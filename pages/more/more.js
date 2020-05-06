@@ -1,4 +1,6 @@
 // pages/more/more.js
+const height = 164;
+
 Page({
 
   /**
@@ -163,7 +165,7 @@ Page({
     })
 
     wx.pageScrollTo({
-      scrollTop: 164,
+      scrollTop: height,
       complete: (res) => { },
     })
   },
@@ -222,5 +224,13 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+
+  onPageScroll: function (e) {
+    console.log(e)
+    let flag = e.scrollTop > height ? false : true;
+    this.setData({
+      show: flag
+    });
   }
 })
