@@ -160,10 +160,6 @@ Page({
   },
 
   onClose: function (event) {
-    this.setData({
-      show: false
-    })
-
     wx.pageScrollTo({
       scrollTop: height,
       complete: (res) => { },
@@ -228,7 +224,7 @@ Page({
 
   onPageScroll: function (e) {
     console.log(e)
-    let flag = e.scrollTop > height ? false : true;
+    let flag = e.scrollTop > height/2 ? false : true;
     this.setData({
       show: flag
     });
