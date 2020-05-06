@@ -1,0 +1,15 @@
+<!--pages/mine/mine.wxml-->
+<!-- 我的 -->
+<view class="container">
+	<view class="header_container">
+		<view class="header_user_container">
+			<image class="uicon" src="/img/icon_header.jpg"></image>
+			<text class="uid">151*****627</text>
+		</view>
+		<view class="header_balance_container"></view>
+	</view>
+	<view class="body_container">
+	</view>
+	<view class="tail_container">
+	</view>
+</view>

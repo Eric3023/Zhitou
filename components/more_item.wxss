@@ -1,0 +1,48 @@
+/* components/more_item.wxss */
+.container{
+  display: flex;
+  flex-direction: column;
+  margin-top: 2rpx;
+  margin-bottom: 60rpx;
+}
+
+.item_title_container{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 25rpx;
+}
+
+.item_content_container{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.icon{
+  width: 40rpx;
+  height: 40rpx;
+}
+
+.title{
+  margin-left: 15rpx;
+  font-size: 28rpx;
+  text-align: center;
+}
+
+.close{
+  width: 28rpx;
+  height: 28rpx;
+  position: relative;
+  left: 510rpx;
+}
+
+.item{
+  width: 180rpx;
+  margin-top: 42rpx;
+  text-align: center;
+  color: #030303;
+  font-size: 22rpx;
+}

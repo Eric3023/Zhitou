@@ -6,7 +6,9 @@
     "pages/city/city",
     "pages/search/search",
     "pages/more/more",
-    "pages/tencentmap/map"
+    "pages/tencentmap/map",
+    "pages/throw/throw",
+    "pages/mine/mine"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -24,13 +26,13 @@
         "selectedIconPath": "img/icon1.png"
       },
       {
-        "pagePath": "pages/index/index",
+        "pagePath": "pages/throw/throw",
         "text": "投放",
         "iconPath": "img/icon2_1.png",
         "selectedIconPath": "img/icon2.png"
       },
       {
-        "pagePath": "pages/index/index",
+        "pagePath": "pages/mine/mine",
         "text": "我的",
         "iconPath": "img/icon3_1.png",
         "selectedIconPath": "img/icon3.png"

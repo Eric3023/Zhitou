@@ -1,1 +1,24 @@
 /* pages/more/more.wxss */
+.header_container {
+  height: 328rpx;
+  padding-left: 50rpx;
+  padding-right: 50rpx;
+  background-color: white;
+  margin-top: 2rpx;
+  box-shadow: 0rpx 0rpx 20rpx 4rpx #cccccc;
+  position: fixed;
+  z-index: 1;
+}
+
+
+.body_container {
+  margin-left: 50rpx;
+  margin-right: 50rpx;
+  position: absolute;
+  z-index: 0;
+}
+
+v_more_item {
+  margin-bottom: 40rpx;
+  position: relative;
+}

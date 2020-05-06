@@ -1,0 +1,11 @@
+<!--components/more_item.wxml-->
+<view class="container">
+	<view class="item_title_container">
+		<image class="icon" src="{{icon}}"></image>
+		<text class="title" style="color:{{color}}">{{title}}</text>
+		<image class="close" wx:if='{{close}}' src="/img/close.jpg" bindtap="onClose"></image>
+	</view>
+	<view class="item_content_container">
+		<view class="item" wx:for="{{items}}" bindtap="onClick">{{item}}</view>
+	</view>
+</view>

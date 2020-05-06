@@ -1,0 +1,49 @@
+/* pages/mine/mine.wxss */
+page {
+  background-color: #ebebeb;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.header_container {
+  background-color: white;
+  height: 310rpx;
+  margin-top: 2rpx;
+}
+
+.body_container {
+  background-color: white;
+  height: 510rpx;
+  margin-top: 12rpx;
+}
+
+.header_user_container{
+  margin-left: 40rpx;
+  margin-right: 40rpx;
+  margin-top: 36rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.header_balance_container{
+  margin-left: 34rpx;
+  margin-right: 34rpx;
+  margin-top: 44rpx;
+  margin-bottom: 40rpx;
+  height: 110rpx;
+}
+
+.uicon{
+  width: 95rpx;
+  height: 95rpx;
+}
+
+.uid{
+  margin-left: 18rpx;
+  font-size: 30rpx;
+  color: #373737;
+}
