@@ -1,0 +1,54 @@
+<!--index.wxml-->
+<view class="container">
+  <view class="searchline">
+    <navigator url="/pages/search/search" class="search">
+      <image src="/img/title_search.png"></image>
+      <text>大家都在搜:热门商圈</text>
+    </navigator>    
+    <image src="/img/more.png" class="image1" bindtap="bindViewTap"></image>
+  </view>
+
+<view class='carousel'> 
+  <swiper class='carousel_swiper' indicator-dots="true" indicator-color="#f4f4f4" indicator-active-color="#4eb8b8" autoplay="true" interval='5000' circular='true'>
+    <block wx:for="{{carouselList}}" wx:key="key">
+      <swiper-item bindtap='chomeCarouselClick' data-url='{{item.url}}'>
+        <image class="carouselImg" src='{{host}}{{item.img}}' mode='aspectFill' ></image>
+      </swiper-item>
+    </block>
+  </swiper>
+ </view>
+    <!-- <view class="banner">
+      <image src="/img/banner1.jpg" mode="widthFix"></image>
+    </view> -->
+
+    <view class="location" bindtap="mapPageTap">
+      <image src="/img/11.png"></image>
+      <text>当前位置：</text>
+      <text >{{address}}</text>
+      <view class="user-font">10公里内有<text class="usercount-color" v-model="userCount">1880+</text>个用户</view>
+    </view>
+    <view class="case-list">
+      <view class="header">
+        <text>高端广告位展示</text>
+      </view>
+      <view class="list-left">
+        <image src="/img/t1.jpg" mode="widthFix" ></image>
+      </view>
+      <view class="list-right">
+        <image src="/img/t1.jpg" mode="widthFix"></image>
+      </view>
+      <view class="list-left">
+        <image src="/img/t1.jpg" mode="widthFix"></image>
+      </view>
+      <view class="list-right">
+        <image src="/img/t1.jpg" mode="widthFix"></image>
+      </view>
+      <view class="list-left">
+        <image src="/img/t1.jpg" mode="widthFix"></image>
+      </view>
+      <view class="list-right">
+        <image src="/img/t1.jpg" mode="widthFix"></image>
+      </view>
+    </view>
+ 
+</view>
