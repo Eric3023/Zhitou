@@ -15,6 +15,12 @@ page {
   box-shadow: 0rpx 0rpx 10rpx 4rpx #ebebeb;
 }
 
+.header_user_balance{
+  position: relative;
+  left: 34rpx;
+  top: 44rpx;
+}
+
 .body_container {
   height: 525rpx;
   background-color: white;

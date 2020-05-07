@@ -6,10 +6,10 @@
 			<image class="uicon" src="/img/icon_header.jpg"></image>
 			<text class="uid">151*****627</text>
 		</view>
-		<view class="header_balance_container"></view>
+		<v_balance class="header_user_balance" balance="{{balance}}" bindrecharge="recharge" />
 	</view>
 	<view class="body_container">
-		<v_setting wx:for="{{user_datas}}" icon="{{item.icon}}" title="{{item.title}}" bindclickItem = "onClickItem"/>
+		<v_setting wx:for="{{user_datas}}" icon="{{item.icon}}" title="{{item.title}}" bindclickItem="onClickItem" />
 	</view>
 	<view class="tail_container">
 		<text>没有更多了</text>

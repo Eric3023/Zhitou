@@ -1,5 +1,6 @@
 {
   "usingComponents": {
-    "v_setting":"/components/setting/setting"
+    "v_setting":"/components/setting/setting",
+    "v_balance":"/components/balance/balance"
   }
 }

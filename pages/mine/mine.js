@@ -5,6 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    balance: 5000,
     user_datas: [
       { icon: "/img/icon_mine_collection.jpg", title: "我的订单" },
       { icon: "/img/icon_mine_rmb.jpg", title: "充值记录" },
@@ -14,6 +15,19 @@ Page({
     ]
   },
 
+  /**
+   * 立即充值
+   */
+  recharge(event){
+    wx.showToast({
+      title: '进入【充值】页面',
+      icon: 'none'
+    })
+  },
+
+  /**
+   * 进入下级页面
+   */
   onClickItem(event) {
     let title = '进入【' + event.detail.title + '】页面';
     wx.showToast({
