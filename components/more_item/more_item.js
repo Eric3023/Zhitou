@@ -18,6 +18,9 @@ Component({
     },
     close: {
       type: Boolean
+    },
+    more: {
+      type: Boolean
     }
   },
 
@@ -33,10 +36,8 @@ Component({
    */
   methods: {
     onClick: function (event) {
-      wx.showToast({
-        title: '进入搜索商圈页面',
-        icon: 'none'
-      });
+      let title = event.currentTarget.dataset.name;
+      this.triggerEvent("clickItem", { title: title });
     },
 
     onClose: function (event) {
@@ -46,5 +47,11 @@ Component({
       });
       this.triggerEvent("close", { event: event })
     },
+
+    seeMore: function (event) {
+      this.setData({
+        more: true
+      })
+    }
   }
 })

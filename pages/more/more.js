@@ -39,7 +39,11 @@ Page({
           "小吃",
           "自助餐",
           "茶餐厅",
-          "糕饼店"
+          "糕饼店",
+          "自助",
+          "早餐",
+          "美食街",
+          "海底捞"
         ],
         color: "#000000"
       },
@@ -159,10 +163,21 @@ Page({
     }
   },
 
+  /**
+   * 关闭顶部推荐栏目
+   */
   onClose: function (event) {
     wx.pageScrollTo({
       scrollTop: height,
       complete: (res) => { },
+    })
+  },
+
+  onClickItem: function (event) {
+    let title = '点击了【' + event.detail.title + '】, 进入搜索商圈页面';
+    wx.showToast({
+      title: title,
+      icon: 'none'
     })
   },
 
@@ -224,7 +239,7 @@ Page({
 
   onPageScroll: function (e) {
     console.log(e)
-    let flag = e.scrollTop > height/2 ? false : true;
+    let flag = e.scrollTop > height / 2 ? false : true;
     this.setData({
       show: flag
     });

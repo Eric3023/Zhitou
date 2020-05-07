@@ -3,7 +3,7 @@
   display: flex;
   flex-direction: column;
   margin-top: 2rpx;
-  margin-bottom: 60rpx;
+  margin-bottom: 40rpx;
 }
 
 .item_title_container{
@@ -18,8 +18,20 @@
   flex-direction: row;
   flex-wrap: wrap;
   align-items: center;
-  margin-left: 54rpx;
-  margin-right: 54rpx;
+  /* margin-left: 54rpx;
+  margin-right: 54rpx; */
+}
+
+.item_pull_contianer{
+  display: flex;
+  margin-top: 44rpx;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.icon_pull{
+  width: 40rpx;
+  height: 20rpx;
 }
 
 .icon{
@@ -45,4 +57,15 @@
   margin-top: 42rpx;
   color: #030303;
   font-size: 22rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  text-align: start;
+}
+
+.content{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  width: 108rpx;
 }

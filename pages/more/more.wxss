@@ -1,6 +1,6 @@
 /* pages/more/more.wxss */
 .header_container {
-  width: 100%;
+  width: 650rpx;
   height: 328rpx;
   padding-left: 50rpx;
   padding-right: 50rpx;
@@ -13,7 +13,7 @@
 
 
 .body_container {
-  width: 100%;
+  width: 650rpx;
   padding-left: 50rpx;
   padding-right: 50rpx;
   position: absolute;
