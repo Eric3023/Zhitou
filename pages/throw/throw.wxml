@@ -1,2 +1,6 @@
-<!--pages/throw.wxml-->
-<text>pages/throw.wxml</text>
+<view>
+	<view>1</view>
+	<view>2</view>
+	<view>3</view>
+	<view>4</view>
+</view>

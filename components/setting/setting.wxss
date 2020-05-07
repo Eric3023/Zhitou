@@ -16,10 +16,10 @@
 }
 
 .setting_icon {
-  width: 40rpx;
-  height: 40rpx;
-  margin-left: 28rpx;
-  margin-right: 28rpx;
+  width: 36rpx;
+  height: 36rpx;
+  margin-left: 32rpx;
+  margin-right: 32rpx;
 }
 
 .setting_enter {

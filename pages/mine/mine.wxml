@@ -1,16 +1,17 @@
-<!--pages/mine/mine.wxml-->
 <!-- 我的 -->
 <view class="container">
+	<!-- 1.用户信息 -->
 	<view class="header_container">
-		<view class="header_user_container">
-			<image class="uicon" src="/img/icon_header.jpg"></image>
-			<text class="uid">151*****627</text>
-		</view>
+		<!-- 1.1 用户简介：头像和手机号 -->
+		<v_user class="header_user_container" uicon="{{user_info.uicon}}" uid="{{user_info.uid}}" />
+		<!-- 1.2 账户余额 -->
 		<v_balance class="header_user_balance" balance="{{balance}}" bindrecharge="recharge" />
 	</view>
+	<!-- 2.功能列表 -->
 	<view class="body_container">
 		<v_setting wx:for="{{user_datas}}" icon="{{item.icon}}" title="{{item.title}}" bindclickItem="onClickItem" />
 	</view>
+	<!-- 3.尾部提示 -->
 	<view class="tail_container">
 		<text>没有更多了</text>
 	</view>

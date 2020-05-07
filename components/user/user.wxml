@@ -1,2 +1,4 @@
-<!--components/user/user.wxml-->
-<text>components/user/user.wxml</text>
+<view class="user_container">
+	<image class="uicon" src="{{uicon}}"></image>
+	<text class="uid">{{uid}}</text>
+</view>

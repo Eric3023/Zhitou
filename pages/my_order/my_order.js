@@ -1,43 +1,15 @@
-// pages/mine/mine.js
+// pages/my_order/my_order.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    balance: 5000,
-    user_info: {
-      uicon: "/img/icon_header.jpg",
-      uid: "151*****627"
-    },
-    user_datas: [
-      { icon: "/img/icon_mine_collection.jpg", title: "我的订单" },
-      { icon: "/img/icon_mine_rmb.jpg", title: "充值记录" },
-      { icon: "/img/icon_mine_quan.jpg", title: "优惠券" },
-      { icon: "/img/icon_mine_proxy.jpg", title: "我是代理" },
-      { icon: "/img/icon_mine_setting.png", title: "设置" }
-    ]
-  },
-
-  /**
-   * 立即充值
-   */
-  recharge(event) {
-    wx.showToast({
-      title: '进入【充值】页面',
-      icon: 'none'
-    })
-  },
-
-  /**
-   * 进入下级页面
-   */
-  onClickItem(event) {
-    let title = '进入【' + event.detail.title + '】页面';
-    wx.showToast({
-      title: title,
-      icon: 'none'
-    })
+    order_message: {
+      throwing: 1,
+      exposed: 5000,
+      audience: 8000
+    }
   },
 
   /**

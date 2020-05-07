@@ -33,17 +33,8 @@ page {
   flex-direction: row;
   justify-content: center;
   margin-top: 80rpx;
-  font-size: 20rpx;
+  font-size: 24rpx;
   color: #7c7c7c;
-}
-
-.header_user_container {
-  margin-left: 40rpx;
-  margin-right: 40rpx;
-  margin-top: 36rpx;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
 }
 
 .header_balance_container {
@@ -52,15 +43,4 @@ page {
   margin-top: 44rpx;
   margin-bottom: 40rpx;
   height: 110rpx;
-}
-
-.uicon {
-  width: 95rpx;
-  height: 95rpx;
-}
-
-.uid {
-  margin-left: 18rpx;
-  font-size: 30rpx;
-  color: #373737;
 }

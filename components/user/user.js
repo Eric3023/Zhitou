@@ -4,7 +4,12 @@ Component({
    * Component properties
    */
   properties: {
-
+    uicon: {
+      type: String
+    },
+    uid: {
+      type: String
+    }
   },
 
   /**
