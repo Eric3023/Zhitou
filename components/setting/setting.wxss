@@ -1,0 +1,30 @@
+/* components/setting/setting.wxss */
+.setting_container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 105rpx;
+  font-size: 30rpx;
+  color: #212121;
+}
+
+.setting_line {
+  height: 2rpx;
+  width: 700rpx;
+  margin-left: 25rpx;
+  background-color: #ebebeb;
+}
+
+.setting_icon {
+  width: 40rpx;
+  height: 40rpx;
+  margin-left: 28rpx;
+  margin-right: 28rpx;
+}
+
+.setting_enter {
+  width: 32rpx;
+  height: 32rpx;
+  position: absolute;
+  left: 680rpx;
+}

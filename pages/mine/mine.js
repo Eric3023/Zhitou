@@ -5,7 +5,21 @@ Page({
    * 页面的初始数据
    */
   data: {
+    user_datas: [
+      { icon: "/img/icon_mine_collection.jpg", title: "我的订单" },
+      { icon: "/img/icon_mine_rmb.jpg", title: "充值记录" },
+      { icon: "/img/icon_mine_quan.jpg", title: "优惠券" },
+      { icon: "/img/icon_mine_proxy.jpg", title: "我是代理" },
+      { icon: "/img/icon_mine_setting.png", title: "设置" }
+    ]
+  },
 
+  onClickItem(event) {
+    let title = '进入【' + event.detail.title + '】页面';
+    wx.showToast({
+      title: title,
+      icon: 'none'
+    })
   },
 
   /**

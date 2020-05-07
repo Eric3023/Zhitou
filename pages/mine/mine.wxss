@@ -12,15 +12,26 @@ page {
   background-color: white;
   height: 310rpx;
   margin-top: 2rpx;
+  box-shadow: 0rpx 0rpx 10rpx 4rpx #ebebeb;
 }
 
 .body_container {
+  height: 525rpx;
   background-color: white;
-  height: 510rpx;
   margin-top: 12rpx;
+  box-shadow: 0rpx 0rpx 10rpx 4rpx #ebebeb;
 }
 
-.header_user_container{
+.tail_container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 80rpx;
+  font-size: 20rpx;
+  color: #7c7c7c;
+}
+
+.header_user_container {
   margin-left: 40rpx;
   margin-right: 40rpx;
   margin-top: 36rpx;
@@ -29,7 +40,7 @@ page {
   align-items: center;
 }
 
-.header_balance_container{
+.header_balance_container {
   margin-left: 34rpx;
   margin-right: 34rpx;
   margin-top: 44rpx;
@@ -37,12 +48,12 @@ page {
   height: 110rpx;
 }
 
-.uicon{
+.uicon {
   width: 95rpx;
   height: 95rpx;
 }
 
-.uid{
+.uid {
   margin-left: 18rpx;
   font-size: 30rpx;
   color: #373737;

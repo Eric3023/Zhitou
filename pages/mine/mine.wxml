@@ -9,7 +9,9 @@
 		<view class="header_balance_container"></view>
 	</view>
 	<view class="body_container">
+		<v_setting wx:for="{{user_datas}}" icon="{{item.icon}}" title="{{item.title}}" bindclickItem = "onClickItem"/>
 	</view>
 	<view class="tail_container">
+		<text>没有更多了</text>
 	</view>
 </view>
