@@ -1,6 +1,6 @@
 <view class="header_container" wx:if="{{show}}">
-	<v_more_item class="recommend_view" icon="{{items[0].icon}}" title="{{items[0].title}}" items="{{items[0].items}}" color="{{items[0].color}}" close="true" bindclose="onClose" bindclickItem="onClickItem" />
+	<v_more_item class="recommend_view" icon="/img/icon_more_hot.jpg" title="{{data[0].name}}" items="{{data[0].chileren}}" color="{{data[0].color}}" close="true" bindclose="onClose" bindclickItem="onClickItem" />
 </view>
 <view class="body_container">
-	<v_more_item wx:for="{{items}}" icon="{{item.icon}}" title="{{item.title}}" items="{{item.items}}" color="{{item.color}}" bindclickItem="onClickItem" />
+	<v_more_item wx:for="{{data}}" wx:key="index" title="{{item.name}}" items="{{item.chileren}}" color="{{item.color}}" bindclickItem="onClickItem" />
 </view>

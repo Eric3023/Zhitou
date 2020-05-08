@@ -9,7 +9,7 @@
 	</view>
 	<!-- 2.功能列表 -->
 	<view class="body_container">
-		<v_setting wx:for="{{user_datas}}" icon="{{item.icon}}" title="{{item.title}}" bindclickItem="onClickItem" />
+		<v_setting wx:for="{{user_datas}}" wx:key="index" icon="{{item.icon}}" title="{{item.title}}" bindclickItem="onClickItem" />
 	</view>
 	<!-- 3.尾部提示 -->
 	<view class="tail_container">

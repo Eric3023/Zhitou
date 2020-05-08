@@ -28,7 +28,9 @@ Component({
    * 组件的初始数据
    */
   data: {
-
+    defaultIcon:'/img/icon_point_green.png',
+    //超过该数量，折叠
+    max_num:9
   },
 
   /**
