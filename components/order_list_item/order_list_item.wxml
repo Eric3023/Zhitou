@@ -1,2 +1,15 @@
-<!--components/order_list_item/order_list_item.wxml-->
-<text>components/order_list_item/order_list_item.wxml</text>
+<view class="order_item_container">
+	<!-- 图片 -->
+	<image class="order_item_img" src="{{img}}" />
+	<!-- 详情 -->
+	<view class="content_container">
+		<text class="title">{{title}}</text>
+		<text class="address">地址：{{address}}</text>
+		<view class="address">
+			<text>已曝光{{count}}次</text>
+		</view>
+		<text class="time">{{start}}-{{end}}</text>
+	</view>
+	<!-- 投放状态 -->
+	<text class="state">{{state}}</text>
+</view>

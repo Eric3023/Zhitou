@@ -1,1 +1,52 @@
 /* components/order_list_item/order_list_item.wxss */
+.order_item_container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-left: 28rpx;
+  margin-right: 28rpx;
+  margin-top: 14rpx;
+  margin-bottom: 14rpx;
+}
+
+.order_item_img {
+  width: 160rpx;
+  height: 125rpx;
+}
+
+.content_container {
+  width: 440rpx;
+  display: flex;
+  flex-direction: column;
+  margin-left: 18rpx;
+}
+
+.title {
+  font-size: 22rpx;
+  color: black;
+  margin-top: 5rpx;
+  margin-bottom: 5rpx;
+}
+
+.address {
+  font-size: 18rpx;
+  color: #484848;
+  margin-top: 5rpx;
+  margin-bottom: 5rpx;
+}
+
+.time {
+  width: fit-content;
+  font-size: 22rpx;
+  background-color: #f6f2e9;
+  color: #d7ac96;
+  margin-top: 5rpx;
+  margin-bottom: 5rpx;
+}
+
+.state{
+  font-size: 22rpx;
+  color: #d7ac96;
+  position: absolute;
+  left: 620rpx;
+}

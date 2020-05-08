@@ -3,6 +3,7 @@
   height: 276rpx;
   display: flex;
   flex-direction: column;
+  background-color: #ebebeb;
 }
 
 /*背景图片*/

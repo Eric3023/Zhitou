@@ -1,1 +1,24 @@
 /* components/orde_category/order_category.wxss */
+.order_category_container{
+  display: flex;
+  flex-direction: row;
+  background-color: white;
+}
+
+.content_container {
+  display: flex;
+  flex-direction: column;
+  width: 25%;
+  align-items: center;
+  margin-top: 18rpx;
+}
+
+.icon {
+  width: 48rpx;
+  height: 48rpx;
+}
+
+.category {
+  font-size: 22rpx;
+  margin-top: 30rpx;
+}

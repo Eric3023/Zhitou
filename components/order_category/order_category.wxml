@@ -1,2 +1,17 @@
-<!--components/orde_category/order_category.wxml-->
-<text>components/orde_category/order_category.wxml</text>
+<view class="order_category_container">
+	<view class="content_container" data-index="0" bindtap="onClick">
+		<image class="icon" src="{{index==0?'/img/icon_order_category_create_f.jpg':'/img/icon_order_category_create_nf.jpg'}}"></image>
+		<text class="category">创建中</text>
+	</view>
+	<view class="content_container" data-index="1" bindtap="onClick">
+		<image class="icon" src="{{index==1?'/img/icon_order_category_shen_f.jpg':'/img/icon_order_category_shen_nf.jpg'}}"></image>
+		<text class="category">审核中</text>
+	</view>
+	<view class="content_container" data-index="2" bindtap="onClick">
+		<image class="icon" src="{{index==2?'/img/icon_order_category_throw_f.jpg':'/img/icon_order_category_throw_nf.png'}}"></image>
+		<text class="category">投放中</text>
+	</view>
+	<view class="content_container" data-index="3" bindtap="onClick">
+		<image class="icon" src="{{index==3?'/img/icon_order_category_completed_f.png':'/img/icon_order_category_completed_nf.png'}}"></image> <text class="category">已完成</text>
+	</view>
+</view>

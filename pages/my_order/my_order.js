@@ -9,7 +9,22 @@ Page({
       throwing: 1,
       exposed: 5000,
       audience: 8000
-    }
+    },
+    ordes: [
+      {
+        img: '/img/t1.jpg',
+        title: '韩国烤肉餐饮店投放',
+        address: '北京市朝阳区建国路华贸购物中心',
+        count: 18668,
+        start: "2020年4月20日",
+        end: "2020年8月21日",
+        state: '投放中'
+      },
+      {},
+      {},
+      {},
+      {}
+    ]
   },
 
   /**
