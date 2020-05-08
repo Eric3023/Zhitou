@@ -48,7 +48,7 @@ Page({
     });
 
     var that = this
-    that.setData({//为何不能直接写在data上
+    that.setData({
       latitude: options.lat,
       longitude: options.lng,
       regionCallbackTxt: options.lat + ',' + options.lng,
@@ -69,19 +69,7 @@ Page({
       data.poi_options = 'policy=' + options.policy;
       dataTxt += '\n&emsp;&emsp;poi_options: "policy=' + options.policy + '"';
     }
-    this.setData({
-      requestJson: `wx.serviceMarket.invokeService({
-      &emsp;service: "${WEBSERVICE_APPID}",
-      &emsp;api: "rgeoc",
-      &emsp;data: ${dataTxt}
-      &emsp;}
-      }).then( res => {
-      &emsp;console.log(res)
-      }).catch( err => {
-      &emsp;console.error(err)
-      })`
-
-    });
+    
     wx.serviceMarket.invokeService({
       
       service: WEBSERVICE_APPID,
@@ -165,7 +153,6 @@ Page({
             regionCallbackTxt: latitude.toFixed(6) + ',' + longitude.toFixed(6)
           });
 
-        
           const data = {
             location: that.data.regionCallbackTxt
           };
@@ -355,7 +342,7 @@ Page({
   /**
    * 选择地址
    */
-  bindDistance: function (e) {
+  bindSelect: function (e) {
     //隐藏搜索结果。显示地图
 
     var that = this;
@@ -375,53 +362,75 @@ Page({
         toLocation = String(toLocation);
         var title = siteData[i].title;
 
-        /**
-         * 计算距离
-         * form=>起点坐标
-         * to=>终点坐标
-         * scope=>距离
-         */
-        qqmapsdk.calculateDistance({
-          mode: 'driving',//可选值：'driving'（驾车）、'walking'（步行），不填默认：'walking',可不填
-          from: shapLocation,
-          to: toLocation,
-          success: function (res) {
-            var distance = res.result.elements[0].distance;/**起点到终点的距离，单位：米，如果radius半径过小或者无法搜索到，则返回-1 */
-            var duration = res.result.elements[0].duration;/**表示从起点到终点的结合路况的时间，秒为单位。 注：步行方式不计算耗时，该值始终为0 */
-            if (distance <= range) {
-              wx.showModal({
-                title: '提示',
-                content: '该地址在配送范围以内,是否选择为收货地址',
-                success: function (res) {
-                  if (res.confirm) {
-                    wx.navigateTo({
-                      url: '/pages/user/site/edit/index?title=' + title
-                    })
-                  }
-                }
-              })
-            } else {
-              wx.showModal({
-                title: '提示',
-                content: '该地址不在我们的配送范围之内，请重新选择地址',
-              })
-            }
-          }
-        })
 
+        //显示地图，定位到此。并搜索周边
+        const latitude = siteData[i].location.lat;
+        const longitude = siteData[i].location.lng;
+        this.setData({
+          animation: true,
+          regionCallbackTxt: latitude.toFixed(6) + ',' + longitude.toFixed(6)
+        });
+
+        const data = {
+          location: that.data.regionCallbackTxt
+        };
+        let dataTxt = '{\n&emsp;&emsp;location:' + that.data.regionCallbackTxt + ',';
+        data.get_poi = '1';
+        dataTxt += '\n&emsp;&emsp;get_poi:1,';
+        //}
+
+        data.poi_options = 'policy=1';
+        dataTxt += '\n&emsp;&emsp;poi_options: "policy=1' + '"';
+
+        wx.serviceMarket.invokeService({
+          service: WEBSERVICE_APPID,
+          api: 'rgeoc',
+          data: data
+        }).then(res => {
+          console.log(res);
+          const result = (typeof res.data) === 'string' ? JSON.parse(res.data).result : res.data.result;
+          let adInfo = '';
+          let businessArea = '';
+          let landmark = '';
+          let crossroad = '';
+
+          if (result.address_reference && result.address_reference.business_area) {
+            businessArea = result.address_reference.business_area.title || '';
+            businessArea += '(' + result.address_reference.business_area._dir_desc + ')';
+          }
+
+          if (result.address_reference && result.address_reference.landmark_l1) {
+            landmark = result.address_reference.landmark_l1.title || '';
+            landmark += '(' + result.address_reference.landmark_l1._dir_desc + ')';
+          }
+
+          that.setData({
+            addressInfo: {
+              businessArea: businessArea, //商圈
+              recommend: result.formatted_addresses && result.formatted_addresses.recommend || ''
+            },
+            pois: result.pois,
+
+            'markers[0].latitude': latitude.toFixed(6),
+            'markers[0].longitude': longitude.toFixed(6),
+
+          });
+        }).catch(err => {
+          console.error(err);
+        });
+//显示地图
+        this.setData({
+          hiddenMap: false,
+          siteData: []//清空搜索结果
+        })
+        wx.hideLoading();
+
+        break;
       } else {
         siteData[i].checked = false;
       }
     }
-    var set = setInterval(function () {
-      if (siteData.length > 0) {
-        wx.hideLoading()
-        that.setData({
-          siteData: siteData
-        })
-        clearInterval(set);
-      }
-    }, 100)
+    
     that.setData({
       listIndex: index
     })
