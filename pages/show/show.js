@@ -5,14 +5,17 @@ Page({
    * 页面的初始数据
    */
   data: {
-    src: "/img/effect_app_start.jpg"
+    path: ''
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    let path = options.path;
+    this.setData({
+      path: path
+    })
   },
 
   /**
