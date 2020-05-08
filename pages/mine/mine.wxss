@@ -1,0 +1,46 @@
+/* pages/mine/mine.wxss */
+page {
+  background-color: #ebebeb;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.header_container {
+  background-color: white;
+  height: 310rpx;
+  margin-top: 2rpx;
+  box-shadow: 0rpx 0rpx 10rpx 4rpx #ebebeb;
+}
+
+.header_user_balance{
+  position: relative;
+  left: 34rpx;
+  top: 44rpx;
+}
+
+.body_container {
+  height: 525rpx;
+  background-color: white;
+  margin-top: 12rpx;
+  box-shadow: 0rpx 0rpx 10rpx 4rpx #ebebeb;
+}
+
+.tail_container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 80rpx;
+  font-size: 24rpx;
+  color: #7c7c7c;
+}
+
+.header_balance_container {
+  margin-left: 34rpx;
+  margin-right: 34rpx;
+  margin-top: 44rpx;
+  margin-bottom: 40rpx;
+  height: 110rpx;
+}

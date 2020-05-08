@@ -1,0 +1,12 @@
+<!--pages/my_order/my_order.wxml-->
+<view class="order_container">
+	<!-- 订单简介 -->
+	<v_order_message class="order_message" throwing="{{order_message.throwing}}" exposed="{{order_message.exposed}}" audience="{{order_message.audience}}">
+	</v_order_message>
+	<!-- 订单分类 -->
+	<v_order_category class="order_categor">
+	</v_order_category>
+	<!-- 订单列表 -->
+	<v_order_item class="order_list">
+	</v_order_item>
+</view>

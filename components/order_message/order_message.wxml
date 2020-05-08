@@ -1,0 +1,22 @@
+<view class="order_message_container">
+	<!-- 背景图片 -->
+	<image class="order_message_background" src="/img/background_order_message.jpg" />
+	<!-- 内容容器 -->
+	<view class="order_message_content_container">
+		<!-- 投放中 -->
+		<view class="content_container">
+			<text class="count">{{throwing}}</text>
+			<text class="category">投放中</text>
+		</view>
+		<!-- 已曝光 -->
+		<view class="content_container">
+			<text class="count">{{exposed}}</text>
+			<text class="category">已曝光</text>
+		</view>
+		<!-- 影响人群 -->
+		<view class="content_container">
+			<text class="count">{{audience}}</text>
+			<text class="category">影响人数</text>
+		</view>
+	</view>
+</view>

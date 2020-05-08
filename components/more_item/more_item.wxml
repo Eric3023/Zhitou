@@ -1,0 +1,16 @@
+<!--components/more_item.wxml-->
+<view class="container">
+	<view class="item_title_container">
+		<image class="icon" src="{{icon}}"></image>
+		<text class="title" style="color:{{color}}">{{title}}</text>
+		<image class="close" wx:if='{{close}}' src="/img/close.jpg" bindtap="onClose"></image>
+	</view>
+	<view class="item_content_container">
+		<view class="item" wx:for="{{items}}" data-name="{{item}}" bindtap="onClick" wx:if="{{index<9||more}}">
+			<view class="content">{{item}}</view>
+		</view>
+	</view>
+	<view class=" item_pull_contianer">
+		<image class="icon_pull" wx:if="{{items.length>9 &&!more}}" src="/img/icon_pull_more.png" bindtap="seeMore"></image>
+	</view>
+</view>

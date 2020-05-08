@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "v_order_message": "/components/order_message/order_message",
+    "v_order_category": "/components/order_category/order_category",
+    "v_order_item": "/components/order_list_item/order_list_item"
+  },
+  "navigationBarTitleText": "我的订单"
+}

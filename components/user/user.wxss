@@ -1,0 +1,20 @@
+/* components/user/user.wxss */
+.user_container {
+  margin-left: 40rpx;
+  margin-right: 40rpx;
+  margin-top: 36rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.uicon {
+  width: 95rpx;
+  height: 95rpx;
+}
+
+.uid {
+  margin-left: 18rpx;
+  font-size: 30rpx;
+  color: #373737;
+}
