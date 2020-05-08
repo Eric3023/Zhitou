@@ -33,11 +33,21 @@ Page({
    * 进入下级页面
    */
   onClickItem(event) {
-    let title = '进入【' + event.detail.title + '】页面';
-    wx.showToast({
-      title: title,
-      icon: 'none'
-    })
+    let index = event.detail.title;
+    switch (index) {
+      case '我的订单':
+        wx.navigateTo({
+          url: '/pages/my_order/my_order',
+        })
+        break;
+      default:
+        let title = '进入【' + event.detail.title + '】页面';
+        wx.showToast({
+          title: title,
+          icon: 'none'
+        })
+        break
+    }
   },
 
   /**

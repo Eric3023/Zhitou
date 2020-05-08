@@ -250,8 +250,7 @@ Page({
     })
   },
 
-  onKeywordConfirm(event) {//搜索提交
-    console.log(event);
+  onKeywordConfirm(event) {//搜索提交，从组件传值，默认封装成event.detail.变量名称
     this.getSearchResult(event.detail.value);
   },
   getSearchResult(keyword) {
@@ -311,6 +310,24 @@ Page({
 
           }
 
+          //存储关键字，作为搜索历史记录
+          //最多50条历史
+          
+
+          wx.setStorage({
+            key: 'searchHis',
+            data: res.data.data,
+            success: function () {
+              console.log('success');
+              app.globalData.token = res.data.data;
+              app.globalData.authFlag = true;
+
+              wx.switchTab({//放在里面，同步，放在外面，如果storate写入慢，就会导致先进入index
+                url: '/pages/index/index'
+              })
+            }
+          });
+
         },
       })
 
@@ -331,8 +348,9 @@ Page({
 
 
 
-  onSelectCity() {
+  onSelectCity:function() {
     var that = this;
+    console.log("222");
     wx.navigateTo({
       url: `../city/city?currentcity=` + that.data.currentcity,
     })

@@ -1,0 +1,20 @@
+<view class="searchline">
+  <view class="select-city" bindtap="onSelectCity" >
+    <text class="city">{{currentcity}}</text>
+  </view>
+  <image src="../../img/select.png" class="selectimage"></image>
+  <view class="line-left"></view>
+
+  <input type="text" class="search-input" confirm-type="search" value="{{keyword}}" bindconfirm="onKeywordConfirm" placeholder="{{defaultKeyword.keyword}}" 
+  placeholder-style="color:#cccccc;"
+  bindfocus="_hiddenMap"
+  bindblur="_showMap"
+  
+  ></input>
+
+<!-- 
+<image class="del" wx-if="{{keyword}}" bindtap="clearKeyword" src="../../img/clear_input.png"></image> -->
+
+<button size="mini" plain="true" form-type="submit" class="search-button" bindtap="clearKeyword">取消</button>
+<view class="line"></view>
+  </view>

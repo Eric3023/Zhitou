@@ -1,0 +1,85 @@
+page{ width: 100%; height:100%; }
+.searchline {
+   position: fixed;
+   top: 0rpx;
+    left: 0rpx;
+    right: 0rpx;
+    /* border-radius: 10rpx; */
+    height: 80rpx;
+    background: white;
+    
+    z-index:999;
+    box-shadow: 0rpx 0rpx 10rpx #e0e0e0 ;
+}
+.select-city{
+  float: left;
+  width: auto;
+  height: 80rpx;
+  line-height: 80rpx;
+  margin-left: 20rpx;
+  
+  text-align: center;
+  font-size: 26rpx;
+  color: #5a5656;
+
+}
+
+.selectimage {
+  float: left;
+  width: 80rpx;
+  height: 40rpx;
+  margin: 20rpx 0rpx;
+}
+
+.search-input{
+  display: inline-block;
+  width: auto;
+  min-width: 350rpx;
+  height: 60rpx;
+  margin: 10rpx 0rpx 10rpx 15rpx;
+  
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAMAAABF0y+mAAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAA8UExURUdwTGZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZjQWelcAAAATdFJOUwDUDlMW8DUFcdHpnc3cSLkosSd78uTdAAAAvUlEQVQoz4WS6QLDEBCE131L0nn/d23J0VCV+bP4LLsM0S6Tg1NQLmRDnYz1OOVti18OcFZLI7Utw/XGtEIS10wkKH3NVoWF3/byBerMNQ5be4vZ4I4Vi8S7+niC3bd55L54yvA1VSDSryJqheE4oZVFKMFBD6AGK0FBDiCHKgEwA/hZfsxkszun1U77nL7Q9G3nvzL6z1sH2ndOANi3eRmrhzjx6qGo2Z327pMNJSMO34paSkc7PdJI/2lc3naRCwMB9sl5AAAAAElFTkSuQmCC) no-repeat left  #ffffff;
+  background-size: 35rpx 35rpx;
+  background-position-x: 10rpx;
+  padding-left: 60rpx;
+  line-height: 40rpx;
+  font-size: 26rpx;
+  color: #5a5656;
+}
+
+.searchline .line {
+  float: right;
+  width: 1rpx;
+  height: 60rpx;
+  margin: 10rpx auto;
+  border-right: 1rpx solid #cccccc6e;
+}
+.searchline .line-left {
+  float: left;
+  width: 1rpx;
+  height: 60rpx;
+  margin: 10rpx auto;
+  border-right: 1rpx solid #cccccc62;
+}
+.searchline .search-button {
+  float: right;
+  width: 80rpx;
+  height: 60rpx;
+  padding: 3rpx;
+  margin: 10rpx 15rpx 10rpx 15rpx;
+  text-align: center;
+  vertical-align: middle;
+  font-size: 26rpx;
+  color: #cccccccc;
+  background: white;
+  border: none;
+}
+
+.searchline .del {
+  position: absolute;
+  top: 15rpx;
+  right: 30rpx;
+  width: 53rpx;
+  height: 53rpx;
+  z-index: 10;
+}

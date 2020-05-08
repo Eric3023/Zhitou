@@ -1,20 +1,23 @@
-<view class="searchline">
-  <view class="select-city" bindtap="onSelectCity" >
-    <text class="city">{{currentcity}}</text>
-  </view>
-  <image src="../../img/select.png" class="selectimage"></image>
-  <view class="line-left"></view>
+<search_component currentcity="{{currentcity}}" 
+bind:onSelectCity="onSelectCity"
+bind:onKeywordConfirm="onKeywordConfirm"
+bind:showMap="showMap"
+bind:hiddenMap="hiddenMap"
+bind:clearKeyword="clearKeyword"
+>
+</search_component>
 
-  <input type="text" class="search-input" confirm-type="search" value="{{keyword}}" bindconfirm="onKeywordConfirm" placeholder="{{defaultKeyword.keyword}}" 
-  placeholder-style="color:#cccccc;"
-  bindfocus="hiddenMap"
-  bindblur="showMap"
-  bindinput=""
-  ></input>
+<view class="list {{hiddenMap==false?'map-hidden':'map-block'}}" wx:if="{{siteData.length>0}}">
+      <view class='list-li' wx:for="{{siteData}}" wx:key="{{index}}" data-location='{{item.location}}' data-index='{{index+1}}' bindtap='bindSelect'>
+        
+        <view class='list-img'>
+          <image src='../../img/dot.png' mode='widthFix'/>
+        </view>
 
-<!-- 
-<image class="del" wx-if="{{keyword}}" bindtap="clearKeyword" src="../../img/clear_input.png"></image> -->
-
-<button size="mini" plain="true" form-type="submit" class="search-button" bindtap="clearKeyword">取消</button>
-<view class="line"></view>
-  </view>
+        <view class='list-r'>
+          <view class='list-p'>{{item.title}}</view>
+          <view class='list-span text-truncate2'>{{item.address}}</view>
+        </view>
+        
+      </view>
+    </view>

@@ -8,7 +8,7 @@
     "pages/tencentmap/map",
     "pages/throw/throw",
     "pages/mine/mine",
-    "components/search/search_title"
+    "pages/my_order/my_order"
   ],
   "window": {
     "backgroundTextStyle": "light",
