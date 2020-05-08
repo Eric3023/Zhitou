@@ -1,10 +1,10 @@
 
 <scroll-view scroll-y class="h-100 scroll-view" scroll-into-view="{{scrollIntoView}}">
 <view class="pa-l30 pa-r30">
-  <view class="pa-t30 pa-b30 fo-28 fo-g">当前定位城市</view>
+  <view class="pa-t30 pa-b30 fo-28 fo-g">当前城市</view>
   <view class="city-item panel-center item-center">
     <image src="/img/location.png" class="icon-25"></image>
-    <view class="fo-26 ma-l10 w-s ell">湖州市</view>
+    <view class="fo-26 ma-l10 w-s ell">{{currentcity}}</view>
   </view>
   <view class="pa-t30 pa-b30 fo-28 fo-g">热门城市</view>
   <!-- 热门城市 -->

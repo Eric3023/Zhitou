@@ -1,4 +1,5 @@
 const cityData = require('../../utils/city.js');
+var QQMapWX = require('../../libs/qqmap-wx-jssdk.js');
 const app = getApp();
 let _this;
 Page({
@@ -12,7 +13,23 @@ Page({
     cityData: cityData.cityData,
     scrollIntoView:'',
     showLetter:false,
-    hotCity:[{name:'杭州市'},{name:'湖州市'},{name:'绍兴市'},{name:'宁波市'}]
+    currentcity:'',
+    hotCity:[{name:'北京市'},
+    {name:'天津市'},
+    {name:'石家庄市'},
+    {name:'杭州市'},
+      { name: '成都市' },
+      { name: '重庆市' },
+      { name: '青岛市' },
+      { name: '广州市' },
+      { name: '南京市' },
+      { name: '福州市' }, 
+      { name: '深圳市' }
+      
+    ],
+    latitude: 0,
+    longitude: 0,
+    regionCallbackTxt: '',
   },
   /**
    * 点击滑动到字母
@@ -42,7 +59,8 @@ Page({
   onLoad: function (options) {
     _this = this;
     _this.setData({
-      location: wx.getStorageSync("getLocation")
+      location: wx.getStorageSync("getLocation"),
+      currentcity: options.currentcity
     })
   },
   /**
@@ -50,14 +68,123 @@ Page({
    */
   chooseCity: function (e) {
     let name = e.currentTarget.dataset.name;
-    let pages = getCurrentPages();
-    let prePage = getCurrentPages()[pages.length - 2];
-    prePage.setData({
-      cityName: name
+    // let pages = getCurrentPages();
+    // let prePage = getCurrentPages()[pages.length - 2];
+    // prePage.setData({
+    //   currentcity: name
+    // })
+    // wx.setStorageSync("city_name", name);
+    // wx.navigateBack({
+    //   delta:1
+    // })
+
+    //根据选择的城市，算出经纬度，调用地址解析接口
+    this.getCurrentGeocoder(name);
+
+  },
+
+  getCurrentGeocoder(name) {
+    var that = this;
+    var qqmapsdk = new QQMapWX({
+      key: '5PEBZ-P4N63-LO53C-YFVFX-AGA2F-2WFE4'
+    });
+    wx.getSetting({
+      success(res) {
+        if (!res.authSetting['scope.userLocation']) {
+          wx.authorize({
+            scope: 'scope.userLocation',
+            success(res) {
+              //https://lbs.qq.com/miniProgram/jsSdk/jsSdkGuide/methodReverseGeocoder
+              //注：坐标系采用gcj02坐标系
+              qqmapsdk.geocoder({
+                address: name,
+                success: function (res) {//成功后的回调
+
+                  console.log(res);
+                  var res = res.result;
+
+                  that.setData({
+                    regionCallbackTxt: res.location.lat + ',' + res.location.lng,
+                    latitude: res.location.lat,
+                    longitude: res.location.lng,
+                    currentcity: res.address_components.city
+                  });
+
+                  wx.navigateTo({
+                    url: `../map/map?location=${that.data.regionCallbackTxt}&getPoi=1&policy=1&lat=${that.data.latitude}&lng=${that.data.longitude}&currentcity=${that.data.currentcity}`,
+                  })
+                }
+              });
+
+            }
+
+          })
+        } else {//授权过位置信息
+          qqmapsdk.geocoder({
+            address: name,
+            success: function (res) {//成功后的回调
+
+              console.log(res);
+              var res = res.result;
+              that.setData({
+
+                regionCallbackTxt: res.location.lat + ',' + res.location.lng,
+                latitude: res.location.lat,
+                longitude: res.location.lng,
+                currentcity: res.address_components.city
+              });
+
+
+              wx.navigateTo({
+                url: `../map/map?location=${that.data.regionCallbackTxt}&getPoi=1&policy=1&lat=${that.data.latitude}&lng=${that.data.longitude}&currentcity=${that.data.currentcity}`,
+              })
+            }
+          });
+        }
+      }
     })
-    wx.setStorageSync("city_name", name);
-    wx.navigateBack({
-      delta:1
+  },
+
+  getCurrentCity: function ()  {
+    var that = this;
+   
+    var qqmapsdk = new QQMapWX({
+      key: '5PEBZ-P4N63-LO53C-YFVFX-AGA2F-2WFE4'
+    });
+    wx.getSetting({
+      success(res) {
+        if (!res.authSetting['scope.userLocation']) {
+          wx.authorize({
+            scope: 'scope.userLocation',
+            success(res) {
+              //https://lbs.qq.com/miniProgram/jsSdk/jsSdkGuide/methodReverseGeocoder
+              //注：坐标系采用gcj02坐标系
+              qqmapsdk.reverseGeocoder({
+                success: function (res) {//成功后的回调
+                  console.log(res);
+                  that.setData({
+                    currentcity:
+                      res.result.address_component.city
+                  });
+                }
+              });
+
+              console.log(res)
+            }
+
+          })
+        } else {//授权过位置信息
+          qqmapsdk.reverseGeocoder({
+            success: function (res) {//成功后的回调
+              console.log(res);
+              that.setData({
+                currentcity:
+                  res.result.address_component.city
+              });
+            }
+          });
+        }
+      }
     })
   }
 })

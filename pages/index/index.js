@@ -16,6 +16,7 @@ Page({
     policy: 1,
     animation: true,
     isShowSubpois: true,
+    currentcity:'北京市'
   },
   //事件处理函数
   bindViewTap: function() {
@@ -26,7 +27,7 @@ Page({
   
   mapPageTap: function() {
     wx.navigateTo({
-      url: `../map/map?location=${this.data.regionCallbackTxt}&getPoi=${this.data.isShowSubpois ? 1 : 0}&policy=${this.data.policy}`,
+      url: `../map/map?location=${this.data.regionCallbackTxt}&getPoi=${this.data.isShowSubpois ? 1 : 0}&policy=${this.data.policy}&lat=${app.globalData.lat}&lng=${app.globalData.lng}&currentcity=${this.data.currentcity}`,
     })
     // wx.navigateTo({
     //   url: '../map/map'
@@ -54,7 +55,8 @@ Page({
                   that.setData({
                     address: //res.result.address_reference.crossroad.title
                     res.result.address_reference.town.title,
-                    regionCallbackTxt: res.result.location.lat + ',' +     res.result.location.lng
+                    regionCallbackTxt: res.result.location.lat + ',' +     res.result.location.lng,
+                    currentcity: res.result.address_component.city
                   });
                   app.globalData.lat = res.result.location.lat;
                   app.globalData.lng = res.result.location.lng;
@@ -70,7 +72,8 @@ Page({
             success: function (res) {//成功后的回调
               console.log(res);
               that.setData({
-                address: res.result.address_reference.town.title
+                address: res.result.address_reference.town.title,
+                currentcity: res.result.address_component.city
               });
               app.globalData.lat = res.result.location.lat;
               app.globalData.lng = res.result.location.lng;

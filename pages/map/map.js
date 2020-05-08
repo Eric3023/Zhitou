@@ -2,9 +2,10 @@ import {
   CDN_PATH,
 } from '../../config/appConfig';
 import { WEBSERVICE_APPID } from '../../config/appConfig';
-
+var QQMapWX = require('../../libs/qqmap-wx-jssdk.js');
 const RADIUS = 4;
-const app = getApp()
+const app = getApp();
+var qqmapsdk;
 Page({
   data: {
     isLocation: false,
@@ -16,7 +17,7 @@ Page({
     dialogShow: false,
     link: 'https://developers.weixin.qq.com/community/servicemarket/detail/00046c6eed0df09552990112551815',
     regionCallbackTxt:'',
-    keywrod: '',
+    keyword: '',
     defaultKeyword:{
       keyword :'搜索'
     },
@@ -27,25 +28,33 @@ Page({
         borderRadius: 2,
         display: 'ALWAYS'
       },
-      latitude: 40.040415,
-      longitude: 116.273511,
-      iconPath: '../../img/Marker3_Activated.png',
+      latitude: 0,
+      longitude: 0,
+      //iconPath: '../../img/Marker3_Activated.png',
       width: '34px',
       height: '34px',
       rotate: 0,
       alpha: 1
-    }]
+    }],
+    currentcity:'北京市',
+    hiddenMap:false,
+    siteData:[]
   },
 
   onLoad: function (options) {
-   
+    // 实例化API核心类
+    qqmapsdk = new QQMapWX({
+      key: '5PEBZ-P4N63-LO53C-YFVFX-AGA2F-2WFE4'
+    });
+
     var that = this
     that.setData({//为何不能直接写在data上
-      latitude: app.globalData.lat,
-      longitude: app.globalData.lng,
-      regionCallbackTxt: app.globalData.lat+','+app.globalData.lng,
-      'markers[0].latitude': app.globalData.lat,
-      'markers[0].longitude': app.globalData.lng
+      latitude: options.lat,
+      longitude: options.lng,
+      regionCallbackTxt: options.lat + ',' + options.lng,
+      'markers[0].latitude': options.lat,
+      'markers[0].longitude': options.lng,
+      currentcity: options.currentcity
     })
 
     const data = {
@@ -74,6 +83,7 @@ Page({
 
     });
     wx.serviceMarket.invokeService({
+      
       service: WEBSERVICE_APPID,
       api: 'rgeoc',
       data: data
@@ -84,12 +94,16 @@ Page({
       let businessArea = '';
       let landmark = '';
       let crossroad = '';
+      let tempCity = '';
       if (result.ad_info) {
         adInfo = result.ad_info.nation || '';
         adInfo += result.ad_info.province ? ',' + result.ad_info.province : '';
         adInfo += result.ad_info.city ? ',' + result.ad_info.city : '';
         adInfo += result.ad_info.district ? ',' + result.ad_info.district : '';
+
+       
       }
+
       if (result.address_reference && result.address_reference.business_area) {
         businessArea = result.address_reference.business_area.title || '';
         businessArea += '(' + result.address_reference.business_area._dir_desc + ')';
@@ -191,7 +205,7 @@ Page({
               },
               pois: result.pois,
 
-                'markers[0].latitude': latitude.toFixed(6),
+              'markers[0].latitude': latitude.toFixed(6),
               'markers[0].longitude': longitude.toFixed(6),
                 
             });
@@ -234,25 +248,183 @@ Page({
     };
   },
 
+  showMap(event) {
+    console.log(event);
+    if (event.detail.value == '') {//有搜索值的时候，失去焦点后不显示地图
+      this.setData({
+        hiddenMap: false,
+        siteData:[]//清空搜索结果
+      })
+    }
+  },
+  hiddenMap() {
+    this.setData({
+      hiddenMap: true
+    })
+  },
+
   onKeywordConfirm(event) {//搜索提交
+    console.log(event);
     this.getSearchResult(event.detail.value);
   },
   getSearchResult(keyword) {
     if (keyword === '') {
       keyword = this.data.defaultKeyword.keyword;
+      wx.showToast({
+        title: '请输入搜索关键字',
+        icon: 'none',
+        duration: 1000
+      })
     } else {//输入之后搜索
+      
+      this.search(keyword);
 
 
     }
+  },
+  search: function (keyword) {
+    var that = this;
+    var siteData = [];
     
+      wx.showLoading({
+        title: '加载中',
+      })
+    var shapLocation = that.data.regionCallbackTxt;//坐标中心 
+      
+    //http://lbs.qq.com/miniProgram/jsSdk/jsSdkGuide/methodSearch
+    qqmapsdk.search({
+      keyword: keyword,//搜索关键词
+      location: shapLocation,//设置周边搜索中心点
+      address_format: 'short',
+      region: that.data.currentcity,
+      page_size:20,
+        success: function (res) {
+          if (res.data.length > 0) {
+            for (var i = 0; i < res.data.length; i++) {
+              siteData.push({
+                title: res.data[i].title,//名字
+                id: res.data[i].id,//id
+                da_info: res.data[i].da_info,//所属省市区
+                address: res.data[i].address,//具体地址
+                location: res.data[i].location,//坐标
+                category: res.data[i].category,//类型
+                tel: res.data[i].tel,//电话
+                checked: false,//是否在选中
+                scope: false,//是否在范围以内
+              })
+            };
 
-    //this.getGoodsList();
+            that.setData({
+              siteData: siteData
+            })
+            wx.hideLoading();
+          } else {
+            //无数据
+
+
+          }
+
+        },
+      })
+
+    console.log(siteData);
   },
   clearKeyword: function () {
     this.setData({
       keyword: '',
       searchStatus: false
     });
+    wx.hideLoading();
+    //取消后显示地图
+    this.setData({
+      hiddenMap: false,
+      siteData: []//清空搜索结果
+    })
+  },
+
+
+
+  onSelectCity() {
+    var that = this;
+    wx.navigateTo({
+      url: `../city/city?currentcity=` + that.data.currentcity,
+    })
+
+  },
+
+  /**
+   * 选择地址
+   */
+  bindDistance: function (e) {
+    //隐藏搜索结果。显示地图
+
+    var that = this;
+    var index = e.currentTarget.dataset.index ? e.currentTarget.dataset.index : "0";
+    var location = e.currentTarget.dataset.location;
+    var siteData = this.data.siteData;
+    var shapLocation = this.data.shapLocation;//起点地址坐标
+    
+    wx.showLoading({
+      title: '加载中',
+    })
+
+    for (var i = 0; i < siteData.length; i++) {
+      if (index == (i + 1)) {
+        siteData[i].checked = true;
+        var toLocation = siteData[i].location.lat + "," + siteData[i].location.lng
+        toLocation = String(toLocation);
+        var title = siteData[i].title;
+
+        /**
+         * 计算距离
+         * form=>起点坐标
+         * to=>终点坐标
+         * scope=>距离
+         */
+        qqmapsdk.calculateDistance({
+          mode: 'driving',//可选值：'driving'（驾车）、'walking'（步行），不填默认：'walking',可不填
+          from: shapLocation,
+          to: toLocation,
+          success: function (res) {
+            var distance = res.result.elements[0].distance;/**起点到终点的距离，单位：米，如果radius半径过小或者无法搜索到，则返回-1 */
+            var duration = res.result.elements[0].duration;/**表示从起点到终点的结合路况的时间，秒为单位。 注：步行方式不计算耗时，该值始终为0 */
+            if (distance <= range) {
+              wx.showModal({
+                title: '提示',
+                content: '该地址在配送范围以内,是否选择为收货地址',
+                success: function (res) {
+                  if (res.confirm) {
+                    wx.navigateTo({
+                      url: '/pages/user/site/edit/index?title=' + title
+                    })
+                  }
+                }
+              })
+            } else {
+              wx.showModal({
+                title: '提示',
+                content: '该地址不在我们的配送范围之内，请重新选择地址',
+              })
+            }
+          }
+        })
+
+      } else {
+        siteData[i].checked = false;
+      }
+    }
+    var set = setInterval(function () {
+      if (siteData.length > 0) {
+        wx.hideLoading()
+        that.setData({
+          siteData: siteData
+        })
+        clearInterval(set);
+      }
+    }, 100)
+    that.setData({
+      listIndex: index
+    })
   },
 })
 

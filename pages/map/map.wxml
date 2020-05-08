@@ -1,20 +1,25 @@
 <view class="searchline">
-  <view class="select-city" >
-    <text class="city">北京</text>
+  <view class="select-city" bindtap="onSelectCity" >
+    <text class="city">{{currentcity}}</text>
   </view>
-  <image src="../../img/clear_input.png" class="selectimage"></image>
+  <image src="../../img/select.png" class="selectimage"></image>
+  <view class="line-left"></view>
+
   <input type="text" class="search-input" confirm-type="search" value="{{keyword}}" bindconfirm="onKeywordConfirm" placeholder="{{defaultKeyword.keyword}}" 
   placeholder-style="color:#cccccc;"
+  bindfocus="hiddenMap"
+  bindblur="showMap"
+  bindinput=""
   ></input>
 
+<!-- 
+<image class="del" wx-if="{{keyword}}" bindtap="clearKeyword" src="../../img/clear_input.png"></image> -->
 
-<image class="del" wx-if="{{keyword}}" bindtap="clearKeyword" src="../../img/clear_input.png"></image>
-
-
-<button size="mini" plain="true" form-type="submit" class="search-button">搜索</button>
+<button size="mini" plain="true" form-type="submit" class="search-button" bindtap="clearKeyword">取消</button>
 <view class="line"></view>
   </view>
-<view class="map-container">
+
+<view class="map-container {{hiddenMap==true?'map-hidden':'map-block'}}">
   <view class="map-content">
     <map id="map"
         class="map"
@@ -60,3 +65,20 @@
   </view>
 
 </view>
+
+
+<!-- 返回的地址 -->
+    <view class="list {{hiddenMap==false?'map-hidden':'map-block'}}" wx:if="{{siteData.length>0}}">
+      <view class='list-li' wx:for="{{siteData}}" wx:key="{{index}}" data-location='{{item.location}}' data-index='{{index+1}}' bindtap='bindDistance'>
+        
+        <view class='list-img'>
+          <image src='../../img/dot.png' mode='widthFix'/>
+        </view>
+
+        <view class='list-r'>
+          <view class='list-p'>{{item.title}}</view>
+          <view class='list-span text-truncate2'>{{item.address}}</view>
+        </view>
+        
+      </view>
+    </view>
