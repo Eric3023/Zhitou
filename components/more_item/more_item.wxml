@@ -6,7 +6,7 @@
 			<image class="icon_1" wx:if="{{icon}}" src="{{icon}}"></image>
 		</view>
 		<text class="title" style="color:{{color}}">{{title}}</text>
-		<image class="close" wx:if='{{close}}' src="/img/close.jpg" bindtap="onClose"></image>
+		<image class="close" wx:if='{{close}}' src="/img/icon_more_close.png" bindtap="onClose"></image>
 	</view>
 	<view class="item_content_container">
 		<view class="item" wx:for="{{items}}" wx:key="index" data-name="{{item}}" bindtap="onClick" wx:if="{{index<max_num||more}}">
