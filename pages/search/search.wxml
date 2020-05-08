@@ -1,30 +1,20 @@
-<!--index.wxml-->
 <view class="searchline">
-  <input type="text" class="search-input" confirm-type="search" value="{{keyword}}" bindconfirm="onKeywordConfirm" placeholder="{{defaultKeyword.keyword}}"></input>
-
-<image class="del" wx-if="{{keyword}}" bindtap="clearKeyword" src="http://nos.netease.com/mailpub/hxm/yanxuan-wap/p/20150730/style/img/icon-normal/clearIpt-f71b83e3c2.png"></image>
-  
-    <image src="/img/more.png" class="image1" bindtap="bindViewTap"></image>
+  <view class="select-city" bindtap="onSelectCity" >
+    <text class="city">{{currentcity}}</text>
   </view>
-  
-<view class="container">
-  
+  <image src="../../img/select.png" class="selectimage"></image>
+  <view class="line-left"></view>
 
-<view class="search-content">
-  <text class="search-his">历史搜索</text>
-  <view class="search-his-content-view">
-    
-    <text class="search-his-content-cur-view">测试搜索</text>
-    <text class="search-his-content-text">测试搜索</text>
-    <text class="search-his-content-text">测试搜索</text>
-  </view>
+  <input type="text" class="search-input" confirm-type="search" value="{{keyword}}" bindconfirm="onKeywordConfirm" placeholder="{{defaultKeyword.keyword}}" 
+  placeholder-style="color:#cccccc;"
+  bindfocus="hiddenMap"
+  bindblur="showMap"
+  bindinput=""
+  ></input>
 
-  <text class="search-hot">热门搜索</text>
-  <view class="search-his-content-view">
-    <text class="search-his-content-text">CBD</text>
-    <text class="search-his-content-text">世贸天阶</text>
-    <text class="search-his-content-text">王府井</text>
-    <text class="search-his-content-text">大学城</text>
+<!-- 
+<image class="del" wx-if="{{keyword}}" bindtap="clearKeyword" src="../../img/clear_input.png"></image> -->
+
+<button size="mini" plain="true" form-type="submit" class="search-button" bindtap="clearKeyword">取消</button>
+<view class="line"></view>
   </view>
-</view>
-</view>

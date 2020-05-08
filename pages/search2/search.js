@@ -5,13 +5,15 @@ const app = getApp()
 
 Page({
   data: {
-    currentcity: '北京市',
-    keyword: '',
-    defaultKeyword: {
-      keyword: '搜索'
-    },
+    keywrod: '',
+    searchStatus:false
   },
-  
+  //事件处理函数
+  bindViewTap: function () {
+    wx.navigateTo({
+      url: '../more/more'
+    })
+  },
   onLoad: function () {},
 
   onKeywordConfirm(event) {//搜索提交
