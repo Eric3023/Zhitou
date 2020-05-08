@@ -37,6 +37,20 @@
 .icon{
   width: 40rpx;
   height: 40rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.icon_0{
+  width: 18rpx;
+  height: 18rpx;
+}
+
+.icon_1{
+  width: 40rpx;
+  height: 40rpx;
 }
 
 .title{
@@ -49,7 +63,7 @@
   width: 28rpx;
   height: 28rpx;
   position: relative;
-  left: 510rpx;
+  left: 515rpx;
 }
 
 .item{

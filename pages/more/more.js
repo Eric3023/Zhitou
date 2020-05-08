@@ -12,7 +12,7 @@ Page({
 
     items: [
       {
-        icon: "/img/icon1.png",
+        icon: "/img/icon_more_hot.jpg",
         title: "热门",
         items: [
           "银行",
@@ -28,7 +28,6 @@ Page({
         color: "#000000"
       },
       {
-        icon: "/img/icon1.png",
         title: "吃",
         items: [
           "快餐",
@@ -48,7 +47,6 @@ Page({
         color: "#000000"
       },
       {
-        icon: "/img/icon1.png",
         title: "住",
         items: [
           "宾馆",
@@ -64,7 +62,6 @@ Page({
         color: "#000000"
       },
       {
-        icon: "/img/icon1.png",
         title: "行",
         items: [
           "加油站",
@@ -80,7 +77,6 @@ Page({
         color: "#000000"
       },
       {
-        icon: "/img/icon1.png",
         title: "玩",
         items: [
           "网吧",
@@ -96,7 +92,6 @@ Page({
         color: "#000000"
       },
       {
-        icon: "/img/icon1.png",
         title: "游",
         items: [
           "著名景点",
@@ -112,7 +107,6 @@ Page({
         color: "#000000"
       },
       {
-        icon: "/img/icon1.png",
         title: "生活",
         items: [
           "医院",
@@ -128,7 +122,6 @@ Page({
         color: "#000000"
       },
       {
-        icon: "/img/icon1.png",
         title: "购",
         items: [
           "超市",
@@ -146,7 +139,6 @@ Page({
     ],
 
     itemInfo: {
-      icon: "/img/icon1.png",
       title: "热门",
       items: [
         "银行",
