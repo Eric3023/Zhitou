@@ -24,6 +24,7 @@ Component({
       this.setData({
         index: index
       })
+      this.triggerEvent("changetype", { index: index })
     }
   }
 })

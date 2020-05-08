@@ -10,7 +10,7 @@ Page({
       exposed: 5000,
       audience: 8000
     },
-    ordes: [
+    orders: [
       {
         img: '/img/t1.jpg',
         title: '韩国烤肉餐饮店投放',
@@ -20,11 +20,65 @@ Page({
         end: "2020年8月21日",
         state: '投放中'
       },
-      {},
-      {},
-      {},
-      {}
-    ]
+      {
+        img: '/img/t1.jpg',
+        title: '韩国烤肉餐饮店投放',
+        address: '北京市朝阳区建国路华贸购物中心',
+        count: 18668,
+        start: "2020年4月20日",
+        end: "2020年8月21日",
+        state: '投放中'
+      }, {
+        img: '/img/t1.jpg',
+        title: '韩国烤肉餐饮店投放',
+        address: '北京市朝阳区建国路华贸购物中心',
+        count: 18668,
+        start: "2020年4月20日",
+        end: "2020年8月21日",
+        state: '投放中'
+      },
+      {
+        img: '/img/t1.jpg',
+        title: '韩国烤肉餐饮店投放',
+        address: '北京市朝阳区建国路华贸购物中心',
+        count: 18668,
+        start: "2020年4月20日",
+        end: "2020年8月21日",
+        state: '投放中'
+      },
+      {
+        img: '/img/t1.jpg',
+        title: '韩国烤肉餐饮店投放',
+        address: '北京市朝阳区建国路华贸购物中心',
+        count: 18668,
+        start: "2020年4月20日",
+        end: "2020年8月21日",
+        state: '投放中'
+      }
+    ],
+    state: "创建中"
+  },
+
+  onChangeType: function (event) {
+    let index = event.detail.index;
+    let state = "创建中";
+    switch (index) {
+      case 0:
+        state = "创建中";
+        break;
+      case 1:
+        state = "审核中";
+        break;
+      case 2:
+        state = "投放中";
+        break;
+      case 3:
+        state = "已完成";
+        break;
+    }
+    this.setData({
+      state: state
+    })
   },
 
   /**
