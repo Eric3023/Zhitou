@@ -1,3 +1,1 @@
-<view>
-	<image class="img" src="{{path}}" mode="widthFix" />
-</view>
+<image class="img" src="{{path}}" mode="widthFix" />
