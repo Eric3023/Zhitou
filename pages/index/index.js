@@ -32,12 +32,13 @@ Page({
    */
   onShowEffect: function (event) {
     let positionCode = event.currentTarget.dataset.code;
-    let imgPath = "";
+    let imgPath = '';
     switch (positionCode) {
       case this.data.type_positon_0:
-        imgPath="/img/effect_app_start.jpg"
+        imgPath = '/img/effect_app_start.jpg';
         break;
       case this.data.type_positon_1:
+        imgPath = '/img/effect_banner.jpg';
         break;
       case this.data.type_positon_2:
         break;
@@ -48,7 +49,7 @@ Page({
       case this.data.type_positon_5:
         break;
     }
-    if(imgPath){
+    if (imgPath) {
       wx.navigateTo({
         url: `/pages/show/show?path=${imgPath}`,
       })
