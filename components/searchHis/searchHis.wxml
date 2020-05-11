@@ -1,0 +1,17 @@
+<view class="list {{hiddenHis?'map-hidden':'map-block'}}" wx:if="{{hisSearchData.length>0}}">
+      <view class='list-li' wx:for="{{hisSearchData}}" wx:key="{{index}}" data-location='{{item.name}}' data-index='{{index+1}}' bindtap='bindHisSelect'>
+        
+        <view class='list-img'>
+          <image src='../../img/time.png' mode='widthFix'/>
+        </view>
+
+        <view class='list-r'>
+          <view class='list-p'>{{item}}</view>
+        </view>
+        
+      </view>
+
+      <view class="clear-his" bindtap="clearHisSearchData">
+        <text>清空历史记录</text>  
+      </view>
+    </view>
