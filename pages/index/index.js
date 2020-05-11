@@ -1,5 +1,5 @@
-var QQMapWX = require('../../libs/qqmap-wx-jssdk.js');
-var qqmapsdk;
+var qqmaputil = require('../../utils/qqmaputil.js');
+
 //获取应用实例
 const app = getApp()
 
@@ -73,10 +73,6 @@ Page({
   onLoad: function () {
     var that = this;
     this.requestCarouselListData();//请求轮播图
-    // 实例化API核心类
-    qqmapsdk = new QQMapWX({
-      key: '5PEBZ-P4N63-LO53C-YFVFX-AGA2F-2WFE4'
-    });
 
     wx.getSetting({
       success(res) {
@@ -86,36 +82,23 @@ Page({
             success(res) {
               //https://lbs.qq.com/miniProgram/jsSdk/jsSdkGuide/methodReverseGeocoder
               //注：坐标系采用gcj02坐标系
-              qqmapsdk.reverseGeocoder({
-                success: function (res) {//成功后的回调
-                  console.log(res);
-                  that.setData({
-                    address: //res.result.address_reference.crossroad.title
-                      res.result.address_reference.town.title,
-                    regionCallbackTxt: res.result.location.lat + ',' + res.result.location.lng,
-                    currentcity: res.result.address_component.city
-                  });
-                  app.globalData.lat = res.result.location.lat;
-                  app.globalData.lng = res.result.location.lng;
-                }
-              });
+             
+              qqmaputil.reverseGeocoder(app, that);
 
               console.log(res)
+            },
+            fail(res) {//拒绝授权
+              address="北京市";
+              currentcity="北京市";
+              app.globalData.lat =39.909604;
+              app.globalData.lng =116.397228;
+              regionCallbackTxt = 39.909604 + "," + 116.397228;
             }
-
           })
         } else {//授权过位置信息
-          qqmapsdk.reverseGeocoder({
-            success: function (res) {//成功后的回调
-              console.log(res);
-              that.setData({
-                address: res.result.address_reference.town.title,
-                currentcity: res.result.address_component.city
-              });
-              app.globalData.lat = res.result.location.lat;
-              app.globalData.lng = res.result.location.lng;
-            }
-          });
+          
+          qqmaputil.reverseGeocoder(app,that);
+
         }
       }
     })
@@ -178,16 +161,5 @@ Page({
       userInfo: e.detail.userInfo,
       hasUserInfo: true
     })
-  },
-
-  setGlobalVar: function (e) {
-    var that = this;
-    console.log(res);
-    that.setData({
-      address: res.result.address_reference.town.title,
-    });
-
-    app.globalData.lat = res.result.location.lat;
-    app.globalData.lng = res.result.location.lng;
   }
 })

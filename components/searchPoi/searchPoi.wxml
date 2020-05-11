@@ -1,0 +1,14 @@
+<view class="list" wx:if="{{pois.length>0}}">
+      <view class='list-li' wx:for="{{pois}}" wx:key="{{index}}" data-location='{{item.location}}' data-index='{{index+1}}' bindtap='bindSelect'>
+        
+        <view class='list-img'>
+          <image src='../../img/dot.png' mode='widthFix'/>
+        </view>
+
+        <view class='list-r'>
+          <view class='list-p'>{{item.title}}</view>
+          <view class='list-span text-truncate2'>{{item.address}}</view>
+        </view>
+        
+      </view>
+    </view>

@@ -34,6 +34,9 @@ Component({
       this.triggerEvent("onSelectCity");
     },
     clearKeyword: function () {
+      this.setData({
+        keyword:''
+      });
       this.triggerEvent("clearKeyword");
     },
     _hiddenMap:function() {

@@ -6,6 +6,7 @@ bind:hiddenMap="hiddenMap"
 bind:clearKeyword="clearKeyword"
 >
 </search_component>
+
 <view class="map-container {{hiddenMap==true?'map-hidden':'map-block'}}">
   <view class="map-content">
     <map id="map"
@@ -38,7 +39,10 @@ bind:clearKeyword="clearKeyword"
           <view class="pois-title">
             周边地点
           </view>
-          <scroll-view class="poi-list">
+          
+          <search_poi  pois="{{pois}}"></search_poi>
+
+          <!-- <scroll-view class="poi-list">
             <view class="list-item" wx:for="{{pois}}" wx:key="{{index}}" data-index="{{index}}" data-poi="{{item}}">
               <view class="item-title">
                 <text>{{item.title}}</text>
@@ -47,25 +51,20 @@ bind:clearKeyword="clearKeyword"
                 <text class="item-address">{{item.address}}</text>
               </view>
             </view>
-          </scroll-view>
+          </scroll-view> -->
         </view>
   </view>
 
 </view>
 
+<search_item hiddenMap="{{hiddenMap}}"  siteData="{{siteData}}"
+bind:bindSelect="bindSelect"
+>
+</search_item>
+    
+<search_his hiddenHis="{{hiddenHis}}"  hisSearchData="{{hisSearchData}}"
+bind:bindHisSelect="bindHisSelect"
+bind:clearHisSearchData = "clearHisSearchData"
+>
+</search_his>
 
-<!-- 返回的地址 -->
-    <view class="list {{hiddenMap==false?'map-hidden':'map-block'}}" wx:if="{{siteData.length>0}}">
-      <view class='list-li' wx:for="{{siteData}}" wx:key="{{index}}" data-location='{{item.location}}' data-index='{{index+1}}' bindtap='bindSelect'>
-        
-        <view class='list-img'>
-          <image src='../../img/dot.png' mode='widthFix'/>
-        </view>
-
-        <view class='list-r'>
-          <view class='list-p'>{{item.title}}</view>
-          <view class='list-span text-truncate2'>{{item.address}}</view>
-        </view>
-        
-      </view>
-    </view>

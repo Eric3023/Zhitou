@@ -1,0 +1,20 @@
+<view class="list {{hiddenMap==false?'map-hidden':'map-block'}}" wx:if="{{siteData.length>0}}">
+      <view class='list-li' wx:for="{{siteData}}" wx:key="{{index}}" data-location='{{item.location}}' data-index='{{index+1}}' bindtap='bindSelect'>
+        
+        <view class='list-img'>
+          <image src='../../img/dot.png' mode='widthFix'/>
+        </view>
+
+        <view class='list-r'>
+          <view class='list-p'>{{item.title}}</view>
+          <view class='list-span text-truncate2'>{{item.address}}</view>
+        </view>
+        
+      </view>
+      <view class="clear-his" bindtap="clearHisSearchData">
+        <text>加载更多</text>  
+      </view>
+    </view>
+    <view class="noresult {{hiddenMap==false?'map-hidden':'map-block'}}" wx:if="{{siteData.length <= 0 && showNull}}">
+      <text>未搜索到结果</text>  
+    </view>

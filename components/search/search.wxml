@@ -2,7 +2,10 @@
   <view class="select-city" bindtap="onSelectCity" >
     <text class="city">{{currentcity}}</text>
   </view>
-  <image src="../../img/select.png" class="selectimage"></image>
+  <view class="image-view">
+    <image src="../../img/select.png" class="selectimage"></image>
+  </view>
+  
   <view class="line-left"></view>
 
   <input type="text" class="search-input" confirm-type="search" value="{{keyword}}" bindconfirm="onKeywordConfirm" placeholder="{{defaultKeyword.keyword}}" 

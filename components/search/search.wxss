@@ -9,7 +9,8 @@ page{ width: 100%; height:100%; }
     background: white;
     
     z-index:999;
-    box-shadow: 0rpx 0rpx 10rpx #e0e0e0 ;
+    /* box-shadow: 0rpx 0rpx 10rpx #e0e0e0 ; */
+    border-bottom: 1rpx solid #cccccc6e
 }
 .select-city{
   float: left;
@@ -23,12 +24,18 @@ page{ width: 100%; height:100%; }
   color: #5a5656;
 
 }
-
+.image-view {
+  float: left;
+  width: 55rpx;
+  height: 40rpx;
+  margin: 20rpx 0rpx 20rpx -20rpx;
+  overflow:hidden;
+}
 .selectimage {
   float: left;
   width: 80rpx;
   height: 40rpx;
-  margin: 20rpx 0rpx;
+ 
 }
 
 .search-input{
