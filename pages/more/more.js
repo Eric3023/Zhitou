@@ -37,12 +37,12 @@ Page({
    */
   onLoad: function (options) {
     //从服务器获取行业列表
-    moreModel.getCategoryList((res) => {
+    moreModel.getCategoryList().then(res => {
       let data = res.data;
       this.setData({
         data: data
       })
-    });
+    })
   },
 
   /**
