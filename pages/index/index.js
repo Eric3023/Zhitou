@@ -35,16 +35,19 @@ Page({
     let imgPath = '';
     switch (positionCode) {
       case this.data.type_positon_0:
-        imgPath = '/img/effect_app_start.jpg';
+        imgPath = '/img/effect/effect_app_start.jpg';
         break;
       case this.data.type_positon_1:
-        imgPath = '/img/effect_banner.jpg';
+        imgPath = '/img/effect/effect_banner.jpg';
         break;
       case this.data.type_positon_2:
+        imgPath='/img/effect/effect_receive_order.jpg'
         break;
       case this.data.type_positon_3:
+        imgPath='/img/effect/effect_activity_center.jpg'
         break;
       case this.data.type_positon_4:
+        imgPath='/img/effect/effect_personal_center.jpg'
         break;
       case this.data.type_positon_5:
         break;
