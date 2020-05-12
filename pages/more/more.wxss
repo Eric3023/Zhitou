@@ -1,6 +1,6 @@
 /* pages/more/more.wxss */
 .container {
-  min-height: 1662rpx;
+  min-height: 1800rpx;
 }
 
 .header_container {
