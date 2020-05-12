@@ -24,7 +24,6 @@ Page({
     type_positon_2: 2,
     type_positon_3: 3,
     type_positon_4: 4,
-    type_positon_5: 5
   },
 
   /**
@@ -41,10 +40,10 @@ Page({
         imgPath = '/img/effect/effect_banner.jpg';
         break;
       case this.data.type_positon_2:
-        imgPath='/img/effect/effect_receive_order.jpg'
+        imgPath='/img/effect/effect_activity_center.jpg'
         break;
       case this.data.type_positon_3:
-        imgPath='/img/effect/effect_activity_center.jpg'
+        imgPath='/img/effect/effect_receive_order.jpg'
         break;
       case this.data.type_positon_4:
         imgPath='/img/effect/effect_personal_center.jpg'
