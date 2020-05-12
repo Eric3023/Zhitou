@@ -23,7 +23,16 @@ Component({
    * 组件的方法列表
    */
   methods: {
-    clearHisSearchData:function() {
+
+    /**
+     * 选中搜索历史Item
+     */
+    onSelectHistory: function (event) {
+      const value = event.currentTarget.dataset.value;
+      this.triggerEvent("selectHistory", { value: value });
+    },
+
+    clearHisSearchData: function () {
       this.triggerEvent("clearHisSearchData");
     }
   }

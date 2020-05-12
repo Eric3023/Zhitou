@@ -1,48 +1,31 @@
-<search_component currentcity="{{currentcity}}" 
-bind:onSelectCity="onSelectCity"
-bind:onKeywordConfirm="onKeywordConfirm"
-bind:showMap="showMap"
-bind:hiddenMap="hiddenMap"
-bind:clearKeyword="clearKeyword"
->
+<search_component currentcity="{{currentcity}}" keyword="{{keyword}}" bind:onSelectCity="onSelectCity" bind:onKeywordConfirm="onKeywordConfirm" bind:showMap="showMap" bind:hiddenMap="hiddenMap" bind:clearKeyword="clearKeyword">
 </search_component>
 
 <view class="map-container {{hiddenMap==true?'map-hidden':'map-block'}}">
-  <view class="map-content">
-    <map id="map"
-        class="map"
-        latitude="{{latitude}}" longitude="{{longitude}}" 
-        show-location="true"
-        bindregionchange="onChangeRegion"
-        scale='14'
-        markers="{{markers}}"
-      >
-    <image
-					class="locationpicker-ic-marker {{animation ? 'locationpicker-animation' : ''}}"
-					src="../../img/Big_Marker@2x.png"
-					bindanimationend="onMarkerAnimationend"
-				/>
-    
-    </map>
-        
-         <view class="location" >
-      
-            <text>位置：</text>
-            <text >{{addressInfo.recommend}}</text>
-            <!-- <view wx-if="{{addressInfo.businessArea != ''}}">
+	<view class="map-content">
+		<map id="map" class="map" latitude="{{latitude}}" longitude="{{longitude}}" show-location="true" bindregionchange="onChangeRegion" scale='14' markers="{{markers}}">
+			<image class="locationpicker-ic-marker {{animation ? 'locationpicker-animation' : ''}}" src="../../img/Big_Marker@2x.png" bindanimationend="onMarkerAnimationend" />
+
+		</map>
+
+		<view class="location">
+
+			<text>位置：</text>
+			<text >{{addressInfo.recommend}}</text>
+			<!-- <view wx-if="{{addressInfo.businessArea != ''}}">
               所属商圈：{{addressInfo.businessArea}}
             </view> -->
-            <view class="user-font">10公里内有<text class="usercount-color" v-model="userCount">1880+</text>个用户</view>
-          </view>
+			<view class="user-font">10公里内有<text class="usercount-color" v-model="userCount">1880+</text>个用户</view>
+		</view>
 
-        <view class="pois-container" wx:if="{{pois.length > 0}}">
-          <view class="pois-title">
-            周边地点
-          </view>
-          
-          <search_poi  pois="{{pois}}"></search_poi>
+		<view class="pois-container" wx:if="{{pois.length > 0}}">
+			<view class="pois-title">
+				周边地点
+			</view>
 
-          <!-- <scroll-view class="poi-list">
+			<search_poi pois="{{pois}}"></search_poi>
+
+			<!-- <scroll-view class="poi-list">
             <view class="list-item" wx:for="{{pois}}" wx:key="{{index}}" data-index="{{index}}" data-poi="{{item}}">
               <view class="item-title">
                 <text>{{item.title}}</text>
@@ -52,19 +35,13 @@ bind:clearKeyword="clearKeyword"
               </view>
             </view>
           </scroll-view> -->
-        </view>
-  </view>
+		</view>
+	</view>
 
 </view>
 
-<search_item hiddenMap="{{hiddenMap}}"  siteData="{{siteData}}"
-bind:bindSelect="bindSelect"
->
+<search_item hiddenMap="{{hiddenMap}}" siteData="{{siteData}}" bind:bindSelect="bindSelect" bind:loadMore="onLoadMore">
 </search_item>
-    
-<search_his hiddenHis="{{hiddenHis}}"  hisSearchData="{{hisSearchData}}"
-bind:bindHisSelect="bindHisSelect"
-bind:clearHisSearchData = "clearHisSearchData"
->
-</search_his>
 
+<search_his hiddenHis="{{hiddenHis}}" hisSearchData="{{hisSearchData}}" bind:selectHistory="onSelectHistory" bind:clearHisSearchData="clearHisSearchData">
+</search_his>

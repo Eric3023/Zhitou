@@ -27,6 +27,14 @@ Component({
    * 组件的方法列表
    */
   methods: {
+
+    /**
+     * 点击加载更多，监听回调
+     */
+    onLoadMore:function(event){
+      this.triggerEvent("loadMore");
+    },
+
     bindSelect:function(event) {
       this.triggerEvent("bindSelect", { event: event });
     }
