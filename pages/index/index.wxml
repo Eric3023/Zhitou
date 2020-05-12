@@ -10,9 +10,9 @@
 
 	<view class='carousel'>
 		<swiper class='carousel_swiper' indicator-dots="true" indicator-color="#f4f4f4" indicator-active-color="#4eb8b8" autoplay="true" interval='5000' circular='true'>
-			<block wx:for="{{carouselList}}" wx:key="key">
+			<block wx:for="{{banners}}" wx:key="key">
 				<swiper-item bindtap='chomeCarouselClick' data-url='{{item.url}}'>
-					<image class="carouselImg" src='{{host}}{{item.img}}' mode='aspectFill'></image>
+					<image class="carouselImg" src='{{item.imageUrl}}' mode='aspectFill'></image>
 				</swiper-item>
 			</block>
 		</swiper>

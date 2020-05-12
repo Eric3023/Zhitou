@@ -43,10 +43,6 @@ Component({
     },
 
     onClose: function (event) {
-      wx.showToast({
-        title: '关闭推荐',
-        icon: 'none'
-      });
       this.triggerEvent("close", { event: event })
     },
 
