@@ -1,7 +1,9 @@
 var qqmaputil = require('../../utils/qqmaputil.js');
+import { HomeModel } from '../../models/home.js';
 
 //获取应用实例
 const app = getApp()
+const homeModel = new HomeModel();
 
 Page({
   data: {
@@ -11,7 +13,6 @@ Page({
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     address: '',
     host: "http://manage.aitopone.com/pic/",
-    carouselList: [{ url: 'o_1e6qm4a4b11uecafbhb13g25h07.png', img: 'o_1e6qm4a4b11uecafbhb13g25h07.png' }, { url: 'o_1e6qm4a4b11uecafbhb13g25h07.png', img: 'o_1e6qm4a4b11uecafbhb13g25h07.png' }],
     regionCallbackTxt: '',
     policy: 1,
     animation: true,
@@ -24,7 +25,11 @@ Page({
     type_positon_2: 2,
     type_positon_3: 3,
     type_positon_4: 4,
-    type_positon_5: 5
+    // Banner默认轮播图
+    banners: [
+      { imageUrl: '/img/banner/banner1.jpg' },
+      { imageUrl: '/img/banner/banner2.jpg' },
+    ]
   },
 
   /**
@@ -35,16 +40,19 @@ Page({
     let imgPath = '';
     switch (positionCode) {
       case this.data.type_positon_0:
-        imgPath = '/img/effect_app_start.jpg';
+        imgPath = '/img/effect/effect_app_start.jpg';
         break;
       case this.data.type_positon_1:
-        imgPath = '/img/effect_banner.jpg';
+        imgPath = '/img/effect/effect_banner.jpg';
         break;
       case this.data.type_positon_2:
+        imgPath = '/img/effect/effect_activity_center.jpg'
         break;
       case this.data.type_positon_3:
+        imgPath = '/img/effect/effect_receive_order.jpg'
         break;
       case this.data.type_positon_4:
+        imgPath = '/img/effect/effect_personal_center.jpg'
         break;
       case this.data.type_positon_5:
         break;
@@ -73,7 +81,7 @@ Page({
   },
   onLoad: function () {
     var that = this;
-    this.requestCarouselListData();//请求轮播图
+    this.getBanners();//请求轮播图
 
     wx.getSetting({
       success(res) {
@@ -83,22 +91,22 @@ Page({
             success(res) {
               //https://lbs.qq.com/miniProgram/jsSdk/jsSdkGuide/methodReverseGeocoder
               //注：坐标系采用gcj02坐标系
-             
+
               qqmaputil.reverseGeocoder(app, that);
 
               console.log(res)
             },
             fail(res) {//拒绝授权
-              address="北京市";
-              currentcity="北京市";
-              app.globalData.lat =39.909604;
-              app.globalData.lng =116.397228;
+              address = "北京市";
+              currentcity = "北京市";
+              app.globalData.lat = 39.909604;
+              app.globalData.lng = 116.397228;
               regionCallbackTxt = 39.909604 + "," + 116.397228;
             }
           })
         } else {//授权过位置信息
-          
-          qqmaputil.reverseGeocoder(app,that);
+
+          qqmaputil.reverseGeocoder(app, that);
 
         }
       }
@@ -131,30 +139,7 @@ Page({
       })
     }
   },
-  //请求轮播图
-  requestCarouselListData() {
-    var that = this;//注意this指向性问题
-    // var urlStr = that.data.host + "/xjj/chome_carousel_list.json"; //请求连接注意替换（我用本地服务器模拟）
-    // console.log("请求轮播图：" + urlStr);
-    // wx.request({
-    //   url: urlStr,
-    //   data: {//这里放请求参数，如果传入参数值不是String，会被转换成String 
-    //     // x: '',
-    //     // y: ''
-    //   },
-    //   header: {
-    //     'content-type': 'application/json' // 默认值
-    //   },
-    //   success(res) {
-    //     console.log("轮播图返回值：");
-    //     console.log(res.data.result);
-    //     var resultArr = res.data.result;
-    //     that.setData({
-    //       carouselList: resultArr
-    //     })
-    //   }
-    // })
-  },
+
   getUserInfo: function (e) {
     console.log(e)
     app.globalData.userInfo = e.detail.userInfo
@@ -162,5 +147,21 @@ Page({
       userInfo: e.detail.userInfo,
       hasUserInfo: true
     })
+  },
+
+  /**
+   * 获取轮播图
+   */
+  getBanners() {
+    homeModel.getBanners().then(
+      res => {
+        let banners = res.data.data;
+        if (banners) {
+          this.setData({
+            banners: banners
+          });
+        }
+      }
+    );
   }
 })

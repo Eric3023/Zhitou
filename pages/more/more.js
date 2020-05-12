@@ -15,6 +15,30 @@ Page({
   },
 
   /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad: function (options) {
+    this.getCatagory()
+  },
+
+  /**
+   * 获取行业列表
+   */
+  getCatagory() {
+    wx.showLoading();
+    moreModel.getCategoryList().then(res => {
+      let data = res.data.data;
+      this.setData({
+        data: data
+      });
+      wx.hideLoading();
+    }, error => {
+      wx.hideLoading();
+    });
+  },
+
+
+  /**
    * 关闭顶部推荐栏目
    */
   onClose: function (event) {
@@ -24,6 +48,9 @@ Page({
     })
   },
 
+  /**
+   * 点击行业Item
+   */
   onClickItem: function (event) {
     let title = '点击了【' + event.detail.title + '】, 进入搜索商圈页面';
     wx.showToast({
@@ -33,67 +60,8 @@ Page({
   },
 
   /**
-   * 生命周期函数--监听页面加载
+   * 点击监听
    */
-  onLoad: function (options) {
-    //从服务器获取行业列表
-    moreModel.getCategoryList().then(res => {
-      let data = res.data;
-      this.setData({
-        data: data
-      })
-    })
-  },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  },
-
   onPageScroll: function (e) {
     console.log(e)
     let flag = e.scrollTop > height / 2 ? false : true;

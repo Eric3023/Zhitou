@@ -66,7 +66,7 @@ function reverseGeocoderPoi(app, that, loca) {
     location: loca,
     get_poi: 1,
     poi_options:
-      'page_size=20' //[默认] 以地标+主要的路+近距离poi为主，着力描述当前位置；
+      'page_index=1;page_size=20' //[默认] 以地标+主要的路+近距离poi为主，着力描述当前位置；
     ,
 
     success: function (res) {
@@ -117,12 +117,13 @@ function reverseGeocoderPoi(app, that, loca) {
   });
 }
 
-function search(that, keyword, shapLocation, currentcity, siteData) {
+function search(that, keyword, page, shapLocation, currentcity, siteData) {
   qqmapsdk.search({
     keyword: keyword,//搜索关键词
     location: shapLocation,//设置周边搜索中心点
     address_format: 'short',
     region:currentcity,
+    page_index: page,
     page_size: "20",
     success: function (res) {
       if (res.data.length > 0) {

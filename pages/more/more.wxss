@@ -1,4 +1,8 @@
 /* pages/more/more.wxss */
+.container {
+  min-height: 1662rpx;
+}
+
 .header_container {
   width: 650rpx;
   height: 328rpx;

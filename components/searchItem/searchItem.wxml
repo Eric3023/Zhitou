@@ -11,7 +11,7 @@
         </view>
         
       </view>
-      <view class="clear-his" bindtap="clearHisSearchData">
+      <view class="clear-his" bindtap="onLoadMore">
         <text>加载更多</text>  
       </view>
     </view>

@@ -4,9 +4,10 @@ Component({
    * 组件的属性列表
    */
   properties: {
-    currentcity:{
-      type:String
-    }
+    currentcity: {
+      type: String,
+    },
+    keyword: String
   },
 
   /**
@@ -14,7 +15,6 @@ Component({
    */
   data: {
     show: true,
-    keyword: '',
     defaultKeyword: {
       keyword: '搜索'
     }
@@ -25,26 +25,26 @@ Component({
    */
   methods: {
     //点击确认查询
-    onKeywordConfirm:function(event) {
+    onKeywordConfirm: function (event) {
       console.log(event);
       this.triggerEvent("onKeywordConfirm", { value: event.detail.value });
     },
     //点击选择城市
-    onSelectCity:function() {
+    onSelectCity: function () {
       this.triggerEvent("onSelectCity");
     },
     clearKeyword: function () {
       this.setData({
-        keyword:''
+        keyword: ''
       });
       this.triggerEvent("clearKeyword");
     },
-    _hiddenMap:function() {
+    _hiddenMap: function () {
       this.triggerEvent("hiddenMap");
     },
     _showMap: function (event) {
-      
-      this.triggerEvent("showMap",{ value: event.detail.value });
+
+      this.triggerEvent("showMap", { value: event.detail.value });
     }
 
   }

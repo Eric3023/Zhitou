@@ -15,13 +15,19 @@ Page({
       keyword: '搜索'
     },
     currentcity: '北京市',
-    siteData: [],
     hiddenRes: false,//进入搜索，隐藏搜索结果
     hiddenHis: false,//默认显示历史搜索记录
+
+    //搜索关键词
+    keyword: '',
+    //搜索页码
+    page: 1,
+    //搜索结果
+    siteData: [],
   },
 
   onLoad: function (options) {
-    
+
     var that = this
     that.setData({
       latitude: options.lat,
@@ -33,7 +39,8 @@ Page({
   },
 
   onKeywordConfirm(event) {//搜索提交，从组件传值，默认封装成event.detail.变量名称
-    this.getSearchResult(event.detail.value);
+    const value = event.detail.value;
+    this._searchList(value);
   },
   getSearchResult(keyword) {
     if (keyword === '') {
@@ -50,21 +57,19 @@ Page({
 
   search: function (keyword) {
     var that = this;
-    var siteData = [];
-
     wx.showLoading({
       title: '加载中',
     })
     var shapLocation = that.data.regionCallbackTxt;//坐标中心 
 
-    qqmaputil.search(that, keyword, shapLocation, that.data.currentcity, siteData);
+    qqmaputil.search(that, keyword, this.data.page, shapLocation, that.data.currentcity, this.data.siteData);
 
-    console.log(siteData);
+    console.log(this.data.siteData);
     this.setData({
-      hiddenRes:true,//显示结果
+      hiddenRes: true,//显示结果
       hiddenHis: true//隐藏历史
     });
-    
+
   },
 
   clearKeyword: function () {
@@ -91,7 +96,7 @@ Page({
   loadHis() {
     var that = this;
     let arr = wx.getStorageSync("searchHisArray");
-  
+
     if (Array.isArray(arr)) {
       that.setData({
         hisSearchData: arr
@@ -157,7 +162,7 @@ Page({
   showRes(event) {
     if (event.detail.value == '') {//有搜索值的时候，失去焦点后不显示地图
       // this.setData({
-        
+
       //   siteData: []//清空搜索结果
       // })
     }
@@ -171,4 +176,43 @@ Page({
     // });
 
   },
+
+  /**
+   * 选中搜索历史监听回调
+   */
+  onSelectHistory(event) {
+    const value = event.detail.value;
+    this._searchList(value);
+  },
+
+  /**
+   * 加载更多搜索结果
+   */
+  onLoadMore() {
+    const value = this.data.keyword;
+    this._searchMoreList(value)
+  },
+
+  /**
+   * 修改检索关键词，重新搜索
+   */
+  _searchList(value) {
+    //重新搜索，页码和搜索结果需要重置
+    this.data.page = 1;
+    this.data.siteData = [];
+    //修改搜索框的显示内容
+    this.setData({
+      keyword: value
+    });
+    this.getSearchResult(value);
+  },
+
+  /**
+   * 不修改检索关键词，加载更多结果
+   */
+  _searchMoreList(value) {
+    //加载更多，页码递增
+    this.data.page++;
+    this.getSearchResult(value);
+  }
 })

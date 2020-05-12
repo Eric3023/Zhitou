@@ -1,9 +1,10 @@
-.container{
-  width:100%;
-  height:100%;
-  position:relative;
-  /* overflow-x:hidden;* 消除左右滑动 * */
+.container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    /* overflow-x:hidden;* 消除左右滑动 * */
 }
+
 .searchline {
     background: #ffffff;
     height: 80rpx;
@@ -13,30 +14,33 @@
     position: fixed;
     top: 0rpx;
     left: 0;
-    z-index:999;
+    z-index: 999;
 }
 
 .search {
-    float:left;
+    float: left;
     margin: 5px auto 20px 12px;
     width: 85%;
-    height: 50rpx;/* 浮动起来后，脱离了行级，高才生效*/
+    height: 50rpx;
+    /* 浮动起来后，脱离了行级，高才生效*/
     border: 1px solid #e6e3e349;
-    border-radius:25rpx;
+    border-radius: 25rpx;
     background-size: 100% 100%;
     background-color: #f7fbfe;
     align-items: center;
     line-height: 58rpx;
 }
-.search > image{
-  
-    float:left;
+
+.search>image {
+
+    float: left;
     margin-left: 10rpx;
     margin-top: 8rpx;
     width: 35rpx;
     height: 35rpx;
 }
-.search > text{
+
+.search>text {
     float: left;
     margin-top: 0rpx;
     margin-left: 12rpx;
@@ -45,27 +49,27 @@
     color: rgb(226, 224, 224);
 }
 
-.carousel{
-  
-  width: 100%;
-  background-color: rebeccapurple;
-  margin: 80rpx 0 0rpx 0;
+.carousel {
+
+    width: 100%;
+    background-color: rebeccapurple;
+    margin: 80rpx 0 0rpx 0;
 }
 
-.carousel_swiper{
-  width: 100%;
-  height: 340rpx;
-  display: block;
-  position: relative;
-  background: #f4f4f4;
+.carousel_swiper {
+    width: 100%;
+    height: 340rpx;
+    display: block;
+    position: relative;
+    background: #f4f4f4;
 }
 
-.carouselImg{
-  width: 100%;
-  height: inherit;
+.carouselImg {
+    width: 100%;
+    height: inherit;
 }
 
-.image1{
+.image1 {
     padding-top: 12rpx;
     width: 35rpx;
     height: 35rpx;
@@ -77,7 +81,7 @@
     margin: 16rpx 18rpx;
     background: white;
     border: 0rpx #cccccc solid;
-    box-shadow: 0rpx 0rpx 10rpx #e0e0e0 ;
+    box-shadow: 0rpx 0rpx 10rpx #e0e0e0;
     font-size: 22rpx;
     padding-left: 15rpx;
     font-family: PingFangSC-Regular, sans-serif;
@@ -85,13 +89,14 @@
     color: #070707;
 }
 
-.location > text {
+.location>text {
     font-size: 22rpx;
     font-family: PingFangSC-Regular, sans-serif;
     color: #070707;
-    
+
 }
-.location > image {
+
+.location>image {
     vertical-align: middle;
     width: 18rpx;
     height: 18rpx;
@@ -100,16 +105,16 @@
 
 .location .user-font {
     /* height: 100%; */
-    
+
     float: right;
     padding-right: 5px;
     font-family: PingFangSC-Regular, sans-serif;
     font-size: 18rpx;
-    color: rgba(78, 75, 75,0.7);
+    color: rgba(78, 75, 75, 0.7);
 }
 
 .location .user-font .usercount-color {
-  color:rgb(236, 98, 98);
+    color: rgb(236, 98, 98);
 }
 
 .case-list {
@@ -128,8 +133,23 @@
     font-weight: bold;
 }
 
-.case-list .list-left{
-    
+.list-top {
+    float: left;
+    width: 100%;
+    height: auto;
+    border: 0px solid;
+    border-radius: 10px;
+    /* margin: 0 10px 10px 0; */
+    margin: 0 1% 2% 0;
+
+    align-items: center;
+    /** 垂直居中*/
+    justify-content: center;
+    /** flex 属性， 水平居中**/
+}
+
+.case-list .list-left {
+
     float: left;
     width: 49%;
     height: auto;
@@ -138,10 +158,13 @@
     /* margin: 0 10px 10px 0; */
     margin: 0 1% 1% 0;
 
-    align-items: center;/** 垂直居中*/
-    justify-content: center;/** flex 属性， 水平居中**/
+    align-items: center;
+    /** 垂直居中*/
+    justify-content: center;
+    /** flex 属性， 水平居中**/
 }
-.case-list .list-right{
+
+.case-list .list-right {
     float: right;
     width: 49%;
     height: auto;
@@ -150,6 +173,7 @@
     /* margin: 0 10px 10px 0; */
     margin: 0 0 1% 0;
 }
+
 .case-list image {
     width: 100%;
     height: 100%;

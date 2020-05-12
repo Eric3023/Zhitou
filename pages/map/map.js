@@ -17,10 +17,10 @@ Page({
     animation: false,
     isShowSubpois: true,
     dialogShow: false,
-    regionCallbackTxt:'',
+    regionCallbackTxt: '',
     keyword: '',
-    defaultKeyword:{
-      keyword :'搜索'
+    defaultKeyword: {
+      keyword: '搜索'
     },
     markers: [{
       callout: {
@@ -37,12 +37,18 @@ Page({
       rotate: 0,
       alpha: 1
     }],
-    currentcity:'北京市',
-    hiddenMap:false,
-    hiddenHis:true,
-    siteData:[],
-    hisSearchData:[],
-    showNull:false
+    currentcity: '北京市',
+    hiddenMap: false,
+    hiddenHis: true,
+    hisSearchData: [],
+    showNull: false,
+
+    //搜索关键词
+    keyword: '',
+    //搜索页码
+    page: 1,
+    //搜索结果
+    siteData: [],
   },
 
   onLoad: function (options) {
@@ -53,15 +59,15 @@ Page({
       longitude: options.lng,
       regionCallbackTxt: options.lat + ',' + options.lng,
       currentcity: options.currentcity,
-      'markers[0].latitude' : options.lat,
+      'markers[0].latitude': options.lat,
       'markers[0].longitude': options.lng,
-      
+
     })
 
     that.loadHis();//载入搜索历史记录
 
     //获取指定位置的poi
-    qqmaputil.reverseGeocoderPoi(app, that, {latitude: options.lat,longitude: options.lng});
+    qqmaputil.reverseGeocoderPoi(app, that, { latitude: options.lat, longitude: options.lng });
 
   },
   onMarkerAnimationend() {
@@ -74,7 +80,7 @@ Page({
     if (event.type === 'end' && event.causedBy === 'drag') {
       const mapCtx = wx.createMapContext('map', that);//根据控件ID
       mapCtx.getCenterLocation({
-       
+
         //拿到移动的位置
         success: res => {
           const latitude = res.latitude;
@@ -85,7 +91,7 @@ Page({
             'markers[0].longitude': longitude,
           });
 
-          qqmaputil.reverseGeocoderPoi(app, that, { latitude: latitude, longitude: longitude});
+          qqmaputil.reverseGeocoderPoi(app, that, { latitude: latitude, longitude: longitude });
 
           // wx.serviceMarket.invokeService({
           //   service: WEBSERVICE_APPID,
@@ -97,7 +103,7 @@ Page({
           //   let businessArea = '';
           //   let landmark = '';
           //   let crossroad = '';
-            
+
           //   if (result.address_reference && result.address_reference.business_area) {
           //     businessArea = result.address_reference.business_area.title || '';
           //     businessArea += '(' + result.address_reference.business_area._dir_desc + ')';
@@ -107,7 +113,7 @@ Page({
           //     landmark = result.address_reference.landmark_l1.title || '';
           //     landmark += '(' + result.address_reference.landmark_l1._dir_desc + ')';
           //   }
-            
+
           //   that.setData({
           //     addressInfo: {
           //       businessArea: businessArea, //商圈
@@ -117,14 +123,14 @@ Page({
 
           //     'markers[0].latitude': latitude.toFixed(6),
           //     'markers[0].longitude': longitude.toFixed(6),
-                
+
           //   });
           // }).catch(err => {
           //   console.error(err);
           // });
 
         },
-        
+
       });
     }
   },
@@ -146,16 +152,16 @@ Page({
 
   showMap(event) {
     console.log(event);
-    if (event.detail.value == '') {//有搜索值的时候，失去焦点后不显示地图
-      this.setData({
-        hiddenMap: false,
-        hiddenHis:true,
-        showNull: false,
-        siteData:[]//清空搜索结果
-      })
-    }
+    // if (event.detail.value == '') {//有搜索值的时候，失去焦点后不显示地图
+    //   this.setData({
+    //     hiddenMap: false,
+    //     hiddenHis: true,
+    //     showNull: false,
+    //     siteData: []//清空搜索结果
+    //   })
+    // }
   },
-  loadHis(){
+  loadHis() {
     console.log(111);
     var that = this;
     let arr = wx.getStorageSync("searchHisArray");
@@ -167,18 +173,19 @@ Page({
   },
 
   hiddenMap() {
-    
+
     var that = this;
     this.setData({
       hiddenMap: true,
       showNull: false,
-      hiddenHis:false//显示搜索历史
+      hiddenHis: false//显示搜索历史
     });
 
   },
 
   onKeywordConfirm(event) {//搜索提交，从组件传值，默认封装成event.detail.变量名称
-    this.getSearchResult(event.detail.value);
+    const value = event.detail.value;
+    this._searchList(value);
   },
   getSearchResult(keyword) {
     if (keyword === '') {
@@ -189,7 +196,7 @@ Page({
         duration: 1000
       })
     } else {//输入之后搜索
-      
+
       this.search(keyword);
 
 
@@ -197,15 +204,14 @@ Page({
   },
   search: function (keyword) {
     var that = this;
-    var siteData = [];
-    
-      wx.showLoading({
-        title: '加载中',
-      })
+
+    wx.showLoading({
+      title: '加载中',
+    })
     var shapLocation = that.data.regionCallbackTxt;//坐标中心 
-      
-    qqmaputil.search(that, keyword, shapLocation, that.data.currentcity, siteData);
-    
+
+    qqmaputil.search(that, keyword, this.data.page, shapLocation, that.data.currentcity, this.data.siteData);
+
     //http://lbs.qq.com/miniProgram/jsSdk/jsSdkGuide/methodSearch
     // qqmapsdk.search({
     //   keyword: keyword,//搜索关键词
@@ -238,7 +244,7 @@ Page({
     //         that.setData({
     //           showNull :true
     //         })
-            
+
     //         wx.hideLoading();
 
     //       }
@@ -249,19 +255,17 @@ Page({
     //       //最多50条历史
     //       that.addHisSearchData(keyword);
 
-          
+
     //     },
     //   })
-
-    console.log(siteData);
   },
   clearKeyword: function () {
     this.setData({
       keyword: '',
       searchStatus: false,
-      
+
     });
-    
+
     wx.hideLoading();
     //取消后显示地图
     this.setData({
@@ -273,7 +277,7 @@ Page({
 
 
 
-  onSelectCity:function() {
+  onSelectCity: function () {
     var that = this;
     console.log("222");
     wx.navigateTo({
@@ -287,14 +291,14 @@ Page({
    */
   bindSelect: function (e) {
     //隐藏搜索结果。显示地图
-    
+
     e = e.detail.event;
     var that = this;
     var index = e.currentTarget.dataset.index ? e.currentTarget.dataset.index : "0";
     var location = e.currentTarget.dataset.location;
     var siteData = this.data.siteData;
     var shapLocation = this.data.shapLocation;//起点地址坐标
-    
+
     wx.showLoading({
       title: '加载中',
     })
@@ -321,7 +325,7 @@ Page({
         qqmaputil.reverseGeocoderPoi(app, that, { latitude: latitude, longitude: longitude });
 
 
-//显示地图
+        //显示地图
         this.setData({
           hiddenMap: false,
           hiddenHis: true,
@@ -334,7 +338,7 @@ Page({
         siteData[i].checked = false;
       }
     }
-    
+
     that.setData({
       listIndex: index
     })
@@ -342,7 +346,7 @@ Page({
 
   // 添加历史搜索记录缓存
   addHisSearchData: function (searchValue) {
-    
+
     var that = this;
     let arr = wx.getStorageSync("searchHisArray");
     if (!Array.isArray(arr)) {//判断本地缓存是否有数组，如果没有，则新建
@@ -355,14 +359,14 @@ Page({
       })
 
       return;
-    } 
+    }
 
     //如果存在了，则读取本地缓存
-    
-    if(arr !== null) {
-      
+
+    if (arr !== null) {
+
       let num = arr.indexOf(searchValue);
-      if(num != -1) {
+      if (num != -1) {
         // 删除已存在后重新插入至数组
         arr.splice(num, 1);
         arr.unshift(searchValue);
@@ -371,8 +375,8 @@ Page({
       }
     }
 
-    if(arr.length >= 50) {
-      arr.splice(49,1);
+    if (arr.length >= 50) {
+      arr.splice(49, 1);
     }
 
     //存储搜索记录
@@ -380,18 +384,57 @@ Page({
       key: "searchHisArray",
       data: arr
     })
-    
+
     that.setData({
       hisSearchData: arr
     })
-    
+
   },
-  clearHisSearchData:function(){
+  clearHisSearchData: function () {
     this.setData({
-      hisSearchData:[]
+      hisSearchData: []
     });
-    
+
     wx.clearStorage("searchHisArray");
+  },
+
+  /**
+   * 选中搜索历史监听回调
+   */
+  onSelectHistory(event) {
+    const value = event.detail.value;
+    this._searchList(value);
+  },
+
+  /**
+   * 加载更多搜索结果
+   */
+  onLoadMore() {
+    const value = this.data.keyword;
+    this._searchMoreList(value)
+  },
+
+  /**
+   * 修改检索关键词，重新搜索
+   */
+  _searchList(value) {
+    //重新搜索，页码和搜索结果需要重置
+    this.data.page = 1;
+    this.data.siteData = [];
+    //修改搜索框的显示内容
+    this.setData({
+      keyword: value
+    });
+    this.getSearchResult(value);
+  },
+
+  /**
+   * 不修改检索关键词，加载更多结果
+   */
+  _searchMoreList(value) {
+    //加载更多，页码递增
+    this.data.page++;
+    this.getSearchResult(value);
   }
 })
 

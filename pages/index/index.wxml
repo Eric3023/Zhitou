@@ -10,9 +10,9 @@
 
 	<view class='carousel'>
 		<swiper class='carousel_swiper' indicator-dots="true" indicator-color="#f4f4f4" indicator-active-color="#4eb8b8" autoplay="true" interval='5000' circular='true'>
-			<block wx:for="{{carouselList}}" wx:key="key">
+			<block wx:for="{{banners}}" wx:key="key">
 				<swiper-item bindtap='chomeCarouselClick' data-url='{{item.url}}'>
-					<image class="carouselImg" src='{{host}}{{item.img}}' mode='aspectFill'></image>
+					<image class="carouselImg" src='{{item.imageUrl}}' mode='aspectFill'></image>
 				</swiper-item>
 			</block>
 		</swiper>
@@ -31,23 +31,20 @@
 		<view class="header">
 			<text>高端广告位展示</text>
 		</view>
-		<view class="list-left">
-			<image src="/img/t1.jpg" data-code="{{type_positon_0}}" mode="widthFix" bindtap="onShowEffect"></image>
+		<view class="list-top">
+			<image src="/img/adcode/app_start.png" data-code="{{type_positon_0}}" mode="widthFix" bindtap="onShowEffect"></image>
 		</view>
 		<view class="list-right">
-			<image src="/img/t1.jpg" data-code="{{type_positon_1}}" mode="widthFix" bindtap="onShowEffect"></image>
+			<image src="/img/adcode/activity_center.png" data-code="{{type_positon_2}}" mode="widthFix" bindtap="onShowEffect"></image>
 		</view>
 		<view class="list-left">
-			<image src="/img/t1.jpg" data-code="{{type_positon_2}}" mode="widthFix" bindtap="onShowEffect"></image>
+			<image src="/img/adcode/bully.jpg" data-code="{{type_positon_1}}" mode="widthFix" bindtap="onShowEffect"></image>
 		</view>
 		<view class="list-right">
-			<image src="/img/t1.jpg" data-code="{{type_positon_3}}" mode="widthFix" bindtap="onShowEffect"></image>
+			<image src="/img/adcode/personal_center.png" data-code="{{type_positon_4}}" mode="widthFix" bindtap="onShowEffect"></image>
 		</view>
 		<view class="list-left">
-			<image src="/img/t1.jpg" data-code="{{type_positon_4}}" mode="widthFix" bindtap="onShowEffect"></image>
-		</view>
-		<view class="list-right">
-			<image src="/img/t1.jpg" data-code="{{type_positon_5}}" mode="widthFix" bindtap="onShowEffect"></image>
+			<image src="/img/adcode/receive_order.png" data-code="{{type_positon_3}}" mode="widthFix" bindtap="onShowEffect"></image>
 		</view>
 	</view>
 
