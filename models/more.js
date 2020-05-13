@@ -1,9 +1,9 @@
 import { API_LOCATION_CATEGOTY } from '../config/appConfig.js';
+import { HTTP } from '../utils/http.js'
+
 /**
  * 地点分类数据请求类
  */
-
-import { HTTP } from '../utils/http.js'
 
 class MoreModel extends HTTP {
 

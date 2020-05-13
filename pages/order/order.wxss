@@ -1,13 +1,12 @@
-/* pages/my_order/my_order.wxss */
 page {
   background: white;
 }
 
-.order_container {
+.container {
   display: flex;
   flex-direction: column;
 }
 
-.order_category{
+.category{
   margin-bottom: 60rpx;
 }

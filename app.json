@@ -8,7 +8,7 @@
     "pages/tencentmap/map",
     "pages/throw/throw",
     "pages/mine/mine",
-    "pages/my_order/my_order",
+    "pages/order/order",
     "pages/show/show"
   ],
   "window": {

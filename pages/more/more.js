@@ -1,4 +1,3 @@
-// pages/more/more.js
 import { MoreModel } from '../../models/more.js'
 
 const height = 164;
@@ -60,7 +59,7 @@ Page({
   },
 
   /**
-   * 点击监听
+   * 页面滚动监听
    */
   onPageScroll: function (e) {
     console.log(e)
