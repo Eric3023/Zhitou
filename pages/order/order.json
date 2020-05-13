@@ -1,7 +1,7 @@
 {
   "usingComponents": {
     "v_order_message": "/components/order_message/order_message",
-    "v_order_category": "/components/order_category/order_category",
+    "v_state": "/components/state/index",
     "v_order": "/components/order/index"
   },
 

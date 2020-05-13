@@ -1,8 +1,8 @@
 <view class="container">
 	<!-- 订单简介 -->
 	<v_order_message class="header" throwing="{{orders.throwing_num}}" exposed="{{orders.exposed_num}}" audience="{{orders.audience_num}}" />
-	<!-- 订单分类 -->
-	<v_order_category class="category" bindchangetype="onChangeType" />
+	<!-- 订单状态 -->
+	<v_state class="category" bindchangetype="onChangeType" />
 	<!-- 订单列表 -->
 	<v_order class="list" wx:for="{{displaying}}" wx:key="indexS" img="{{item.img}}" title="{{item.title}}" address="{{item.address}}" count="{{item.count}}" start="{{item.start}}" end="{{item.end}}" state="{{item.state}}" />
 </view>
