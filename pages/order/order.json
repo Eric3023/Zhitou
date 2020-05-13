@@ -1,6 +1,6 @@
 {
   "usingComponents": {
-    "v_order_message": "/components/order_message/order_message",
+    "v_statistic": "/components/statistic/index",
     "v_state": "/components/state/index",
     "v_order": "/components/order/index"
   },
