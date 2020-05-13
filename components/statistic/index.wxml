@@ -1,6 +1,6 @@
 <view class="container">
 	<!-- 背景图片 -->
-	<image class="background" src="/img/background_order_message.jpg" />
+	<image class="background" src="img/background.jpg" />
 	<!-- 内容容器 -->
 	<view class="body">
 		<!-- 投放中 -->
