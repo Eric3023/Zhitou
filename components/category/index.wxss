@@ -1,4 +1,3 @@
-/* components/more_item.wxss */
 .container{
   display: flex;
   flex-direction: column;
@@ -6,14 +5,14 @@
   margin-bottom: 40rpx;
 }
 
-.item_title_container{
+.header{
   display: flex;
   flex-direction: row;
   align-items: center;
   margin-top: 25rpx;
 }
 
-.item_content_container{
+.content{
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -22,7 +21,7 @@
   margin-right: 54rpx; */
 }
 
-.item_pull_contianer{
+.pull{
   display: flex;
   margin-top: 44rpx;
   flex-direction: row;
