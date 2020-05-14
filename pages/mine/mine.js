@@ -1,10 +1,12 @@
-// pages/mine/mine.js
+const app = getApp()
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    phone : '',
+    hasLogin: false,
     balance: 5000,
     user_info: {
       uicon: "/img/icon_header.jpg",
@@ -54,11 +56,57 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    //判断是否登录
-    
+    let that = this;
+    let token = '';
+    let phone = '';
+    //必须登录才能查看
+    wx.getStorage({
+      key: 'token',
+      success(res) {
+        token = res.data;
+      },
+      fail(err) {
+        console.log('不存在')
+      }
+    })
 
+    wx.getStorage({
+      key: 'phone',
+      success(res) {
+        phone = res.data;
+      },
+      fail(err) {
+        console.log('不存在')
+      }
+    })
+    console.log(token);
+    if (!token || token == '') {
+      wx.showModal({
+        title: "提示",
+        content: "登录后体验更多功能",
+        cancelText: "取消",
+        confirmText: "去登录",
+        success(res) {
+          if (res.confirm) {
+            wx.navigateTo({
+              url: '/pages/login/login',
+            })
+          } else if (res.cancel) {
+            wx.reLaunch({
+              url: '/pages/index/index',
+            })
+          }
+        }
+      })
+
+    } else {
+      this.setData({
+        phone: phone,
+        hasLogin: true
+      });
+    }
   },
-
+  
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

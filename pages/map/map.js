@@ -279,7 +279,6 @@ Page({
 
   onSelectCity: function () {
     var that = this;
-    console.log("222");
     wx.navigateTo({
       url: `../city/city?currentcity=` + that.data.currentcity,
     })

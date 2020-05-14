@@ -1,5 +1,6 @@
 {
   "pages": [
+    
     "pages/index/index",
     "pages/map/map",
     "pages/city/city",
@@ -9,7 +10,9 @@
     "pages/throw/throw",
     "pages/mine/mine",
     "pages/my_order/my_order",
-    "pages/show/show"
+    "pages/show/show",
+    "pages/login/phoneLogin/phoneLogin",
+    "pages/login/login"
   ],
   "window": {
     "backgroundTextStyle": "light",

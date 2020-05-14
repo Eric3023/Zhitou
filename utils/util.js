@@ -20,7 +20,7 @@ function formatNumber(n) {
 }
 
 /**
- * 封封微信的的request
+ * 微信的request
  */
 function request(url, data = {}, method = "GET") {
   return new Promise(function(resolve, reject) {
@@ -39,7 +39,7 @@ function request(url, data = {}, method = "GET") {
           if (res.data.errno == 501) {
             // 清除登录相关内容
             try {
-              wx.removeStorageSync('userInfo');
+              wx.removeStorageSync('phone');
               wx.removeStorageSync('token');
             } catch (e) {
               // Do something when catch error
@@ -81,7 +81,7 @@ function redirect(url) {
 function showErrorToast(msg) {
   wx.showToast({
     title: msg,
-    image: '/static/images/icon_error.png'
+    icon: 'none'
   })
 }
 

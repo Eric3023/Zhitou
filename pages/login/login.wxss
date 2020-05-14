@@ -1,0 +1,62 @@
+.login-img-view {
+  width: 100%;
+  height: 320rpx;
+}
+.login-img-view > image {
+  width: 100%;
+  height: 100%;
+}
+.login-box {
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+  
+}
+
+.wx-login-btn {
+  margin: 60rpx auto 20rpx auto;
+  height: 96rpx;
+  line-height: 96rpx;
+  font-size: 30rpx;
+  border-radius: 6rpx;
+  width: 96%;
+  color: #fff;
+  padding: 0;
+  text-align: center;
+  letter-spacing: 3rpx;
+}
+.inputphone-color-agree{
+  color: #000000;
+}
+.inputphone-color-reject{
+  color: #a9aaab;
+}
+
+.protocol{
+  display: block;
+  position: fixed;
+  bottom: 80rpx;
+  width: 100%;
+}
+.checked-lable {
+  display: block;
+  width: 100%;
+  height: 20rpx;
+  line-height: 20rpx;
+  
+  
+  text-align: center;
+  margin: 0;
+}
+
+.account-login {
+  display: block;
+  width: 100%;
+  margin: 0 auto;
+  font-size: 26rpx;
+  height: 30rpx;
+  line-height: 30rpx;
+  align-items: center;
+  text-align: center;
+  letter-spacing: 3rpx;
+}

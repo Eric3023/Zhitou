@@ -44,7 +44,7 @@ function login() {
 /**
  * 调用微信登录
  */
-function loginByWeixin(userInfo) {
+function loginByWeixin(e) {
   let shareUserId = wx.getStorageSync('shareUserId');
   if (!shareUserId || shareUserId =='undefined'){
     shareUserId = 1;
@@ -54,12 +54,15 @@ function loginByWeixin(userInfo) {
       //登录远程服务器
       util.request(api.AuthLoginByWeixin, {
         code: res.code,
-        userInfo: userInfo,
+        iv: e.detail.iv,
+        encryptedData: e.detail.encryptedData,
         shareUserId: shareUserId
       }, 'POST').then(res => {
+        console.log(res);
         if (res.errno === 0) {
           //存储用户信息
-          wx.setStorageSync('userInfo', res.data.userInfo);
+          wx.setStorageSync('phone', res.data.userInfo.phone);
+          console.log(res.data.token);
           wx.setStorageSync('token', res.data.token);
 
           resolve(res);

@@ -41,15 +41,8 @@ App({
   },
 
   globalData: {
-    sessionKey: '',
-    openid: '',
-    token: '',
-    user: '',
-    appId: 'wx5b4f1f7a11303c71',
-    contextPath: 'https://192.168.1.10:9999',
-    switchTabUrl: '',
-    authFlag: false,
     lat:0,
-    lng:0
+    lng:0,
+    hasLogin: false
   }
 })
