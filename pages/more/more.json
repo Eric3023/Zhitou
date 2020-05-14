@@ -1,5 +1,5 @@
 {
   "usingComponents": {
-    "v_more_item": "/components/more_item/more_item"
+    "v_category": "/components/category/index"
   }
 }

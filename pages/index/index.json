@@ -1,4 +1,7 @@
 {
   
-  "usingComponents": {}
+  "usingComponents": {
+    "v_coupon_bully":"/components/coupon_bully/index",
+    "v_mask":"/components/mask/index"
+  }
 }

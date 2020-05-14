@@ -1,11 +1,11 @@
 /* components/orde_category/order_category.wxss */
-.order_category_container{
+.container{
   display: flex;
   flex-direction: row;
   background-color: white;
 }
 
-.content_container {
+.content {
   display: flex;
   flex-direction: column;
   width: 25%;

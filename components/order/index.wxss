@@ -1,5 +1,4 @@
-/* components/order_list_item/order_list_item.wxss */
-.order_item_container {
+.container {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -9,12 +8,12 @@
   margin-bottom: 14rpx;
 }
 
-.order_item_img {
+.img {
   width: 160rpx;
   height: 125rpx;
 }
 
-.content_container {
+.content {
   width: 440rpx;
   display: flex;
   flex-direction: column;

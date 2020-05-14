@@ -12,7 +12,7 @@
 		<swiper class='carousel_swiper' indicator-dots="true" indicator-color="#f4f4f4" indicator-active-color="#4eb8b8" autoplay="true" interval='5000' circular='true'>
 			<block wx:for="{{banners}}" wx:key="key">
 				<swiper-item bindtap='chomeCarouselClick' data-url='{{item.url}}'>
-					<image class="carouselImg" src='{{item.imageUrl}}' mode='aspectFill'></image>
+					<image class="carouselImg" src="{{item.imageUrl}}" mode='aspectFill' data-index="{{index}}" binderror="onBannerError"></image>
 				</swiper-item>
 			</block>
 		</swiper>
@@ -49,3 +49,7 @@
 	</view>
 
 </view>
+
+<!-- 霸屏 -->
+<v_mask class="mask" wx:if='{{bullying}}' />
+<v_coupon_bully class="bully" wx:if='{{bullying}}' couponList="{{coupons}}" bind:close="onCloseCoupon" bind:confirm="onConfirCoupon"></v_coupon_bully>

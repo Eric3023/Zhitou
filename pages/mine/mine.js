@@ -39,7 +39,7 @@ Page({
     switch (index) {
       case '我的订单':
         wx.navigateTo({
-          url: '/pages/my_order/my_order',
+          url: '/pages/order/order',
         })
         break;
       default:

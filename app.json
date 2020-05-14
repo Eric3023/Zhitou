@@ -9,10 +9,10 @@
     "pages/tencentmap/map",
     "pages/throw/throw",
     "pages/mine/mine",
-    "pages/my_order/my_order",
-    "pages/show/show",
     "pages/login/phoneLogin/phoneLogin",
-    "pages/login/login"
+    "pages/login/login",
+    "pages/order/order",
+    "pages/show/show"
   ],
   "window": {
     "backgroundTextStyle": "light",

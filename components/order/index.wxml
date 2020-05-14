@@ -1,8 +1,8 @@
-<view class="order_item_container">
+<view class="container">
 	<!-- 图片 -->
-	<image class="order_item_img" src="{{img}}" />
+	<image class="img" src="{{img}}" />
 	<!-- 详情 -->
-	<view class="content_container">
+	<view class="content">
 		<text class="title">{{title}}</text>
 		<text class="address">地址：{{address}}</text>
 		<view class="address">

@@ -1,1 +1,72 @@
-/* pages/throw.wxss */
+.container {
+  background-color: #ebebeb;
+}
+
+.header {
+  height: 208rpx;
+  margin-top: 10rpx;
+  padding-left: 60rpx;
+  padding-bottom: 60rpx;
+  background: white;
+  border-radius: 25rpx;
+  box-shadow: 0rpx -3rpx 2rpx #dedede;
+}
+
+.ad {
+  height: 336rpx;
+  margin: 26rpx 50rpx 26rpx 50rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.form {
+  background-color: white;
+  border-top-left-radius: 25rpx;
+  border-top-right-radius: 25rpx;
+  height: 566rpx;
+  box-shadow: 0rpx -3rpx 1rpx #dedede;
+  color: black;
+  font-size: 28rpx;
+  font-weight: 900rpx;
+  padding-left: 50rpx;
+  padding-right: 50rpx;
+  padding-top: 30rpx;
+}
+
+.city {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  color: black;
+  font-size: 28rpx;
+  font-weight: 600;
+  margin-top: 38rpx;
+}
+
+.point1 {
+  width: 20rpx;
+  height: 20rpx;
+  margin-left: 220rpx;
+}
+
+.change {
+  color: #4cbea0;
+  margin-left: 12rpx;
+}
+
+.point2 {
+  width: 30rpx;
+  height: 30rpx;
+  margin-right: 30rpx;
+}
+
+.address {
+  color: #5a5a5a;
+}
+
+.audience {
+  font-size: 20rpx;
+  color: #5a5a5a;
+  margin-top: 28rpx;
+}

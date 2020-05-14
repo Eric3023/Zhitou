@@ -1,5 +1,6 @@
 var qqmaputil = require('../../utils/qqmaputil.js');
 import { HomeModel } from '../../models/home.js';
+import { coupons } from '../../local/coupon.js';
 
 //获取应用实例
 const app = getApp()
@@ -29,7 +30,13 @@ Page({
     banners: [
       { imageUrl: '/img/banner/banner1.jpg' },
       { imageUrl: '/img/banner/banner2.jpg' },
-    ]
+    ],
+    defaultBanner: '/img/banner/banner1.jpg',
+
+    //优惠券列表
+    coupons: coupons,
+    //是否显示霸屏
+    bullying: true,
   },
 
   /**
@@ -163,5 +170,34 @@ Page({
         }
       }
     );
-  }
+  },
+
+  /**
+   * Banner图片加载失败
+   */
+  onBannerError(event) {
+    const index = event.currentTarget.dataset.index;
+    this.data.banners[index].imageUrl = this.data.defaultBanner;
+    this.setData({
+      banners: this.data.banners,
+    });
+  },
+
+  /**
+   * 关闭优惠霸屏
+   */
+  onCloseCoupon() {
+    this.setData({
+      bullying: false,
+    });
+  },
+
+  /**
+   * 领取优惠券
+   */
+  onConfirCoupon() {
+    this.setData({
+      bullying: false,
+    });
+  },
 })
