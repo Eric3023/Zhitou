@@ -2,8 +2,10 @@ import {
   CDN_PATH,
 } from '../../config/appConfig';
 import { WEBSERVICE_APPID } from '../../config/appConfig';
+import { LocationModel } from '../../models/location.js';
 
 var qqmaputil = require('../../utils/qqmaputil.js');
+const locationModel = new LocationModel();
 
 const RADIUS = 4;
 const app = getApp();
@@ -24,7 +26,7 @@ Page({
     },
     markers: [{
       callout: {
-        content: '10公里内2000+用户',
+        content: '10公里内有2000+用户',
         padding: 11,
         borderRadius: 2,
         display: 'ALWAYS'
@@ -49,6 +51,9 @@ Page({
     page: 1,
     //搜索结果
     siteData: [],
+
+    //周边用户数
+    user_num: 1800,
   },
 
   onLoad: function (options) {
@@ -68,6 +73,8 @@ Page({
 
     //获取指定位置的poi
     qqmaputil.reverseGeocoderPoi(app, that, { latitude: options.lat, longitude: options.lng });
+    //获取周边用户
+    this._getAroundUser(options.lng, options.lat, 10);
 
   },
   onMarkerAnimationend() {
@@ -92,6 +99,8 @@ Page({
           });
 
           qqmaputil.reverseGeocoderPoi(app, that, { latitude: latitude, longitude: longitude });
+          //获取周边用户
+          this._getAroundUser(longitude, latitude, 10);
 
           // wx.serviceMarket.invokeService({
           //   service: WEBSERVICE_APPID,
@@ -322,6 +331,8 @@ Page({
         });
 
         qqmaputil.reverseGeocoderPoi(app, that, { latitude: latitude, longitude: longitude });
+        //获取周边用户
+        this._getAroundUser(longitude, latitude, 10);
 
 
         //显示地图
@@ -434,7 +445,23 @@ Page({
     //加载更多，页码递增
     this.data.page++;
     this.getSearchResult(value);
-  }
+  },
+
+  /**
+   * 获取周边用户数量
+   */
+  _getAroundUser(lng, lat, distance) {
+    locationModel.getAroundUser(lng, lat, distance).then(
+      res => {
+        const data = res.data.data;
+        this.data.markers[0].content = `10公里内有${data}用户`;
+        this.setData({
+          user_num: data,
+          markers: this.data.markers,
+        });
+      }
+    );
+  },
 })
 
 
