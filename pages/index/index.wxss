@@ -14,7 +14,7 @@
     position: fixed;
     top: 0rpx;
     left: 0;
-    z-index: 999;
+    z-index: 9;
 }
 
 .search {
@@ -180,4 +180,14 @@
     vertical-align: middle;
     border-radius: 10px;
     min-width: 0;
+}
+
+.mask{
+    position: fixed;
+    z-index: 99;
+}
+
+.bully{
+    position: fixed;
+    z-index: 999;
 }

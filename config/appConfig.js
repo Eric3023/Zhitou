@@ -8,7 +8,7 @@ export const INDOOR_KEY = 'wx5b4f1f7a11303c71';
 export const REFERER = '腾讯位置服务';
 export const WEBSERVICE_APPID = 'wxc1c68623b7bdea7b';
 
-export const API_BASE_URL = 'http://192.168.1.105:8070/';
+export const API_BASE_URL = 'http://192.168.1.19:8070/';
 //首页Banner
 export const API_BANNER = API_BASE_URL + 'wx/index/banner';
 //行业分类
