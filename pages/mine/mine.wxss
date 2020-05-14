@@ -44,3 +44,33 @@ page {
   margin-bottom: 40rpx;
   height: 110rpx;
 }
+
+.nickname::after {
+ border:none;
+ font-size: 25rpx;
+}
+
+
+.uicon {
+  width: 95rpx;
+  height: 95rpx;
+}
+
+.uid {
+  margin-left: 18rpx;
+  font-size: 30rpx;
+  color: #373737;
+  border: none;
+  background: #ffffff;
+}
+.uid::after{
+  border: none;
+}
+
+button[disabled] {
+  margin-left: 18rpx !important;
+  font-size: 30rpx !important;
+  color: #373737 !important;
+  border: none !important;
+  background: #ffffff !important;
+}

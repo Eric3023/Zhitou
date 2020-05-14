@@ -10,7 +10,7 @@ Page({
     balance: 5000,
     user_info: {
       uicon: "/img/icon_header.jpg",
-      uid: "151*****627"
+      uid: ""
     },
     user_datas: [
       { icon: "/img/icon_mine_collection.jpg", title: "我的订单" },
@@ -154,5 +154,19 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+  getWxUserInfo(event) {
+    
+    var that = this
+    // 声明一个变量接收用户授权信息
+    var userinfo = event.detail.event.userInfo;
+    if (userinfo != undefined) {
+      that.setData({
+        user_info: {
+          uicon: userinfo.avatarUrl,
+          uid: userinfo.nickName
+        }
+      })
+    }
   }
 })

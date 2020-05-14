@@ -39,7 +39,9 @@ Page({
     }
 
     user.checkLogin().catch(() => {
-      
+      wx.showLoading({
+        title: '登录中'
+      })
       user.loginByWeixin(e).then(res => {
         console.log(res);
         app.globalData.hasLogin = true;
@@ -53,6 +55,7 @@ Page({
           delta: 1
         })
       }).catch((err) => {
+        wx.hideLoading();
         console.log(err);
         app.globalData.hasLogin = false;
         util.showErrorToast('微信登录失败');

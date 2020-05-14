@@ -23,6 +23,9 @@ Component({
    * Component methods
    */
   methods: {
-
+    getWxUserInfo:function(event){
+        console.log(event);
+      this.triggerEvent("getWxUserInfo", { event: event.detail});
+    }
   }
 })

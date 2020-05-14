@@ -1,4 +1,7 @@
 <view class="user_container">
 	<image class="uicon" src="{{uicon}}"></image>
-	<text class="uid">{{uid}}</text>
+  <button open-type="getUserInfo" disabled="{{uid?true:false}}" 
+  bindgetuserinfo="getWxUserInfo"
+  class="uid" >{{uid?uid:'设置用户昵称'}}</button>
+	
 </view>

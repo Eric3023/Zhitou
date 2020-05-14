@@ -3,7 +3,10 @@
 	<!-- 1.用户信息 -->
 	<view class="header_container">
 		<!-- 1.1 用户简介：头像和手机号 -->
-		<v_user class="header_user_container" uicon="{{user_info.uicon}}" uid="{{user_info.uid}}" />
+		<v_user class="header_user_container" uicon="{{user_info.uicon}}" 
+    bind:getWxUserInfo="getWxUserInfo"
+    uid="{{user_info.uid}}" />
+    
 		<!-- 1.2 账户余额 -->
 		<v_balance class="header_user_balance" balance="{{balance}}" bindrecharge="recharge" />
 	</view>
