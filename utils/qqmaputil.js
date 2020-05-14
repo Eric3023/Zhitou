@@ -3,11 +3,11 @@ var qqmapsdk = new QQMapWX({
   key: '5PEBZ-P4N63-LO53C-YFVFX-AGA2F-2WFE4'
 });
 
-function reverseGeocoder(app,that) {
-  
+function reverseGeocoder(app, that, callback = null) {
+
   qqmapsdk.reverseGeocoder({
-    
-    success: function(res) {
+
+    success: function (res) {
 
       console.log(res);
       const result = res.result;
@@ -56,9 +56,12 @@ function reverseGeocoder(app,that) {
       app.globalData.lat = result.location.lat;
       app.globalData.lng = result.location.lng;
 
+      if (callback) {
+        callback(result.location.lat, result.location.lng);
+      }
     }
   });
-  
+
 }
 
 function reverseGeocoderPoi(app, that, loca) {
@@ -98,7 +101,7 @@ function reverseGeocoderPoi(app, that, loca) {
         crossroad += '(' + result.address_reference.crossroad._dir_desc + ')';
       }
       that.setData({
-        
+
         addressInfo: {
           adcode: result.ad_info && result.ad_info.adcode || '', //行政区划代码
           address: result.address || '',
@@ -122,7 +125,7 @@ function search(that, keyword, page, shapLocation, currentcity, siteData) {
     keyword: keyword,//搜索关键词
     location: shapLocation,//设置周边搜索中心点
     address_format: 'short',
-    region:currentcity,
+    region: currentcity,
     page_index: page,
     page_size: "20",
     success: function (res) {

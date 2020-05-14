@@ -37,11 +37,11 @@ class HTTP {
 
   // 处理失败
   _handler_error(error, reject) {
-    wx.showToast({
-      title: error,
-      icon: 'none',
-      duration: 3000
-    });
+    // wx.showToast({
+    //   title: error,
+    //   icon: 'none',
+    //   duration: 3000
+    // });
     reject();
   }
 

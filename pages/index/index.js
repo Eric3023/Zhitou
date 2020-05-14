@@ -1,10 +1,12 @@
 var qqmaputil = require('../../utils/qqmaputil.js');
 import { HomeModel } from '../../models/home.js';
+import { LocationModel } from '../../models/location.js';
 import { coupons } from '../../local/coupon.js';
 
 //获取应用实例
 const app = getApp()
 const homeModel = new HomeModel();
+const locationModel = new LocationModel();
 
 Page({
   data: {
@@ -32,6 +34,8 @@ Page({
       { imageUrl: '/img/banner/banner2.jpg' },
     ],
     defaultBanner: '/img/banner/banner1.jpg',
+
+    user_num: 1880,
 
     //优惠券列表
     coupons: coupons,
@@ -88,7 +92,7 @@ Page({
   },
   onLoad: function () {
     var that = this;
-    this.getBanners();//请求轮播图
+    this._getBanners();//请求轮播图
 
     wx.getSetting({
       success(res) {
@@ -100,7 +104,6 @@ Page({
               //注：坐标系采用gcj02坐标系
 
               qqmaputil.reverseGeocoder(app, that);
-
               console.log(res)
             },
             fail(res) {//拒绝授权
@@ -113,8 +116,10 @@ Page({
           })
         } else {//授权过位置信息
 
-          qqmaputil.reverseGeocoder(app, that);
-
+          qqmaputil.reverseGeocoder(app, that, (lat, lng) => {
+            console.log('开始获取周边用户');
+            that._getAroundUser(lng, lat, 10);
+          });
         }
       }
     })
@@ -159,7 +164,7 @@ Page({
   /**
    * 获取轮播图
    */
-  getBanners() {
+  _getBanners() {
     homeModel.getBanners().then(
       res => {
         let banners = res.data.data;
@@ -168,6 +173,20 @@ Page({
             banners: banners
           });
         }
+      }
+    );
+  },
+
+  /**
+   * 获取周边用户数量
+   */
+  _getAroundUser(lng, lat, distance) {
+    locationModel.getAroundUser(lng, lat, distance).then(
+      res => {
+        const data = res.data.data;
+        this.setData({
+          user_num: data,
+        });
       }
     );
   },
