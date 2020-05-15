@@ -1,5 +1,5 @@
 import { HTTP } from '../utils/http.js'
-import { API_AROUND_USER } from '../config/appConfig.js';
+import { AroundUsers } from '../config/api.js';
 
 /**
  * 位置相关-业务处理
@@ -11,7 +11,7 @@ class LocationModel extends HTTP {
    */
   getAroundUser(lng, lat, distance) {
     return this.request({
-      url: API_AROUND_USER,
+      url: AroundUsers,
       method:'POST',
       data: {
         lng: lng,

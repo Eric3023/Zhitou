@@ -1,6 +1,3 @@
-import {
-  CDN_PATH,
-} from '../../config/appConfig';
 
 var qqmaputil = require('../../utils/qqmaputil.js');
 

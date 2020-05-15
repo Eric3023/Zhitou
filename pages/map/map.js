@@ -1,7 +1,3 @@
-import {
-  CDN_PATH,
-} from '../../config/appConfig';
-import { WEBSERVICE_APPID } from '../../config/appConfig';
 import { LocationModel } from '../../models/location.js';
 
 var qqmaputil = require('../../utils/qqmaputil.js');
@@ -26,7 +22,7 @@ Page({
     },
     markers: [{
       callout: {
-        content: '10公里内有2000+用户',
+        content: '10公里内有0用户',
         padding: 11,
         borderRadius: 2,
         display: 'ALWAYS',
@@ -54,7 +50,7 @@ Page({
     siteData: [],
 
     //周边用户数
-    user_num: 1800,
+    user_num: 0,
   },
 
   onLoad: function (options) {

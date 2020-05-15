@@ -1,5 +1,5 @@
 import { HTTP } from '../utils/http.js';
-import { API_BANNER } from '../config/appConfig.js';
+import { Banner } from '../config/api.js';
 /**
  * 主页数据请求、业务处理类
  */
@@ -11,7 +11,7 @@ class HomeModel extends HTTP {
    */
   getBanners() {
     return this.request({
-      url: API_BANNER
+      url: Banner,
     });
   }
 }

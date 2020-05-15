@@ -1,4 +1,4 @@
-import { API_LOCATION_CATEGOTY } from '../config/appConfig.js';
+import { LocationCategory } from '../config/api.js';
 import { HTTP } from '../utils/http.js'
 
 /**
@@ -12,7 +12,7 @@ class MoreModel extends HTTP {
    */
   getCategoryList() {
     return this.request({
-      url: API_LOCATION_CATEGOTY
+      url: LocationCategory,
     });
   }
 }
