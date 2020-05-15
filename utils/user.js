@@ -60,7 +60,7 @@ function loginByWeixin(that) {
         if (res.errno === 0) {
           that.setData({
             sessionKey: res.data.sessionKey,
-            openId: res.data.sessionKey
+            openId: res.data.openId
           })
         } else {
           reject(res);
