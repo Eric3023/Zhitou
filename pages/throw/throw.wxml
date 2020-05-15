@@ -14,14 +14,15 @@
 		<view class="audience">10公里内当前时间当前有1800+的用户</view>
 	</view>
 	<!-- 广告选择 -->
-	<view class="ad">内容待定</view>
+	<view class="ad">功能待开发</view>
 	<!-- 选项表单 -->
 	<view class="form">
-		<text>输入显示内容</text>
+		<view class="ad">功能待开发</view>
+		<!-- <text >输入显示内容</text>
 		<view>1</view>
 		<view>1</view>
 		<view>1</view>
 		<view>1</view>
-		<view>1</view>
+		<view>1</view> -->
 	</view>
 </view>
