@@ -33,9 +33,9 @@ Page({
       },
       latitude: 0,
       longitude: 0,
-      //iconPath: '../../img/Marker3_Activated.png',
-      width: '34px',
-      height: '34px',
+      iconPath: '../../img/Marker3_Activated.png',
+      width: '1px',
+      height: '1px',
       rotate: 0,
       alpha: 1
     }],
@@ -59,23 +59,30 @@ Page({
   onLoad: function (options) {
 
     var that = this
-    that.setData({
-      latitude: options.lat,
-      longitude: options.lng,
-      regionCallbackTxt: options.lat + ',' + options.lng,
-      currentcity: options.currentcity,
-      'markers[0].latitude': options.lat,
-      'markers[0].longitude': options.lng,
 
-    })
-
-    that.loadHis();//载入搜索历史记录
-
-    //获取指定位置的poi
-    qqmaputil.reverseGeocoderPoi(app, that, { latitude: options.lat, longitude: options.lng });
-    //获取周边用户
-    this._getAroundUser(options.lng, options.lat, 10);
-
+    //需要直接开始搜索
+    let keyword = options.keyword;
+    if (keyword) {
+      this.hiddenMap();
+      this._searchList(keyword);
+    }else{
+      that.setData({
+        latitude: options.lat,
+        longitude: options.lng,
+        regionCallbackTxt: options.lat + ',' + options.lng,
+        currentcity: options.currentcity,
+        'markers[0].latitude': options.lat,
+        'markers[0].longitude': options.lng,
+  
+      })
+  
+      that.loadHis();//载入搜索历史记录
+  
+      //获取指定位置的poi
+      qqmaputil.reverseGeocoderPoi(app, that, { latitude: options.lat, longitude: options.lng });
+      //获取周边用户
+      this._getAroundUser(options.lng, options.lat, 10);
+    }
   },
   onMarkerAnimationend() {
     this.setData({

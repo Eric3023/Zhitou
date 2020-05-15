@@ -51,10 +51,9 @@ Page({
    * 点击行业Item
    */
   onClickItem: function (event) {
-    let title = '点击了【' + event.detail.title + '】, 进入搜索商圈页面';
-    wx.showToast({
-      title: title,
-      icon: 'none'
+    let title = event.detail.title;
+    wx.navigateTo({
+      url: `../map/map?keyword=${title}`,
     })
   },
 

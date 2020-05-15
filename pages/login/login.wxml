@@ -1,6 +1,6 @@
 <view class="container">
   <view class="login-img-view">
-    <image src="../../img/login/login.png"></image>
+    <image src="../../img/login/login.jpg"></image>
   </view>
   <view class="login-box">
     <button type="primary" disabled="{{disabled}}" open-type="getPhoneNumber" class="wx-login-btn" bindgetphonenumber="wxLogin">微信用户一键登录</button>
