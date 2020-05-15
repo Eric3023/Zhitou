@@ -55,5 +55,5 @@
 </view>
 
 <!-- 霸屏 -->
-<v_mask class="mask" wx:if='{{bullying}}' />
+<v_mask class="mask" wx:if='{{bullying}}'  bind:tap="onCloseCoupon"/>
 <v_coupon_bully class="bully" wx:if='{{bullying}}' couponList="{{coupons}}" bind:close="onCloseCoupon" bind:confirm="onConfirCoupon"></v_coupon_bully>
