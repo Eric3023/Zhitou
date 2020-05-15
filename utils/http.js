@@ -21,6 +21,7 @@ class HTTP {
         let code = res.statusCode;
         //请求成功
         if (code.toString().startsWith('2')) {
+          console.log(res.data);
           resolve(res);
         }
         //请求失败 

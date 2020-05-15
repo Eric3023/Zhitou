@@ -1,10 +1,10 @@
 <!--index.wxml-->
 <view class="container">
 	<view class="searchline">
-		<navigator url="/pages/search/search?lat={{app.globalData.lng}}&lng={{app.globalData.lng}}&currentcity={{currentcity}}" class="search">
+		<view class="search" bindtap="onSearch">
 			<image src="/img/title_search.png"></image>
 			<text>大家都在搜:热门商圈</text>
-		</navigator>
+		</view>
 		<image src="/img/more.png" class="image1" bindtap="bindViewTap"></image>
 	</view>
 
@@ -55,5 +55,5 @@
 </view>
 
 <!-- 霸屏 -->
-<v_mask class="mask" wx:if='{{bullying}}'  bind:tap="onCloseCoupon"/>
+<v_mask class="mask" wx:if='{{bullying}}' bind:tap="onCloseCoupon" />
 <v_coupon_bully class="bully" wx:if='{{bullying}}' couponList="{{coupons}}" bind:close="onCloseCoupon" bind:confirm="onConfirCoupon"></v_coupon_bully>

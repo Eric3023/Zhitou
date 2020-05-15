@@ -29,13 +29,14 @@ Page({
         content: '10公里内有2000+用户',
         padding: 11,
         borderRadius: 2,
-        display: 'ALWAYS'
+        display: 'ALWAYS',
+        anchorY:-30
       },
       latitude: 0,
       longitude: 0,
       iconPath: '../../img/Marker3_Activated.png',
       width: '1px',
-      height: '1px',
+      height: '60px',
       rotate: 0,
       alpha: 1
     }],
@@ -59,13 +60,16 @@ Page({
   onLoad: function (options) {
 
     var that = this
+    that.loadHis();//载入搜索历史记录
 
     //需要直接开始搜索
     let keyword = options.keyword;
-    if (keyword) {
+    let searching = options.searching;
+    if (searching) {
       this.hiddenMap();
-      this._searchList(keyword);
-    }else{
+      if (keyword == true)
+        this._searchList(keyword);
+    } else {
       that.setData({
         latitude: options.lat,
         longitude: options.lng,
@@ -73,11 +77,9 @@ Page({
         currentcity: options.currentcity,
         'markers[0].latitude': options.lat,
         'markers[0].longitude': options.lng,
-  
+
       })
-  
-      that.loadHis();//载入搜索历史记录
-  
+
       //获取指定位置的poi
       qqmaputil.reverseGeocoderPoi(app, that, { latitude: options.lat, longitude: options.lng });
       //获取周边用户
@@ -469,6 +471,15 @@ Page({
       }
     );
   },
+
+  /**
+   * 点击了周边位置Item
+   */
+  onSelectPosition(event) {
+    wx.switchTab({
+      url: '../throw/throw',
+    })
+  }
 })
 
 

@@ -23,7 +23,7 @@
 				周边地点
 			</view>
 
-			<search_poi pois="{{pois}}"></search_poi>
+			<search_poi pois="{{pois}}" bind:click = "onSelectPosition"></search_poi>
 
 			<!-- <scroll-view class="poi-list">
             <view class="list-item" wx:for="{{pois}}" wx:key="{{index}}" data-index="{{index}}" data-poi="{{item}}">

@@ -1,7 +1,7 @@
 <view class='container'>
 	<image class="background" src="images/bacground.png"></image>
 	<view class='coupons'>
-		<view class='item' wx:for="{{couponList}}" wx:key="index">
+		<view class='item' wx:for="{{couponList}}" wx:if="{{index<3}}" wx:key="index">
 			<view class='money'>￥<text class='num'>{{item.discount}}</text></view>
 			<view class='text'>
 				<view class='name'>【{{item.desc}}】购物买{{item.min}}减{{item.discount}}</view>

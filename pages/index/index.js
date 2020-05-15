@@ -40,7 +40,7 @@ Page({
     //优惠券列表
     coupons: coupons,
     //是否显示霸屏
-    bullying: true,
+    bullying: false,
   },
 
   /**
@@ -93,6 +93,7 @@ Page({
   onLoad: function () {
     var that = this;
     this._getBanners();//请求轮播图
+    this._getCouponing();
 
     wx.getSetting({
       success(res) {
@@ -203,9 +204,29 @@ Page({
   },
 
   /**
+   * 点击顶部搜索按钮
+   */
+  onSearch(event) {
+    let title = event.detail.title;
+    wx.navigateTo({
+      url: `../map/map?searching=true&keyword=${title}`,
+    });
+  },
+
+  /**
+   * 是否需要显示霸屏
+   */
+  _getCouponing() {
+    this.setData({
+      bullying: app.globalData.couponing,
+    });
+  },
+
+  /**
    * 关闭优惠霸屏
    */
   onCloseCoupon() {
+    app.globalData.couponing = false;
     this.setData({
       bullying: false,
     });
@@ -215,6 +236,7 @@ Page({
    * 领取优惠券
    */
   onConfirCoupon() {
+    app.globalData.couponing = false;
     this.setData({
       bullying: false,
     });

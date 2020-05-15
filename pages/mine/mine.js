@@ -9,7 +9,7 @@ Page({
     hasLogin: false,
     balance: 5000,
     user_info: {
-      uicon: "/img/icon_header.jpg",
+      uicon: "/img/mine/icon_header.png",
       uid: ""
     },
     user_datas: [

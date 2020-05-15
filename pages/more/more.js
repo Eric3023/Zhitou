@@ -53,7 +53,7 @@ Page({
   onClickItem: function (event) {
     let title = event.detail.title;
     wx.navigateTo({
-      url: `../map/map?keyword=${title}`,
+      url: `../map/map?searching=true&keyword=${title}`,
     })
   },
 

@@ -7,8 +7,10 @@ App({
   },
 
   globalData: {
-    lat:0,
-    lng:0,
-    hasLogin: false
+    lat: 0,
+    lng: 0,
+    hasLogin: false,
+
+    couponing: true,
   }
 })
