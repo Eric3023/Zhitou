@@ -6,10 +6,26 @@ var app = getApp();
 Page({
   data:{
     disabled:true,
-    checked:false
+    checked:false,
+    sessionKey:'',
+    openId:''
   },
   onLoad: function (options) {
-    
+    var that = this;
+    //获取sessionKey
+    wx.showToast({
+      title: '加载中',
+      icon:'none',
+      duration: 500
+    });
+    user.loginByWeixin(that).then(res => {
+      console.log(res);
+      wx.hideLoading();
+    }).catch((err) => {
+      wx.hideLoading();
+      console.log(err);
+    });
+
   },
   onReady: function () {
 
@@ -42,7 +58,7 @@ Page({
       wx.showLoading({
         title: '登录中'
       })
-      user.loginByWeixin(e).then(res => {
+      user.wxLoginPhone(e,that).then(res => {
         console.log(res);
         app.globalData.hasLogin = true;
         
@@ -51,9 +67,10 @@ Page({
           duration: 500
         });
 
-        wx.navigateBack({
-          delta: 1
+        wx.reLaunch({
+          url: '/pages/index/index',
         })
+        
       }).catch((err) => {
         wx.hideLoading();
         console.log(err);

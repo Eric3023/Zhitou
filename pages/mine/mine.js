@@ -57,28 +57,9 @@ Page({
    */
   onLoad: function (options) {
     let that = this;
-    let token = '';
-    let phone = '';
+    let token = wx.getStorageSync("token");
+    let phone = wx.getStorageSync("phone");
     //必须登录才能查看
-    wx.getStorage({
-      key: 'token',
-      success(res) {
-        token = res.data;
-      },
-      fail(err) {
-        console.log('不存在')
-      }
-    })
-
-    wx.getStorage({
-      key: 'phone',
-      success(res) {
-        phone = res.data;
-      },
-      fail(err) {
-        console.log('不存在')
-      }
-    })
     console.log(token);
     if (!token || token == '') {
       wx.showModal({
@@ -88,7 +69,7 @@ Page({
         confirmText: "去登录",
         success(res) {
           if (res.confirm) {
-            wx.navigateTo({
+            wx.redirectTo({
               url: '/pages/login/login',
             })
           } else if (res.cancel) {

@@ -42,36 +42,67 @@ function login() {
 }
 
 /**
- * 调用微信登录
+ * 调用微信登录,获取sessionKey
  */
-function loginByWeixin(e) {
+function loginByWeixin(that) {
+
   let shareUserId = wx.getStorageSync('shareUserId');
-  if (!shareUserId || shareUserId =='undefined'){
+  if (!shareUserId || shareUserId == 'undefined') {
     shareUserId = 1;
   }
-  return new Promise(function(resolve, reject) {
+  return new Promise(function (resolve, reject) {
     return login().then((res) => {
       //登录远程服务器
       util.request(api.AuthLoginByWeixin, {
-        code: res.code,
-        iv: e.detail.iv,
-        encryptedData: e.detail.encryptedData,
-        shareUserId: shareUserId
+        code: res.code
       }, 'POST').then(res => {
         console.log(res);
         if (res.errno === 0) {
-          //存储用户信息
-          wx.setStorageSync('phone', res.data.userInfo.phone);
-          console.log(res.data.token);
-          wx.setStorageSync('token', res.data.token);
-
-          resolve(res);
+          that.setData({
+            sessionKey: res.data.sessionKey,
+            openId: res.data.sessionKey
+          })
         } else {
           reject(res);
         }
       }).catch((err) => {
         reject(err);
       });
+    }).catch((err) => {
+      reject(err);
+    })
+  });
+}
+
+/**
+ * 获取微信手机号码，如不存在，则并自动注册
+ */
+function wxLoginPhone(e, that) {
+
+  let shareUserId = wx.getStorageSync('shareUserId');
+  if (!shareUserId || shareUserId =='undefined'){
+    shareUserId = 1;
+  }
+  return new Promise(function(resolve, reject) {
+    //登录远程服务器
+    util.request(api.AuthPhoneLoginByWeixin, {
+      sessionKey: that.data.sessionKey,
+      openId: that.data.openId,
+      iv: e.detail.iv,
+      encryptedData: e.detail.encryptedData,
+      shareUserId: shareUserId
+    }, 'POST').then(res => {
+      console.log(res);
+      if (res.errno === 0) {
+        //存储用户信息
+        wx.setStorageSync('phone', res.data.userInfo.phone);
+        wx.setStorageSync('token', res.data.token);
+
+        resolve(res);
+      } else {
+        reject(res);
+      }
+
     }).catch((err) => {
       reject(err);
     })
@@ -98,4 +129,5 @@ function checkLogin() {
 module.exports = {
   loginByWeixin,
   checkLogin,
+  wxLoginPhone,
 };
