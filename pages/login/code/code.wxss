@@ -1,0 +1,60 @@
+page {
+  background: white;
+}
+
+.phone_container {
+  display: flex;
+  flex-direction: column;
+  margin: 90rpx 30rpx 0rpx 30rpx;
+}
+
+.phone_tip1 {
+  font-size: 36rpx;
+  color: black;
+  font-weight: 500;
+}
+
+.phone_tip2 {
+  font-size: 28rpx;
+  color: #959595;
+  margin-top: 12rpx;
+}
+
+.phone_tip3 {
+  font-size: 24rpx;
+  color: #bbbbbb;
+  margin-top: 102rpx;
+}
+
+.form_container {
+  margin-top: 28rpx;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.code_container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+}
+
+form input {
+  height: 92rpx;
+  width: 92rpx;
+  border: 1px solid #cdcdcd;
+  border-radius: 8rpx;
+  display: inline-block;
+  line-height: 94px;
+  text-align: center;
+  font-size: 48rpx;
+  color: #323232;
+}
+
+form .hidden_input {
+  height: 0rpx;
+  width: 0rpx;
+  border: none;
+  margin: 0;
+}

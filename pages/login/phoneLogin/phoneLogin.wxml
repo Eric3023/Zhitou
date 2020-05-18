@@ -1,4 +1,19 @@
 <view class="container">
-  <view class="h1"></view>
-  <view class="info"></view>
+	<!-- 手机号布局 -->
+	<view class="phone_container">
+		<text class="phone_tip1">请输入手机号</text>
+		<text class="phone_tip2">为方便取得联系，请输入您的常用手机号码</text>
+		<text class="phone_tip3">请输入手机号</text>
+		<view class="phone_tip4">
+			<view class="phone">
+				<view class="a86">
+					<text>+86</text>
+					<image class="pull" src="/img/login/icon_pull.png"></image>
+				</view>
+				<input class="phone_input" placeholder="输入手机号" focus="true" type="number" maxlength="11" bindinput="onInput" adjust-position="true"></input>
+			</view>
+			<view class="line"></view>
+		</view>
+		<button class="phone_btn" catchtap="onConfirm">下一步</button>
+	</view>
 </view>

@@ -1,6 +1,5 @@
 {
   "pages": [
-    
     "pages/index/index",
     "pages/map/map",
     "pages/city/city",
@@ -12,7 +11,8 @@
     "pages/login/phoneLogin/phoneLogin",
     "pages/login/login",
     "pages/order/order",
-    "pages/show/show"
+    "pages/show/show",
+    "pages/login/code/code"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -27,7 +27,7 @@
         "pagePath": "pages/index/index",
         "text": "首页",
         "iconPath": "img/tab/home_normal.png",
-        "selectedIconPath":"img/tab/home_select.png",
+        "selectedIconPath": "img/tab/home_select.png",
         "color": "#000000",
         "selectedColor": "#f3864b"
       },
@@ -35,7 +35,7 @@
         "pagePath": "pages/throw/throw",
         "text": "投放",
         "iconPath": "img/tab/throw_normal.png",
-        "selectedIconPath":"img/tab/throw_select.png",
+        "selectedIconPath": "img/tab/throw_select.png",
         "color": "#000000",
         "selectedColor": "#f3864b"
       },
@@ -43,7 +43,7 @@
         "pagePath": "pages/mine/mine",
         "text": "我的",
         "iconPath": "img/tab/mine_normal.png",
-        "selectedIconPath":"img/tab/mine_select.png",
+        "selectedIconPath": "img/tab/mine_select.png",
         "color": "#000000",
         "selectedColor": "#f3864b"
       }

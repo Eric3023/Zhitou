@@ -1,0 +1,16 @@
+<view class="container">
+	<!-- 验证码布局 -->
+	<view class="phone_container">
+		<text class="phone_tip1">请输入验证码</text>
+		<text class="phone_tip2">验证码已发送至手机</text>
+		<text class="phone_tip2">{{phone}}</text>
+		<text class="phone_tip3">6位数字验证码</text>
+		<!-- 验证码输入框 -->
+		<form class="form_container">
+			<view class="code_container">
+				<input type='number' wx:for="{{length}}" wx:key="index" disabled bindtap='onFocus' value="{{value.length>=index+1?value[index]:''}}" />
+			</view>
+			<input class='hidden_input' name="password" password="{{true}}" maxlength="{{length}}" focus="{{isFocus}}" bindinput="setValue"></input>
+		</form>
+	</view>
+</view>
