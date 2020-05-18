@@ -59,8 +59,8 @@
 			"list": [
 				{
 					"id": 0,
-					"name": "pages/login/phoneLogin/phoneLogin",
-					"pathName": "pages/login/phoneLogin/phoneLogin",
+					"name": "pages/mine/mine",
+					"pathName": "pages/mine/mine",
 					"query": "",
 					"scene": null
 				}

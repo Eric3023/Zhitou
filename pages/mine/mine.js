@@ -6,6 +6,7 @@ Page({
    */
   data: {
     phone : '',
+    authored: false,
     hasLogin: false,
     balance: 5000,
     user_info: {
