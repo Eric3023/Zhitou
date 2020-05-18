@@ -2,29 +2,28 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  margin-left: 28rpx;
-  margin-right: 28rpx;
+  margin-left: 32rpx;
+  margin-right: 32rpx;
   margin-top: 14rpx;
   margin-bottom: 14rpx;
 }
 
 .img {
-  width: 160rpx;
+  width: 164rpx;
   height: 125rpx;
 }
 
 .content {
-  width: 440rpx;
+  width: 300rpx;
   display: flex;
   flex-direction: column;
-  margin-left: 18rpx;
+  margin-left: 20rpx;
 }
 
 .title {
-  font-size: 22rpx;
-  color: black;
-  margin-top: 5rpx;
-  margin-bottom: 5rpx;
+  font-size: 28rpx;
+  color: #010101;
+  margin-bottom: 8rpx;
   width: 100%;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -32,11 +31,11 @@
 }
 
 .address {
-  font-size: 18rpx;
-  color: #484848;
+  width: 100%;
+  font-size: 22rpx;
+  color: #76baa4;
   margin-top: 5rpx;
   margin-bottom: 5rpx;
-  width: 100%;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
@@ -45,8 +44,7 @@
 .time {
   width: fit-content;
   font-size: 22rpx;
-  background-color: #f6f2e9;
-  color: #d7ac96;
+  color: #999999;
   margin-top: 5rpx;
   margin-bottom: 5rpx;
   width: 100%;
@@ -55,9 +53,16 @@
   overflow: hidden;
 }
 
-.state{
+.state {
   font-size: 22rpx;
-  color: #d7ac96;
+  color: #76baa4;
   position: absolute;
   left: 620rpx;
+}
+
+.line{
+  width: 1rpx;
+  height: 90rpx;
+  background-color: #cecece;
+  margin-left: 36rpx;
 }

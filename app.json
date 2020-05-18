@@ -12,7 +12,8 @@
     "pages/login/login",
     "pages/order/order",
     "pages/show/show",
-    "pages/login/code/code"
+    "pages/login/code/code",
+    "pages/orderDetail/orderDetail"
   ],
   "window": {
     "backgroundTextStyle": "light",

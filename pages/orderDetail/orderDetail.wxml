@@ -1,0 +1,30 @@
+<view class="container">
+	<!-- Layout 1 -->
+	<view class="header">
+		<!-- 剩余天数 -->
+		<view class="remain">
+			<text class="remain_num">125天</text>
+			<text class="remain_title">剩余天数</text>
+		</view>
+		<!-- 已投放天数 -->
+		<view class="exposed">
+			<text class="exposed_num">5天</text>
+			<text class="exposed_title">已投放</text>
+		</view>
+	</view>
+	<!-- layout 2 -->
+	<view class="body">
+		<text class="tag">曝光</text>
+		<text class="num">{{detail.expose_num}}次</text>
+		<text class="tag">浏览量</text>
+		<text class="num">{{detail.browse_num}}次</text>
+		<text class="tag">点击次数</text>
+		<text class="num">{{detail.click_num}}次</text>
+		<text class="tag">感兴趣</text>
+		<text class="num">{{detail.interest_num}}次</text>
+	</view>
+	<!-- layout 3 -->
+	<view class="detail_container">
+		<v_order img="{{detail.img}}" title="{{detail.title}}" address="{{detail.days}}" count="{{detail.count}}" start="{{detail.start}}" end="{{detail.end}}" state="{{detail.state}}" />
+	</view>
+</view>

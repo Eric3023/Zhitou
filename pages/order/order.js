@@ -19,6 +19,7 @@ Page({
     this._getOrders();
   },
 
+
   /**
    * 获取我的订单列表
    */
@@ -55,6 +56,15 @@ Page({
     this.setData({
       displaying,
     });
+  },
+
+  /**
+   * 点击订单列表，进入订单详情
+   */
+  onClickItem(event) {
+    wx.navigateTo({
+      url: '/pages/orderDetail/orderDetail',
+    })
   },
 
 })

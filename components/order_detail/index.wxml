@@ -1,0 +1,13 @@
+<view class="container">
+	<!-- 图片 -->
+	<image class="img" src="{{img}}" />
+	<!-- 详情 -->
+	<view class="content">
+		<text class="title">{{title}}</text>
+		<text class="address">已投放{{address}}天</text>
+		<text class="time">周期：{{start}}-{{end}}</text>
+	</view>
+	<view class="line"></view>
+	<!-- 投放状态 -->
+	<text class="state">{{state}}</text>
+</view>
