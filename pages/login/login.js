@@ -13,19 +13,25 @@ Page({
   onLoad: function (options) {
     var that = this;
     //获取sessionKey
-    wx.showToast({
-      title: '加载中',
-      icon:'none',
-      duration: 500
-    });
+    wx.showLoading({
+      title: '加载中'
+    })
+   
+    // wx.showToast({
+    //   title: '加载中',
+    //   icon:'none',
+    //   //duration: 500
+    // });
+    
     user.loginByWeixin(that).then(res => {
       console.log(res);
       wx.hideLoading();
+      
     }).catch((err) => {
       wx.hideLoading();
       console.log(err);
     });
-
+    
   },
   onReady: function () {
 
@@ -75,7 +81,9 @@ Page({
         wx.hideLoading();
         console.log(err);
         app.globalData.hasLogin = false;
-        util.showErrorToast('微信登录失败');
+        util.showErrorToast('微信登录失败');//避免sessionkey过期，重新获取sesssionkey
+
+        
       });
 
     });

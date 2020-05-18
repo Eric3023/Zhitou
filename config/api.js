@@ -1,7 +1,7 @@
 // 本机开发API地址
-var WxApiRoot = 'http://192.168.1.105:8070/wx/';
+var WxApiRoot = 'http://180.76.112.118:8070/wx/';
 // 局域网开发API地址
-var WxApiRoot = 'http://192.168.1.19:8070/wx/index/';
+// var WxApiRoot = 'http://192.168.1.19:8070/wx/index/';
 // 线上云平台api地址
 //var WxApiRoot = 'https://www.dtsshop.com/wx/';
 
@@ -13,10 +13,10 @@ module.exports = {
   //图片根地址
   BaseImgApi: 'http://180.76.112.118:8070/',
   //首页Banner
-  Banner: WxApiRoot + 'banner',
+  Banner: WxApiRoot + 'index/banner',
   //行业分类
-  LocationCategory: WxApiRoot + 'allCategory',
+  LocationCategory: WxApiRoot + 'index/allCategory',
   //周边用户数
-  AroundUsers: WxApiRoot + 'userNums',
+  AroundUsers: WxApiRoot + 'index/userNums',
 
 };

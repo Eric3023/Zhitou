@@ -56,12 +56,13 @@ function loginByWeixin(that) {
       util.request(api.AuthLoginByWeixin, {
         code: res.code
       }, 'POST').then(res => {
-        console.log(res);
+        
         if (res.errno === 0) {
           that.setData({
             sessionKey: res.data.sessionKey,
             openId: res.data.openId
           })
+          resolve(res);
         } else {
           reject(res);
         }

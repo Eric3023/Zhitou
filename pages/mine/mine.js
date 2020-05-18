@@ -57,6 +57,15 @@ Page({
    */
   onLoad: function (options) {
     let that = this;
+
+    let uicon = wx.getStorageSync("uicon");
+    let uid = wx.getStorageSync("uid");
+    if (!uicon) {
+      that.setData({
+        uicon : uicon,
+        uid:uid
+      })
+    }
     let token = wx.getStorageSync("token");
     let phone = wx.getStorageSync("phone");
     //必须登录才能查看
@@ -148,6 +157,11 @@ Page({
           uid: userinfo.nickName
         }
       })
+
+      //存储用户信息
+      wx.setStorageSync('uicon', userinfo.avatarUrl);
+      wx.setStorageSync('uid', userinfo.nickName);
+
     }
   }
 })
