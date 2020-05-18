@@ -63,7 +63,7 @@ Page({
     let searching = options.searching;
     if (searching) {
       this.hiddenMap();
-      if (keyword == true)
+      if (keyword)
         this._searchList(keyword);
     } else {
       that.setData({
