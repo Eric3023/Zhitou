@@ -22,7 +22,7 @@
 				<text class="code_content">打开APP的第一眼，点亮你的</text>
 			</view>
 			<view class="code_btn_container">
-				<text class="btn">上传素材</text>
+				<text class="btn" catchtap="onClickUpdate">上传素材</text>
 				<text class="btn preview">预览</text>
 			</view>
 		</view>
@@ -33,7 +33,7 @@
 				<text class="code_content">霸屏时间长，位置优越</text>
 			</view>
 			<view class="code_btn_container">
-				<text class="btn">上传素材</text>
+				<text class="btn" catchtap="onClickUpdate">上传素材</text>
 				<text class="btn preview">预览</text>
 			</view>
 		</view>
@@ -44,7 +44,7 @@
 				<text class="code_content">活动中心内容纷繁，位置</text>
 			</view>
 			<view class="code_btn_container">
-				<text class="btn">上传素材</text>
+				<text class="btn" catchtap="onClickUpdate">上传素材</text>
 				<text class="btn preview">预览</text>
 			</view>
 		</view>
@@ -55,7 +55,7 @@
 				<text class="code_content">打开APP的第一眼，点亮</text>
 			</view>
 			<view class="code_btn_container">
-				<text class="btn">上传素材</text>
+				<text class="btn" catchtap="onClickUpdate">上传素材</text>
 				<text class="btn preview">预览</text>
 			</view>
 		</view>
@@ -66,9 +66,72 @@
 				<text class="code_content">打开APP的第一眼，点亮</text>
 			</view>
 			<view class="code_btn_container">
-				<text class="btn">上传素材</text>
+				<text class="btn" catchtap="onClickUpdate">上传素材</text>
 				<text class="btn preview">预览</text>
 			</view>
 		</view>
 	</view>
+	<!-- 遮罩层 -->
+	<v_mask class="mask" wx:if="{{state==1}}" catchtap="onCancelMaterial"/>
+	<!-- 模板选择 -->
+	<radio-group class="model" wx:if="{{state==1}}">
+		<!-- 模板选择 -->
+		<view class="model_selector">
+			<view class="model_header">
+				<radio style="transform:scale(0.5);"></radio>
+				<text  class="model_title" >  模板选择 :</text>
+			</view>
+			<view class="model_body">
+				<scroll-view scroll-x="true" scroll-y="false">
+					<radio-group>
+						<view class="model_items">
+							<block wx:for="{{models}}" wx:key="index">
+								<view class="model_item">
+									<image class="model_img" src="{{item.img}}"></image>
+									<radio class="model_radio" style="transform:scale(0.5);"></radio>
+								</view>
+							</block>
+						</view>
+					</radio-group>
+				</scroll-view>
+				<view class="photo">
+					<text>选择照片</text>
+					<view class="photo_update">+</view>
+				</view>
+				<view class="input_container">
+					<view class="input_title">
+						<text>输入显示内容</text>
+						<text class="notice">注意事项</text>
+						<image class="notice_icon" src="/img/throw/notice.png"></image>
+					</view>
+					<input class="input" placeholder="文字" placeholder-class="place_class"></input>
+					<input class="input" placeholder="电话" placeholder-class="place_class"></input>
+				</view>
+				<view class="motto">
+					优选车型
+					<picker bindchange="bindPickerChange" value="0" range="{{mottos}}">
+						<view class="picker">{{mottos[index]}}
+							<image class="picker_icon" src="/img/login/icon_pull.png"></image>
+						</view>
+					</picker>
+				</view>
+				<view class="cycle">投放周期</view>
+			</view>
+		</view>
+		<!-- 直接上传 -->
+		<view class="model_selector">
+			<view class="model_header">
+				<radio style="transform:scale(0.5);"></radio>
+				<text  class="model_title" >直接上传 :</text>
+			</view>
+			<view class="model_body photo">
+				<text>选择照片</text>
+				<view class="photo_update">+</view>
+			</view>
+		</view>
+		<view class="btn_container">
+			<button class="button" catchtap="onCancelMaterial">放弃</button>
+			<button class="button" catchtap="onCommitMaterial">确定</button>
+		</view>
+	</radio-group>
 </view>
