@@ -13,7 +13,8 @@
     "pages/order/order",
     "pages/show/show",
     "pages/login/code/code",
-    "pages/throw_detail/throw_detail"
+    "pages/throw_detail/throw_detail",
+    "pages/complete/complete"
   ],
   "window": {
     "backgroundTextStyle": "light",

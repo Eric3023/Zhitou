@@ -101,11 +101,14 @@ Page({
   },
 
   /**
-   * 取消结算 
+   * 完成结算 
    */
   onConfirmCheck() {
     this.setData({
       state: 4,
     });
+    wx.navigateTo({
+      url: '../../pages/complete/complete',
+    })
   },
 })
