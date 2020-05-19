@@ -292,6 +292,128 @@ page {
   margin-top: 28rpx;
 }
 
+.settlement {
+  width: 100%;
+  height: 360rpx;
+  background-color: white;
+  border-radius: 20rpx;
+  box-shadow: 0 0 8rpx #cbcbcb;
+  position: fixed;
+  z-index: 999;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  padding-top: 15rpx;
+  align-items: flex-end;
+}
+
+.settlement .audience {
+  margin: 30rpx 50rpx 0 60rpx;
+  width: 640rpx;
+  display: flex;
+  flex-direction: row;
+  font-size: 26rpx;
+  color: #000000;
+  position: relative;
+}
+
+.settlement .audience .audience_num {
+  font-size: 24rpx;
+  color: #6c6c6c;
+  position: absolute;
+  right: 0;
+}
+
+.coupon {
+  color: #cb9178;
+  font-size: 28rpx;
+  margin-top: 50rpx;
+  margin-right: 36rpx;
+}
+
+.settle {
+  margin-top: 54rpx;
+  margin-right: 28rpx;
+  font-size: 26rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.settle_btn {
+  font-size: 28rpx;
+  margin-left: 25rpx;
+  background-color: #f77a51;
+  color: white;
+  padding: 12rpx 36rpx 12rpx 36rpx;
+  box-shadow: 0 0 8rpx #f77a51;
+}
+
+/* 结算确认 */
+.check {
+  width: 464rpx;
+  height: 328rpx;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  margin-top: -164rpx;
+  margin-left: -232rpx;
+  z-index: 9999;
+  background-color: white;
+  box-shadow: 0 0 8rpx #aaaaaa;
+  border-radius: 10rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 28rpx;
+}
+
+.check_title {
+  margin-top: 28rpx;
+  font-weight: 600;
+}
+
+.check_total_balance {
+  margin-top: 40rpx;
+  width: 342rpx;
+  position: relative;
+}
+
+.total_balance {
+  position: absolute;
+  right: 0rpx;
+}
+
+.check_later_balance {
+  margin-top: 16rpx;
+  width: 342rpx;
+  position: relative;
+  color: #dc8c84;
+}
+
+.check_btn_container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin-top: 44rpx;
+  width: 342rpx;
+  align-items: center;
+}
+
+.check_cancel {
+  border: 2rpx solid #bebebe;
+  padding: 8rpx 22rpx 8rpx 22rpx;
+  border-radius: 5rpx;
+}
+
+.check_confirm {
+  padding: 8rpx 22rpx 8rpx 22rpx;
+  color: white;
+  background-color: #71caaf;
+  border: 2rpx solid #71caaf;
+  border-radius: 5rpx;
+}
+
 /*隐藏滚动条*/
 ::-webkit-scrollbar {
   width: 0;

@@ -36,7 +36,7 @@ Page({
       "100万以上",
     ],
     index: 0,
-    state: 0,//0：选择广告位，1：选择模板/文件；2.选择完成
+    state: 0,//0：选择广告位，1：选择模板/文件；2.选择素材完成；3：结算中/结算确认；4；结算完成
   },
 
   /**
@@ -80,5 +80,32 @@ Page({
     this.setData({
       index: event.detail.value,
     })
+  },
+
+  /**
+   * 点击开始结算
+   */
+  onSettle() {
+    this.setData({
+      state: 3,
+    });
+  },
+
+  /**
+   * 取消结算 
+   */
+  onCancleCheck() {
+    this.setData({
+      state: 2,
+    });
+  },
+
+  /**
+   * 取消结算 
+   */
+  onConfirmCheck() {
+    this.setData({
+      state: 4,
+    });
   },
 })

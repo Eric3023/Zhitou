@@ -72,7 +72,7 @@
 		</view>
 	</view>
 	<!-- 遮罩层 -->
-	<v_mask class="mask" wx:if="{{state==1}}" catchtap="onCancelMaterial"/>
+	<v_mask class="mask" wx:if="{{state!=0 && state!=4}}" catchtap="onCancelMaterial" />
 	<!-- 模板选择 -->
 	<radio-group class="model" wx:if="{{state==1}}">
 		<!-- 模板选择 -->
@@ -134,4 +134,31 @@
 			<button class="button" catchtap="onCommitMaterial">确定</button>
 		</view>
 	</radio-group>
+	<!-- 结算 -->
+	<view class="settlement" wx:if="{{state==2}}">
+		<view class="audience">影响人群
+			<view class="audience_num">9000+</view>
+		</view>
+		<view class="audience">单　　价
+			<view class="audience_num">2000+</view>
+		</view>
+		<view class="coupon">已享受首单满减，优惠金额1000元</view>
+		<view class="settle">合计：2000元
+			<view class="settle_btn" catchtap="onSettle">结算</view>
+		</view>
+	</view>
+	<!-- 结算确认 -->
+	<view class="check" wx:if="{{state==3}}">
+		<view class="check_title">支付</view>
+		<view class="check_total_balance">总余额
+			<text class="total_balance">5000元</text>
+		</view>
+		<view class="check_later_balance">支付后余额
+			<text class="total_balance">3000元</text>
+		</view>
+		<view class="check_btn_container">
+			<view class="check_cancel" catchtap="onCancleCheck">放弃</view>
+			<view class="check_confirm" catchtap="onConfirmCheck">确定</view>
+		</view>
+	</view>
 </view>
