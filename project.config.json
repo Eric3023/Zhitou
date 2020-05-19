@@ -59,8 +59,8 @@
 			"list": [
 				{
 					"id": 0,
-					"name": "pages/orderDetail/orderDetail",
-					"pathName": "pages/orderDetail/orderDetail",
+					"name": "pages/throw_detail/throw_detail",
+					"pathName": "pages/throw_detail/throw_detail",
 					"query": "",
 					"scene": null
 				}

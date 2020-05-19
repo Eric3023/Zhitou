@@ -25,6 +25,6 @@
 	</view>
 	<!-- layout 3 -->
 	<view class="detail_container">
-		<v_order img="{{detail.img}}" title="{{detail.title}}" address="{{detail.days}}" count="{{detail.count}}" start="{{detail.start}}" end="{{detail.end}}" state="{{detail.state}}" />
+		<v_detail img="{{detail.img}}" title="{{detail.title}}" address="{{detail.days}}" count="{{detail.count}}" start="{{detail.start}}" end="{{detail.end}}" state="{{detail.state}}" />
 	</view>
 </view>
