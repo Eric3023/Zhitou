@@ -4,7 +4,7 @@
 		<view class="city">
 			<text>当前城市： </text>
 			<text>北京市 </text>
-			<image class="point1" src="/img/icon_point.png"></image>
+			<image class="point1" src="/img/throw/change_location.png"></image>
 			<text class="change">切换全城投放 </text>
 		</view>
 		<view class="city">
@@ -14,15 +14,61 @@
 		<view class="audience">10公里内当前时间当前有1800+的用户</view>
 	</view>
 	<!-- 广告选择 -->
-	<view class="ad">功能待开发</view>
-	<!-- 选项表单 -->
-	<view class="form">
-		<view class="ad">功能待开发</view>
-		<!-- <text >输入显示内容</text>
-		<view>1</view>
-		<view>1</view>
-		<view>1</view>
-		<view>1</view>
-		<view>1</view> -->
+	<view class="ad">
+		<view class="code_container">
+			<image class="code_backgroud" src="/img/throw/app_start.png"></image>
+			<view class="code_messeage">
+				<text class="code_title">启动图</text>
+				<text class="code_content">打开APP的第一眼，点亮你的</text>
+			</view>
+			<view class="code_btn_container">
+				<text class="btn">上传素材</text>
+				<text class="btn preview">预览</text>
+			</view>
+		</view>
+		<view class="code_container">
+			<image class="code_backgroud" src="/img/throw/banner.png"></image>
+			<view class="code_messeage">
+				<text class="code_title">首页轮播</text>
+				<text class="code_content">霸屏时间长，位置优越</text>
+			</view>
+			<view class="code_btn_container">
+				<text class="btn">上传素材</text>
+				<text class="btn preview">预览</text>
+			</view>
+		</view>
+		<view class="code_container">
+			<image class="code_backgroud" src="/img/throw/activity_center.png"></image>
+			<view class="code_messeage">
+				<text class="code_title">活动中心</text>
+				<text class="code_content">活动中心内容纷繁，位置</text>
+			</view>
+			<view class="code_btn_container">
+				<text class="btn">上传素材</text>
+				<text class="btn preview">预览</text>
+			</view>
+		</view>
+		<view class="code_container">
+			<image class="code_backgroud" src="/img/throw/receive_order.png"></image>
+			<view class="code_messeage">
+				<text class="code_title">司机接单</text>
+				<text class="code_content">打开APP的第一眼，点亮</text>
+			</view>
+			<view class="code_btn_container">
+				<text class="btn">上传素材</text>
+				<text class="btn preview">预览</text>
+			</view>
+		</view>
+		<view class="code_container">
+			<image class="code_backgroud" src="/img/throw/personal_center.png"></image>
+			<view class="code_messeage">
+				<text class="code_title">个人中心</text>
+				<text class="code_content">打开APP的第一眼，点亮</text>
+			</view>
+			<view class="code_btn_container">
+				<text class="btn">上传素材</text>
+				<text class="btn preview">预览</text>
+			</view>
+		</view>
 	</view>
 </view>
