@@ -43,6 +43,11 @@ Page({
           url: '/pages/order/order',
         })
         break;
+      case '充值记录':
+        wx.navigateTo({
+          url: '/pages/recharge_record/record',
+        })
+        break;
       default:
         let title = '进入【' + event.detail.title + '】页面';
         wx.showToast({
