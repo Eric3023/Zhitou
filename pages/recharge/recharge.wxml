@@ -1,0 +1,27 @@
+<view class="container">
+	<view class="title">
+		<view class="child">
+			余额
+			<text class="data">￥50.00</text>
+		</view>
+		<view class="child child_margin">
+			充值
+			<text class="data origin">￥2000.00</text>
+		</view>
+	</view>
+	<view class="body">
+		<radio-group class="type">
+			<view class="option">
+				<image src="/img/recharge/wx.png"></image>
+				<text>微信支付(推荐)</text>
+				<radio checked="true"></radio>
+			</view>
+			<view class="option option_margin">
+				<image src="/img/recharge/union.png"></image>
+				<text>银行卡转账</text>
+				<radio></radio>
+			</view>
+		</radio-group>
+	</view>
+	<text class="btn">立即支付</text>
+</view>

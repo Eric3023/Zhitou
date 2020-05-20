@@ -26,9 +26,8 @@ Page({
    * 立即充值
    */
   recharge(event) {
-    wx.showToast({
-      title: '进入【充值】页面',
-      icon: 'none'
+    wx.navigateTo({
+      url: '/pages/recharge/recharge',
     })
   },
 

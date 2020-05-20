@@ -59,8 +59,8 @@
 			"list": [
 				{
 					"id": 0,
-					"name": "pages/recharge_record/record",
-					"pathName": "pages/recharge_record/record",
+					"name": "pages/recharge/recharge",
+					"pathName": "pages/recharge/recharge",
 					"query": "",
 					"scene": null
 				}
