@@ -59,8 +59,8 @@
 			"list": [
 				{
 					"id": 0,
-					"name": "pages/author/author",
-					"pathName": "pages/author/author",
+					"name": "pages/invoice/invoice",
+					"pathName": "pages/invoice/invoice",
 					"query": "",
 					"scene": null
 				}

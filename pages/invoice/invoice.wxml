@@ -7,11 +7,11 @@
 			<view class="data">
 				<radio-group class="radio_container">
 					<view class="radio_container">
-						<radio style="transform:scale(0.6);"></radio>
+						<radio style="transform:scale(0.65);"></radio>
 						<text>企业单位</text>
 					</view>
-					<view class="radio_container radio_contianer_marginl">
-						<radio style="transform:scale(0.6);"></radio>
+					<view class="radio_container radio_margin">
+						<radio style="transform:scale(0.65);"></radio>
 						<text>个人</text>
 					</view>
 				</radio-group>
@@ -19,12 +19,15 @@
 		</view>
 		<view class="param">
 			公司名称
+			<view class="data">北京广化寺</view>
 		</view>
 		<view class="param">
 			公司税号
+			<view class="data">AFD1012154621225JKIO</view>
 		</view>
 		<view class="param">
 			总金额
+			<view class="data">10000元</view>
 		</view>
 	</view>
 	<!-- 接收方式 -->
@@ -32,8 +35,9 @@
 		接收方式
 		<view class="param">
 			电子邮箱
+			<view class="data">20179282@qq.com</view>
 		</view>
 	</view>
 	<!-- 确认按钮 -->
-	<view></view>
+	<view class="btn">提交</view>
 </view>
