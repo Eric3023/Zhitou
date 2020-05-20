@@ -63,7 +63,7 @@ Page({
    */
   onClickItem(event) {
     wx.navigateTo({
-      url: '/pages/orderDetail/orderDetail',
+      url: '/pages/throw_detail/throw_detail',
     })
   },
 

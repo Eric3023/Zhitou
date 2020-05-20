@@ -1,0 +1,18 @@
+<view class="container">
+	<view class="invoice">
+		<text>开发票</text>
+	</view>
+	<image class="icon" src="/img/order/icon_wallet.png"></image>
+	<text class="title">付款-给西红柿老太太</text>
+	<text class="price">-10000</text>
+	<view class="line"></view>
+	<view class="content">当前状态
+		<text class="param">支付成功</text>
+	</view>
+	<view class="content">转账时间
+		<text class="param">2020-04-18 10:44:28</text>
+	</view>
+	<view class="content">转账单号
+		<text class="param">10000499012020041800102015857241</text>
+	</view>
+</view>

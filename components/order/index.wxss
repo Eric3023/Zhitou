@@ -49,7 +49,7 @@
   color: #d7ac96;
   margin-top: 5rpx;
   margin-bottom: 5rpx;
-  width: 100%;
+  max-width: 100%;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;

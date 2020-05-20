@@ -1,5 +1,5 @@
 <view class="contianer">
 	<icon type="success" size="54" color="#6eccaf"></icon>
 	<text>已完成投放</text>
-  <view class="btn">查看订单</view>
+  <view class="btn" catchtap="onClikeDetail">查看订单</view>
 </view>

@@ -14,7 +14,9 @@
     "pages/show/show",
     "pages/login/code/code",
     "pages/throw_detail/throw_detail",
-    "pages/complete/complete"
+    "pages/complete/complete",
+    "pages/order_detail/order_detail",
+    "pages/throw_detail2/throw_detail2"
   ],
   "window": {
     "backgroundTextStyle": "light",

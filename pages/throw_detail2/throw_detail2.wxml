@@ -1,0 +1,36 @@
+<view class="container">
+	<!-- layout 1 -->
+	<view class="header">
+		<image src="/img/adcode/bully.jpg"></image>
+		<view class="content">
+			<text class="title">韩国烤肉餐饮店投放</text>
+			<text class="throw">投放5天</text>
+		</view>
+		<view class="line"></view>
+		<text class="state">审核未通过</text>
+	</view>
+	<!-- layout 2 -->
+	<view class="sub">
+		<text class="reason">未通过原因：素材审核不合格</text>
+		<view class="notice">
+			<text>素材注意事项</text>
+			<image class="notice_icon" src="/img/throw/notice.png"></image>
+		</view>
+	</view>
+	<!-- layout 3 -->
+	<view class="body">
+		<view class="title_container">
+			<view class="point"></view>
+			<view class="title">华腾世纪总部公园</view>
+		</view>
+		<image class="img" src="/img/adcode/bully.jpg"></image>
+		<view class="tail">
+			<text>投放周期: </text>
+			<text class="data">2020年04月20日-2020年08月21日</text>
+		</view>
+		<view class="tail">
+			<text>影响人群: </text>
+			<text class="data">300人</text>
+		</view>
+	</view>
+</view>

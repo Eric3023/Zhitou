@@ -15,6 +15,15 @@ Page({
    */
   onLoad: function (options) {
 
+  },
+
+  /**
+   * 查看订单
+   */
+  onClikeDetail() {
+    wx.navigateTo({
+      url: '/pages/order_detail/order_detail',
+    })
   }
 })
 
