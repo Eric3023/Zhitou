@@ -1,9 +1,9 @@
 // 本机开发API地址
-var WxApiRoot = 'http://180.76.112.118:8070/wx/';
+//var WxApiRoot = 'http://127.0.0.1:8070/wx/';
 // 局域网开发API地址
-// var WxApiRoot = 'http://192.168.1.19:8070/wx/index/';
+//var WxApiRoot = 'http://180.76.112.118:8070/wx/';
 // 线上云平台api地址
-//var WxApiRoot = 'https://www.dtsshop.com/wx/';
+var WxApiRoot = 'https://zt.ottauto.tv/wx/';
 
 module.exports = {
 
@@ -18,5 +18,17 @@ module.exports = {
   LocationCategory: WxApiRoot + 'index/allCategory',
   //周边用户数
   AroundUsers: WxApiRoot + 'index/userNums',
+
+
+  //用户余额接口
+  UserBalance: WxApiRoot + 'recharge/userBalance',
+
+  //对公账户接口
+  BankAccount: WxApiRoot + 'recharge/bankAccount',
+
+  //确认充值接口
+  RechargeConfirm: WxApiRoot + 'recharge/recharge',
+
+  RechargePrepay: WxApiRoot + 'pay/prepay', //订单的预支付会话
 
 };

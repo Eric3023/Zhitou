@@ -1,0 +1,48 @@
+<view class="container">
+  <form bindsubmit="rechargePrepay">
+
+  
+  <view class="balance-info">
+    <view class="balance">
+      <text>余额</text>
+      <text>￥{{balance}}</text>
+    </view>
+    <view class="recharge">
+      <text>充值金额</text>
+      <input type="number" name="recharge" confirm-type="done" placeholder="输入充值金额"></input>
+    </view>
+  </view>
+  <view class="payment-method">
+    <radio-group class="radio-group" bindchange="radioChange">
+      <view class="payment">
+        <view style="display:flex">
+        <image src="../../img/recharge/wechat.png"></image>
+        <text>微信支付（推荐）</text>
+        </view>
+        
+        <radio class="radio" value="1" checked="true"/>
+      </view>
+      <view class="payment">
+        <view style="display:flex">
+        <image src="../../img/recharge/bankcard.png"></image>
+        <text>银行转账</text>
+        </view>
+        
+        <radio class="radio" value="2" />
+      </view>
+      
+    </radio-group>
+    
+    <button class="button-payment {{hiddenAccount?'show-block':'hidden'}}" form-type='submit'>立即支付</button>
+
+    <view class="account-info {{hiddenAccount?'hidden':'show-flex'}}">
+    <text class="account-text">说明：线下汇款到以下账户后，请联系我们的客服人员，我们将在收到汇款后的1个工作日，将汇款充值到该账户。</text>
+      <text class="account-text">账户名称：北京知了互联信息科技有限公司</text>
+      <text class="account-text">开户银行：招商银行股份有限公司北京华贸中心支行</text>
+      <text class="account-text">银行账号：110924634010301</text>
+
+    </view>
+  </view>
+
+  </form>
+</view>
