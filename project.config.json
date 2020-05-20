@@ -59,8 +59,8 @@
 			"list": [
 				{
 					"id": 0,
-					"name": "pages/mine/mine",
-					"pathName": "pages/mine/mine",
+					"name": "pages/recharge_record/record",
+					"pathName": "pages/recharge_record/record",
 					"query": "",
 					"scene": null
 				}

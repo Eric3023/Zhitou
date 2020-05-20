@@ -1,1 +1,63 @@
-/* pages/recharge_record/record.wxss */
+page {
+  background-color: white;
+}
+
+.mouth_container {
+  width: 100%;
+  height: 144rpx;
+  background-color: #f5f5f5;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-left: 38rpx;
+}
+
+.mouth_container .mouth {
+  font-size: 32rpx;
+  color: #1a1a1a;
+}
+
+.mouth_container .money {
+  font-size: 28rpx;
+  margin-top: 16rpx;
+  color: #949494;
+}
+
+.record_container {
+  height: 140rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-left: 38rpx;
+  border: 1px solid #f5f5f5;
+  position: relative;
+}
+
+.record_container .icon {
+  width: 72rpx;
+  height: 72rpx;
+}
+
+.record_container .content {
+  display: flex;
+  flex-direction: column;
+  margin-left: 20rpx;
+}
+
+.record_container .content .person {
+  font-size: 32rpx;
+  color: #000000;
+}
+
+.record_container .content .time {
+  font-size: 24rpx;
+  margin-top: 18rpx;
+  color: #b7b7b7;
+}
+
+.record_container .money{
+  font-size: 32rpx;
+  color: #000000;
+  position: absolute;
+  right: 32rpx;
+}
