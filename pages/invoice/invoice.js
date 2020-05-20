@@ -1,3 +1,4 @@
+// pages/invoice/invoice.js
 Page({
 
   /**
@@ -13,13 +14,4 @@ Page({
   onLoad: function (options) {
 
   },
-
-  /**
-   * 开具发票
-   */
-  onInvoice() {
-    wx.navigateTo({
-      url: '/pages/invoice/invoice',
-    })
-  }
 })

@@ -1,6 +1,6 @@
 <view class="container">
 	<view class="invoice">
-		<text>开发票</text>
+		<text catchtap="onInvoice">开发票</text>
 	</view>
 	<image class="icon" src="/img/order/icon_wallet.png"></image>
 	<text class="title">付款-给西红柿老太太</text>

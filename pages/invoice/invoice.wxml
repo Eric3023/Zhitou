@@ -1,0 +1,39 @@
+<view class="container">
+	<!-- 发票详情 -->
+	<view class="sub_contaner">
+		发票详情
+		<view class="param">
+			发票类型
+			<view class="data">
+				<radio-group class="radio_container">
+					<view class="radio_container">
+						<radio style="transform:scale(0.6);"></radio>
+						<text>企业单位</text>
+					</view>
+					<view class="radio_container radio_contianer_marginl">
+						<radio style="transform:scale(0.6);"></radio>
+						<text>个人</text>
+					</view>
+				</radio-group>
+			</view>
+		</view>
+		<view class="param">
+			公司名称
+		</view>
+		<view class="param">
+			公司税号
+		</view>
+		<view class="param">
+			总金额
+		</view>
+	</view>
+	<!-- 接收方式 -->
+	<view class="sub_contaner">
+		接收方式
+		<view class="param">
+			电子邮箱
+		</view>
+	</view>
+	<!-- 确认按钮 -->
+	<view></view>
+</view>
