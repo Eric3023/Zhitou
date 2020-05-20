@@ -22,7 +22,7 @@ Page({
     },
     markers: [{
       callout: {
-        content: '10公里内有0用户',
+        content: '10公里内有x个用户',
         padding: 11,
         borderRadius: 2,
         display: 'ALWAYS',
