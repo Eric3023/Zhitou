@@ -5,7 +5,7 @@
 		<!-- 1.1 用户简介：头像和手机号 -->
 		<view class="user_info">
 			<v_user class="header_user_container" uicon="{{user_info.uicon}}" bind:getWxUserInfo="getWxUserInfo" uid="{{user_info.uid}}" />
-			<image class="authentication" src="{{authored?'/img/mine/auth.png':'/img/mine/no_auth.png'}}"></image>
+			<image class="authentication" src="{{authored?'/img/mine/auth.png':'/img/mine/no_auth.png'}}" catchtap="onAuthor"></image>
 		</view>
 
 		<!-- 1.2 账户余额 -->

@@ -1,0 +1,48 @@
+<view class="container">
+	<!-- 基本信息 -->
+	<view class="info">
+		基本信息
+		<view class="type">
+			<view class="point green"></view>
+			<text>证件类型</text>
+			<picker class="picker" bindchange="onTypeChanged" value="0" range="{{types}}">
+				<view>{{types[index]}}
+					<image class="picker_icon" src="/img/login/icon_pull.png"></image>
+				</view>
+			</picker>
+		</view>
+		<view class="type">
+			<view class="point orig"></view>
+			<text>注册地</text>
+			<picker class="picker" bindchange="onTypeChanged" value="0" range="{{types}}">
+				<view>{{types[index]}}
+					<image class="picker_icon" src="/img/login/icon_pull.png"></image>
+				</view>
+			</picker>
+		</view>
+	</view>
+	<!-- 企业营业执照 -->
+	<view class="license">
+		企业营业执照
+		<text class="notice">请上传最新营业执照正面照（仅支持中国大陆地区）</text>
+		<view class="photo">
+			+
+			<text>点击上传</text>
+		</view>
+	</view>
+	<!-- 法人信息 -->
+	<view class="legal">
+		法人信息
+		<text class="notice">请上传法人省份证正反面</text>
+		<view class="photo_contianer">
+			<view class="photo">
+				+
+				<text>正面</text>
+			</view>
+			<view class="photo">
+				+
+				<text>反面</text>
+			</view>
+		</view>
+	</view>
+</view>

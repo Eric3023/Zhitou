@@ -5,7 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    phone : '',
+    phone: '',
     authored: false,
     hasLogin: false,
     balance: 5000,
@@ -63,8 +63,8 @@ Page({
     let uid = wx.getStorageSync("uid");
     if (!uicon) {
       that.setData({
-        uicon : uicon,
-        uid:uid
+        uicon: uicon,
+        uid: uid
       })
     }
     let token = wx.getStorageSync("token");
@@ -97,9 +97,9 @@ Page({
       });
     }
   },
-  
+
   getWxUserInfo(event) {
-    
+
     var that = this
     // 声明一个变量接收用户授权信息
     var userinfo = event.detail.event.userInfo;
@@ -116,5 +116,14 @@ Page({
       wx.setStorageSync('uid', userinfo.nickName);
 
     }
+  },
+
+  /**
+   * 实名认证
+   */
+  onAuthor(event) {
+    wx.navigateTo({
+      url: '/pages/author/author',
+    })
   }
 })
