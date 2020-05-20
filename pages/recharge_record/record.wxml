@@ -1,0 +1,18 @@
+<view class="container">
+	<block wx:for="{{records}}" wx:key="index">
+		<view class="mouth_container">
+			<text class="mouth">{{item.mouth}}</text>
+			<text class="money">支出 ￥{{item.money}}元</text>
+		</view>
+		<block wx:for="{{item.datas}}" wx:key="index">
+			<view class="record_container">
+				<image class="icon" src="/img/order/icon_wallet.png"></image>
+				<view class="content">
+					<text class="person">付款-给{{item.person}}</text>
+					<text class="time">{{item.time}}</text>
+				</view>
+				<text class="money">-{{item.money}}</text>
+			</view>
+		</block>
+	</block>
+</view>

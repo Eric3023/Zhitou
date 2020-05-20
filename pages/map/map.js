@@ -22,7 +22,7 @@ Page({
     },
     markers: [{
       callout: {
-        content: '10公里内有0用户',
+        content: '10公里内有x个用户',
         padding: 11,
         borderRadius: 2,
         display: 'ALWAYS',
@@ -63,7 +63,7 @@ Page({
     let searching = options.searching;
     if (searching) {
       this.hiddenMap();
-      if (keyword == true)
+      if (keyword)
         this._searchList(keyword);
     } else {
       that.setData({
@@ -459,7 +459,7 @@ Page({
     locationModel.getAroundUser(lng, lat, distance).then(
       res => {
         const data = res.data.data;
-        this.data.markers[0].content = `10公里内有${data}用户`;
+        this.data.markers[0].content = `10公里内有${data==0? 'x':data}个用户`;
         this.setData({
           user_num: data,
           markers: this.data.markers,

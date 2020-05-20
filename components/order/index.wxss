@@ -25,6 +25,10 @@
   color: black;
   margin-top: 5rpx;
   margin-bottom: 5rpx;
+  width: 100%;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .address {
@@ -32,6 +36,10 @@
   color: #484848;
   margin-top: 5rpx;
   margin-bottom: 5rpx;
+  width: 100%;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .time {
@@ -41,6 +49,10 @@
   color: #d7ac96;
   margin-top: 5rpx;
   margin-bottom: 5rpx;
+  max-width: 100%;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .state{

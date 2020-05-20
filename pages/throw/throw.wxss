@@ -1,4 +1,4 @@
-.container {
+page {
   background-color: #ebebeb;
 }
 
@@ -9,29 +9,250 @@
   padding-bottom: 60rpx;
   background: white;
   border-radius: 25rpx;
-  box-shadow: 0rpx -3rpx 2rpx #dedede;
+  box-shadow: 0rpx 0rpx 8rpx #dedede;
 }
 
 .ad {
-  height: 336rpx;
-  margin: 26rpx 50rpx 26rpx 50rpx;
+  margin: 0rpx 50rpx 26rpx 50rpx;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.form {
+.code_container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 26rpx;
+  width: 650rpx;
+  height: 142rpx;
   background-color: white;
-  border-top-left-radius: 25rpx;
-  border-top-right-radius: 25rpx;
-  height: 566rpx;
-  box-shadow: 0rpx -3rpx 1rpx #dedede;
-  color: black;
+  position: relative;
+}
+
+.code_backgroud {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: 0;
+}
+
+.code_messeage {
+  width: 58%;
+  position: relative;
+  z-index: 9;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.code_title {
+  width: 80%;
   font-size: 28rpx;
-  font-weight: 900rpx;
-  padding-left: 50rpx;
-  padding-right: 50rpx;
-  padding-top: 30rpx;
+  margin-left: 38rpx;
+  color: #000000;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.code_content {
+  width: 90%;
+  font-size: 24rpx;
+  margin-top: 22rpx;
+  margin-left: 38rpx;
+  color: #484848;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.code_btn_container {
+  display: flex;
+  flex-direction: row;
+  position: absolute;
+  right: 54rpx;
+  z-index: 9;
+}
+
+.btn {
+  background-color: white;
+  font-size: 20rpx;
+  border-radius: 20rpx;
+  padding: 5rpx 12rpx 5rpx 12rpx;
+}
+
+.preview {
+  margin-left: 20rpx;
+}
+
+.mask {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  z-index: 9;
+}
+
+.model {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 650rpx;
+  height: 1020rpx;
+  margin-left: -325rpx;
+  margin-top: -510rpx;
+  background-color: white;
+  z-index: 99;
+}
+
+.model_header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.model_selector {
+  margin-top: 24rpx;
+  margin-left: 32rpx;
+}
+
+.model_title {
+  font-size: 26rpx;
+  font-weight: 400;
+}
+
+.model_body {
+  margin-left: 75rpx;
+}
+
+.model_items {
+  margin-top: 18rpx;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+}
+
+.model_item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 26rpx;
+}
+
+.model_radio {
+  position: relative;
+  margin-top: -16rpx;
+}
+
+.model_img {
+  width: 142rpx;
+  height: 220rpx;
+  margin-bottom: 16rpx;
+}
+
+.photo {
+  display: flex;
+  flex-direction: row;
+  font-size: 24rpx;
+  margin-top: 20rpx;
+  align-items: center;
+}
+
+.photo_update {
+  width: 68rpx;
+  height: 60rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  border: 1rpx solid #bebebe;
+  margin-left: 50rpx;
+}
+
+.input_title {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+}
+
+.input_container {
+  font-size: 24rpx;
+  margin-top: 24rpx;
+}
+
+.notice {
+  margin-left: 20rpx;
+  font-size: 18rpx;
+  color: #cbcbcb;
+}
+
+.notice_icon {
+  margin-left: 8rpx;
+  position: relative;
+  bottom: 1rpx;
+  width: 20rpx;
+  height: 20rpx;
+}
+
+.place_class {
+  font-size: 20rpx;
+  margin-left: 12rpx;
+}
+
+.motto {
+  margin-top: 28rpx;
+  font-size: 24rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.picker {
+  margin-left: 200rpx;
+  font-size: 20rpx;
+  border: 1rpx solid #cecece;
+  padding: 4rpx 16rpx 4rpx 16rpx;
+  border-radius: 8rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.picker_icon {
+  width: 20rpx;
+  height: 20rpx;
+  margin-left: 10rpx;
+}
+
+.input {
+  width: 450rpx;
+  height: 36rpx;
+  margin-top: 12rpx;
+  background-color: #f1f1f1;
+  box-shadow: 0rpx 0rpx 5rpx #dedede;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.cycle {
+  font-size: 26rpx;
+  margin-top: 36rpx;
+}
+
+.btn_container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  margin-top: 36rpx;
+}
+
+.button {
+  padding: 0 72rpx 0 72rpx;
+  font-size: 26rpx;
 }
 
 .city {
@@ -45,8 +266,8 @@
 }
 
 .point1 {
-  width: 20rpx;
-  height: 20rpx;
+  width: 40rpx;
+  height: 40rpx;
   margin-left: 220rpx;
 }
 
@@ -69,4 +290,133 @@
   font-size: 20rpx;
   color: #5a5a5a;
   margin-top: 28rpx;
+}
+
+.settlement {
+  width: 100%;
+  height: 360rpx;
+  background-color: white;
+  border-radius: 20rpx;
+  box-shadow: 0 0 8rpx #cbcbcb;
+  position: fixed;
+  z-index: 999;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  padding-top: 15rpx;
+  align-items: flex-end;
+}
+
+.settlement .audience {
+  margin: 30rpx 50rpx 0 60rpx;
+  width: 640rpx;
+  display: flex;
+  flex-direction: row;
+  font-size: 26rpx;
+  color: #000000;
+  position: relative;
+}
+
+.settlement .audience .audience_num {
+  font-size: 24rpx;
+  color: #6c6c6c;
+  position: absolute;
+  right: 0;
+}
+
+.coupon {
+  color: #cb9178;
+  font-size: 28rpx;
+  margin-top: 50rpx;
+  margin-right: 36rpx;
+}
+
+.settle {
+  margin-top: 54rpx;
+  margin-right: 28rpx;
+  font-size: 26rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.settle_btn {
+  font-size: 28rpx;
+  margin-left: 25rpx;
+  background-color: #f77a51;
+  color: white;
+  padding: 12rpx 36rpx 12rpx 36rpx;
+  box-shadow: 0 0 8rpx #f77a51;
+}
+
+/* 结算确认 */
+.check {
+  width: 464rpx;
+  height: 328rpx;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  margin-top: -164rpx;
+  margin-left: -232rpx;
+  z-index: 9999;
+  background-color: white;
+  box-shadow: 0 0 8rpx #aaaaaa;
+  border-radius: 10rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 28rpx;
+}
+
+.check_title {
+  margin-top: 28rpx;
+  font-weight: 600;
+}
+
+.check_total_balance {
+  margin-top: 40rpx;
+  width: 342rpx;
+  position: relative;
+}
+
+.total_balance {
+  position: absolute;
+  right: 0rpx;
+}
+
+.check_later_balance {
+  margin-top: 16rpx;
+  width: 342rpx;
+  position: relative;
+  color: #dc8c84;
+}
+
+.check_btn_container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin-top: 44rpx;
+  width: 342rpx;
+  align-items: center;
+}
+
+.check_cancel {
+  border: 2rpx solid #bebebe;
+  padding: 8rpx 22rpx 8rpx 22rpx;
+  border-radius: 5rpx;
+}
+
+.check_confirm {
+  padding: 8rpx 22rpx 8rpx 22rpx;
+  color: white;
+  background-color: #71caaf;
+  border: 2rpx solid #71caaf;
+  border-radius: 5rpx;
+}
+
+/*隐藏滚动条*/
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  color: transparent;
 }

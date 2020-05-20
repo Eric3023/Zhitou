@@ -11,6 +11,8 @@
 .uicon {
   width: 95rpx;
   height: 95rpx;
+  border-radius: 50%;
+  overflow: hidden;
 }
 
 .uid {

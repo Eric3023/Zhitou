@@ -1,6 +1,5 @@
 {
   "pages": [
-    
     "pages/index/index",
     "pages/map/map",
     "pages/city/city",
@@ -13,7 +12,15 @@
     "pages/login/login",
     "pages/order/order",
     "pages/show/show",
-    "pages/recharge/recharge"
+    "pages/recharge/recharge",
+    "pages/login/code/code",
+    "pages/throw_detail/throw_detail",
+    "pages/complete/complete",
+    "pages/order_detail/order_detail",
+    "pages/throw_detail2/throw_detail2",
+    "pages/author/author",
+    "pages/invoice/invoice",
+    "pages/developing/developing"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -33,7 +40,7 @@
         "selectedColor": "#f3864b"
       },
       {
-        "pagePath": "pages/throw/throw",
+        "pagePath": "pages/developing/developing",
         "text": "投放",
         "iconPath": "img/tab/throw_normal.png",
         "selectedIconPath": "img/tab/throw_select.png",
@@ -41,7 +48,7 @@
         "selectedColor": "#f3864b"
       },
       {
-        "pagePath": "pages/mine/mine",
+        "pagePath": "pages/developing/developing",
         "text": "我的",
         "iconPath": "img/tab/mine_normal.png",
         "selectedIconPath": "img/tab/mine_select.png",

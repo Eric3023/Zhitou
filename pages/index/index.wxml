@@ -27,7 +27,7 @@
 		<text >{{addressInfo.recommend}}</text>
 		<view class="user-font">
 			10公里内有
-			<text class="usercount-color" v-model="userCount">{{user_num}}</text>
+			<text class="usercount-color" v-model="userCount">{{user_num==0? 'x':user_num}}</text>
 			个用户
 		</view>
 	</view>

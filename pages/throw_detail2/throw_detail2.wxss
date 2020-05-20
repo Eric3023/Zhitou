@@ -1,0 +1,128 @@
+page {
+  background-color: white;
+}
+
+.header {
+  margin: 20rpx 28rpx 0 26rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 694rpx;
+  height: 126rpx;
+  position: relative;
+}
+
+.header image {
+  width: 180rpx;
+  height: 100%;
+}
+
+.header .content {
+  display: flex;
+  flex-direction: column;
+  width: 340rpx;
+  margin-left: 20rpx;
+}
+
+.header .content text {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.header .content .title {
+  font-size: 28rpx;
+  color: #000000;
+}
+
+.header .content .throw {
+  font-size: 20rpx;
+  color: #292929;
+  margin-top: 18rpx;
+}
+
+.header .line {
+  background-color: #cbcbcb;
+  width: 1rpx;
+  height: 75rpx;
+}
+
+.header .state {
+  max-width: 150rpx;
+  color: #e47a29;
+  font-size: 24rpx;
+  position: absolute;
+  right: 0;
+}
+
+.sub {
+  margin: 40rpx 28rpx 0 26rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 694rpx;
+}
+
+.sub .reason {
+  font-size: 24rpx;
+  color: #e47a29;
+}
+
+.sub .notice {
+  font-size: 18rpx;
+  margin-left: 12rpx;
+  color: #bdbdbd;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.sub .notice_icon {
+  width: 28rpx;
+  height: 28rpx;
+  margin-left: 8rpx;
+}
+
+.body {
+  margin: 50rpx;
+}
+
+.body .title_container {
+  font-size: 24rpx;
+  color: #000000;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.body .point {
+  width: 18rpx;
+  height: 18rpx;
+  background-color: #57b77e;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-right: 18rpx;
+}
+
+.body .img {
+  margin-left: 80rpx;
+  margin-top: 20rpx;
+  margin-bottom: 18rpx;
+  width: 490rpx;
+  height: 588rpx;
+}
+
+.body .tail {
+  margin-top: 34rpx;
+  margin-right: 20rpx;
+  font-size: 24rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  position: relative;
+}
+
+.body .tail .data {
+  position: absolute;
+  right: 0rpx;
+}

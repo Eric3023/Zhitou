@@ -11,6 +11,6 @@ App({
     lng: 0,
     hasLogin: false,
 
-    couponing: true,
+    couponing: false,
   }
 })

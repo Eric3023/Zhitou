@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "v_detail": "/components/throw_detail/index"
+  },
+  "navigationBarTitleText": "投放详情"
+}

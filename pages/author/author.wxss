@@ -1,0 +1,114 @@
+page {
+  background-color: white;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  color: #000000;
+  font-size: 32rpx;
+  margin-top: 26rpx;
+  margin-left: 50rpx;
+}
+
+.info .type {
+  margin-top: 50rpx;
+  margin-left: 14rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  position: relative;
+}
+
+.info .type .point {
+  width: 20rpx;
+  height: 20rpx;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-right: 20rpx;
+}
+
+.info .type .green {
+  background-color: #5dbf9e;
+}
+
+.info .type .orig {
+  background-color: #fc8933;
+}
+
+.info .type .picker {
+  font-size: 26rpx;
+  color: #9c9c9c;
+  position: absolute;
+  right: 64rpx;
+}
+
+.info .type .picker_icon {
+  width: 20rpx;
+  height: 20rpx;
+}
+
+.license {
+  display: flex;
+  flex-direction: column;
+  color: #000000;
+  font-size: 32rpx;
+  margin-top: 98rpx;
+  margin-left: 50rpx;
+}
+
+.notice {
+  color: #9c9c9c;
+  font-size: 20rpx;
+  margin-top: 18rpx;
+}
+
+.license .photo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #e8e8e8;
+  margin-top: 20rpx;
+  width: 150rpx;
+  height: 210rpx;
+  position: relative;
+}
+
+.license .photo text {
+  position: absolute;
+  bottom: 16rpx;
+  font-size: 20rpx;
+}
+
+.legal {
+  display: flex;
+  flex-direction: column;
+  color: #000000;
+  font-size: 32rpx;
+  margin-top: 82rpx;
+  margin-left: 50rpx;
+}
+
+.legal .photo_contianer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.legal .photo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  background-color: #e8e8e8;
+  margin-top: 20rpx;
+  margin-right: 30rpx;
+  width: 175rpx;
+  height: 96rpx;
+  position: relative;
+}
+
+.legal .photo text {
+  font-size: 20rpx;
+}

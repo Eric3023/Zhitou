@@ -4,7 +4,7 @@
 		<view class="city">
 			<text>当前城市： </text>
 			<text>北京市 </text>
-			<image class="point1" src="/img/icon_point.png"></image>
+			<image class="point1" src="/img/throw/change_location.png"></image>
 			<text class="change">切换全城投放 </text>
 		</view>
 		<view class="city">
@@ -14,15 +14,151 @@
 		<view class="audience">10公里内当前时间当前有1800+的用户</view>
 	</view>
 	<!-- 广告选择 -->
-	<view class="ad">功能待开发</view>
-	<!-- 选项表单 -->
-	<view class="form">
-		<view class="ad">功能待开发</view>
-		<!-- <text >输入显示内容</text>
-		<view>1</view>
-		<view>1</view>
-		<view>1</view>
-		<view>1</view>
-		<view>1</view> -->
+	<view class="ad">
+		<view class="code_container">
+			<image class="code_backgroud" src="/img/throw/app_start.png"></image>
+			<view class="code_messeage">
+				<text class="code_title">启动图</text>
+				<text class="code_content">打开APP的第一眼，点亮你的</text>
+			</view>
+			<view class="code_btn_container">
+				<text class="btn" catchtap="onClickUpdate">上传素材</text>
+				<text class="btn preview">预览</text>
+			</view>
+		</view>
+		<view class="code_container">
+			<image class="code_backgroud" src="/img/throw/banner.png"></image>
+			<view class="code_messeage">
+				<text class="code_title">首页轮播</text>
+				<text class="code_content">霸屏时间长，位置优越</text>
+			</view>
+			<view class="code_btn_container">
+				<text class="btn" catchtap="onClickUpdate">上传素材</text>
+				<text class="btn preview">预览</text>
+			</view>
+		</view>
+		<view class="code_container">
+			<image class="code_backgroud" src="/img/throw/activity_center.png"></image>
+			<view class="code_messeage">
+				<text class="code_title">活动中心</text>
+				<text class="code_content">活动中心内容纷繁，位置</text>
+			</view>
+			<view class="code_btn_container">
+				<text class="btn" catchtap="onClickUpdate">上传素材</text>
+				<text class="btn preview">预览</text>
+			</view>
+		</view>
+		<view class="code_container">
+			<image class="code_backgroud" src="/img/throw/receive_order.png"></image>
+			<view class="code_messeage">
+				<text class="code_title">司机接单</text>
+				<text class="code_content">打开APP的第一眼，点亮</text>
+			</view>
+			<view class="code_btn_container">
+				<text class="btn" catchtap="onClickUpdate">上传素材</text>
+				<text class="btn preview">预览</text>
+			</view>
+		</view>
+		<view class="code_container">
+			<image class="code_backgroud" src="/img/throw/personal_center.png"></image>
+			<view class="code_messeage">
+				<text class="code_title">个人中心</text>
+				<text class="code_content">打开APP的第一眼，点亮</text>
+			</view>
+			<view class="code_btn_container">
+				<text class="btn" catchtap="onClickUpdate">上传素材</text>
+				<text class="btn preview">预览</text>
+			</view>
+		</view>
+	</view>
+	<!-- 遮罩层 -->
+	<v_mask class="mask" wx:if="{{state!=0 && state!=4}}" catchtap="onCancelMaterial" />
+	<!-- 模板选择 -->
+	<radio-group class="model" wx:if="{{state==1}}">
+		<!-- 模板选择 -->
+		<view class="model_selector">
+			<view class="model_header">
+				<radio style="transform:scale(0.5);"></radio>
+				<text  class="model_title" >  模板选择 :</text>
+			</view>
+			<view class="model_body">
+				<scroll-view scroll-x="true" scroll-y="false">
+					<radio-group>
+						<view class="model_items">
+							<block wx:for="{{models}}" wx:key="index">
+								<view class="model_item">
+									<image class="model_img" src="{{item.img}}"></image>
+									<radio class="model_radio" style="transform:scale(0.5);"></radio>
+								</view>
+							</block>
+						</view>
+					</radio-group>
+				</scroll-view>
+				<view class="photo">
+					<text>选择照片</text>
+					<view class="photo_update">+</view>
+				</view>
+				<view class="input_container">
+					<view class="input_title">
+						<text>输入显示内容</text>
+						<text class="notice">注意事项</text>
+						<image class="notice_icon" src="/img/throw/notice.png"></image>
+					</view>
+					<input class="input" placeholder="文字" placeholder-class="place_class"></input>
+					<input class="input" placeholder="电话" placeholder-class="place_class"></input>
+				</view>
+				<view class="motto">
+					优选车型
+					<picker bindchange="bindPickerChange" value="0" range="{{mottos}}">
+						<view class="picker">{{mottos[index]}}
+							<image class="picker_icon" src="/img/login/icon_pull.png"></image>
+						</view>
+					</picker>
+				</view>
+				<view class="cycle">投放周期</view>
+			</view>
+		</view>
+		<!-- 直接上传 -->
+		<view class="model_selector">
+			<view class="model_header">
+				<radio style="transform:scale(0.5);"></radio>
+				<text  class="model_title" >直接上传 :</text>
+			</view>
+			<view class="model_body photo">
+				<text>选择照片</text>
+				<view class="photo_update">+</view>
+			</view>
+		</view>
+		<view class="btn_container">
+			<button class="button" catchtap="onCancelMaterial">放弃</button>
+			<button class="button" catchtap="onCommitMaterial">确定</button>
+		</view>
+	</radio-group>
+	<!-- 结算 -->
+	<view class="settlement" wx:if="{{state==2}}">
+		<view class="audience">影响人群
+			<view class="audience_num">9000+</view>
+		</view>
+		<view class="audience">单　　价
+			<view class="audience_num">2000+</view>
+		</view>
+		<view class="coupon">已享受首单满减，优惠金额1000元</view>
+		<view class="settle">合计：2000元
+			<view class="settle_btn" catchtap="onSettle">结算</view>
+		</view>
+	</view>
+	<!-- 结算确认 -->
+	<view class="check" wx:if="{{state==3}}">
+		<view class="check_title">支付</view>
+		<view class="check_total_balance">总余额
+			<text class="total_balance">5000元</text>
+		</view>
+		<view class="check_later_balance">支付后余额
+			<text class="total_balance">3000元</text>
+		</view>
+		<view class="check_btn_container">
+			<view class="check_cancel" catchtap="onCancleCheck">放弃</view>
+			<view class="check_confirm" catchtap="onConfirmCheck">确定</view>
+		</view>
 	</view>
 </view>

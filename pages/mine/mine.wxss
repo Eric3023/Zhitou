@@ -15,7 +15,22 @@ page {
   box-shadow: 0rpx 0rpx 10rpx 4rpx #ebebeb;
 }
 
-.header_user_balance{
+.user_info {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  position: relative;
+}
+
+.authentication{
+  width: 108rpx;
+  height: 42rpx;
+  position: absolute;
+  top: 64rpx;
+  right: 68rpx;
+}
+
+.header_user_balance {
   position: relative;
   left: 34rpx;
   top: 44rpx;
@@ -46,8 +61,8 @@ page {
 }
 
 .nickname::after {
- border:none;
- font-size: 25rpx;
+  border: none;
+  font-size: 25rpx;
 }
 
 
@@ -63,7 +78,8 @@ page {
   border: none;
   background: #ffffff;
 }
-.uid::after{
+
+.uid::after {
   border: none;
 }
 

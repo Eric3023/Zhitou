@@ -209,9 +209,15 @@ Page({
    */
   onSearch(event) {
     let title = event.detail.title;
-    wx.navigateTo({
-      url: `../map/map?searching=true&keyword=${title}`,
-    });
+    if(title){
+      wx.navigateTo({
+        url: `../map/map?searching=true&keyword=${title}`,
+      });
+    }else{
+      wx.navigateTo({
+        url: `../map/map?searching=true`,
+      });
+    }
   },
 
   /**

@@ -5,7 +5,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    phone : '',
+    phone: '',
+    authored: false,
     hasLogin: false,
     balance: 5000,
     user_info: {
@@ -41,6 +42,11 @@ Page({
           url: '/pages/order/order',
         })
         break;
+      case '充值记录':
+        wx.navigateTo({
+          url: '/pages/recharge_record/record',
+        })
+        break;
       default:
         let title = '进入【' + event.detail.title + '】页面';
         wx.showToast({
@@ -61,8 +67,8 @@ Page({
     let uid = wx.getStorageSync("uid");
     if (!uicon) {
       that.setData({
-        uicon : uicon,
-        uid:uid
+        uicon: uicon,
+        uid: uid
       })
     }
     let token = wx.getStorageSync("token");
@@ -95,57 +101,9 @@ Page({
       });
     }
   },
-  
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
 
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  },
   getWxUserInfo(event) {
-    
+
     var that = this
     // 声明一个变量接收用户授权信息
     var userinfo = event.detail.event.userInfo;
@@ -162,5 +120,14 @@ Page({
       wx.setStorageSync('uid', userinfo.nickName);
 
     }
+  },
+
+  /**
+   * 实名认证
+   */
+  onAuthor(event) {
+    wx.navigateTo({
+      url: '/pages/author/author',
+    })
   }
 })
