@@ -105,7 +105,11 @@ Page({
               //https://lbs.qq.com/miniProgram/jsSdk/jsSdkGuide/methodReverseGeocoder
               //注：坐标系采用gcj02坐标系
 
-              qqmaputil.reverseGeocoder(app, that);
+              qqmaputil.reverseGeocoder(app, that, (location, lat, lng) => {
+                app.globalData.t_location = location;
+                console.log('开始获取周边用户');
+                that._getAroundUser(lng, lat, 10);
+              });
               console.log(res)
             },
             fail(res) {//拒绝授权
@@ -118,7 +122,8 @@ Page({
           })
         } else {//授权过位置信息
 
-          qqmaputil.reverseGeocoder(app, that, (lat, lng) => {
+          qqmaputil.reverseGeocoder(app, that, (location, lat, lng) => {
+            app.globalData.t_location = location;
             console.log('开始获取周边用户');
             that._getAroundUser(lng, lat, 10);
           });
@@ -209,11 +214,11 @@ Page({
    */
   onSearch(event) {
     let title = event.detail.title;
-    if(title){
+    if (title) {
       wx.navigateTo({
         url: `../map/map?searching=true&keyword=${title}`,
       });
-    }else{
+    } else {
       wx.navigateTo({
         url: `../map/map?searching=true`,
       });

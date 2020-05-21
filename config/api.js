@@ -1,9 +1,9 @@
 // 本机开发API地址
-// var BaseApi = 'http://180.76.112.118:8070/';
+var BaseApi = 'http://180.76.112.118:8070/';
 // 局域网开发API地址
 // var BaseApi = 'http://192.168.1.19:8070/';
 // 线上云平台api地址
-var BaseApi = "https://zt.ottauto.tv/"
+// var BaseApi = "https://zt.ottauto.tv/"
 
 var WxApiRoot = BaseApi + 'wx/';
 
@@ -20,5 +20,14 @@ module.exports = {
   LocationCategory: WxApiRoot + 'index/allCategory',
   //周边用户数
   AroundUsers: WxApiRoot + 'index/userNums',
+  //获取投放广告位
+  AdPlaces: WxApiRoot + 'advertising/getAdPlaces',
+  //车型列表
+  CarTypes: WxApiRoot + 'advertising/getCarTypes',
+  //投放模板
+  Templates: WxApiRoot + 'advertising/getTemplates',
+  //投放
+  DoAdvertising: WxApiRoot + 'advertising/dodvertising',
+
 
 };

@@ -59,8 +59,8 @@
 			"list": [
 				{
 					"id": 0,
-					"name": "pages/recharge/recharge",
-					"pathName": "pages/recharge/recharge",
+					"name": "pages/throw/throw",
+					"pathName": "pages/throw/throw",
 					"query": "",
 					"scene": null
 				}

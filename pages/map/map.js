@@ -1,5 +1,4 @@
 import { LocationModel } from '../../models/location.js';
-
 var qqmaputil = require('../../utils/qqmaputil.js');
 const locationModel = new LocationModel();
 
@@ -26,7 +25,7 @@ Page({
         padding: 11,
         borderRadius: 2,
         display: 'ALWAYS',
-        anchorY:-30
+        anchorY: -30
       },
       latitude: 0,
       longitude: 0,
@@ -459,7 +458,7 @@ Page({
     locationModel.getAroundUser(lng, lat, distance).then(
       res => {
         const data = res.data.data;
-        this.data.markers[0].content = `10公里内有${data==0? 'x':data}个用户`;
+        this.data.markers[0].content = `10公里内有${data == 0 ? 'x' : data}个用户`;
         this.setData({
           user_num: data,
           markers: this.data.markers,
@@ -472,8 +471,15 @@ Page({
    * 点击了周边位置Item
    */
   onSelectPosition(event) {
+    let location = event.detail.value;
+    app.globalData.t_location = location;
     wx.switchTab({
-      url: '../throw/throw',
+      url: `../throw/throw`,
+      success: res => {
+        var page = getCurrentPages().pop();
+        if (page == undefined || page == null) return;
+        page.onLoad();
+      }
     })
   }
 })
