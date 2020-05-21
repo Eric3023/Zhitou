@@ -30,4 +30,16 @@ module.exports = {
   DoAdvertising: WxApiRoot + 'advertising/dodvertising',
 
 
+
+  //用户余额接口
+  UserBalance: WxApiRoot + 'recharge/userBalance',
+
+  //对公账户接口
+  BankAccount: WxApiRoot + 'recharge/bankAccount',
+
+  //确认充值接口
+  RechargeConfirm: WxApiRoot + 'recharge/recharge',
+
+  RechargePrepay: WxApiRoot + 'pay/prepay', //订单的预支付会话
+
 };

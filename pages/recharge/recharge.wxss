@@ -1,87 +1,121 @@
 page {
-  background-color: white;
+  margin: 0;
+  padding: 0;
+  height: 100%;
 }
-
 .container {
-  background-color: #f2f2f2;
+    width: 100%;
+    height: 100%;
 }
 
-.title {
-  margin: 36rpx 28rpx 36rpx 28rpx;
+.balance-info {
   display: flex;
   flex-direction: column;
-  font-size: 28rpx;
+  justify-content: space-between;
+  /* align-items: center; */
+  margin: 50rpx 30rpx;
+  height: 150rpx;
+  font-size: 26rpx;
 }
 
-.title .child {
+.balance {
   display: flex;
   flex-direction: row;
-  position: relative;
+  justify-content: space-between;
+}
+
+.recharge {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
   align-items: center;
 }
 
-.title .child_margin {
-  margin-top: 32rpx;
+.recharge input{
+  border: 1rpx solid #fa833a;
+  width: 180rpx;
+  height: 2rem;
+  text-align: center;
 }
 
-.title .child .data {
-  position: absolute;
-  right: 20rpx;
+.payment-method {
+  width: 100%;
+  height: 100%;
+  margin: 0rpx 0 0 0;
+  background: #fff;
+  box-shadow: 1rpx 1rpx 10rpx #cccccc;
+  border: 0;
+  border-radius: 20rpx 20rpx 0 0;
+
 }
 
-.title .child .origin {
-  color: #fd6c30;
-  border: 1rpx solid #fd6c30;
-  border-radius: 2rpx;
-  padding:10rpx 20rpx 10rpx  20rpx ;
-  position: absolute;
-  right: 0;
+.radio-group {
+  margin: 35rpx 15rpx;
+  
 }
 
-.body {
-  background-color: white;
-  padding: 54rpx 52rpx;
-  border-top-left-radius: 30rpx;
-  border-top-right-radius: 30rpx;
-}
-
-.body .type {
-  display: flex;
-  flex-direction: column;
-  font-size: 28rpx;
-}
-
-.body .type .option {
-  color: #000000;
-  font-size: 28rpx;
-  position: relative;
+.payment {
   display: flex;
   flex-direction: row;
-  align-items: center;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  margin: 20rpx 30rpx;
 }
 
-.body .type .option_margin {
-  margin-top: 60rpx;
+.payment text {
+  margin: 0 auto 0 10rpx;
+  font-size: 26rpx;
+  height: 25px;
+  line-height: 25px;
 }
 
-.body .type .option image {
+.radio-group {
+  display: flex;
+  flex-direction: column;
+}
+.radio-group image {
   width: 68rpx;
   height: 50rpx;
-  margin-right: 12rpx;
+}
+.radio {
+  
+  transform:scale(0.9);
+
 }
 
-.body .type .option radio {
-  position: absolute;
-  right: 0;
+.button-payment {
+  font-size: 30rpx;
+  border-radius: 0rpx;
+  background: #fa833a;
+  color: #ffffff;
+}
+.button-payment::after {
+  border: 0;
 }
 
-.btn {
-  width: 100%;
-  height: 72rpx;
-  background-color: #fc832d;
-  color: white;
+.account-info {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  margin: 10rpx auto 0 auto;
+  width: 90%;
+  background: #f7f7f7;
+  color: #8c8c8c;
+  font-size: 26rpx;
 }
+
+.account-text {
+  margin: 10rpx 10rpx;
+}
+
+.hidden {
+  display: none;
+}
+
+.show-flex {
+  display: flex;
+}
+
+.show-block {
+  display: block;
+}
+
