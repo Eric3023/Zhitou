@@ -25,13 +25,13 @@ Page({
         padding: 11,
         borderRadius: 2,
         display: 'ALWAYS',
-        anchorY: -30
+        // anchorY: -10
       },
       latitude: 0,
       longitude: 0,
       iconPath: '../../img/Marker3_Activated.png',
       width: '1px',
-      height: '60px',
+      height: '60rpx',
       rotate: 0,
       alpha: 1
     }],
