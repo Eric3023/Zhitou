@@ -462,7 +462,7 @@ Page({
   _getAroundUser(lng, lat, distance) {
     locationModel.getAroundUser(lng, lat, distance).then(
       res => {
-        const data = res.data.data;
+        const data = res.data;
         this.data.markers[0].content = `10公里内有${data == 0 ? 'x' : data}个用户`;
         this.setData({
           user_num: data,

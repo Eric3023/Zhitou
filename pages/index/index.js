@@ -178,7 +178,7 @@ Page({
   _getBanners() {
     homeModel.getBanners().then(
       res => {
-        let banners = res.data.data;
+        let banners = res.data;
         if (banners) {
           this.setData({
             banners: banners
@@ -194,7 +194,7 @@ Page({
   _getAroundUser(lng, lat, distance) {
     locationModel.getAroundUser(lng, lat, distance).then(
       res => {
-        const data = res.data.data;
+        const data = res.data;
         this.setData({
           user_num: data,
         });

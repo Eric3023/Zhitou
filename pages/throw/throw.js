@@ -247,6 +247,7 @@ Page({
    * 上传素材
    */
   onCommitMaterial() {
+    let imgPath = '';
     if (this.data.model == 0) {
       console.log(this.data.model_param);
       if (!this.data.model_param.img) {
@@ -256,6 +257,7 @@ Page({
         });
         return;
       }
+      imgPath = this.data.model_param.img;
     } else {
       console.log(this.data.div_param);
       if (!this.data.div_param.img) {
@@ -265,18 +267,21 @@ Page({
         });
         return;
       }
+      imgPath = this.data.div_param.img;
     }
 
     this.setData({
       state: 2,
     });
 
-    //模拟上传素材
-    setTimeout(() => {
-      this.setData({
-        state: 3,
-      });
-    }, 3000);
+    this._updateImgFie(imgPath);
+
+    // //模拟上传素材
+    // setTimeout(() => {
+    //   this.setData({
+    //     state: 3,
+    //   });
+    // }, 3000);
   },
 
   /**
@@ -347,7 +352,7 @@ Page({
     locationModel.getAroundUser(lng, lat, distance)
       .then(
         res => {
-          const data = res.data.data;
+          const data = res.data;
           this.setData({
             audience: data,
           });
@@ -389,7 +394,7 @@ Page({
       console.log('获取投放广告位成功');
       console.log(res);
       this.setData({
-        codes: res.data.data,
+        codes: res.data,
       });
     }, error => {
       console.log('获取投放广告位失败');
@@ -405,7 +410,7 @@ Page({
       console.log('获取投放车型列表');
       console.log(res);
       this.setData({
-        mottos: res.data.data,
+        mottos: res.data,
       });
     }), error => {
       console.log('获取投放车型列表');
@@ -421,11 +426,31 @@ Page({
       console.log('获取模板列表成功');
       console.log(res.data);
       this.setData({
-        models: res.data.data,
+        models: res.data,
       });
     }, error => {
       console.log('获取模板列表失败');
       console.log(error);
+    })
+  },
+
+  /**
+   * 上传图片
+   */
+  _updateImgFie(path) {
+    let uploadTask = throwModel.updateImgFie({
+      path: path,
+      sCallback: res => {
+        console.log('上传成功', res.progress)
+      },
+      fCallback: error => {
+        console.log('上传失败', res.progress)
+      }
+    });
+    uploadTask.onProgressUpdate((res) => {
+      console.log('上传进度', res.progress)
+      console.log('已经上传的数据长度', res.totalBytesSent)
+      console.log('预期需要上传的数据总长度', res.totalBytesExpectedToSend)
     })
   },
 })

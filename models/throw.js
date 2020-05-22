@@ -1,15 +1,13 @@
-import { HTTP } from '../utils/http.js';
+var util = require('../utils/util.js');
 var config = require('../config/api.js');
 
-class ThrowModel extends HTTP {
+class ThrowModel {
 
   /**
    * 获取投放广告位
    */
   getAdPlaces() {
-    return this.request({
-      url: config.AdPlaces,
-    });
+    return util.request(config.AdPlaces);
   }
 
 
@@ -17,31 +15,25 @@ class ThrowModel extends HTTP {
    * 获取车型列表 
    */
   getCarTypes() {
-    return this.request({
-      url: config.CarTypes,
-    });
+    return util.request(config.CarTypes);
   }
 
   /**
    * 获取投放模板
    */
   getTemplates(adPlace) {
-    return this.request({
-      url: config.Templates,
-      data: {
+    return util.request(config.Templates,
+      {
         adPlace: adPlace,
-      },
-    });
+      });
   }
 
   /**
    * 投放
    */
   doAdvertising(phone, ) {
-    return this.request({
-      url: config.DoAdvertising,
-      method: 'POST',
-      data: {
+    return util.request(config.DoAdvertising,
+      {
         adContact: phone,
         adDesc: content,
         adImgUrl: imgUrl,
@@ -65,6 +57,23 @@ class ThrowModel extends HTTP {
         totalAmount: totalAmount,
         unitPrice: unitPrice,
       },
+      'POST');
+  }
+
+  /**
+   * 上传图片
+   */
+  updateImgFie({ path, sCallback, fCallback }) {
+    return wx.uploadFile({
+      url: config.Upload,
+      filePath: path,
+      name: 'file',
+      success: res => {
+        sCallback(res);
+      },
+      fail: error => {
+        fCallback(error);
+      }
     });
   }
 }

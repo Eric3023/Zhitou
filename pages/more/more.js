@@ -30,7 +30,7 @@ Page({
   getCatagory() {
     wx.showLoading();
     moreModel.getCategoryList().then(res => {
-      let data = res.data.data;
+      let data = res.data;
       this.setData({
         data: data
       });
