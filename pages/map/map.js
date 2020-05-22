@@ -81,6 +81,11 @@ Page({
       this._getAroundUser(options.lng, options.lat, 10);
     }
   },
+
+  onShareAppMessage(){
+
+  },
+
   onMarkerAnimationend() {
     this.setData({
       animation: false

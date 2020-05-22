@@ -421,7 +421,7 @@ Page({
       console.log('获取模板列表成功');
       console.log(res.data);
       this.setData({
-        model: res.data.data,
+        models: res.data.data,
       });
     }, error => {
       console.log('获取模板列表失败');

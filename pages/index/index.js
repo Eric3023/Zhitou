@@ -159,6 +159,10 @@ Page({
     }
   },
 
+  onShareAppMessage(){
+
+  },
+
   getUserInfo: function (e) {
     console.log(e)
     app.globalData.userInfo = e.detail.userInfo

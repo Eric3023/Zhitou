@@ -20,6 +20,10 @@ Page({
     this.getCatagory()
   },
 
+  onShareAppMessage(){
+
+  },
+
   /**
    * 获取行业列表
    */
