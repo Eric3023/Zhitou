@@ -47,7 +47,7 @@
         "selectedColor": "#f3864b"
       },
       {
-        "pagePath": "pages/developing/developing",
+        "pagePath": "pages/mine/mine",
         "text": "我的",
         "iconPath": "img/tab/mine_normal.png",
         "selectedIconPath": "img/tab/mine_select.png",
