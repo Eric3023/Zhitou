@@ -24,14 +24,13 @@ function formatNumber(n) {
  */
 function request(url, data = {}, method = "GET") {
   return new Promise(function(resolve, reject) {
-    
     wx.request({
       url: url,
       data: data,
       method: method,
       header: {
         'Content-Type': 'application/json',
-        'X-Dts-Token': wx.getStorageSync('token')
+        'token': wx.getStorageSync('token')
       },
       success: function(res) {
 
