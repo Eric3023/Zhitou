@@ -20,12 +20,13 @@ Component({
    * 组件的方法列表
    */
   methods: {
-    
+
     /**
      * 点击了列表ITEM
      */
-    bindSelect(event){
-      this.triggerEvent("click");
+    bindSelect(event) {
+      let value = event.currentTarget.dataset.value;
+      this.triggerEvent("click", { value: value });
     },
   }
 })

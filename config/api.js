@@ -20,6 +20,15 @@ module.exports = {
   LocationCategory: WxApiRoot + 'index/allCategory',
   //周边用户数
   AroundUsers: WxApiRoot + 'index/userNums',
+  //获取投放广告位
+  AdPlaces: WxApiRoot + 'advertising/getAdPlaces',
+  //车型列表
+  CarTypes: WxApiRoot + 'advertising/getCarTypes',
+  //投放模板
+  Templates: WxApiRoot + 'advertising/getTemplates',
+  //投放
+  DoAdvertising: WxApiRoot + 'advertising/dodvertising',
+
 
 
   //用户余额接口

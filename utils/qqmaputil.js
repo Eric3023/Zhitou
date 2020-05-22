@@ -57,7 +57,9 @@ function reverseGeocoder(app, that, callback = null) {
       app.globalData.lng = result.location.lng;
 
       if (callback) {
-        callback(result.location.lat, result.location.lng);
+        console.log('+++');
+        console.log(result);
+        callback(result, result.location.lat, result.location.lng);
       }
     }
   });
