@@ -1,10 +1,11 @@
 import { LocationModel } from '../../models/location.js';
 let ThrowModel = require('../../models/throw.js');
+var dateUtil = require('../../utils/date.js');
 
 const app = getApp();
 const locationModel = new LocationModel();
 const date = new Date();
-let now = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
+let now = dateUtil.tsFormatTime(date, 'yyyy-MM-dd');
 let throwModel = new ThrowModel();
 
 Page({
@@ -32,7 +33,7 @@ Page({
     //模板相关参数
     model: 0,//0.使用模板；1.直接上传
     model_param: {
-      modelIndex: 0,//选中的模板索引
+      modelId: 0,//选中的模板Id
       img: '',//上传的模板照片
       content: '',//输入的显示内容
       phone: '',//输入的电话
@@ -46,6 +47,9 @@ Page({
       start: now,//投放开始日期
       end: now,//投放结束日期
     },
+
+    imgurl: '',
+    progress: '',//图片上传进度
   },
 
   /**
@@ -56,10 +60,6 @@ Page({
     this._getLocation();
     this._getAdPlaces();
     this._getCarTypes();
-  },
-
-  onShow: function () {
-    console.log('onShow');
   },
 
   /**
@@ -107,9 +107,9 @@ Page({
    * 选中模板 
    */
   onModelDetailChange(event) {
-    let modelIndex = event.detail.value;
-    this.data.model_param.modelIndex = modelIndex;
-    console.log(this.data.model_param.modelIndex);
+    let modelId = event.detail.value;
+    this.data.model_param.modelId = modelId;
+    console.log(this.data.model_param.modelId);
   },
 
   /**
@@ -248,6 +248,7 @@ Page({
    */
   onCommitMaterial() {
     let imgPath = '';
+    //图片未选择
     if (this.data.model == 0) {
       console.log(this.data.model_param);
       if (!this.data.model_param.img) {
@@ -274,14 +275,34 @@ Page({
       state: 2,
     });
 
-    this._updateImgFie(imgPath);
-
-    // //模拟上传素材
-    // setTimeout(() => {
-    //   this.setData({
-    //     state: 3,
-    //   });
-    // }, 3000);
+    //上传图片
+    this._updateImgFie({
+      path: imgPath,
+      progress: res => {
+        console.log('上传进度', res.progress);
+        console.log('已经上传的数据长度', res.totalBytesSent);
+        console.log('预期需要上传的数据总长度', res.totalBytesExpectedToSend);
+        this.setData({
+          progress: res.progress,
+        });
+      },
+      success: res => {
+        console.log('上传成功');
+        console.log(res);
+        let response = JSON.parse(res);
+        let data = response.data;
+        this.data.imgurl = data.url;
+        this.setData({
+          state: 3,
+        });
+        console.log(this.data.imgurl);
+      },
+      fail: error => {
+        console.log('上传失败');
+        console.log(error);
+        this._resetData();
+      },
+    });
   },
 
   /**
@@ -301,17 +322,57 @@ Page({
   },
 
   /**
-   * 确认结算 
+   * 确认投放 
    */
   onConfirmCheck() {
-    //开始结算，结算完成后，投放
+    //投放
+    let start = this.data.model == 0 ? this.data.model_param.start : this.div_param.start;
+    let end = this.data.model == 0 ? this.data.model_param.end : this.data.div_param.end;
+    let startTime = dateUtil.tsFormatTime(dateUtil.formatTimeStamp(start), 'yyyy-MM-dd 00:00:00');
+    let endTime = dateUtil.tsFormatTime(dateUtil.formatTimeStamp(end), 'yyyy-MM-dd 23:59:59');
+    throwModel.doAdvertising({
+      lat: this.data.location.location.lat,
+      lng: this.data.location.location.lng,
+      address: this.data.location.title ? this.data.location.title : this.data.location.formatted_addresses.recommend,
+      province: this.data.location.ad_info.provice,
+      city: this.data.location.ad_info.city,
+      audience: this.data.audience,
+      distance: 10,
+      throwType: this.data.location_state,
+      position: this.data.position,
+      isTemplate: this.data.model,
+      templateId: this.data.models[this.data.model_param.modelId].id,
+      phone: this.data.model_param.phone,
+      content: this.data.model_param.content,
+      imgUrl: this.data.imgurl,
+      modelImagUrl: this.data.models[this.data.model_param.modelId].styleImageUrl,
+      motto: this.data.model == 0 ? this.data.mottos[this.data.model_param.mottoIndex].code : this.data.mottos[this.data.div_param.mottoIndex].code,
+      startTime: startTime,
+      endTime: endTime,
+      totalAmount: 9000,
+      unitPrice: 1500,
+      coupon: 0,
+      couponId: 0,
+    }
+    ).then(res => {
+      console.log(res);
+      this.setData({
+        state: 5,
+      });
+      wx.navigateTo({
+        url: '../../pages/complete/complete',
+      });
+    }, error => {
+      console.log(error);
+      wx.showToast({
+        title: '投放失败，请尝试重新投放',
+        icon: 'none',
+      });
+      this.setData({
+        state: 0,
+      });
+    });
 
-    this.setData({
-      state: 5,
-    });
-    wx.navigateTo({
-      url: '../../pages/complete/complete',
-    });
   },
 
   /**
@@ -369,7 +430,7 @@ Page({
       position: 0,
       model: 0,
       model_param: {
-        modelIndex: 0,//选中的模板索引
+        modelId: 0,//选中的模板id
         img: '',//上传的模板照片
         content: '',//输入的显示内容
         phone: '',//输入的电话
@@ -383,6 +444,7 @@ Page({
         start: now,//投放开始日期
         end: now,//投放结束日期
       },
+      imgurl: '',
     });
   },
 
@@ -437,20 +499,18 @@ Page({
   /**
    * 上传图片
    */
-  _updateImgFie(path) {
+  _updateImgFie({ path, progress, success, fail }) {
     let uploadTask = throwModel.updateImgFie({
       path: path,
       sCallback: res => {
-        console.log('上传成功', res.progress)
+        success(res);
       },
       fCallback: error => {
-        console.log('上传失败', res.progress)
+        fail(error)
       }
     });
     uploadTask.onProgressUpdate((res) => {
-      console.log('上传进度', res.progress)
-      console.log('已经上传的数据长度', res.totalBytesSent)
-      console.log('预期需要上传的数据总长度', res.totalBytesExpectedToSend)
+      progress(res);
     })
   },
 })

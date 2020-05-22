@@ -31,14 +31,14 @@ class ThrowModel {
   /**
    * 投放
    */
-  doAdvertising(phone, ) {
+  doAdvertising({ lat, lng, address, province, audience, distance, throwType, position, isTemplate, templateId, phone, content, imgUrl, modelImagUrl, motto, city, coupon, couponId, startTime, endTime, totalAmount, unitPrice }) {
     return util.request(config.DoAdvertising,
       {
         adContact: phone,
         adDesc: content,
         adImgUrl: imgUrl,
-        adPlace: posiotn,
-        adTmpUrl: modelImagUtl,
+        adPlace: position,
+        adTmpUrl: modelImagUrl,
         carType: motto,
         city: city,
         couponAmount: coupon,
@@ -48,14 +48,14 @@ class ThrowModel {
         endTime: endTime,
         isTemplate: isTemplate,
         lat: lat,
-        lng: lnt,
+        lng: lng,
         positionDesc: address,
         province: province,
         startTime: startTime,
         templateId: templateId,
         throwType: throwType,
-        totalAmount: totalAmount,
-        unitPrice: unitPrice,
+        totalAmount: totalAmount,//总价
+        unitPrice: unitPrice,//单价
       },
       'POST');
   }
@@ -69,7 +69,7 @@ class ThrowModel {
       filePath: path,
       name: 'file',
       success: res => {
-        sCallback(res);
+        sCallback(res.data);
       },
       fail: error => {
         fCallback(error);

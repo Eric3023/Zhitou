@@ -59,8 +59,8 @@
 			"list": [
 				{
 					"id": 0,
-					"name": "更新模拟",
-					"pathName": "pages/index/index",
+					"name": "pages/throw/throw",
+					"pathName": "pages/throw/throw",
 					"query": "",
 					"scene": null
 				}
