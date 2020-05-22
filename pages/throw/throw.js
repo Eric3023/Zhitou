@@ -253,7 +253,7 @@ Page({
       console.log(this.data.model_param);
       if (!this.data.model_param.img) {
         wx.showToast({
-          title: '请上传图片',
+          title: '您已选择模板类型，请上传图片',
           icon: 'none',
         });
         return;
@@ -263,7 +263,7 @@ Page({
       console.log(this.data.div_param);
       if (!this.data.div_param.img) {
         wx.showToast({
-          title: '请上传图片',
+          title: '您已选择直接上传，请上传图片',
           icon: 'none',
         });
         return;
