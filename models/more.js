@@ -1,19 +1,17 @@
 import { LocationCategory } from '../config/api.js';
-import { HTTP } from '../utils/http.js'
+var util = require('../utils/util.js');
 
 /**
  * 地点分类数据请求类
  */
 
-class MoreModel extends HTTP {
+class MoreModel{
 
   /**
    * 获取行业分类列表
    */
   getCategoryList() {
-    return this.request({
-      url: LocationCategory,
-    });
+    return util.request(LocationCategory);
   }
 }
 

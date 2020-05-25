@@ -1,15 +1,13 @@
-import { HTTP } from '../utils/http.js';
+var util = require('../utils/util.js');
 var config = require('../config/api.js');
 
-class ThrowModel extends HTTP {
+class ThrowModel {
 
   /**
    * 获取投放广告位
    */
   getAdPlaces() {
-    return this.request({
-      url: config.AdPlaces,
-    });
+    return util.request(config.AdPlaces);
   }
 
 
@@ -17,36 +15,30 @@ class ThrowModel extends HTTP {
    * 获取车型列表 
    */
   getCarTypes() {
-    return this.request({
-      url: config.CarTypes,
-    });
+    return util.request(config.CarTypes);
   }
 
   /**
    * 获取投放模板
    */
   getTemplates(adPlace) {
-    return this.request({
-      url: config.Templates,
-      data: {
+    return util.request(config.Templates,
+      {
         adPlace: adPlace,
-      },
-    });
+      });
   }
 
   /**
    * 投放
    */
-  doAdvertising(phone, ) {
-    return this.request({
-      url: config.DoAdvertising,
-      method: 'POST',
-      data: {
+  doAdvertising({ lat, lng, address, province, audience, distance, throwType, position, isTemplate, templateId, phone, content, imgUrl, modelImagUrl, motto, city, coupon, couponId, startTime, endTime, totalAmount, unitPrice }) {
+    return util.request(config.DoAdvertising,
+      {
         adContact: phone,
         adDesc: content,
         adImgUrl: imgUrl,
-        adPlace: posiotn,
-        adTmpUrl: modelImagUtl,
+        adPlace: position,
+        adTmpUrl: modelImagUrl,
         carType: motto,
         city: city,
         couponAmount: coupon,
@@ -56,15 +48,32 @@ class ThrowModel extends HTTP {
         endTime: endTime,
         isTemplate: isTemplate,
         lat: lat,
-        lng: lnt,
+        lng: lng,
         positionDesc: address,
         province: province,
         startTime: startTime,
         templateId: templateId,
         throwType: throwType,
-        totalAmount: totalAmount,
-        unitPrice: unitPrice,
+        totalAmount: totalAmount,//总价
+        unitPrice: unitPrice,//单价
       },
+      'POST');
+  }
+
+  /**
+   * 上传图片
+   */
+  updateImgFie({ path, sCallback, fCallback }) {
+    return wx.uploadFile({
+      url: config.Upload,
+      filePath: path,
+      name: 'file',
+      success: res => {
+        sCallback(res.data);
+      },
+      fail: error => {
+        fCallback(error);
+      }
     });
   }
 }

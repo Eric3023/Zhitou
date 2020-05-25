@@ -4,8 +4,10 @@
 		<view class="city">
 			<text>当前城市： </text>
 			<text>{{location.ad_info.city}}</text>
-			<image class="point1" src="/img/throw/change_location.png" catchtap="onChangeToCity"></image>
-			<text class="change" catchtap="onChangeToCity">切换全城投放 </text>
+			<view class="change_city">
+				<image class="point1" src="/img/throw/change_location.png" catchtap="onChangeToCity"></image>
+				<text class="change" catchtap="onChangeToCity">切换全城投放 </text>
+			</view>
 		</view>
 		<view class="city">
 			<image class="point2" src="/img/icon_location.jpg"></image>
@@ -24,9 +26,12 @@
 					<text class="code_content">{{item.description}}</text>
 				</view>
 				<view class="code_btn_container">
+
 					<text class="btn" data-position="{{item.optionCode}}" catchtap="onClickUpdate">上传素材</text>
 					<text class="btn preview" style="background-color:{{position==item.optionCode && state==3? '#ffffff':'#bdbdbd'}}; color:{{position==item.optionCode && state==3? '#000000':'#ffffff'}};" data-position="{{item.optionCode}}" catchtap="onPreview">预览</text>
 				</view>
+				<progress class="code_progress" wx:if="{{position==item.optionCode && state!=0 && state!=1}}" activeColor="#42c2e2" backgroundColor="#e9e9e9" percent="{{position==item.optionCode? progress:0}}">
+				</progress>
 			</view>
 		</block>
 		<!-- 空白占位层 -->
@@ -36,107 +41,109 @@
 	<!-- 遮罩层 -->
 	<v_mask class="mask" wx:if="{{state==1||state==4}}" catchtap="onCancelMaterial" />
 	<!-- 模板选择 -->
-	<scroll-view class="model" wx:if="{{state==1}}" scroll-x="false" scroll-y="true">
-		<radio-group bindchange="onModelChange">
-			<!-- 模板选择 -->
-			<view class="model_selector">
-				<view class="model_header">
-					<radio style="transform:scale(0.5);" checked="true" value="{{0}}"></radio>
-					<text  class="model_title" >  模板选择 :</text>
-				</view>
-				<view class="model_body">
-					<scroll-view scroll-x="true" scroll-y="false">
-						<radio-group bindchange="onModelDetailChange">
-							<view class="model_items">
-								<block wx:for="{{models}}" wx:key="index">
-									<view class="model_item">
-										<image class="model_img" src="{{item.styleImageUrl}}"></image>
-										<radio class="model_radio" style="transform:scale(0.5);" checked="{{index==0}}" value="{{index}}"></radio>
+	<view class="model_container" wx:if="{{state==1}}">
+		<scroll-view class="model" scroll-x="false" scroll-y="true">
+			<radio-group bindchange="onModelChange">
+				<!-- 模板选择 -->
+				<view class="model_selector">
+					<view class="model_header">
+						<radio style="transform:scale(0.6);" checked="true" value="{{0}}"></radio>
+						<text  class="model_title" >  模板选择 :</text>
+					</view>
+					<view class="model_body">
+						<scroll-view scroll-x="true" scroll-y="false">
+							<radio-group bindchange="onModelDetailChange">
+								<view class="model_items">
+									<block wx:for="{{models}}" wx:key="index">
+										<view class="model_item">
+											<image class="model_img" src="{{item.styleImageUrl}}"></image>
+											<radio class="model_radio" style="transform:scale(0.6);" checked="{{index==0}}" value="{{index}}"></radio>
+										</view>
+									</block>
+								</view>
+							</radio-group>
+						</scroll-view>
+						<view class="photo">
+							<text>选择照片</text>
+							<view class="photo_update" wx:if="{{!model_param.img}}" catchtap="onSelectModelPhoto">+</view>
+							<image class="photo_update" wx:if="{{model_param.img}}" src="{{model_param.img}}"></image>
+						</view>
+						<view class="input_container">
+							<view class="input_title">
+								<text>输入显示内容</text>
+								<text class="notice">注意事项</text>
+								<image class="notice_icon" src="/img/throw/notice.png"></image>
+							</view>
+							<input class="input" placeholder="文字" placeholder-class="place_class" adjust-position="true" bindblur="onConfirmModelContent"></input>
+							<input class="input" placeholder="电话" placeholder-class="place_class" adjust-position="true" bindblur="onConfirmModelPhone"></input>
+						</view>
+						<view class="motto">
+							优选车型
+							<picker bindchange="bindModelPickerChange" value="0" range="{{mottos}}" range-key='desc'>
+								<view class="picker">{{mottos[model_param.mottoIndex].desc}}
+									<image class="picker_icon" src="/img/login/icon_pull.png"></image>
+								</view>
+							</picker>
+						</view>
+						<view class="cycle">
+							投放周期
+							<view class="time_picker_contianer">
+								<picker bindchange="onModelStartTimeChange" mode="date" value="0" start='{{now}}'>
+									<view class="time_picker time_picker_right_margin">{{model_param.start?model_param.start:now}}
 									</view>
-								</block>
+								</picker>
+								-
+								<picker bindchange="onModelEndTimeChange" value="0" mode="date" start='{{now}}'>
+									<view class="time_picker time_picker_left_margin">{{model_param.end?model_param.end:now}}
+									</view>
+								</picker>
 							</view>
-						</radio-group>
-					</scroll-view>
-					<view class="photo">
-						<text>选择照片</text>
-						<view class="photo_update" wx:if="{{!model_param.img}}" catchtap="onSelectModelPhoto">+</view>
-						<image class="photo_update" wx:if="{{model_param.img}}" src="{{model_param.img}}"></image>
-					</view>
-					<view class="input_container">
-						<view class="input_title">
-							<text>输入显示内容</text>
-							<text class="notice">注意事项</text>
-							<image class="notice_icon" src="/img/throw/notice.png"></image>
-						</view>
-						<input class="input" placeholder="文字" placeholder-class="place_class" adjust-position="true" bindblur="onConfirmModelContent"></input>
-						<input class="input" placeholder="电话" placeholder-class="place_class" adjust-position="true" bindblur="onConfirmModelPhone"></input>
-					</view>
-					<view class="motto">
-						优选车型
-						<picker bindchange="bindModelPickerChange" value="0" range="{{mottos}}" range-key='desc'>
-							<view class="picker">{{mottos[model_param.mottoIndex].desc}}
-								<image class="picker_icon" src="/img/login/icon_pull.png"></image>
-							</view>
-						</picker>
-					</view>
-					<view class="cycle">
-						投放周期
-						<view class="time_picker_contianer">
-							<picker bindchange="onModelStartTimeChange" mode="date" value="0" start='{{now}}'>
-								<view class="time_picker">{{model_param.start?model_param.start:now}}
-								</view>
-							</picker>
-							至
-							<picker bindchange="onModelEndTimeChange" value="0" mode="date" start='{{now}}'>
-								<view class="time_picker">{{model_param.end?model_param.end:now}}
-								</view>
-							</picker>
 						</view>
 					</view>
 				</view>
-			</view>
-			<!-- 直接上传 -->
-			<view class="model_selector">
-				<view class="model_header">
-					<radio style="transform:scale(0.5);" value="{{1}}"></radio>
-					<text  class="model_title" >直接上传 :</text>
-				</view>
-				<view class="model_body">
-					<view class="photo">
-						<text>选择照片</text>
-						<view class="photo_update" wx:if="{{!div_param.img}}" catchtap="onSelectDivPhoto">+</view>
-						<image class="photo_update" wx:if="{{div_param.img}}" src="{{div_param.img}}"></image>
+				<!-- 直接上传 -->
+				<view class="model_selector">
+					<view class="model_header">
+						<radio style="transform:scale(0.6);" value="{{1}}"></radio>
+						<text  class="model_title" >直接上传 :</text>
 					</view>
-					<view class="motto">
-						优选车型
-						<picker bindchange="bindDivPickerChange" value="0" range="{{mottos}}" range-key='desc'>
-							<view class="picker">{{mottos[div_param.mottoIndex].desc}}
-								<image class="picker_icon" src="/img/login/icon_pull.png"></image>
-							</view>
-						</picker>
-					</view>
-					<view class="cycle">
-						投放周期
-						<view class="time_picker_contianer">
-							<picker bindchange="onDivStartTimeChange" mode="date" value="0" start='{{now}}'>
-								<view class="time_picker">{{div_param.start?div_param.start:now}}
-								</view>
-							</picker>
-							至
-							<picker bindchange="onDivEndTimeChange" value="0" mode="date" start='{{now}}'>
-								<view class="time_picker">{{div_param.end?div_param.end:now}}
+					<view class="model_body">
+						<view class="photo">
+							<text>选择照片</text>
+							<view class="photo_update" wx:if="{{!div_param.img}}" catchtap="onSelectDivPhoto">+</view>
+							<image class="photo_update" wx:if="{{div_param.img}}" src="{{div_param.img}}"></image>
+						</view>
+						<view class="motto">
+							优选车型
+							<picker bindchange="bindDivPickerChange" value="0" range="{{mottos}}" range-key='desc'>
+								<view class="picker">{{mottos[div_param.mottoIndex].desc}}
+									<image class="picker_icon" src="/img/login/icon_pull.png"></image>
 								</view>
 							</picker>
 						</view>
+						<view class="cycle">
+							投放周期
+							<view class="time_picker_contianer ">
+								<picker bindchange="onDivStartTimeChange" mode="date" value="0" start='{{now}}'>
+									<view class="time_picker time_picker_right_margin">{{div_param.start?div_param.start:now}}
+									</view>
+								</picker>
+								-
+								<picker bindchange="onDivEndTimeChange" value="0" mode="date" start='{{now}}'>
+									<view class="time_picker time_picker_left_margin">{{div_param.end?div_param.end:now}}
+									</view>
+								</picker>
+							</view>
+						</view>
 					</view>
 				</view>
-			</view>
-			<view class="btn_container">
-				<button class="button" catchtap="onCancelMaterial">放弃</button>
-				<button class="button" catchtap="onCommitMaterial">确定</button>
-			</view>
-		</radio-group>
-	</scroll-view>
+			</radio-group>
+		</scroll-view>
+		<view class="btn_container">
+			<button class="button" catchtap="onCancelMaterial">放弃</button>
+			<button class="button" catchtap="onCommitMaterial">确定</button>
+		</view>
+	</view>
 	<!-- 结算 -->
 	<view class="settlement" wx:if="{{state==3}}">
 		<view class="audience">影响人群

@@ -1,11 +1,11 @@
-import { HTTP } from '../utils/http.js'
+var util = require('../utils/util.js');
 import { orders } from '../local/order.js'
 
 /**
  * 我的订单-业务处理
  */
 
-class OrderModel extends HTTP {
+class OrderModel {
   /**
    * 获取我的订单列表
    */

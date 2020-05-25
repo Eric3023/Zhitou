@@ -1,24 +1,20 @@
-import { HTTP } from '../utils/http.js'
+var util = require('../utils/util.js');
 import { AroundUsers } from '../config/api.js';
 
 /**
  * 位置相关-业务处理
  */
 
-class LocationModel extends HTTP {
+class LocationModel {
   /**
    * 获取周边用户数
    */
   getAroundUser(lng, lat, distance) {
-    return this.request({
-      url: AroundUsers,
-      method:'POST',
-      data: {
-        lng: lng,
-        lat: lat,
-        distance: distance,
-      },
-    })
+    return util.request(AroundUsers, {
+      lng: lng,
+      lat: lat,
+      distance: distance,
+    }, 'POST');
   }
 }
 

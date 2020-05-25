@@ -20,13 +20,17 @@ Page({
     this.getCatagory()
   },
 
+  onShareAppMessage(){
+
+  },
+
   /**
    * 获取行业列表
    */
   getCatagory() {
     wx.showLoading();
     moreModel.getCategoryList().then(res => {
-      let data = res.data.data;
+      let data = res.data;
       this.setData({
         data: data
       });

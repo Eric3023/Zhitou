@@ -23,7 +23,7 @@ function formatNumber(n) {
  * 微信的request
  */
 function request(url, data = {}, method = "GET") {
-  return new Promise(function(resolve, reject) {
+  return new Promise(function (resolve, reject) {
     wx.request({
       url: url,
       data: data,
@@ -32,9 +32,14 @@ function request(url, data = {}, method = "GET") {
         'Content-Type': 'application/json',
         'token': wx.getStorageSync('token')
       },
-      success: function(res) {
+      success: function (res) {
 
         if (res.statusCode == 200) {
+          
+          if (res.data.errno == 800 || res.data.errno == 401) {
+            
+            reject(res.data.errmsg);
+          }
 
           if (res.data.errno == 501) {
             // 清除登录相关内容
@@ -48,7 +53,7 @@ function request(url, data = {}, method = "GET") {
             wx.navigateTo({
               url: '/pages/auth/login/login'
             });
-          } else {
+          } else{
             resolve(res.data);
           }
         } else {
@@ -56,7 +61,7 @@ function request(url, data = {}, method = "GET") {
         }
 
       },
-      fail: function(err) {
+      fail: function (err) {
         reject(err)
       }
     })
@@ -88,14 +93,14 @@ function showErrorToast(msg) {
 function jhxLoadShow(message) {
   if (wx.showLoading) {  // 基础库 1.1.0 微信6.5.6版本开始支持，低版本需做兼容处理
     wx.showLoading({
-      title: message, 
+      title: message,
       mask: true
     });
   } else {    // 低版本采用Toast兼容处理并将时间设为20秒以免自动消失
     wx.showToast({
-      title: message, 
-      icon: 'loading', 
-      mask: true, 
+      title: message,
+      icon: 'loading',
+      mask: true,
       duration: 20000
     });
   }

@@ -19,6 +19,10 @@ Page({
 
   },
 
+  onShareAppMessage(){
+
+  },
+
   /**
    * 证件类型改变
    */

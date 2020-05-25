@@ -63,6 +63,11 @@ Page({
       currentcity: options.currentcity
     })
   },
+
+  onShareAppMessage(){
+
+  },
+  
   /**
    * 选中城市
    */

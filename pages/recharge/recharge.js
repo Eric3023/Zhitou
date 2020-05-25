@@ -101,6 +101,8 @@ Page({
           }
         });
       }
+    }).catch(err=> {
+      util.showErrorToast("请正确填写支付金额");
     });
 
   },

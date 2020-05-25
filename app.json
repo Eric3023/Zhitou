@@ -39,7 +39,7 @@
         "selectedColor": "#f3864b"
       },
       {
-        "pagePath": "pages/developing/developing",
+        "pagePath": "pages/throw/throw",
         "text": "投放",
         "iconPath": "img/tab/throw_normal.png",
         "selectedIconPath": "img/tab/throw_select.png",
