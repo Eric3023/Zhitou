@@ -8,132 +8,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    records: [
-      {
-        mouth: "2020年6月",
-        money: 220220,
-        datas: [
-          {
-            time: '1月30日 18:15',
-            money: 10000,
-            person: '西红柿老太太',
-          },
-          {
-            time: '1月30日 18:15',
-            money: 10000,
-            person: '西红柿老太太',
-          },
-          {
-            time: '1月30日 18:15',
-            money: 10000,
-            person: '西红柿老太太',
-          },
-          {
-            time: '1月30日 18:15',
-            money: 10000,
-            person: '西红柿老太太',
-          },
-          {
-            time: '1月30日 18:15',
-            money: 10000,
-            person: '西红柿老太太',
-          },
-        ]
-      },
-      {
-        mouth: "2020年5月",
-        money: 220220,
-        datas: [
-          {
-            time: '1月30日 18:15',
-            money: 10000,
-            person: '西红柿老太太',
-          },
-          {
-            time: '1月30日 18:15',
-            money: 10000,
-            person: '西红柿老太太',
-          },
-          {
-            time: '1月30日 18:15',
-            money: 10000,
-            person: '西红柿老太太',
-          },
-          {
-            time: '1月30日 18:15',
-            money: 10000,
-            person: '西红柿老太太',
-          },
-          {
-            time: '1月30日 18:15',
-            money: 10000,
-            person: '西红柿老太太',
-          },
-        ]
-      },
-      {
-        mouth: "2020年4月",
-        money: 220220,
-        datas: [
-          {
-            time: '1月30日 18:15',
-            money: 10000,
-            person: '西红柿老太太',
-          },
-          {
-            time: '1月30日 18:15',
-            money: 10000,
-            person: '西红柿老太太',
-          },
-          {
-            time: '1月30日 18:15',
-            money: 10000,
-            person: '西红柿老太太',
-          },
-          {
-            time: '1月30日 18:15',
-            money: 10000,
-            person: '西红柿老太太',
-          },
-          {
-            time: '1月30日 18:15',
-            money: 10000,
-            person: '西红柿老太太',
-          },
-        ]
-      },
-      {
-        mouth: "2020年3月",
-        money: 220220,
-        datas: [
-          {
-            time: '1月30日 18:15',
-            money: 10000,
-            person: '西红柿老太太',
-          },
-          {
-            time: '1月30日 18:15',
-            money: 10000,
-            person: '西红柿老太太',
-          },
-          {
-            time: '1月30日 18:15',
-            money: 10000,
-            person: '西红柿老太太',
-          },
-          {
-            time: '1月30日 18:15',
-            money: 10000,
-            person: '西红柿老太太',
-          },
-          {
-            time: '1月30日 18:15',
-            money: 10000,
-            person: '西红柿老太太',
-          },
-        ]
-      },
-    ],
+    records: [],
 
     page: 1,
     size: 20,
@@ -166,9 +41,25 @@ Page({
       res => {
         let list = res.data.list;
         let hasNext = res.data.pageData.hasNext;
+        let tmp = "";
+        for (var i = 0; i < list.length; i++) {
+          let item = list[i];
+          let time = item.payTime;
+          if (time) {
+            let date = new Date(time);
+            item.mouth = date.getFullYear() + "年" + (date.getMonth() + 1) + "月";
+            if (tmp == item.mouth) {
+              item.first = false;
+            } else {
+              item.first = true;
+            }
+            tmp = item.mouth;
+          }
+        }
         this.data.hasMore = hasNext;
+        this.data.records = this.data.records.concat(list);
         this.setData({
-          records: list,
+          records: this.data.records,
           hasMore: hasNext,
         });
 

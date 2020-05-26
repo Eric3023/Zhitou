@@ -1,18 +1,15 @@
 <view class="container">
 	<block wx:for="{{records}}" wx:key="index">
-		<view class="mouth_container">
+		<view class="mouth_container" wx:if="{{item.first}}">
 			<text class="mouth">{{item.mouth}}</text>
-			<text class="money">支出 ￥{{item.money}}元</text>
 		</view>
-		<block wx:for="{{item.datas}}" wx:key="index">
-			<view class="record_container">
-				<image class="icon" src="/img/order/icon_wallet.png"></image>
-				<view class="content">
-					<text class="person">付款-给{{item.person}}</text>
-					<text class="time">{{item.time}}</text>
-				</view>
-				<text class="money">-{{item.money}}</text>
+		<view class="record_container">
+			<image class="icon" src="/img/order/icon_wallet.png"></image>
+			<view class="content">
+				<text class="person">{{item.message}}</text>
+				<text class="time">{{item.payTime}}</text>
 			</view>
-		</block>
+			<text class="money">{{item.actualPrice}}</text>
+		</view>
 	</block>
 </view>
