@@ -35,6 +35,11 @@ function request(url, data = {}, method = "GET") {
       success: function (res) {
 
         if (res.statusCode == 200) {
+          
+          if (res.data.errno == 800 || res.data.errno == 401) {
+            
+            reject(res.data.errmsg);
+          }
 
           if (res.data.errno == 501) {
             // 清除登录相关内容

@@ -4,6 +4,7 @@
 // var BaseApi = 'http://192.168.1.105:8070/';
 // var BaseApi = 'http://192.168.1.19:8070/';
 // 线上云平台api地址
+
 var BaseApi = "https://zt.ottauto.tv/"
 
 var WxApiRoot = BaseApi + 'wx/';

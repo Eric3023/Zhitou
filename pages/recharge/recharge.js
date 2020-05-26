@@ -88,7 +88,9 @@ Page({
           'paySign': payParam.paySign,
           'success': function (res) {
             console.log("支付过程成功");
-            util.redirect('/pages/ucenter/order/order');
+            wx.reLaunch({
+              url: '/pages/mine/mine',
+            })
           },
           'fail': function (res) {
             console.log("支付过程失败");
@@ -99,6 +101,8 @@ Page({
           }
         });
       }
+    }).catch(err=> {
+      util.showErrorToast("请正确填写支付金额");
     });
 
   },

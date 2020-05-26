@@ -57,9 +57,9 @@
 
 .balance_recharge {
   width: 132rpx;
-  height: 42rpx;
+  height: 40rpx;
   position: absolute;
   top: 50%;
   right: 40rpx;
-  margin-top: -21rpx;
+  margin-top: -20rpx;
 }
