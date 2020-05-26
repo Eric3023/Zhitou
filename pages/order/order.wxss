@@ -8,5 +8,5 @@ page {
 }
 
 .category{
-  margin-bottom: 60rpx;
+  margin-bottom: 40rpx;
 }

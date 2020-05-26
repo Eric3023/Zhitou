@@ -9,7 +9,6 @@ const formatNumber = n => {
 */
 function tsFormatTime(timestamp, format) {
 
-  const formateArr = ['Y', 'M', 'D', 'h', 'm', 's'];
   let returnArr = [];
 
   let date = new Date(timestamp);

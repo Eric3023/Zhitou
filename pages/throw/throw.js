@@ -50,6 +50,8 @@ Page({
 
     imgurl: '',
     progress: '',//图片上传进度
+
+    isMonitor: 0, //是否使用记刻数据0:不使用；1:使用；
   },
 
   /**
@@ -282,33 +284,39 @@ Page({
     });
 
     //上传图片
-    this._updateImgFie({
-      path: imgPath,
-      progress: res => {
-        console.log('上传进度', res.progress);
-        console.log('已经上传的数据长度', res.totalBytesSent);
-        console.log('预期需要上传的数据总长度', res.totalBytesExpectedToSend);
-        this.setData({
-          progress: res.progress,
-        });
-      },
-      success: res => {
-        console.log('上传成功');
-        console.log(res);
-        let response = JSON.parse(res);
-        let data = response.data;
-        this.data.imgurl = data.url;
-        this.setData({
-          state: 3,
-        });
-        console.log(this.data.imgurl);
-      },
-      fail: error => {
-        console.log('上传失败');
-        console.log(error);
-        this._resetData();
-      },
-    });
+    if (this.data.model == 0) {
+      this.setData({
+        state: 3,
+      });
+    } else {
+      this._updateImgFie({
+        path: imgPath,
+        progress: res => {
+          console.log('上传进度', res.progress);
+          console.log('已经上传的数据长度', res.totalBytesSent);
+          console.log('预期需要上传的数据总长度', res.totalBytesExpectedToSend);
+          this.setData({
+            progress: res.progress,
+          });
+        },
+        success: res => {
+          console.log('上传成功');
+          console.log(res);
+          let response = JSON.parse(res);
+          let data = response.data;
+          this.data.imgurl = data.url;
+          this.setData({
+            state: 3,
+          });
+          console.log(this.data.imgurl);
+        },
+        fail: error => {
+          console.log('上传失败');
+          console.log(error);
+          this._resetData();
+        },
+      });
+    }
   },
 
   /**
@@ -336,7 +344,7 @@ Page({
     let end = this.data.model == 0 ? this.data.model_param.end : this.data.div_param.end;
     let startTime = dateUtil.tsFormatTime(dateUtil.formatTimeStamp(start), 'yyyy-MM-dd 00:00:00');
     let endTime = dateUtil.tsFormatTime(dateUtil.formatTimeStamp(end), 'yyyy-MM-dd 23:59:59');
-    throwModel.doAdvertising({
+    let data = {
       lat: this.data.location.location.lat,
       lng: this.data.location.location.lng,
       address: this.data.location.title ? this.data.location.title : this.data.location.formatted_addresses.recommend,
@@ -347,11 +355,6 @@ Page({
       throwType: this.data.location_state,
       position: this.data.position,
       isTemplate: this.data.model,
-      templateId: this.data.models[this.data.model_param.modelId].id,
-      phone: this.data.model_param.phone,
-      content: this.data.model_param.content,
-      imgUrl: this.data.imgurl,
-      modelImagUrl: this.data.models[this.data.model_param.modelId].styleImageUrl,
       motto: this.data.model == 0 ? this.data.mottos[this.data.model_param.mottoIndex].code : this.data.mottos[this.data.div_param.mottoIndex].code,
       startTime: startTime,
       endTime: endTime,
@@ -359,8 +362,20 @@ Page({
       unitPrice: 1500,
       coupon: 0,
       couponId: 0,
+      isMonitor: this.data.isMonitor,
+    };
+    //使用模板
+    if (this.data.model == 0) {
+      data.templateId = this.data.models[this.data.model_param.modelId].id;
+      data.phone = this.data.model_param.phone;
+      data.content = this.data.model_param.content;
+      data.modelImagUrl = this.data.models[this.data.model_param.modelId].styleImageUrl;
     }
-    ).then(res => {
+    //直接上传
+    else {
+      data.imgUrl = this.data.imgurl;
+    }
+    throwModel.doAdvertising(data).then(res => {
       console.log(res);
       this.setData({
         state: 5,
@@ -390,6 +405,18 @@ Page({
     this.setData({
       codes: this.data.codes,
     });
+  },
+
+  /**
+   * 是否使用监测
+   */
+  onMonitorChange(event) {
+    let value = event.detail.value;
+    if (!value || value.length == 0) {
+      this.data.isMonitor = 0;
+    } else {
+      this.data.isMonitor = 1;
+    }
   },
 
   /**

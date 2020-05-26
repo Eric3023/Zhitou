@@ -38,10 +38,10 @@
 }
 
 .count {
-  font-size: 28rpx;
+  font-size: 30rpx;
 }
 
 .category {
-  font-size: 20rpx;
-  margin-top: 20rpx;
+  font-size: 24rpx;
+  margin-top: 16rpx;
 }

@@ -1,6 +1,7 @@
+<wxs src="index.wxs" module="util" />
 <view class="container">
 	<!-- 图片 -->
-	<image class="img" src="{{img}}" />
+	<image class="img" src="{{img}}" mode="aspectFill" />
 	<!-- 详情 -->
 	<view class="content">
 		<text class="title">{{title}}</text>
@@ -8,7 +9,7 @@
 		<view class="address">
 			<text>已曝光{{count}}次</text>
 		</view>
-		<text class="time">{{start}}-{{end}}</text>
+		<text class="time">{{util.getTime(start)}}-{{util.getTime(end)}}</text>
 	</view>
 	<!-- 投放状态 -->
 	<text class="state">{{state}}</text>

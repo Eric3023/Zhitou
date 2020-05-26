@@ -31,7 +31,7 @@ class ThrowModel {
   /**
    * 投放
    */
-  doAdvertising({ lat, lng, address, province, audience, distance, throwType, position, isTemplate, templateId, phone, content, imgUrl, modelImagUrl, motto, city, coupon, couponId, startTime, endTime, totalAmount, unitPrice }) {
+  doAdvertising({ lat, lng, address, province, audience, distance, throwType, position, isTemplate, templateId, phone, content, imgUrl, modelImagUrl, motto, city, coupon, couponId, startTime, endTime, totalAmount, unitPrice, isMonitor }) {
     return util.request(config.DoAdvertising,
       {
         adContact: phone,
@@ -56,6 +56,7 @@ class ThrowModel {
         throwType: throwType,
         totalAmount: totalAmount,//总价
         unitPrice: unitPrice,//单价
+        isMonitor: isMonitor,//是否使用检测
       },
       'POST');
   }

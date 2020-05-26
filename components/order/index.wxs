@@ -1,0 +1,8 @@
+var getTime = function (str) {
+  var date = getDate(str);
+  return date.getFullYear() + "年" + (date.getMonth() + 1) + "月" + date.getDate() + "日";
+}
+
+module.exports = {
+  getTime: getTime
+}

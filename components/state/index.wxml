@@ -1,11 +1,11 @@
 <view class="container">
 	<view class="content" data-index="0" bindtap="onClick">
 		<image class="icon" src="{{index==0?'img/icon_order_category_create_f.jpg':'img/icon_order_category_create_nf.jpg'}}"></image>
-		<text class="category">创建中</text>
+		<text class="category">审核中</text>
 	</view>
 	<view class="content" data-index="1" bindtap="onClick">
 		<image class="icon" src="{{index==1?'img/icon_order_category_shen_f.jpg':'img/icon_order_category_shen_nf.jpg'}}"></image>
-		<text class="category">审核中</text>
+		<text class="category">审核失败</text>
 	</view>
 	<view class="content" data-index="2" bindtap="onClick">
 		<image class="icon" src="{{index==2?'img/icon_order_category_throw_f.jpg':'img/icon_order_category_throw_nf.png'}}"></image>

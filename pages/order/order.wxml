@@ -1,10 +1,11 @@
+<wxs src="order.wxs" module="util"/>
 <view class="container">
 	<!-- 订单简介 -->
 	<v_statistic class="header" throwing="{{orders.throwing_num}}" exposed="{{orders.exposed_num}}" audience="{{orders.audience_num}}" />
 	<!-- 订单状态 -->
 	<v_state class="category" bindchangetype="onChangeType" />
 	<!-- 订单列表 -->
-	<block class="list" wx:for="{{displaying}}" wx:key="index">
-		<v_order img="{{item.img}}" title="{{item.title}}" address="{{item.address}}" count="{{item.count}}" start="{{item.start}}" end="{{item.end}}" state="{{item.state}}" catchtap="onClickItem"/>
+	<block class="list" wx:for="{{orders}}" wx:key="index">
+		<v_order img="{{item.adImgUrl}}" title="{{item.title}}" address="{{item.positionDesc}}" count="{{item.count}}" start="{{item.startTime}}" end="{{item.endTime}}" state="{{util.getState(status)}}" catchtap="onClickItem" />
 	</block>
 </view>

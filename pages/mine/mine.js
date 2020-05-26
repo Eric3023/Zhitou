@@ -1,3 +1,5 @@
+let AccountModel = require('../../models/account.js');
+const accountModel = new AccountModel();
 const app = getApp()
 Page({
 
@@ -8,7 +10,7 @@ Page({
     phone: '',
     authored: false,
     hasLogin: false,
-    balance: 5000,
+    balance: '0',
     user_info: {
       uicon: "/img/mine/icon_header.png",
       uid: ""
@@ -100,6 +102,8 @@ Page({
         hasLogin: true
       });
     }
+
+    this._getBalance();
   },
 
   /**
@@ -136,5 +140,20 @@ Page({
     wx.navigateTo({
       url: '/pages/author/author',
     })
-  }
+  },
+
+  /**
+   * 获取账户余额
+   */
+  _getBalance() {
+    accountModel.getBalance().then(
+      res => {
+        let balance = res.data.totalAmount;
+        balance = balance.toFixed(2);
+        this.setData({
+          balance: balance,
+        });
+      }
+    );
+  },
 })

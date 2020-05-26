@@ -38,7 +38,7 @@
   flex-direction: row;
   align-items: center;
   margin-top: 5rpx;
-  margin-left: 76rpx;
+  margin-left: 74rpx;
   font-size: 28rpx;
   color: #dd8c6a;
 }

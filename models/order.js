@@ -1,6 +1,5 @@
 var util = require('../utils/util.js');
-import { orders } from '../local/order.js'
-
+var config = require('../config/api.js');
 /**
  * 我的订单-业务处理
  */
@@ -9,10 +8,16 @@ class OrderModel {
   /**
    * 获取我的订单列表
    */
-  getOrders() {
-    //测试数据
-    return orders;
+  getOrders(status, page, size) {
+    return util.request(
+      config.Order,
+      {
+        status: status,
+        page: page,
+        size: size
+      }
+    );
   }
 }
 
-export { OrderModel }
+module.exports = OrderModel;

@@ -10,21 +10,21 @@
 
 .img {
   width: 160rpx;
-  height: 125rpx;
+  height: 130rpx;
 }
 
 .content {
-  width: 440rpx;
+  width: 400rpx;
   display: flex;
   flex-direction: column;
   margin-left: 18rpx;
 }
 
 .title {
-  font-size: 22rpx;
+  font-size: 24rpx;
   color: black;
   margin-top: 5rpx;
-  margin-bottom: 5rpx;
+  margin-bottom: 3rpx;
   width: 100%;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -32,10 +32,10 @@
 }
 
 .address {
-  font-size: 18rpx;
+  font-size: 22rpx;
   color: #484848;
   margin-top: 5rpx;
-  margin-bottom: 5rpx;
+  margin-bottom: 3rpx;
   width: 100%;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -56,8 +56,8 @@
 }
 
 .state{
-  font-size: 22rpx;
+  font-size: 24rpx;
   color: #d7ac96;
   position: absolute;
-  left: 620rpx;
+  right: 60rpx;
 }

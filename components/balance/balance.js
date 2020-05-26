@@ -5,7 +5,7 @@ Component({
    */
   properties: {
     balance: {
-      type: Number
+      type: String
     }
   },
 

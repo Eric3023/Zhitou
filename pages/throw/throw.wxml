@@ -14,10 +14,10 @@
 			<text class="address">{{location_state==0? (location.title? location.title:location.formatted_addresses.recommend):location.ad_info.city}}</text>
 		</view>
 		<view class="audience">{{location_state==0?'当前位置10公里内':location.ad_info.city+'全城'}}有{{audience}}个用户</view>
-		<view class="audience origin">
-			<checkbox checked="true" color="#f77a51"></checkbox>
+		<checkbox-group class="audience origin" bindchange="onMonitorChange">
+			<checkbox color="#f77a51" value="{{1}}"></checkbox>
 			是否选择由记刻数据提供第三方监测
-		</view>
+		</checkbox-group>
 	</view>
 	<!-- 广告选择 -->
 	<view class="ad">
@@ -33,7 +33,7 @@
 					<text class="btn" data-position="{{item.optionCode}}" catchtap="onClickUpdate">上传素材</text>
 					<text class="btn preview" style="background-color:{{position==item.optionCode && state==3? '#ffffff':'#bdbdbd'}}; color:{{position==item.optionCode && state==3? '#000000':'#ffffff'}};" data-position="{{item.optionCode}}" catchtap="onPreview">预览</text>
 				</view>
-				<progress class="code_progress" wx:if="{{position==item.optionCode && state!=0 && state!=1}}" activeColor="#42c2e2" backgroundColor="#e9e9e9" percent="{{position==item.optionCode? progress:0}}">
+				<progress class="code_progress" wx:if="{{position==item.optionCode && state!=0 && state!=1 && model==1}}" activeColor="#42c2e2" backgroundColor="#e9e9e9" percent="{{position==item.optionCode? progress:0}}">
 				</progress>
 			</view>
 		</block>

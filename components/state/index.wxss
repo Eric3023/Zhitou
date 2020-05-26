@@ -19,6 +19,6 @@
 }
 
 .category {
-  font-size: 22rpx;
-  margin-top: 30rpx;
+  font-size: 24rpx;
+  margin-top: 24rpx;
 }
