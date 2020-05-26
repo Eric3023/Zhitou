@@ -102,6 +102,13 @@ Page({
     }
   },
 
+  /**
+   * 转发
+   */
+  onShareAppMessage: function () {
+
+  },
+
   getWxUserInfo(event) {
 
     var that = this

@@ -113,11 +113,15 @@ Page({
               console.log(res)
             },
             fail(res) {//拒绝授权
-              address = "北京市";
-              currentcity = "北京市";
-              app.globalData.lat = 39.909604;
-              app.globalData.lng = 116.397228;
-              regionCallbackTxt = 39.909604 + "," + 116.397228;
+              // address = "北京市";
+              // currentcity = "北京市";
+              // app.globalData.lat = 39.909604;
+              // app.globalData.lng = 116.397228;
+              // regionCallbackTxt = 39.909604 + "," + 116.397228;
+
+              wx.navigateTo({
+                url: '/pages/city/city',
+              })
             }
           })
         } else {//授权过位置信息

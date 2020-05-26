@@ -4,12 +4,12 @@
 		<view class="balance_content_header_container">
 			<image class="balance_icon" src="{{icon}}"></image>
 			<text class="balance_title">{{title}}</text>
-			<image class="balance_recharge" src="{{recharge}}" bindtap="recharge"></image>
 		</view>
 		<view class="balance_content__body_container">
 			<text>余额：</text>
 			<text>{{balance}}</text>
 			<text>元</text>
 		</view>
+		<image class="balance_recharge" src="{{recharge}}" bindtap="recharge"></image>
 	</view>
 </view>

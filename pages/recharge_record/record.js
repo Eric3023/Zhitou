@@ -1,4 +1,7 @@
-// pages/recharge_record/record.js
+var RecordModel = require('../../models/record.js');
+
+let recordModel = new RecordModel();
+
 Page({
 
   /**
@@ -130,62 +133,85 @@ Page({
           },
         ]
       },
-    ]
+    ],
+
+    page: 1,
+    size: 20,
+    lock: false,
+    hasMore: true,
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this._getRecords();
   },
 
   /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
+   * 滑动到页面底部
    */
   onReachBottom: function () {
-
+    this._getRecords();
   },
 
   /**
-   * 用户点击右上角分享
+   * 获取充值记录
    */
-  onShareAppMessage: function () {
+  _getRecords(page, size) {
+    if (this._isLock() || !this._hasMore()) return;
+    wx.showLoading();
+    this._addLock();
+    recordModel.getPayRecods(this.data.page, this.data.size).then(
+      res => {
+        let list = res.data.list;
+        let hasNext = res.data.pageData.hasNext;
+        this.data.hasMore = hasNext;
+        this.setData({
+          records: list,
+          hasMore: hasNext,
+        });
 
+        this.data.page++;
+        this._removeLock();
+        wx.hideLoading();
+      },
+      error => {
+        this._removeLock();
+        wx.hideLoading();
+      }
+    );
+  },
+
+  /**
+   * 是否加锁（正在请求数据）
+   */
+  _isLock() {
+    return this.data.lock;
+  },
+
+  /**
+   * 加锁
+   */
+  _addLock() {
+    this.setData({
+      lock: true,
+    });
+  },
+
+  /**
+   * 解锁
+   */
+  _removeLock() {
+    this.setData({
+      lock: false,
+    });
+  },
+
+  /**
+   * 是否还有更多数据
+   */
+  _hasMore() {
+    return this.data.hasMore;
   }
 })

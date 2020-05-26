@@ -357,12 +357,16 @@ page {
 
 .address {
   color: #5a5a5a;
+  margin-left: 10rpx;
 }
 
 .audience {
   font-size: 22rpx;
   color: #5a5a5a;
   margin-top: 28rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
 .settlement {
@@ -498,4 +502,30 @@ page {
   width: 0;
   height: 0;
   color: transparent;
+}
+
+/*checkbox 整体大小  */
+checkbox {
+  width: 30rpx;
+  height: 30rpx;
+  position: relative;
+  margin-right: 16rpx;
+}
+/*checkbox 选项框大小  */
+checkbox .wx-checkbox-input {
+  width: 30rpx;
+  height: 30rpx;
+  margin-top: 0rpx;
+  position: absolute;
+  top: 0rpx;
+  left: 0rpx;
+}
+
+/*checkbox选中后图标样式  */
+checkbox .wx-checkbox-input.wx-checkbox-input-checked::before {
+  width: 30rpx;
+  height: 30rpx;
+  line-height: 28rpx;
+  text-align: center;
+  font-size: 30rpx;
 }

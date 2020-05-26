@@ -57,7 +57,6 @@ function reverseGeocoder(app, that, callback = null) {
       app.globalData.lng = result.location.lng;
 
       if (callback) {
-        console.log('+++');
         console.log(result);
         callback(result, result.location.lat, result.location.lng);
       }
@@ -113,7 +112,8 @@ function reverseGeocoderPoi(app, that, loca) {
           recommend: result.formatted_addresses && result.formatted_addresses.recommend || '',
           crossroad: crossroad
         },
-        pois: result.pois
+        pois: result.pois,
+        currentcity: result.address_component.city,
       });
     },
     fail: function (res) {

@@ -66,9 +66,15 @@ Page({
    * 切换至全城投放
    */
   onChangeToCity() {
-    this.setData({
-      location_state: 1
-    });
+    if (this.data.location_state == 0) {
+      this.setData({
+        location_state: 1
+      });
+    } else {
+      this.setData({
+        location_state: 0
+      });
+    }
   },
 
   /**
@@ -251,13 +257,13 @@ Page({
     //图片未选择
     if (this.data.model == 0) {
       console.log(this.data.model_param);
-      if (!this.data.model_param.img) {
-        wx.showToast({
-          title: '您已选择模板类型，请上传图片',
-          icon: 'none',
-        });
-        return;
-      }
+      // if (!this.data.model_param.img) {
+      //   wx.showToast({
+      //     title: '您已选择模板类型，请上传图片',
+      //     icon: 'none',
+      //   });
+      //   return;
+      // }
       imgPath = this.data.model_param.img;
     } else {
       console.log(this.data.div_param);
@@ -326,7 +332,7 @@ Page({
    */
   onConfirmCheck() {
     //投放
-    let start = this.data.model == 0 ? this.data.model_param.start : this.div_param.start;
+    let start = this.data.model == 0 ? this.data.model_param.start : this.data.div_param.start;
     let end = this.data.model == 0 ? this.data.model_param.end : this.data.div_param.end;
     let startTime = dateUtil.tsFormatTime(dateUtil.formatTimeStamp(start), 'yyyy-MM-dd 00:00:00');
     let endTime = dateUtil.tsFormatTime(dateUtil.formatTimeStamp(end), 'yyyy-MM-dd 23:59:59');
