@@ -1,27 +1,25 @@
 /* components/user/user.wxss */
 .user_container {
-  margin-left: 40rpx;
-  margin-right: 40rpx;
-  margin-top: 36rpx;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
 }
 
 .uicon {
-  width: 95rpx;
-  height: 95rpx;
+  width: 128rpx;
+  height: 125rpx;
   border-radius: 50%;
+  border: 6rpx solid #ffffff;
   overflow: hidden;
 }
 
 .uid {
-  margin-left: 18rpx;
   font-size: 30rpx;
-  color: #373737;
+  color: white;
+  margin-top: 18rpx;
   border: none;
-  background: #ffffff;
 }
+
 .uid::after{
   border: none;
 }

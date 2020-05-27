@@ -10,6 +10,7 @@ Component({
     // uid: {
     //   type: String
     // }
+    authored: Boolean
   },
 
   /**

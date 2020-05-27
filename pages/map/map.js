@@ -90,7 +90,9 @@ Page({
     this.setData({
       animation: false
     });
-  },// 监听视野变化
+  },
+  
+  // 监听视野变化
   onChangeRegion(event) {
     var that = this
     if (event.type === 'end' && event.causedBy === 'drag') {
@@ -152,16 +154,19 @@ Page({
       });
     }
   },
+
   onDialogClose() {
     this.setData({
       dialogShow: false
     });
   },
+
   onWatchDoc() {
     this.setData({
       dialogShow: true
     });
   },
+
   onShareAppMessage: function () {
     return {
       title: '腾讯位置服务'
@@ -179,6 +184,7 @@ Page({
     //   })
     // }
   },
+
   loadHis() {
     console.log(111);
     var that = this;
@@ -205,6 +211,7 @@ Page({
     const value = event.detail.value;
     this._searchList(value);
   },
+
   getSearchResult(keyword) {
     if (keyword === '') {
       keyword = this.data.defaultKeyword.keyword;
@@ -220,6 +227,7 @@ Page({
 
     }
   },
+
   search: function (keyword) {
     var that = this;
 
@@ -277,6 +285,7 @@ Page({
     //     },
     //   })
   },
+
   clearKeyword: function () {
     this.setData({
       keyword: '',
@@ -292,8 +301,6 @@ Page({
       siteData: []//清空搜索结果
     })
   },
-
-
 
   onSelectCity: function () {
     var that = this;
@@ -409,6 +416,7 @@ Page({
     })
 
   },
+  
   clearHisSearchData: function () {
     this.setData({
       hisSearchData: []

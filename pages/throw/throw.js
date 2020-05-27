@@ -340,6 +340,10 @@ Page({
       this.setData({
         state: 5,
       });
+      this._resetData();
+      this.setData({
+        state: 0,
+      });
       wx.navigateTo({
         url: '../../pages/complete/complete',
       });

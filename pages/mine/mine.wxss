@@ -9,31 +9,49 @@ page {
 }
 
 .header_container {
-  background-color: white;
-  height: 310rpx;
+  height: 372rpx;
   margin-top: 2rpx;
   box-shadow: 0rpx 0rpx 10rpx 4rpx #ebebeb;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.header_container .background {
+  width: 100%;
+  height: 310rpx;
+  background-color: #ee7f51;
+  position: absolute;
+  top: 0;
+  z-index: 0;
 }
 
 .user_info {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
   position: relative;
+  margin-top: 56rpx;
 }
 
-.authentication{
-  width: 120rpx;
-  height: 48rpx;
-  position: absolute;
-  top: 64rpx;
-  right: 68rpx;
+.authentication {
+  padding: 0rpx 20rpx 0rpx 20rpx ;
+  position: relative;
+  left: 72rpx;
+  bottom: 94rpx;
+  font-size: 24rpx;
+  border-radius: 20rpx;
 }
 
 .header_user_balance {
-  position: relative;
-  left: 34rpx;
-  top: 44rpx;
+  width: 666rpx;
+  border-radius: 15rpx;
+  box-shadow: 0 0 8 rpx #bcbcbc;
+  background-color: white;
+  position: absolute;
+  top: 275rpx;
+  z-index: 9;
 }
 
 .body_container {
@@ -64,7 +82,6 @@ page {
   border: none;
   font-size: 25rpx;
 }
-
 
 .uicon {
   width: 95rpx;

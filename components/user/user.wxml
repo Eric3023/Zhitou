@@ -1,7 +1,7 @@
 <view class="user_container">
 	<!-- 此处只有显示功能，无需js中使用用户信息，故使用open-data组件实现，无需用户授权 -->
 	<!-- js中使用用户信息，在登录页面实现 -->
-	<open-data class="uicon" type="userAvatarUrl" />
+	<open-data class="uicon" style="border: 6rpx solid {{authored? '#61b39d':'#ffffff'}};" type="userAvatarUrl" />
 	<open-data class="uid" type="userNickName" />
 	<!-- <image class="uicon" src="{{uicon}}"></image>
   <button open-type="getUserInfo" disabled="{{uid?true:false}}" 
