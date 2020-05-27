@@ -37,17 +37,13 @@ Page({
       img: '',//上传的模板照片
       content: '',//输入的显示内容
       phone: '',//输入的电话
-      mottoIndex: 0,//选中车型索引
-      start: now,//投放开始日期
-      end: now,//投放结束日期
     },
     div_param: {
       img: '',//上传的照片
-      mottoIndex: 0,//选中车型索引
-      start: now,//投放开始日期
-      end: now,//投放结束日期
     },
-
+    mottoIndex: 0,//选中车型索引
+    start: now,//投放开始日期
+    end: now,//投放结束日期
     imgurl: '',
     progress: '',//图片上传进度
 
@@ -107,7 +103,9 @@ Page({
    */
   onModelChange(event) {
     let model = event.detail.value;
-    this.data.model = model;
+    this.setData({
+      model: model
+    });
     console.log(model);
   },
 
@@ -139,73 +137,35 @@ Page({
   },
 
   /**
-   * 模板选中车型
+   * 选中车型
    */
-  bindModelPickerChange(event) {
-    this.data.model_param.mottoIndex = event.detail.value;
+  bindMottoPickerChange(event) {
     this.setData({
-      model_param: this.data.model_param,
+      mottoIndex: event.detail.value,
     });
-    console.log(this.data.mottos[this.data.model_param.mottoIndex]);
-  },
-
-  /**
-   * 直接上传选中车型
-   */
-  bindDivPickerChange(event) {
-    this.data.div_param.mottoIndex = event.detail.value;
-    this.setData({
-      div_param: this.data.div_param,
-    });
-    console.log(this.data.mottos[this.data.div_param.mottoIndex]);
+    console.log(this.data.mottos[this.data.mottoIndex]);
   },
 
   /**
    * 投放开始时间
    */
-  onModelStartTimeChange(event) {
+  onStartTimeChange(event) {
     let start = event.detail.value;
-    this.data.model_param.start = start;
     this.setData({
-      model_param: this.data.model_param,
+      start: start,
     });
-    console.log(this.data.model_param.start);
+    console.log(this.data.start);
   },
 
   /**
    * 投放结束时间
    */
-  onModelEndTimeChange(event) {
+  onEndTimeChange(event) {
     let end = event.detail.value;
-    this.data.model_param.end = end;
     this.setData({
-      model_param: this.data.model_param,
+      end: end,
     });
-    console.log(this.data.model_param.end);
-  },
-
-  /**
-   * 直接上传投放开始时间
-   */
-  onDivStartTimeChange(event) {
-    let start = event.detail.value;
-    this.data.div_param.start = start;
-    this.setData({
-      div_param: this.data.div_param,
-    });
-    console.log(this.data.div_param.start);
-  },
-
-  /**
-   * 直接上传投放结束时间
-   */
-  onDivEndTimeChange(event) {
-    let end = event.detail.value;
-    this.data.div_param.end = end;
-    this.setData({
-      div_param: this.data.div_param,
-    });
-    console.log(this.data.div_param.end);
+    console.log(this.data.end);
   },
 
   /**
@@ -271,7 +231,7 @@ Page({
       console.log(this.data.div_param);
       if (!this.data.div_param.img) {
         wx.showToast({
-          title: '您已选择直接上传，请上传图片',
+          title: '请上传图片',
           icon: 'none',
         });
         return;
@@ -340,8 +300,8 @@ Page({
    */
   onConfirmCheck() {
     //投放
-    let start = this.data.model == 0 ? this.data.model_param.start : this.data.div_param.start;
-    let end = this.data.model == 0 ? this.data.model_param.end : this.data.div_param.end;
+    let start = this.data.start;
+    let end = this.data.end;
     let startTime = dateUtil.tsFormatTime(dateUtil.formatTimeStamp(start), 'yyyy-MM-dd 00:00:00');
     let endTime = dateUtil.tsFormatTime(dateUtil.formatTimeStamp(end), 'yyyy-MM-dd 23:59:59');
     let data = {
@@ -355,7 +315,7 @@ Page({
       throwType: this.data.location_state,
       position: this.data.position,
       isTemplate: this.data.model,
-      motto: this.data.model == 0 ? this.data.mottos[this.data.model_param.mottoIndex].code : this.data.mottos[this.data.div_param.mottoIndex].code,
+      motto: this.data.mottos[this.data.mottoIndex].code,
       startTime: startTime,
       endTime: endTime,
       totalAmount: 9000,
@@ -467,17 +427,14 @@ Page({
         img: '',//上传的模板照片
         content: '',//输入的显示内容
         phone: '',//输入的电话
-        mottoIndex: 0,//选中车型索引
-        start: now,//投放开始日期
-        end: now,//投放结束日期
       },
       div_param: {
         img: '',//上传的照片
-        mottoIndex: 0,//选中车型索引
-        start: now,//投放开始日期
-        end: now,//投放结束日期
       },
       imgurl: '',
+      mottoIndex: 0,//选中车型索引
+      start: now,//投放开始日期
+      end: now,//投放结束日期
     });
   },
 

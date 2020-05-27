@@ -3,13 +3,15 @@ page {
 }
 
 .header {
-  height: 230rpx;
-  margin-top: 10rpx;
+  width: 690rpx;
+  height: 300rpx;
   padding-left: 60rpx;
-  padding-bottom: 60rpx;
   background: white;
-  border-radius: 25rpx;
-  box-shadow: 0rpx 0rpx 8rpx #dedede;
+  border-bottom-left-radius: 25rpx;
+  border-bottom-right-radius: 25rpx;
+  position: fixed;
+  z-index: 9;
+  box-shadow: 0rpx 0rpx 8rpx #bcbcbc;
 }
 
 .header .origin {
@@ -17,10 +19,12 @@ page {
 }
 
 .ad {
-  margin: 0rpx 50rpx 26rpx 50rpx;
+  margin: 290rpx 50rpx 390rpx 50rpx;
+  width: 650rpx;
   display: flex;
   flex-direction: column;
   align-items: center;
+  z-index: 0;
 }
 
 .code_container {
@@ -29,7 +33,7 @@ page {
   align-items: center;
   margin-top: 26rpx;
   width: 650rpx;
-  height: 142rpx;
+  height: 138rpx;
   background-color: white;
   position: relative;
 }
@@ -45,7 +49,7 @@ page {
   width: 100%;
   height: 16rpx;
   position: absolute;
-  z-index: 999;
+  z-index: 99;
   bottom: 0;
 }
 
@@ -82,33 +86,50 @@ page {
 }
 
 .code_btn_container {
+  height: 100%;
   display: flex;
   flex-direction: row;
+  align-items: center;
   position: absolute;
-  right: 42rpx;
+  right: 0rpx;
   z-index: 9;
+}
+
+.preview_container{
+  display: flex;
+  height: 100%;
+  flex-direction: row;
+  align-items: center;
 }
 
 .btn {
   background-color: white;
+  margin-right: 20rpx;
   font-size: 22rpx;
   border-radius: 20rpx;
   padding: 5rpx 12rpx 5rpx 12rpx;
 }
 
 .preview {
-  margin-left: 20rpx;
+  margin-right: 42rpx;
 }
 
 .mask {
   position: fixed;
   width: 100%;
   height: 100%;
-  z-index: 9;
+  z-index: 99;
 }
 
-.model {
-  height: 930rpx;
+.code_container .mask {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 99;
+  top: 0;
+  left: 0;
+  background-color: #000000;
+  opacity: 0.4;
 }
 
 .model>radio-group {
@@ -123,7 +144,7 @@ page {
 }
 
 .model_selector {
-  margin-top: 24rpx;
+  padding-top: 50rpx;
   margin-left: 32rpx;
 }
 
@@ -137,7 +158,7 @@ page {
 }
 
 .model_items {
-  margin-top: 18rpx;
+  margin-top: 24rpx;
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
@@ -165,7 +186,7 @@ page {
   display: flex;
   flex-direction: row;
   font-size: 28rpx;
-  margin-top: 32rpx;
+  margin-top: 36rpx;
   align-items: center;
 }
 
@@ -188,7 +209,7 @@ page {
 
 .input_container {
   font-size: 28rpx;
-  margin-top: 32rpx;
+  margin-top: 36rpx;
 }
 
 .notice {
@@ -210,8 +231,9 @@ page {
 }
 
 .motto {
+  width: 100%;
   margin-top: 32rpx;
-  font-size: 28rpx;
+  font-size: 22rpx;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -227,7 +249,7 @@ page {
   flex-direction: row;
   align-items: center;
   position: absolute;
-  right: 98rpx;
+  right: 0;
   top: 0;
 }
 
@@ -240,7 +262,7 @@ page {
 .input {
   width: 450rpx;
   height: 36rpx;
-  margin-top: 12rpx;
+  margin-top: 18rpx;
   background-color: #f1f1f1;
   box-shadow: 0rpx 0rpx 5rpx #dedede;
   text-overflow: ellipsis;
@@ -249,7 +271,8 @@ page {
 }
 
 .cycle {
-  font-size: 28rpx;
+  width: 100%;
+  font-size: 22rpx;
   margin-top: 36rpx;
   margin-bottom: 36rpx;
   display: flex;
@@ -260,7 +283,7 @@ page {
 
 .time_picker_contianer {
   position: absolute;
-  right: 98rpx;
+  right: 0;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -292,11 +315,11 @@ page {
   top: 50%;
   left: 50%;
   width: 650rpx;
-  height: 1020rpx;
+  height: 940rpx;
   margin-left: -325rpx;
-  margin-top: -510rpx;
+  margin-top: -470rpx;
   background-color: white;
-  z-index: 99;
+  z-index: 999;
   border-radius: 1%;
   box-shadow: 0 0 8rpx #cecece;
   overflow: hidden;
@@ -374,13 +397,12 @@ page {
   height: 360rpx;
   background-color: white;
   border-radius: 20rpx;
-  box-shadow: 0 2rpx 10rpx #969696;
+  box-shadow: 0 0rpx 8rpx #bcbcbc;
   position: fixed;
-  z-index: 999;
+  z-index: 9;
   bottom: 0;
   display: flex;
   flex-direction: column;
-  padding-top: 15rpx;
   align-items: flex-end;
 }
 
@@ -396,6 +418,7 @@ page {
   display: flex;
   flex-direction: row;
   font-size: 26rpx;
+  margin-top: 28rpx;
   color: #000000;
   position: relative;
 }
@@ -410,12 +433,12 @@ page {
 .coupon {
   color: #cb9178;
   font-size: 28rpx;
-  margin-top: 50rpx;
+  margin-top: 30rpx;
   margin-right: 36rpx;
 }
 
 .settle {
-  margin-top: 54rpx;
+  margin-top: 24rpx;
   margin-right: 28rpx;
   font-size: 26rpx;
   display: flex;
@@ -511,6 +534,7 @@ checkbox {
   position: relative;
   margin-right: 16rpx;
 }
+
 /*checkbox 选项框大小  */
 checkbox .wx-checkbox-input {
   width: 30rpx;

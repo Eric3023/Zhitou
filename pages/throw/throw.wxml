@@ -20,27 +20,28 @@
 		</checkbox-group>
 	</view>
 	<!-- 广告选择 -->
-	<view class="ad">
-		<block wx:for="{{codes}}" wx:key="index">
-			<view class="code_container">
-				<image class="code_backgroud" src="{{item.imageUrl? item.imageUrl:'/img/throw/activity_center.png'}}" binderror="onBackgroundError" data-index="{{index}}"></image>
-				<view class="code_messeage">
-					<text class="code_title">{{item.optionName}}</text>
-					<text class="code_content">{{item.description}}</text>
+	<scroll-view class="ad" scroll-x="false" scroll-y="true">
+		<view>
+			<block wx:for="{{codes}}" wx:key="index">
+				<view class="code_container" data-position="{{item.optionCode}}" catchtap="onClickUpdate">
+					<image class="code_backgroud" src="{{item.imageUrl? item.imageUrl:'/img/throw/activity_center.png'}}" binderror="onBackgroundError" data-index="{{index}}"></image>
+					<view class="code_messeage">
+						<text class="code_title">{{item.optionName}}</text>
+						<text class="code_content">{{item.description}}</text>
+					</view>
+					<view class="code_btn_container">
+						<text class="btn">上传素材</text>
+						<view class="preview_container" data-position="{{item.optionCode}}" catchtap="onPreview">
+							<text class="btn preview" style="background-color:{{position==item.optionCode && state==3? '#ffffff':'#bdbdbd'}}; color:{{position==item.optionCode && state==3? '#000000':'#ffffff'}};">预览</text>
+						</view>
+					</view>
+					<progress class="code_progress" wx:if="{{position==item.optionCode && state!=0 && state!=1 && model==1}}" activeColor="#42c2e2" backgroundColor="#e9e9e9" percent="{{position==item.optionCode? progress:0}}">
+					</progress>
+					<view class="mask" wx:if="{{position!=item.optionCode && state!=0 && state!=1}}"></view>
 				</view>
-				<view class="code_btn_container">
-
-					<text class="btn" data-position="{{item.optionCode}}" catchtap="onClickUpdate">上传素材</text>
-					<text class="btn preview" style="background-color:{{position==item.optionCode && state==3? '#ffffff':'#bdbdbd'}}; color:{{position==item.optionCode && state==3? '#000000':'#ffffff'}};" data-position="{{item.optionCode}}" catchtap="onPreview">预览</text>
-				</view>
-				<progress class="code_progress" wx:if="{{position==item.optionCode && state!=0 && state!=1 && model==1}}" activeColor="#42c2e2" backgroundColor="#e9e9e9" percent="{{position==item.optionCode? progress:0}}">
-				</progress>
-			</view>
-		</block>
-		<!-- 空白占位层 -->
-		<view class="settlement_clone" wx:if="{{state==3}}">
+			</block>
 		</view>
-	</view>
+	</scroll-view>
 	<!-- 遮罩层 -->
 	<v_mask class="mask" wx:if="{{state==1||state==4}}" catchtap="onCancelMaterial" />
 	<!-- 模板选择 -->
@@ -80,28 +81,6 @@
 							<input class="input" placeholder="文字" placeholder-class="place_class" adjust-position="true" bindblur="onConfirmModelContent"></input>
 							<input class="input" placeholder="电话" placeholder-class="place_class" adjust-position="true" bindblur="onConfirmModelPhone"></input>
 						</view>
-						<view class="motto" hidden="true">
-							优选车型
-							<picker bindchange="bindModelPickerChange" value="0" range="{{mottos}}" range-key='desc'>
-								<view class="picker">{{mottos[model_param.mottoIndex].desc}}
-									<image class="picker_icon" src="/img/login/icon_pull.png"></image>
-								</view>
-							</picker>
-						</view>
-						<view class="cycle">
-							投放周期
-							<view class="time_picker_contianer">
-								<picker bindchange="onModelStartTimeChange" mode="date" value="0" start='{{now}}'>
-									<view class="time_picker time_picker_right_margin">{{model_param.start?model_param.start:now}}
-									</view>
-								</picker>
-								-
-								<picker bindchange="onModelEndTimeChange" value="0" mode="date" start='{{now}}'>
-									<view class="time_picker time_picker_left_margin">{{model_param.end?model_param.end:now}}
-									</view>
-								</picker>
-							</view>
-						</view>
 					</view>
 				</view>
 				<!-- 直接上传 -->
@@ -116,28 +95,6 @@
 							<view class="photo_update" wx:if="{{!div_param.img}}" catchtap="onSelectDivPhoto">+</view>
 							<image class="photo_update" wx:if="{{div_param.img}}" src="{{div_param.img}}" catchtap="onSelectDivPhoto"></image>
 						</view>
-						<view class="motto" hidden="true">
-							优选车型
-							<picker bindchange="bindDivPickerChange" value="0" range="{{mottos}}" range-key='desc'>
-								<view class="picker">{{mottos[div_param.mottoIndex].desc}}
-									<image class="picker_icon" src="/img/login/icon_pull.png"></image>
-								</view>
-							</picker>
-						</view>
-						<view class="cycle">
-							投放周期
-							<view class="time_picker_contianer ">
-								<picker bindchange="onDivStartTimeChange" mode="date" value="0" start='{{now}}'>
-									<view class="time_picker time_picker_right_margin">{{div_param.start?div_param.start:now}}
-									</view>
-								</picker>
-								-
-								<picker bindchange="onDivEndTimeChange" value="0" mode="date" start='{{now}}'>
-									<view class="time_picker time_picker_left_margin">{{div_param.end?div_param.end:now}}
-									</view>
-								</picker>
-							</view>
-						</view>
 					</view>
 				</view>
 			</radio-group>
@@ -148,7 +105,29 @@
 		</view>
 	</view>
 	<!-- 结算 -->
-	<view class="settlement" wx:if="{{state==3}}">
+	<view class="settlement">
+		<view class="motto" hidden="true">
+			优选车型
+			<picker bindchange="bindMottoPickerChange" value="0" range="{{mottos}}" range-key='desc'>
+				<view class="picker">{{mottos[model_param.mottoIndex].desc}}
+					<image class="picker_icon" src="/img/login/icon_pull.png"></image>
+				</view>
+			</picker>
+		</view>
+		<view class="audience">
+			投放周期
+			<view class="time_picker_contianer">
+				<picker bindchange="onStartTimeChange" mode="date" value="0" start='{{now}}'>
+					<view class="time_picker time_picker_right_margin">{{model_param.start?model_param.start:now}}
+					</view>
+				</picker>
+				-
+				<picker bindchange="onEndTimeChange" value="0" mode="date" start='{{now}}'>
+					<view class="time_picker time_picker_left_margin">{{model_param.end?model_param.end:now}}
+					</view>
+				</picker>
+			</view>
+		</view>
 		<view class="audience">影响人群
 			<view class="audience_num">9000+</view>
 		</view>
