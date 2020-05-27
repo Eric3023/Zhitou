@@ -3,7 +3,9 @@ Component({
     couponList: {
       type: Array,
       value: [],
-    }
+    },
+    bullying: Boolean,
+    bullyInfo: Boolean,
   },
   data: {
 

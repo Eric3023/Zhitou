@@ -1,127 +1,28 @@
 .container {
-  width: 630rpx;
-  height: 649rpx;
-  position: fixed;
-  top: 18%;
-  left: 72rpx;
-  z-index: 99;
-}
-
-.background {
   width: 100%;
   height: 100%;
-  position: absolute;
-  z-index: 9;
-}
-
-.coupons {
-  width: 480rpx;
-  margin: 157rpx 0 0 60rpx;
-  height: 415rpx;
-  overflow: auto;
-  position: absolute;
-  z-index: 99;
-}
-
-.lid {
-  width: 574rpx;
-  height: 224rpx;
-  position: absolute;
-  left: 16rpx;
-  bottom: -125rpx;
-  z-index: 999;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.item {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  width: 100%;
-  height: 120rpx;
-  background-color: #fff;
-  position: relative;
-  margin-bottom: 17rpx;
-}
-
-.item::after {
-  content: '';
-  position: absolute;
-  width: 18rpx;
-  height: 18rpx;
-  border-radius: 50%;
-  background-color: #f2443a;
-  left: 25.5%;
-  bottom: 0;
-  margin-bottom: -9rpx;
-}
-
-.item::before {
-  content: '';
-  position: absolute;
-  width: 18rpx;
-  height: 18rpx;
-  border-radius: 50%;
-  background-color: #f2443a;
-  left: 25.5%;
-  top: 0;
-  margin-top: -9rpx;
-}
-
-.money {
-  width: 130rpx;
-  border-right: 1px dashed #ddd;
-  height: 100%;
-  text-align: center;
-  line-height: 120rpx;
-  font-size: 26rpx;
-  font-weight: bold;
-}
-
-.num {
-  font-size: 40rpx;
-  color: #e00;
-}
-
-.text {
-  width: 349rpx;
-  font-size: 22rpx;
-  color: #999;
   position: fixed;
-  padding: 0 10rpx;
-  left: 264rpx;
-  box-sizing: border-box;
-  z-index: 999;
-}
-
-.name {
-  font-size: 24rpx;
-  color: #282828;
-  font-weight: bold;
-  margin-bottom: 9rpx;
-}
-
-.bnt {
-  font-size: 29rpx;
-  width: 440rpx;
-  height: 80rpx;
-  border-radius: 40rpx;
-  background-color: #f9f1d3;
-  text-align: center;
-  line-height: 80rpx;
-  font-weight: bold;
-  margin: 98rpx auto 0 auto;
-  position: relative;
   z-index: 99;
 }
 
-.close {
-  width: 70rpx;
-  height: 70rpx;
+.bullying {
+  width: 750rpx;
+  height: 1334rpx;
   position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -667rpx;
+  margin-left: -375rpx;
   z-index: 999;
-  top: 800rpx;
-  left: 280rpx;
+}
+
+.bullyInfo {
+  width: 750rpx;
+  height: 400rpx;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -200rpx;
+  margin-left: -375rpx;
+  z-index: 999;
 }

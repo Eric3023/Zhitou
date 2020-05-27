@@ -1,18 +1,4 @@
 <view class='container'>
-	<image class="background" src="images/bacground.png"></image>
-	<view class='coupons'>
-		<view class='item' wx:for="{{couponList}}" wx:if="{{index<3}}" wx:key="index">
-			<view class='money'>￥<text class='num'>{{item.discount}}</text></view>
-			<view class='text'>
-				<view class='name'>【{{item.desc}}】购物买{{item.min}}减{{item.discount}}</view>
-				<view wx:if="{{item.days != 0}}">有效期：{{item.days}}天</view>
-				<view wx:else>{{item.startTime}}-{{item.endTime}}</view>
-			</view>
-		</view>
-	</view>
-	<view class='lid'>
-		<image class="background" src="images/bottom.png"></image>
-		<view hover-class='none' bindtap='onConfirm' class='bnt'>立即领取</view>
-	</view>
-	<image class="close" bindtap='onClose' src="images/close.png"></image>
+	<image class="bullying" wx:if="{{bullying}}" src="images/bullying.png" catchtap="onConfirm"></image>
+	<image class="bullyInfo" wx:if="{{bullyInfo}}" src="images/bullyInfo.png" catchtap="onClose"></image>
 </view>

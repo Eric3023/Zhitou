@@ -42,6 +42,7 @@ Page({
     coupons: coupons,
     //是否显示霸屏
     bullying: false,
+    bullyInfo: false,
   },
 
   /**
@@ -163,7 +164,7 @@ Page({
     }
   },
 
-  onShareAppMessage(){
+  onShareAppMessage() {
 
   },
 
@@ -249,6 +250,7 @@ Page({
     app.globalData.couponing = false;
     this.setData({
       bullying: false,
+      bullyInfo: false,
     });
   },
 
@@ -259,6 +261,11 @@ Page({
     app.globalData.couponing = false;
     this.setData({
       bullying: false,
+      bullyInfo: true,
     });
+    setTimeout(res => {
+      console.log('已领取优惠券');
+      this.onCloseCoupon();
+    }, 3000)
   },
 })

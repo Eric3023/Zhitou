@@ -182,12 +182,14 @@
     min-width: 0;
 }
 
-.mask{
+.mask {
     position: fixed;
     z-index: 99;
 }
 
-.bully{
+.bully {
     position: fixed;
     z-index: 999;
+    top: 0;
+    left: 0;
 }
