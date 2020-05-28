@@ -387,7 +387,24 @@ Page({
    * 获取投放地点 
    */
   _getLocation() {
-    let location = app.globalData.t_location;
+    //当前已定位过，直接从全局中取
+    if (app.globalData.t_location) {
+      let location = app.globalData.t_location;
+      this._setLocationView(location);
+    }
+    //当前未定位过，重新定位，防止进入程序后，index尚未定位完成，直接进入投放页面
+    else {
+      throwModel.getLocation(app).then(res => {
+        let location = res;
+        this._setLocationView(location);
+      });
+    }
+  },
+
+  /**
+   * 设置视图显示的位置
+   */
+  _setLocationView(location) {
     if (location) {
       console.log(location);
       this.setData({

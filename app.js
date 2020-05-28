@@ -54,6 +54,6 @@ App({
     //是否显示优惠券
     couponing: false,
     //投放地点参数，switchTab无法传递参数，使用全局变量
-    t_location: {},
+    t_location: null,
   }
 })

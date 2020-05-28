@@ -170,9 +170,38 @@ function search(that, keyword, page, shapLocation, currentcity, siteData) {
     },
   })
 }
+
+/**
+ * 获取当前定位，同reverseGeocoder，与page解耦
+ */
+function getCurrentLocation({ app } = null) {
+  return new Promise(function (resolve, reject) {
+    console.log("开始获取当前定位");
+    qqmapsdk.reverseGeocoder({
+      success: res => {
+        console.log("获取当前定位");
+        console.log(res);
+        const result = res.result;
+        if (app) {
+          app.globalData.lat = result.location.lat;
+          app.globalData.lng = result.location.lng;
+
+          app.globalData.t_location = result;
+        }
+        resolve(result);
+      },
+      fail: error => {
+        console.log(error);
+        reject(error);
+      }
+    });
+  });
+}
+
 ////最下面一定要加上你自定义的方法（作用：将模块接口暴露出来），否则会报错
 module.exports = {
   reverseGeocoder: reverseGeocoder,
   reverseGeocoderPoi: reverseGeocoderPoi,
+  getCurrentLocation: getCurrentLocation,
   search: search
 }

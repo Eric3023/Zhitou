@@ -1,7 +1,15 @@
 var util = require('../utils/util.js');
 var config = require('../config/api.js');
+var map = require('../utils/qqmaputil');
 
 class ThrowModel {
+
+  /**
+   * 获取当前定位
+   */
+  getLocation(app) {
+    return map.getCurrentLocation({ app: app });
+  }
 
   /**
    * 获取投放广告位

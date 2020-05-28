@@ -1,7 +1,6 @@
 var qqmaputil = require('../../utils/qqmaputil.js');
 import { HomeModel } from '../../models/home.js';
 import { LocationModel } from '../../models/location.js';
-import { coupons } from '../../local/coupon.js';
 import { BaseImgApi } from '../../config/api.js';
 
 //获取应用实例
@@ -38,8 +37,6 @@ Page({
 
     user_num: 0,
 
-    //优惠券列表
-    coupons: coupons,
     //是否显示霸屏
     bullying: false,
     bullyInfo: false,
