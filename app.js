@@ -55,5 +55,7 @@ App({
     couponing: false,
     //投放地点参数，switchTab无法传递参数，使用全局变量
     t_location: null,
+    //当前选择地点（未授权）
+    city: "",
   }
 })

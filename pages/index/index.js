@@ -161,6 +161,18 @@ Page({
     }
   },
 
+  onShow: function () {
+    if (!this.data.addressInfo) {
+      this.data.addressInfo = {}
+    }
+    if (!this.data.addressInfo.recommend) {
+      this.data.addressInfo.recommend = app.globalData.city;
+      this.setData({
+        addressInfo: this.data.addressInfo,
+      });
+    }
+  },
+
   onShareAppMessage() {
 
   },

@@ -117,9 +117,11 @@ Page({
 
                   let ad_info = res.ad_info;
                   let components = res.address_components;
-                  let address =`${components.province}${components.city}${components.district}`;
+                  let address = `${components.province}${components.city}${components.district}`;
                   app.globalData.lat = res.location.lat;
                   app.globalData.lng = res.location.lng;
+                  app.globalData.city = res.address_components.city
+
 
                   wx.navigateTo({
                     url: `../map/map?location=${that.data.regionCallbackTxt}&getPoi=1&policy=1&lat=${that.data.latitude}&lng=${that.data.longitude}&currentcity=${that.data.currentcity}`,
