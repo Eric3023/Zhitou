@@ -21,7 +21,8 @@
     "pages/invoice/invoice",
     "pages/developing/developing",
     "pages/heatmap/heatmap",
-    "pages/setting/setting"
+    "pages/setting/setting",
+    "pages/coupons/coupons"
   ],
   "window": {
     "backgroundTextStyle": "light",

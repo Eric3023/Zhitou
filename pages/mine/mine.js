@@ -52,6 +52,16 @@ Page({
           url: '/pages/recharge_record/record',
         })
         break;
+      case '优惠券':
+        wx.navigateTo({
+          url: '/pages/coupons/coupons',
+        })
+        break;
+      case '设置':
+        wx.navigateTo({
+          url: '/pages/setting/setting',
+        })
+        break;
       default:
         let title = '进入【' + event.detail.title + '】页面';
         wx.showToast({
@@ -169,11 +179,11 @@ Page({
     userInfoHelper.getUserInfo({
       success: res => {
         this.setData({
-        user_info: {
-          uicon: res.userInfo.avatarUrl,
-          uid: res.userInfo.nickName,
-          flag: true,
-        }
+          user_info: {
+            uicon: res.userInfo.avatarUrl,
+            uid: res.userInfo.nickName,
+            flag: true,
+          }
         });
       },
       fail: error => {

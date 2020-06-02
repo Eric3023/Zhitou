@@ -1,0 +1,16 @@
+<view class="container">
+	<view class="item" wx:for="{{list}}" wx:key="index">
+		<view class="money_container" style="background-color:{{item.isOver?'#e5e5e5':'#ffeee7'}};   color:{{item.isOver?'#ffffff':'#ff5515'}};">
+			<text>￥</text>
+			<text class="money">{{item.money}}</text>
+		</view>
+		<view class="body" style="background-color:{{item.isOver?'#ffffff':'#ffeee7'}}; color:{{item.isOver?'#cdcdcd':'#ff5515'}};">
+			<view class="content_container">
+				<text class="condition">满{{item.condition}}元使用</text>
+				<text class="title">{{item.title}}</text>
+				<text class="time">有效期：{{item.startTime}}-{{item.endTime}}</text>
+			</view>
+			<image wx:if="{{item.isOver}}" src="/img/coupons/over.jpg"></image>
+		</view>
+	</view>
+</view>

@@ -1,0 +1,90 @@
+page {
+  background-color: white;
+}
+
+.contianer {
+  margin-top: 5rpx;
+}
+
+.item {
+  margin: 25rpx 50rpx 0 50rpx;
+  width: 650rpx;
+  height: 175rpx;
+  display: flex;
+  overflow: hidden;
+  flex-direction: row;
+  align-items: center;
+  border-radius: 20rpx;
+  mask-type: alpha;
+  filter: drop-shadow(3px 3px 3px rgba(0, 0, 0, .1));
+  position: relative;
+}
+
+.item::before {
+  content: '';
+  height: 100%;
+  border: 3rpx dashed #fff;
+  position: absolute;
+  left: 167rpx;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+}
+
+.money_container {
+  width: 170rpx;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  font-size: 28rpx;
+}
+
+.money_container .money {
+  font-size: 42rpx;
+}
+
+.body {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+}
+
+.content_container {
+  width: 460rpx;
+  display: flex;
+  margin-left: 20rpx;
+  flex-direction: column;
+  font-size: 24rpx;
+}
+
+.content_container text {
+  width: 470rpx;
+  height: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.content_container .condition {
+  font-size: 28rpx;
+}
+
+.content_container .title {
+  margin-top: 32rpx;
+}
+
+.content_container .time {
+  margin-top: 12rpx;
+}
+
+image {
+  width: 72rpx;
+  height: 72rpx;
+  position: absolute;
+  top: 12rpx;
+  right: 28rpx;
+}
