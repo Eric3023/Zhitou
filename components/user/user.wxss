@@ -6,28 +6,41 @@
 }
 
 .uicon {
-  width: 128rpx;
+  width: 125rpx;
   height: 125rpx;
   border-radius: 50%;
   border: 6rpx solid #ffffff;
   overflow: hidden;
 }
 
+.uicon image{
+  width: 125rpx;
+  height: 125rpx;
+}
+
 .uid {
-  font-size: 30rpx;
-  color: white;
-  margin-top: 18rpx;
-  border: none;
+  font-size: 30rpx !important;
+  color: white !important;
+  margin-top: 18rpx !important;
+  border: none !important;
+  background-color: transparent !important;
+  line-height: normal;
+  padding: 0 !important;
+  border:none !important;
 }
 
 .uid::after{
-  border: none;
+  line-height: normal;
+  padding: 0 !important;
+  border:none !important;
 }
 
-button[disabled] {
+/* button[disabled] {
   margin-left: 18rpx !important;
   font-size: 30rpx !important;
-  color: #373737 !important;
+  color: white !important;
   border: none !important;
   background: #ffffff !important;
-}
+  padding: 0 !important;
+  border:none !important;
+} */

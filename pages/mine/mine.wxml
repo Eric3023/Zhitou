@@ -6,7 +6,7 @@
 		<view class="background"></view>
 		<!-- 1.1 用户简介：头像和手机号 -->
 		<view class="user_info">
-			<v_user class="header_user_container" authored="{{authored}}" uicon="{{user_info.uicon}}" bind:getWxUserInfo="getWxUserInfo" uid="{{user_info.uid}}" />
+			<v_user class="header_user_container" authored="{{authored}}" uicon="{{user_info.uicon}}" bind:getWxUserInfo="getWxUserInfo" uid="{{user_info.uid}}" flag="{{user_info.flag}}"/>
 			<!-- <image class="authentication" src="{{authored?'/img/mine/auth.png':'/img/mine/no_auth.png'}}" catchtap="onAuthor"></image> -->
 			<text class="authentication" style="background-color:{{authored? '#61b39d':'#ffffff'}}; color:{{authored? '#ffffff':'#000000'}}">未认证</text>
 		</view>

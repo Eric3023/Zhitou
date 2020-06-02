@@ -83,7 +83,7 @@ page {
   font-size: 25rpx;
 }
 
-.uicon {
+/* .uicon {
   width: 95rpx;
   height: 95rpx;
 }
@@ -98,12 +98,12 @@ page {
 
 .uid::after {
   border: none;
-}
+} */
 
-button[disabled] {
+/* button[disabled] {
   margin-left: 18rpx !important;
   font-size: 30rpx !important;
   color: #373737 !important;
   border: none !important;
   background: #ffffff !important;
-}
+} */

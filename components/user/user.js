@@ -4,12 +4,13 @@ Component({
    * Component properties
    */
   properties: {
-    // uicon: {
-    //   type: String
-    // },
-    // uid: {
-    //   type: String
-    // }
+    uicon: {
+      type: String
+    },
+    uid: {
+      type: String
+    },
+    flag: Boolean,
     authored: Boolean
   },
 
@@ -24,9 +25,13 @@ Component({
    * Component methods
    */
   methods: {
-    // getWxUserInfo:function(event){
-    //     console.log(event);
-    //   this.triggerEvent("getWxUserInfo", { event: event.detail});
-    // }
+
+    getUserInfo:function(event){
+      this.triggerEvent("getWxUserInfo", { event: event.detail.value});
+    },
+
+    getWxUserInfo:function(event){
+      this.triggerEvent("getWxUserInfo", { event: event.detail});
+    }
   }
 })

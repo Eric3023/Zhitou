@@ -1,4 +1,6 @@
 let AccountModel = require('../../models/account.js');
+let UserInfoHelper = require('../../utils/userInfo.js')
+const userInfoHelper = new UserInfoHelper();
 const accountModel = new AccountModel();
 const app = getApp()
 Page({
@@ -13,7 +15,8 @@ Page({
     balance: '0',
     user_info: {
       uicon: "/img/mine/icon_header.png",
-      uid: ""
+      uid: "",
+      flag: false,
     },
     user_datas: [
       { icon: "/img/icon_mine_collection.jpg", title: "我的订单" },
@@ -104,6 +107,7 @@ Page({
     }
 
     this._getBalance();
+    this._getUserInfo();
   },
 
   /**
@@ -114,7 +118,7 @@ Page({
   },
 
   getWxUserInfo(event) {
-
+    console.log(event);
     var that = this
     // 声明一个变量接收用户授权信息
     var userinfo = event.detail.event.userInfo;
@@ -122,7 +126,8 @@ Page({
       that.setData({
         user_info: {
           uicon: userinfo.avatarUrl,
-          uid: userinfo.nickName
+          uid: userinfo.nickName,
+          flag: true,
         }
       })
 
@@ -155,5 +160,31 @@ Page({
         });
       }
     );
+  },
+
+  /**
+   * API获取用户信息
+   */
+  _getUserInfo() {
+    userInfoHelper.getUserInfo({
+      success: res => {
+        this.setData({
+        user_info: {
+          uicon: res.userInfo.avatarUrl,
+          uid: res.userInfo.nickName,
+          flag: true,
+        }
+        });
+      },
+      fail: error => {
+        this.setData({
+          user_info: {
+            uicon: "/img/mine/icon_header.png",
+            uid: "",
+            flag: false,
+          }
+        });
+      },
+    })
   },
 })
