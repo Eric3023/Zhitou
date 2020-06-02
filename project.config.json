@@ -59,8 +59,8 @@
 			"list": [
 				{
 					"id": 0,
-					"name": "pages/throw/throw",
-					"pathName": "pages/throw/throw",
+					"name": "pages/heatmap/heatmap",
+					"pathName": "pages/heatmap/heatmap",
 					"query": "",
 					"scene": null
 				}

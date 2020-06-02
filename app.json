@@ -19,7 +19,8 @@
     "pages/throw_detail2/throw_detail2",
     "pages/author/author",
     "pages/invoice/invoice",
-    "pages/developing/developing"
+    "pages/developing/developing",
+    "pages/heatmap/heatmap"
   ],
   "window": {
     "backgroundTextStyle": "light",

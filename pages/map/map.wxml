@@ -3,19 +3,21 @@
 
 <view class="map-container {{hiddenMap==true?'map-hidden':'map-block'}}">
 	<view class="map-content">
-		<map id="map" class="map" latitude="{{latitude}}" longitude="{{longitude}}" show-location="true" bindregionchange="onChangeRegion" scale='14' markers="{{markers}}">
+		<!-- scale='14' -->
+		<map id="map" class="map" latitude="{{latitude}}" longitude="{{longitude}}" show-location="true" bindregionchange="onChangeRegion" scale='7' markers="{{markers}}">
 			<image class="locationpicker-ic-marker {{animation ? 'locationpicker-animation' : ''}}" src="../../img/Big_Marker@2x.png" bindanimationend="onMarkerAnimationend" />
 
 		</map>
 
-		<view class="location">
+		<view class="location" catchtap="onJumpToHeatMap">
 
 			<text>位置：</text>
 			<text >{{addressInfo.recommend}}</text>
 			<!-- <view wx-if="{{addressInfo.businessArea != ''}}">
               所属商圈：{{addressInfo.businessArea}}
             </view> -->
-			<view class="user-font">10公里内有<text class="usercount-color" v-model="userCount">{{user_num==0? 'x':user_num}}</text>个用户</view>
+			<!-- <view class="user-font">10公里内有<text class="usercount-color" v-model="userCount">{{user_num==0? 'x':user_num}}</text>个用户</view> -->
+			<view class="user-font">查看转化指数热力分布</view>
 		</view>
 
 		<view class="pois-container" wx:if="{{pois.length > 0}}">
@@ -23,7 +25,7 @@
 				周边地点
 			</view>
 
-			<search_poi pois="{{pois}}" bind:click = "onSelectPosition"></search_poi>
+			<search_poi pois="{{pois}}" bind:click="onSelectPosition"></search_poi>
 
 			<!-- <scroll-view class="poi-list">
             <view class="list-item" wx:for="{{pois}}" wx:key="{{index}}" data-index="{{index}}" data-poi="{{item}}">

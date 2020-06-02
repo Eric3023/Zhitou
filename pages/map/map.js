@@ -82,7 +82,7 @@ Page({
     }
   },
 
-  onShareAppMessage(){
+  onShareAppMessage() {
 
   },
 
@@ -91,7 +91,7 @@ Page({
       animation: false
     });
   },
-  
+
   // 监听视野变化
   onChangeRegion(event) {
     var that = this
@@ -416,7 +416,7 @@ Page({
     })
 
   },
-  
+
   clearHisSearchData: function () {
     this.setData({
       hisSearchData: []
@@ -493,6 +493,15 @@ Page({
         if (page == undefined || page == null) return;
         page.onLoad();
       }
+    })
+  },
+
+  /**
+   * 跳转到热力图页面
+   */
+  onJumpToHeatMap(event) {
+    wx.navigateTo({
+      url: `/pages/heatmap/heatmap?lat=${this.data.latitude}&lng=${this.data.longitude}`,
     })
   }
 })
