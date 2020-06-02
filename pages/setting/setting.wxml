@@ -1,0 +1,16 @@
+	<view class="container">
+		<view class="items">
+			<block wx:for="{{list}}" wx:key="index">
+				<view class="item_container" data-item="{{item}}" bindtap="onClickItem">
+					<text>{{item}}</text>
+					<image class="enter" src="/img/icon_mine_enter.png"></image>
+					<button wx:if="{{index==0}}" open-type="contact" bindcontact="handleContact" plain="true"></button>
+				</view>
+				<view class="line" wx:if="{{index!=list.length-1}}"></view>
+			</block>
+		</view>
+		<!-- 退出登录 -->
+		<view class="loginout" catchtap="loginOut">
+			<text>退出登录</text>
+		</view>
+	</view>

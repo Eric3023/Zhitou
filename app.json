@@ -20,7 +20,8 @@
     "pages/author/author",
     "pages/invoice/invoice",
     "pages/developing/developing",
-    "pages/heatmap/heatmap"
+    "pages/heatmap/heatmap",
+    "pages/setting/setting"
   ],
   "window": {
     "backgroundTextStyle": "light",
