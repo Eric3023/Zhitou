@@ -9,7 +9,7 @@
   width: 125rpx;
   height: 125rpx;
   border-radius: 50%;
-  border: 6rpx solid #ffffff;
+  /* border: 6rpx solid #ffffff; */
   overflow: hidden;
 }
 
