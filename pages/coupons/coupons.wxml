@@ -1,10 +1,12 @@
 <view class="container">
+	<view class="header"></view>
 	<view class="item" wx:for="{{list}}" wx:key="index">
-		<view class="money_container" style="background-color:{{item.isOver?'#e5e5e5':'#ffeee7'}};   color:{{item.isOver?'#ffffff':'#ff5515'}};">
+		<view class="sawtooth" style="background: radial-gradient(transparent 8rpx, {{item.isOver?'#e5e5e5':'#ffeee7'}} 8rpx);background-size: 30rpx 30rpx;background-position: 16rpx 0rpx;"></view>
+		<view class="money_container" style="background:radial-gradient(circle at top right, transparent 20rpx, {{item.isOver?'#e5e5e5':'#ffeee7'}} 0) top right, radial-gradient(circle at bottom right, transparent 20rpx, {{item.isOver?'#e5e5e5':'#ffeee7'}} 0) bottom right;background-size:100% 60%;background-repeat:no-repeat;color:{{item.isOver?'#ffffff':'#ff5515'}};">
 			<text>￥</text>
 			<text class="money">{{item.money}}</text>
 		</view>
-		<view class="body" style="background-color:{{item.isOver?'#ffffff':'#ffeee7'}}; color:{{item.isOver?'#cdcdcd':'#ff5515'}};">
+		<view class="body" style="background:radial-gradient(circle at top left, transparent 20rpx, {{item.isOver?'#ffffff':'#ffeee7'}} 0) top left,radial-gradient(circle at bottom left, transparent 20rpx, {{item.isOver?'#ffffff':'#ffeee7'}} 0) bottom left;background-size:100% 60%;background-repeat:no-repeat;color:{{item.isOver?'#cdcdcd':'#ff5515'}};">
 			<view class="content_container">
 				<text class="condition">满{{item.condition}}元使用</text>
 				<text class="title">{{item.title}}</text>
