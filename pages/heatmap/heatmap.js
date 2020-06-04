@@ -13,10 +13,12 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    let regionid = options.regionid;
     let lat = options.lat;
     let lng = options.lng;
+    let zoom = options.zoom;
     this.setData({
-      url: config.BaseImgApi + `html/heapmap.html?lat=${lat}&lng=${lng}`
+      url: config.BaseImgApi + `html/heapmap.html?regionid=${regionid}&lat=${lat}&lng=${lng}&zoom=${zoom}`
     });
     console.log(this.data.url);
   },

@@ -10,6 +10,7 @@ Page({
     isLocation: false,
     latitude: app.globalData.lat,
     longitude: app.globalData.lng,
+    regionId: 0,
     policy: 1,
     animation: false,
     isShowSubpois: true,
@@ -76,7 +77,9 @@ Page({
       })
 
       //获取指定位置的poi
-      qqmaputil.reverseGeocoderPoi(app, that, { latitude: options.lat, longitude: options.lng });
+      qqmaputil.reverseGeocoderPoi(app, that, { latitude: options.lat, longitude: options.lng }, res => {
+        this.data.regionId = res.ad_info.adcode;
+      });
       //获取周边用户
       this._getAroundUser(options.lng, options.lat, 10);
     }
@@ -109,7 +112,9 @@ Page({
             'markers[0].longitude': longitude,
           });
 
-          qqmaputil.reverseGeocoderPoi(app, that, { latitude: latitude, longitude: longitude });
+          qqmaputil.reverseGeocoderPoi(app, that, { latitude: latitude, longitude: longitude }, res => {
+            this.data.regionId = res.ad_info.adcode;
+          });
           //获取周边用户
           this._getAroundUser(longitude, latitude, 10);
 
@@ -346,7 +351,9 @@ Page({
           longitude: longitude,
         });
 
-        qqmaputil.reverseGeocoderPoi(app, that, { latitude: latitude, longitude: longitude });
+        qqmaputil.reverseGeocoderPoi(app, that, { latitude: latitude, longitude: longitude }, res => {
+          this.data.regionId = res.ad_info.adcode;
+        });
         //获取周边用户
         this._getAroundUser(longitude, latitude, 10);
 
@@ -501,7 +508,7 @@ Page({
    */
   onJumpToHeatMap(event) {
     wx.navigateTo({
-      url: `/pages/heatmap/heatmap?lat=${this.data.latitude}&lng=${this.data.longitude}`,
+      url: `/pages/heatmap/heatmap?regionid=${this.data.regionId}&lat=${this.data.latitude}&lng=${this.data.longitude}&zoom=10`,
     })
   }
 })

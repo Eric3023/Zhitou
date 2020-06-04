@@ -65,7 +65,7 @@ function reverseGeocoder(app, that, callback = null) {
 
 }
 
-function reverseGeocoderPoi(app, that, loca) {
+function reverseGeocoderPoi(app, that, loca, scallback = null) {
   qqmapsdk.reverseGeocoder({
     location: loca,
     get_poi: 1,
@@ -76,6 +76,8 @@ function reverseGeocoderPoi(app, that, loca) {
     success: function (res) {
       console.log(res);
       const result = res.result;
+      if (scallback)
+        scallback(result);
       let adInfo = '';
       let businessArea = '';
       let landmark = '';
