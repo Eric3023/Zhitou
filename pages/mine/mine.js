@@ -14,16 +14,16 @@ Page({
     hasLogin: false,
     balance: '0',
     user_info: {
-      uicon: "/img/mine/icon_header.png",
+      uicon: "",
       uid: "",
       flag: false,
     },
     user_datas: [
-      { icon: "/img/icon_mine_collection.jpg", title: "我的订单" },
-      { icon: "/img/icon_mine_rmb.jpg", title: "充值记录" },
-      { icon: "/img/icon_mine_quan.jpg", title: "优惠券" },
-      { icon: "/img/icon_mine_proxy.jpg", title: "我是代理" },
-      { icon: "/img/icon_mine_setting.png", title: "设置" }
+      { icon: "/img/mine/icon_mine_collection.jpg", title: "我的订单" },
+      { icon: "/img/mine/icon_mine_rmb.jpg", title: "充值记录" },
+      { icon: "/img/mine/icon_mine_quan.jpg", title: "优惠券" },
+      { icon: "/img/mine/icon_mine_proxy.jpg", title: "我是代理" },
+      { icon: "/img/mine/icon_mine_setting.png", title: "设置" }
     ]
   },
 
@@ -73,19 +73,57 @@ Page({
   },
 
   /**
-   * 生命周期函数--监听页面加载
+   * 生命周期函数
    */
-  onLoad: function (options) {
-    let that = this;
+  onShow: function () {
+    this._resetUserInfo();
+    this._checkLogin();
+    this._getBalance();
+  },
 
-    let uicon = wx.getStorageSync("uicon");
-    let uid = wx.getStorageSync("uid");
-    if (!uicon) {
+  /**
+   * 转发
+   */
+  onShareAppMessage: function () {
+
+  },
+
+  /**
+   * 点击Button，获取用户信息
+   */
+  getWxUserInfo(event) {
+    console.log(event);
+    var that = this
+    // 声明一个变量接收用户授权信息
+    var userinfo = event.detail.event.userInfo;
+    if (userinfo != undefined) {
       that.setData({
-        uicon: uicon,
-        uid: uid
+        user_info: {
+          uicon: userinfo.avatarUrl,
+          uid: userinfo.nickName,
+          flag: true,
+        }
       })
+
+      //存储用户信息
+      wx.setStorageSync('uicon', userinfo.avatarUrl);
+      wx.setStorageSync('uid', userinfo.nickName);
     }
+  },
+
+  /**
+   * 实名认证
+   */
+  onAuthor(event) {
+    wx.navigateTo({
+      url: '/pages/author/author',
+    })
+  },
+
+  /**
+   * 检查登录
+   */
+  _checkLogin() {
     let token = wx.getStorageSync("token");
     let phone = wx.getStorageSync("phone");
     //必须登录才能查看
@@ -107,54 +145,17 @@ Page({
             })
           }
         }
-      })
-
+      });
+      //未登录不显示头像
+      this._resetUserInfo()
     } else {
       this.setData({
         phone: phone,
         hasLogin: true
       });
+      //登录之后才显示头像
+      this._getStorageUserInfo();
     }
-
-    this._getBalance();
-    this._getUserInfo();
-  },
-
-  /**
-   * 转发
-   */
-  onShareAppMessage: function () {
-
-  },
-
-  getWxUserInfo(event) {
-    console.log(event);
-    var that = this
-    // 声明一个变量接收用户授权信息
-    var userinfo = event.detail.event.userInfo;
-    if (userinfo != undefined) {
-      that.setData({
-        user_info: {
-          uicon: userinfo.avatarUrl,
-          uid: userinfo.nickName,
-          flag: true,
-        }
-      })
-
-      //存储用户信息
-      wx.setStorageSync('uicon', userinfo.avatarUrl);
-      wx.setStorageSync('uid', userinfo.nickName);
-
-    }
-  },
-
-  /**
-   * 实名认证
-   */
-  onAuthor(event) {
-    wx.navigateTo({
-      url: '/pages/author/author',
-    })
   },
 
   /**
@@ -170,6 +171,41 @@ Page({
         });
       }
     );
+  },
+
+  /**
+   * 重置UserInfo
+   */
+  _resetUserInfo() {
+    this.setData({
+      user_info: {
+        uicon: "",
+        uid: "",
+        flag: false,
+      }
+    });
+  },
+
+
+  /**
+   * 本地持久化中获取用户信息（暂时废弃）
+   */
+  _getStorageUserInfo() {
+    let uicon = wx.getStorageSync("uicon");
+    let uid = wx.getStorageSync("uid");
+    this.data.user_info.uicon = uicon;
+    this.data.user_info.uid = uid;
+    if (uicon) {
+      this.data.user_info.flag = true;
+      this.setData({
+        user_info: this.data.user_info
+      });
+    } else {
+      this.data.user_info.flag = false;
+      this.setData({
+        user_info: this.data.user_info
+      });
+    }
   },
 
   /**
@@ -189,7 +225,7 @@ Page({
       fail: error => {
         this.setData({
           user_info: {
-            uicon: "/img/mine/icon_header.png",
+            uicon: "",
             uid: "",
             flag: false,
           }

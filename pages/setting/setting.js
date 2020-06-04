@@ -1,4 +1,5 @@
-// pages/setting/setting.js
+let userModel = require('../../models/user.js');
+
 Page({
 
   /**
@@ -22,10 +23,17 @@ Page({
    * 退出登录
    */
   loginOut: function (event) {
-    wx.showToast({
-      title: '退出登录',
-      icon: 'none'
-    });
+    wx.showModal({
+      content: '确认需要退出登录？',
+      success(res) {
+        if (res.confirm) {
+          userModel.loginOut();
+          wx.switchTab({
+            url: '/pages/mine/mine',
+          })
+        }
+      }
+    })
   },
 
   /**

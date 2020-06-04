@@ -4,7 +4,7 @@
 <view class="map-container {{hiddenMap==true?'map-hidden':'map-block'}}">
 	<view class="map-content">
 		<!-- scale='14' -->
-		<map id="map" class="map" latitude="{{latitude}}" longitude="{{longitude}}" show-location="true" bindregionchange="onChangeRegion" scale='7' markers="{{markers}}">
+		<map id="map" class="map" latitude="{{latitude}}" longitude="{{longitude}}" show-location="true" bindregionchange="onChangeRegion" scale='9' markers="{{markers}}">
 			<image class="locationpicker-ic-marker {{animation ? 'locationpicker-animation' : ''}}" src="../../img/Big_Marker@2x.png" bindanimationend="onMarkerAnimationend" />
 
 		</map>

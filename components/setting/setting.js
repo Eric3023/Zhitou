@@ -17,7 +17,7 @@ Component({
    * Component initial data
    */
   data: {
-    enter: "/img/icon_mine_enter.png"
+    enter: "/img/mine/icon_mine_enter.png"
   },
 
   /**
