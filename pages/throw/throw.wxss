@@ -95,7 +95,7 @@ page {
   z-index: 9;
 }
 
-.preview_container{
+.preview_container {
   display: flex;
   height: 100%;
   flex-direction: row;
@@ -428,6 +428,9 @@ page {
   color: #6c6c6c;
   position: absolute;
   right: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
 .coupon {
@@ -438,12 +441,15 @@ page {
 }
 
 .settle {
-  margin-top: 24rpx;
-  margin-right: 28rpx;
+  /* margin-top: 24rpx; */
+  /* margin-right: 28rpx; */
   font-size: 26rpx;
   display: flex;
   flex-direction: row;
   align-items: center;
+  position: absolute;
+  bottom: 32rpx;
+  right: 36rpx;
 }
 
 .settle_btn {
@@ -481,7 +487,7 @@ page {
 
 .check_total_balance {
   margin-top: 40rpx;
-  width: 342rpx;
+  width: 380rpx;
   position: relative;
 }
 
@@ -492,7 +498,7 @@ page {
 
 .check_later_balance {
   margin-top: 16rpx;
-  width: 342rpx;
+  width: 380rpx;
   position: relative;
   color: #dc8c84;
 }
@@ -518,6 +524,17 @@ page {
   background-color: #71caaf;
   border: 2rpx solid #71caaf;
   border-radius: 5rpx;
+}
+
+.input_num {
+  width: 240rpx;
+  height: 28rpx;
+  margin-right: 18rpx;
+  background-color: #f1f1f1;
+  box-shadow: 0rpx 0rpx 5rpx #dedede;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 /*隐藏滚动条*/

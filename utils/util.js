@@ -35,9 +35,9 @@ function request(url, data = {}, method = "GET") {
       success: function (res) {
 
         if (res.statusCode == 200) {
-          
+
           if (res.data.errno == 800 || res.data.errno == 401) {
-            
+
             reject(res.data.errmsg);
           }
 
@@ -53,7 +53,7 @@ function request(url, data = {}, method = "GET") {
             wx.navigateTo({
               url: '/pages/auth/login/login'
             });
-          } else{
+          } else {
             resolve(res.data);
           }
         } else {
@@ -62,6 +62,7 @@ function request(url, data = {}, method = "GET") {
 
       },
       fail: function (err) {
+        console.log(err);
         reject(err)
       }
     })

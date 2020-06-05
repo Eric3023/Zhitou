@@ -3,17 +3,21 @@
 	<view class="header">
 		<view class="city">
 			<text>当前城市： </text>
-			<text>{{location.ad_info.city}}</text>
+			<view catchtap="onJumpToMap">
+				<text>{{location.ad_info.city}}</text>
+				<image class="picker_icon" src="/img/login/icon_pull.png"></image>
+			</view>
 			<view class="change_city">
 				<image class="point1" src="/img/throw/change_location.png" catchtap="onChangeToCity"></image>
-				<text class="change" catchtap="onChangeToCity">{{location_state==0?'切换全城投放':'切换区域投放'}} </text>
+				<text class="change" catchtap="onChangeToCity">{{location_state==0?'切换至全省投放':'切换至区域投放'}} </text>
 			</view>
 		</view>
 		<view class="city">
 			<image class="point2" src="/img/icon_location.jpg"></image>
-			<text class="address">{{location_state==0? (location.title? location.title:location.formatted_addresses.recommend):location.ad_info.city}}</text>
+			<text class="address">{{location_state==0? (location.title? location.title:location.formatted_addresses.recommend):location.ad_info.province}}</text>
 		</view>
-		<view class="audience">{{location_state==0?'当前位置10公里内':location.ad_info.city+'全城'}}有{{audience}}个用户</view>
+		<!-- <view class="audience">{{location_state==0?'当前位置':location.ad_info.province}}有{{audience}}个用户</view> -->
+		<view class="audience">{{location_state==0?'当前位置':location.ad_info.province}}用户转换指数等级：高</view>
 		<checkbox-group class="audience origin" bindchange="onMonitorChange">
 			<checkbox color="#f77a51" value="{{1}}"></checkbox>
 			是否选择由记刻数据提供第三方监测
@@ -23,7 +27,7 @@
 	<scroll-view class="ad" scroll-x="false" scroll-y="true">
 		<view>
 			<block wx:for="{{codes}}" wx:key="index">
-				<view class="code_container" data-position="{{item.optionCode}}" catchtap="onClickUpdate">
+				<view class="code_container" data-position="{{item.optionCode}}" data-index="{{index}}" catchtap="{{item.status!=0?'none':'onClickUpdate'}}">
 					<image class="code_backgroud" src="{{item.imageUrl? item.imageUrl:'/img/throw/activity_center.png'}}" binderror="onBackgroundError" data-index="{{index}}"></image>
 					<view class="code_messeage">
 						<text class="code_title">{{item.optionName}}</text>
@@ -31,13 +35,13 @@
 					</view>
 					<view class="code_btn_container">
 						<text class="btn">上传素材</text>
-						<view class="preview_container" data-position="{{item.optionCode}}" catchtap="onPreview">
+						<view class="preview_container" data-position="{{item.optionCode}}" catchtap="{{item.status!=0?'none':'onPreview'}}">
 							<text class="btn preview" style="background-color:{{position==item.optionCode && state==3? '#ffffff':'#bdbdbd'}}; color:{{position==item.optionCode && state==3? '#000000':'#ffffff'}};">预览</text>
 						</view>
 					</view>
 					<progress class="code_progress" wx:if="{{position==item.optionCode && state!=0 && state!=1 && model==1}}" activeColor="#42c2e2" backgroundColor="#e9e9e9" percent="{{position==item.optionCode? progress:0}}">
 					</progress>
-					<view class="mask" wx:if="{{position!=item.optionCode && state!=0 && state!=1}}"></view>
+					<view class="mask" wx:if="{{position!=item.optionCode && state!=0 && state!=1 || item.status!=0}}"></view>
 				</view>
 			</block>
 		</view>
@@ -51,7 +55,7 @@
 				<!-- 模板选择 -->
 				<view class="model_selector">
 					<view class="model_header">
-						<radio style="transform:scale(0.6);" checked="true" value="{{0}}"></radio>
+						<radio style="transform:scale(0.6);" checked="true" value="{{0}}" disabled></radio>
 						<text  class="model_title" >  模板选择 :</text>
 					</view>
 					<view class="model_body">
@@ -86,7 +90,7 @@
 				<!-- 直接上传 -->
 				<view class="model_selector">
 					<view class="model_header">
-						<radio style="transform:scale(0.6);" value="{{1}}"></radio>
+						<radio style="transform:scale(0.6);" value="{{1}}" checked></radio>
 						<text  class="model_title" >直接上传 :</text>
 					</view>
 					<view class="model_body">
@@ -118,24 +122,30 @@
 			投放周期
 			<view class="time_picker_contianer">
 				<picker bindchange="onStartTimeChange" mode="date" value="0" start='{{now}}'>
-					<view class="time_picker time_picker_right_margin">{{model_param.start?model_param.start:now}}
+					<view class="time_picker time_picker_right_margin">{{start}}
 					</view>
 				</picker>
 				-
 				<picker bindchange="onEndTimeChange" value="0" mode="date" start='{{now}}'>
-					<view class="time_picker time_picker_left_margin">{{model_param.end?model_param.end:now}}
+					<view class="time_picker time_picker_left_margin">{{end}}
 					</view>
 				</picker>
 			</view>
 		</view>
-		<view class="audience">影响人群
+		<!-- <view class="audience">影响人群
 			<view class="audience_num">9000+</view>
+		</view> -->
+		<view class="audience">投放数量
+			<view class="audience_num">
+				<input class="input_num" placeholder="输入投放数量" placeholder-class="place_class" type="number" adjust-position="true" bindblur="onConfirmThrowCount"></input>
+				CPM
+			</view>
 		</view>
 		<view class="audience">单　　价
-			<view class="audience_num">2000+</view>
+			<view class="audience_num">{{unitPrice}}</view>
 		</view>
-		<view class="coupon">已享受首单满减，优惠金额1000元</view>
-		<view class="settle">合计：2000元
+		<!-- <view class="coupon">已享受首单满减，优惠金额1000元</view> -->
+		<view class="settle">合计：{{totalAmount}}元
 			<view class="settle_btn" catchtap="onSettle">结算</view>
 		</view>
 	</view>
@@ -143,10 +153,10 @@
 	<view class="check" wx:if="{{state==4}}">
 		<view class="check_title">支付</view>
 		<view class="check_total_balance">总余额
-			<text class="total_balance">5000元</text>
+			<text class="total_balance">{{balance}}元</text>
 		</view>
 		<view class="check_later_balance">支付后余额
-			<text class="total_balance">3000元</text>
+			<text class="total_balance">{{remain}}元</text>
 		</view>
 		<view class="check_btn_container">
 			<view class="check_cancel" catchtap="onCancleCheck">放弃</view>

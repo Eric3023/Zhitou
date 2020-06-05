@@ -7,6 +7,8 @@ const app = getApp();
 
 Page({
   data: {
+    location: {},
+
     isLocation: false,
     latitude: app.globalData.lat,
     longitude: app.globalData.lng,
@@ -22,7 +24,8 @@ Page({
     },
     markers: [{
       callout: {
-        content: '10公里内有x个用户',
+        // content: '10公里内有x个用户',
+        content: '用户转换指数等级：高',
         padding: 11,
         borderRadius: 2,
         display: 'ALWAYS',
@@ -79,6 +82,7 @@ Page({
       //获取指定位置的poi
       qqmaputil.reverseGeocoderPoi(app, that, { latitude: options.lat, longitude: options.lng }, res => {
         this.data.regionId = res.ad_info.adcode;
+        this.data.location = res;
       });
       //获取周边用户
       this._getAroundUser(options.lng, options.lat, 10);
@@ -114,6 +118,7 @@ Page({
 
           qqmaputil.reverseGeocoderPoi(app, that, { latitude: latitude, longitude: longitude }, res => {
             this.data.regionId = res.ad_info.adcode;
+            this.data.location = res;
           });
           //获取周边用户
           this._getAroundUser(longitude, latitude, 10);
@@ -353,6 +358,7 @@ Page({
 
         qqmaputil.reverseGeocoderPoi(app, that, { latitude: latitude, longitude: longitude }, res => {
           this.data.regionId = res.ad_info.adcode;
+          this.data.location = res;
         });
         //获取周边用户
         this._getAroundUser(longitude, latitude, 10);
@@ -478,7 +484,8 @@ Page({
     locationModel.getAroundUser(lng, lat, distance).then(
       res => {
         const data = res.data;
-        this.data.markers[0].content = `10公里内有${data == 0 ? 'x' : data}个用户`;
+        // this.data.markers[0].content = `10公里内有${data == 0 ? 'x' : data}个用户`;
+        this.data.markers[0].callout.content = `${this.data.location.ad_info.province}用户转换指数等级：高`;
         this.setData({
           user_num: data,
           markers: this.data.markers,

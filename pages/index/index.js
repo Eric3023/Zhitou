@@ -10,6 +10,8 @@ const locationModel = new LocationModel();
 
 Page({
   data: {
+    location: {},
+
     motto: 'Hello World',
     userInfo: {},
     hasUserInfo: false,
@@ -105,6 +107,9 @@ Page({
 
               qqmaputil.reverseGeocoder(app, that, (location, lat, lng) => {
                 app.globalData.t_location = location;
+                that.setData({
+                  location: location,
+                });
                 console.log('开始获取周边用户');
                 that._getAroundUser(lng, lat, 10);
               });
@@ -126,6 +131,9 @@ Page({
 
           qqmaputil.reverseGeocoder(app, that, (location, lat, lng) => {
             app.globalData.t_location = location;
+            that.setData({
+              location: location,
+            });
             console.log('开始获取周边用户');
             that._getAroundUser(lng, lat, 10);
           });

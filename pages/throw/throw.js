@@ -1,9 +1,12 @@
 import { LocationModel } from '../../models/location.js';
 let ThrowModel = require('../../models/throw.js');
 var dateUtil = require('../../utils/date.js');
+let AccountModel = require('../../models/account.js')
 
+const defaultModel = 1;
 const app = getApp();
 const locationModel = new LocationModel();
+const accountModel = new AccountModel();
 const date = new Date();
 let now = dateUtil.tsFormatTime(date, 'yyyy-MM-dd');
 let throwModel = new ThrowModel();
@@ -20,10 +23,11 @@ Page({
     mottos: [],
     now: now,//当前日期
 
-    state: 0,//流程当前状态 0：选择广告位;1：选择模板/文件；2.选择素材完成，等待上传；3.素材上传完成 3：结算中/结算确认；4；结算完成
+    state: 0,//流程当前状态 0：选择广告位;1：选择模板/文件；2.选择素材完成，等待上传；3.素材上传完成 4：结算中/结算确认；5；结算完成
 
     //地点相关参数
-    location_state: 0,//投放地点：0：特定地点投放;1：全城投放
+    codeIndex: -1,
+    location_state: 0,//投放地点：0：特定地点投放;2：全省投放
     location: {},//投放地点
     audience: 0,//周边用户数
 
@@ -31,7 +35,7 @@ Page({
     position: 0,
 
     //模板相关参数
-    model: 0,//0.使用模板；1.直接上传
+    model: defaultModel,//0.使用模板；1.直接上传
     model_param: {
       modelId: 0,//选中的模板Id
       img: '',//上传的模板照片
@@ -48,6 +52,12 @@ Page({
     progress: '',//图片上传进度
 
     isMonitor: 0, //是否使用记刻数据0:不使用；1:使用；
+
+    throwCount: 0,//投放数量，cpm
+    totalAmount: 0,
+    balance: 0,
+    remain: 0,
+    unitPrice: 0,
   },
 
   /**
@@ -58,6 +68,7 @@ Page({
     this._getLocation();
     this._getAdPlaces();
     this._getCarTypes();
+    this._getBalance();
   },
 
   /**
@@ -66,7 +77,7 @@ Page({
   onChangeToCity() {
     if (this.data.location_state == 0) {
       this.setData({
-        location_state: 1
+        location_state: 2
       });
     } else {
       this.setData({
@@ -76,14 +87,25 @@ Page({
   },
 
   /**
+   * 跳转到地图选择城市
+   */
+  onJumpToMap() {
+    wx.navigateTo({
+      url: `../map/map?lat=${app.globalData.lat}&lng=${app.globalData.lng}`,
+    })
+  },
+
+  /**
    * 点击了上传素材
    */
   onClickUpdate(event) {
     let position = event.currentTarget.dataset.position;
+    let codeIndex = event.currentTarget.dataset.index;
     this._resetData(0);
     this.setData({
       state: 1,
       position: position,
+      codeIndex: codeIndex,
     });
     this._getTemplates(position);
   },
@@ -155,6 +177,7 @@ Page({
       start: start,
     });
     console.log(this.data.start);
+    this._onCalTotal();
   },
 
   /**
@@ -166,6 +189,7 @@ Page({
       end: end,
     });
     console.log(this.data.end);
+    this._onCalTotal();
   },
 
   /**
@@ -269,6 +293,7 @@ Page({
             state: 3,
           });
           console.log(this.data.imgurl);
+          this._onCalTotal();
         },
         fail: error => {
           console.log('上传失败');
@@ -283,6 +308,8 @@ Page({
    * 点击开始结算
    */
   onSettle() {
+    if (this.data.state != 3 && this.data.state != 4) return;
+    if (this.data.totalAmount <= 0) return;
     this.setData({
       state: 4,
     });
@@ -299,6 +326,13 @@ Page({
    * 确认投放 
    */
   onConfirmCheck() {
+    if (this.data.remain < 0) {
+      wx.showToast({
+        title: '余额不足',
+        icon: 'none',
+      })
+      return;
+    }
     //投放
     let start = this.data.start;
     let end = this.data.end;
@@ -307,6 +341,7 @@ Page({
     let data = {
       lat: this.data.location.location.lat,
       lng: this.data.location.location.lng,
+      regionId: this.data.location.ad_info.adcode,
       address: this.data.location.title ? this.data.location.title : this.data.location.formatted_addresses.recommend,
       province: this.data.location.ad_info.provice,
       city: this.data.location.ad_info.city,
@@ -318,11 +353,12 @@ Page({
       motto: this.data.mottos[this.data.mottoIndex].code,
       startTime: startTime,
       endTime: endTime,
-      totalAmount: 9000,
-      unitPrice: 1500,
+      totalAmount: this.data.totalAmount,
+      unitPrice: 0,
       coupon: 0,
       couponId: 0,
       isMonitor: this.data.isMonitor,
+      cpm: this.data.throwCount,
     };
     //使用模板
     if (this.data.model == 0) {
@@ -368,6 +404,65 @@ Page({
     this.data.codes[index].imageUrl = '/img/throw/activity_center.png';
     this.setData({
       codes: this.data.codes,
+    });
+  },
+
+  /**
+   * 投放数量输入完成
+   */
+  onConfirmThrowCount(event) {
+    let value = event.detail.value;
+    this.data.throwCount = parseInt(value);
+    this._onCalTotal();
+  },
+
+  /**
+   * 计算总价
+   */
+  _onCalTotal() {
+    if (this.data.codeIndex < 0) return;
+    let code = this.data.codes[this.data.codeIndex];
+    let start = this.data.start;
+    let end = this.data.end;
+    let days = (new Date(end) - new Date(start)) / (1000 * 60 * 60 * 24) + 1;
+    console.log(days);
+    if (days <= 0) {
+      wx.showToast({
+        title: '结束日期应大于开始日期',
+        icon: 'none',
+      })
+      return;
+    }
+
+    //按照cpm结算
+    if (code.charging == 0) {
+      if (this.data.throwCount > 0) {
+        this.setData({
+          unitPrice: '60元/CPM',
+          totalAmount: this.data.throwCount * 60
+        });
+      } else {
+        this.setData({
+          unitPrice: '60元/CPM',
+          totalAmount: 0,
+        });
+      }
+    } else if (code.charging == 1) {
+      if (days > 0) {
+        this.setData({
+          unitPrice: '20000元/天',
+          totalAmount: days * 20000
+        });
+      } else {
+        this.setData({
+          unitPrice: '20000元/天',
+          totalAmount: 0
+        });
+      }
+    }
+
+    this.setData({
+      remain: (this.data.balance - this.data.totalAmount).toFixed(2),
     });
   },
 
@@ -441,8 +536,9 @@ Page({
   _resetData(state) {
     this.setData({
       state: state,
+      codeIndex: -1,
       position: 0,
-      model: 0,
+      model: defaultModel,
       model_param: {
         modelId: 0,//选中的模板id
         img: '',//上传的模板照片
@@ -454,8 +550,8 @@ Page({
       },
       imgurl: '',
       mottoIndex: 0,//选中车型索引
-      start: now,//投放开始日期
-      end: now,//投放结束日期
+
+      totalAmount: 0,
     });
   },
 
@@ -524,4 +620,21 @@ Page({
       progress(res);
     })
   },
+
+  /**
+   * 获取余额
+   */
+  _getBalance() {
+    accountModel.getBalance()
+      .then(
+        res => {
+          console.log('成功获取余额');
+          console.log(res);
+          let balance = res.data.totalAmount;
+          this.setData({
+            balance: balance.toFixed(2),
+            remain: (this.data.balance - this.data.totalAmount).toFixed(2),
+          });
+        });
+  }
 })
