@@ -87,6 +87,10 @@
     font-family: PingFangSC-Regular, sans-serif;
     line-height: 4em;
     color: #070707;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    position: relative;
 }
 
 .location>text {
@@ -111,6 +115,9 @@
     font-family: PingFangSC-Regular, sans-serif;
     font-size: 18rpx;
     color: rgba(78, 75, 75, 0.7);
+    position: absolute;
+    right: 10rpx;
+
 }
 
 .location .user-font .usercount-color {
@@ -192,4 +199,11 @@
     z-index: 999;
     top: 0;
     left: 0;
+}
+
+.location .title{
+    width: 60%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }

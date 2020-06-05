@@ -53,6 +53,10 @@ page{ width: 100%; height:100%; }
     font-family: PingFangSC-Regular, sans-serif;
     line-height: 4em;
     color: #070707;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    position: relative;
 }
 
 .location > text {
@@ -79,6 +83,8 @@ page{ width: 100%; height:100%; }
     font-size: 18rpx;
     color: rgba(78, 75, 75,0.7);
     display: inline-block;
+    position: absolute;
+    right: 10rpx;
 }
 
 .location .user-font .usercount-color {
@@ -132,4 +138,11 @@ page{ width: 100%; height:100%; }
 }
 .map-block{
   display: block;
+}
+
+.location .title{
+  width: 75%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }

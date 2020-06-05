@@ -492,7 +492,9 @@ Page({
       throwModel.getLocation(app).then(res => {
         let location = res;
         this._setLocationView(location);
-      });
+      }), error => {
+
+      };
     }
   },
 
@@ -526,6 +528,8 @@ Page({
           this.setData({
             audience: data,
           });
+        }, error => {
+
         }
       );
   },
@@ -581,10 +585,10 @@ Page({
       this.setData({
         mottos: res.data,
       });
-    }), error => {
+    }, error => {
       console.log('获取投放车型列表');
       console.log(error);
-    };
+    });
   },
 
   /**
@@ -635,6 +639,8 @@ Page({
             balance: balance.toFixed(2),
             remain: (this.data.balance - this.data.totalAmount).toFixed(2),
           });
+        }, error => {
+
         });
   }
 })

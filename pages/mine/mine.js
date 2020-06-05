@@ -169,6 +169,8 @@ Page({
         this.setData({
           balance: balance,
         });
+      }, error => {
+
       }
     );
   },

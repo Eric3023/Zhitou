@@ -62,7 +62,7 @@ function request(url, data = {}, method = "GET") {
 
       },
       fail: function (err) {
-        console.log(err);
+        console.log(`${url}=>${err}`);
         reject(err)
       }
     })

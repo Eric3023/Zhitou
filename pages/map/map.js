@@ -490,6 +490,8 @@ Page({
           user_num: data,
           markers: this.data.markers,
         });
+      },error=>{
+        
       }
     );
   },

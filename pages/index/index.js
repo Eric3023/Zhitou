@@ -206,6 +206,9 @@ Page({
             banners: banners
           });
         }
+      },
+      error => {
+
       }
     );
   },
@@ -220,6 +223,9 @@ Page({
         this.setData({
           user_num: data,
         });
+      },
+      error => {
+
       }
     );
   },

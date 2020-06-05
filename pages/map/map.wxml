@@ -10,9 +10,7 @@
 		</map>
 
 		<view class="location" catchtap="onJumpToHeatMap">
-
-			<text>位置：</text>
-			<text >{{addressInfo.recommend}}</text>
+			<text class="title">位置：{{addressInfo.recommend}}</text>
 			<!-- <view wx-if="{{addressInfo.businessArea != ''}}">
               所属商圈：{{addressInfo.businessArea}}
             </view> -->

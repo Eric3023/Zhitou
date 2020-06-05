@@ -23,8 +23,7 @@
 
 	<view class="location" bindtap="mapPageTap">
 		<image src="/img/11.png"></image>
-		<text>当前位置：</text>
-		<text >{{addressInfo.recommend}}</text>
+		<text class="title">当前位置：{{addressInfo.recommend}}</text>
 		<view class="user-font">
 			{{location.ad_info.province}}用户转换指数等级：高
 			<!-- 10公里内有
