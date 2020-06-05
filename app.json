@@ -22,7 +22,8 @@
     "pages/developing/developing",
     "pages/heatmap/heatmap",
     "pages/setting/setting",
-    "pages/coupons/coupons"
+    "pages/coupons/coupons",
+    "pages/about/about"
   ],
   "window": {
     "backgroundTextStyle": "light",

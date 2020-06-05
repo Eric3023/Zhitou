@@ -37,6 +37,10 @@ module.exports = {
   Balance: WxApiRoot + 'user/index',
   //订单列表
   Order: WxApiRoot + 'advertising/getAdvertisings',
+  //企业认证
+  Author: WxApiRoot + 'ocr/auth',
+  //优惠券列表
+  Coupons: WxApiRoot + 'coupon/mylist',
 
 
   //用户余额接口

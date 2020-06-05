@@ -1,0 +1,44 @@
+page {
+  background-color: #fafafa;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.icon {
+  width: 144rpx;
+  height: 144rpx;
+  box-shadow: 0 0 10rpx 10rpx #f2f2f2;
+  border-radius: 20rpx;
+  margin-top: 58rpx;
+}
+
+.title {
+  color: #717658;
+  font-size: 32rpx;
+  margin-top: 28rpx;
+}
+
+.version {
+  margin-top: 18rpx;
+  font-size: 28rpx;
+  color: #000000;
+}
+
+.content {
+  color: #92afc8;
+  font-size: 26rpx;
+  position: absolute;
+  top: 56%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.time {
+  color: #000000;
+  margin-top: 18rpx;
+}

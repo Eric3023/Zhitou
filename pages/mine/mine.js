@@ -22,7 +22,7 @@ Page({
       { icon: "/img/mine/icon_mine_collection.jpg", title: "我的订单" },
       { icon: "/img/mine/icon_mine_rmb.jpg", title: "充值记录" },
       { icon: "/img/mine/icon_mine_quan.jpg", title: "优惠券" },
-      { icon: "/img/mine/icon_mine_proxy.jpg", title: "我是代理" },
+      // { icon: "/img/mine/icon_mine_proxy.jpg", title: "我是代理" },
       { icon: "/img/mine/icon_mine_setting.png", title: "设置" }
     ]
   },
@@ -75,7 +75,7 @@ Page({
   /**
    * 生命周期函数
    */
-  onShow: function () {
+  onLoad: function (option) {
     this._resetUserInfo();
     this._checkLogin();
     this._getBalance();

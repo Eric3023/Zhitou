@@ -55,7 +55,6 @@ page {
 }
 
 .body_container {
-  height: 525rpx;
   background-color: white;
   margin-top: 12rpx;
   box-shadow: 0rpx 0rpx 10rpx 4rpx #ebebeb;

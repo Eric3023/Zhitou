@@ -30,6 +30,11 @@ Page({
           userModel.loginOut();
           wx.switchTab({
             url: '/pages/mine/mine',
+            success: res => {
+              var page = getCurrentPages().pop();
+              if (page == undefined || page == null) return;
+              page.onLoad();
+            }
           })
         }
       }
@@ -44,9 +49,8 @@ Page({
     console.log(value);
     switch (value) {
       case '关于枝头':
-        wx.showToast({
-          title: '关于枝头',
-          icon: 'none'
+        wx.navigateTo({
+          url: '/pages/about/about',
         });
         break;
       default:

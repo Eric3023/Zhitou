@@ -57,5 +57,8 @@ App({
     t_location: null,
     //当前选择地点（未授权）
     city: "",
+
+    version: '1.0.1',
+    time: '2020.06.05'
   }
 })

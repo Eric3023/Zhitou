@@ -14,8 +14,8 @@
 		<view class="type">
 			<view class="point orig"></view>
 			<text>注册地</text>
-			<picker class="picker" bindchange="onTypeChanged" value="0" range="{{types}}">
-				<view>{{types[index]}}
+			<picker class="picker" mode="region" bindchange="bindRegionChange" value="{{region}}" custom-item="{{customItem}}">
+				<view>{{region[0]}}，{{region[1]}}，{{region[2]}}
 					<image class="picker_icon" src="/img/login/icon_pull.png"></image>
 				</view>
 			</picker>
@@ -25,24 +25,30 @@
 	<view class="license">
 		企业营业执照
 		<text class="notice">请上传最新营业执照正面照（仅支持中国大陆地区）</text>
-		<view class="photo">
+		<view class="photo" wx:if="{{!license}}" catchtap="onSelectLicense">
 			+
 			<text>点击上传</text>
 		</view>
+		<image class="photo" wx:if="{{license}}" src="{{license}}" catchtap="onSelectLicense" />
+		<icon></icon>
 	</view>
 	<!-- 法人信息 -->
 	<view class="legal">
 		法人信息
-		<text class="notice">请上传法人省份证正反面</text>
+		<text class="notice">请上传法人身份证正反面</text>
 		<view class="photo_contianer">
-			<view class="photo">
+			<view class="photo" wx:if="{{!idcard_a}}" catchtap="onSelectIDCardA">
 				+
 				<text>正面</text>
 			</view>
-			<view class="photo">
+			<image class="photo" wx:if="{{idcard_a}}" src="{{idcard_a}}" catchtap="onSelectIDCardA" />
+			<view class="photo" wx:if="{{!idcard_b}}" catchtap="onSelectIDCardB">
 				+
 				<text>反面</text>
 			</view>
+			<image class="photo" wx:if="{{idcard_b}}" src="{{idcard_b}}" catchtap="onSelectIDCardB" />
 		</view>
 	</view>
+	<!-- 提交按钮 -->
+	<button catchtap="onSubmit">提交</button>
 </view>

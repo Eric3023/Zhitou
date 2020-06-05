@@ -1,4 +1,5 @@
-// pages/coupons/coupons.js
+const couponModel = require('../../models/coupon.js');
+
 Page({
 
   /**
@@ -45,7 +46,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this._getCoupons();
   },
 
   /**
@@ -53,5 +54,17 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+
+  /**
+   * 获取优惠券列表
+   */
+  _getCoupons: function () {
+    couponModel.getCoupons(1)
+      .then(res => {
+        console.log(res);
+      }, error => {
+        console.log(error);
+      });
   }
 })

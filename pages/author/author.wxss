@@ -112,3 +112,14 @@ page {
 .legal .photo text {
   font-size: 20rpx;
 }
+
+button{
+  width: 100%;
+  margin-top: 50rpx;
+  font-size: 32rpx;
+  color: #ffffff;
+  position: fixed;
+  bottom: 0;
+  background-color: #f88a3e;
+  border-radius: 0;
+}
