@@ -1,42 +1,20 @@
-var qqmaputil = require('../../utils/qqmaputil.js');
-import { HomeModel } from '../../models/home.js';
-import { LocationModel } from '../../models/location.js';
-import { BaseImgApi } from '../../config/api.js';
+const homeModel = require('../../models/home.js');
+const locationModel = require('../../models/location.js');
+const config = require('../../config/api.js');
 
 //获取应用实例
 const app = getApp()
-const homeModel = new HomeModel();
-const locationModel = new LocationModel();
 
 Page({
   data: {
-    location: {},
-
-    motto: 'Hello World',
-    userInfo: {},
-    hasUserInfo: false,
-    canIUse: wx.canIUse('button.open-type.getUserInfo'),
-    address: '',
-    host: "http://manage.aitopone.com/pic/",
-    regionCallbackTxt: '',
-    policy: 1,
-    animation: true,
-    isShowSubpois: true,
-    currentcity: '北京市',
-
-    // 广告位编码
-    type_positon_0: 0,
-    type_positon_1: 1,
-    type_positon_2: 2,
-    type_positon_3: 3,
-    type_positon_4: 4,
-    // Banner默认轮播图
+    // Banner默认轮播图(防止网络数据获取失败，显示空白)
     banners: [
       { imageUrl: '/img/banner/banner1.jpg' },
       { imageUrl: '/img/banner/banner2.jpg' },
     ],
     defaultBanner: '/img/banner/banner1.jpg',
 
+    //周边用户数量
     user_num: 0,
 
     //是否显示霸屏
@@ -45,28 +23,51 @@ Page({
   },
 
   /**
-   * 查看广告投放效果 
+   * 加载页面
+   */
+  onLoad: function () {
+    this._getCurrentLocation();//获取当前定位
+    this._getBanners();//请求轮播图
+    this._getCouponing();//显示优惠券
+  },
+
+  /**
+   * 显示页面
+   */
+  onShow: function () {
+    this._showLocationNoPessimion();
+  },
+
+  /**
+   * 分享页面
+   */
+  onShareAppMessage() {
+
+  },
+
+  /**
+   * 跳转到广告投放效果 
    */
   onShowEffect: function (event) {
     let positionCode = event.currentTarget.dataset.code;
-    let imgPath = BaseImgApi;
+    let imgPath = config.BaseImgApi;
     switch (positionCode) {
-      case this.data.type_positon_0:
+      case 'start':
         imgPath += 'img/effect/effect_app_start.jpg';
         break;
-      case this.data.type_positon_1:
+      case 'bully':
         imgPath += 'img/effect/effect_banner.jpg';
         break;
-      case this.data.type_positon_2:
+      case 'activity':
         imgPath += 'img/effect/effect_activity_center.jpg'
         break;
-      case this.data.type_positon_3:
+      case 'receive':
         imgPath += 'img/effect/effect_receive_order.jpg'
         break;
-      case this.data.type_positon_4:
+      case 'personal':
         imgPath += 'img/effect/effect_personal_center.jpg'
         break;
-      case this.data.type_positon_5:
+      default:
         break;
     }
     if (imgPath) {
@@ -76,162 +77,26 @@ Page({
     }
   },
 
-  //事件处理函数
-  bindViewTap: function () {
+  /**
+   * 跳转到行业列表页面
+   */
+  onSelectCategory: function () {
     wx.navigateTo({
       url: '../more/more'
     })
   },
 
-  mapPageTap: function () {
+  /**
+   * 跳转到地图页
+   */
+  onJumpToMap: function () {
     wx.navigateTo({
-      url: `../map/map?location=${this.data.regionCallbackTxt}&getPoi=${this.data.isShowSubpois ? 1 : 0}&policy=${this.data.policy}&lat=${app.globalData.lat}&lng=${app.globalData.lng}&currentcity=${this.data.currentcity}`,
-    })
-    // wx.navigateTo({
-    //   url: '../map/map'
-    // })
-  },
-  onLoad: function () {
-    var that = this;
-    this._getBanners();//请求轮播图
-    this._getCouponing();
-
-    wx.getSetting({
-      success(res) {
-        if (!res.authSetting['scope.userLocation']) {
-          wx.authorize({
-            scope: 'scope.userLocation',
-            success(res) {
-              //https://lbs.qq.com/miniProgram/jsSdk/jsSdkGuide/methodReverseGeocoder
-              //注：坐标系采用gcj02坐标系
-
-              qqmaputil.reverseGeocoder(app, that, (location, lat, lng) => {
-                app.globalData.t_location = location;
-                that.setData({
-                  location: location,
-                });
-                console.log('开始获取周边用户');
-                that._getAroundUser(lng, lat, 10);
-              });
-              console.log(res)
-            },
-            fail(res) {//拒绝授权
-              // address = "北京市";
-              // currentcity = "北京市";
-              // app.globalData.lat = 39.909604;
-              // app.globalData.lng = 116.397228;
-              // regionCallbackTxt = 39.909604 + "," + 116.397228;
-
-              wx.navigateTo({
-                url: '/pages/city/city',
-              })
-            }
-          })
-        } else {//授权过位置信息
-
-          qqmaputil.reverseGeocoder(app, that, (location, lat, lng) => {
-            app.globalData.t_location = location;
-            that.setData({
-              location: location,
-            });
-            console.log('开始获取周边用户');
-            that._getAroundUser(lng, lat, 10);
-          });
-        }
-      }
-    })
-
-    if (app.globalData.userInfo) {
-      this.setData({
-        userInfo: app.globalData.userInfo,
-        hasUserInfo: true
-      })
-    } else if (this.data.canIUse) {
-      // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-      // 所以此处加入 callback 以防止这种情况
-      app.userInfoReadyCallback = res => {
-        this.setData({
-          userInfo: res.userInfo,
-          hasUserInfo: true
-        })
-      }
-    } else {
-      // 在没有 open-type=getUserInfo 版本的兼容处理
-      wx.getUserInfo({
-        success: res => {
-          app.globalData.userInfo = res.userInfo
-          this.setData({
-            userInfo: res.userInfo,
-            hasUserInfo: true
-          })
-        }
-      })
-    }
-  },
-
-  onShow: function () {
-    if (!this.data.addressInfo) {
-      this.data.addressInfo = {}
-    }
-    if (!this.data.addressInfo.recommend) {
-      this.data.addressInfo.recommend = app.globalData.city;
-      this.setData({
-        addressInfo: this.data.addressInfo,
-      });
-    }
-  },
-
-  onShareAppMessage() {
-
-  },
-
-  getUserInfo: function (e) {
-    console.log(e)
-    app.globalData.userInfo = e.detail.userInfo
-    this.setData({
-      userInfo: e.detail.userInfo,
-      hasUserInfo: true
+      url: `../map/map?lat=${this.data.location.location.lat}&lng=${this.data.location.location.lng}&currentcity=${this.data.location.ad_info.city}`,
     })
   },
 
   /**
-   * 获取轮播图
-   */
-  _getBanners() {
-    homeModel.getBanners().then(
-      res => {
-        let banners = res.data;
-        if (banners) {
-          this.setData({
-            banners: banners
-          });
-        }
-      },
-      error => {
-
-      }
-    );
-  },
-
-  /**
-   * 获取周边用户数量
-   */
-  _getAroundUser(lng, lat, distance) {
-    locationModel.getAroundUser(lng, lat, distance).then(
-      res => {
-        const data = res.data;
-        this.setData({
-          user_num: data,
-        });
-      },
-      error => {
-
-      }
-    );
-  },
-
-  /**
-   * Banner图片加载失败
+   * Banner图片加载失败(显示默认图片)
    */
   onBannerError(event) {
     const index = event.currentTarget.dataset.index;
@@ -255,15 +120,6 @@ Page({
         url: `../map/map?searching=true`,
       });
     }
-  },
-
-  /**
-   * 是否需要显示霸屏
-   */
-  _getCouponing() {
-    this.setData({
-      bullying: app.globalData.couponing,
-    });
   },
 
   /**
@@ -291,4 +147,80 @@ Page({
       this.onCloseCoupon();
     }, 3000)
   },
+
+  /**
+   * 获取当前定位
+   */
+  _getCurrentLocation: function () {
+    locationModel.getCurrentLocation()
+      .then(res => {
+        if(res && res.result){
+          this.setData({
+            location: res.result
+          });
+          app.globalData.selectLocation = res.result;
+        }
+      }, error => {
+        wx.navigateTo({
+          url: '/pages/city/city',
+        }) 
+      });
+  },
+
+  /**
+   * 未授权时，显示选中城市
+   */
+  _showLocationNoPessimion: function(){
+    if (!this.data.location) {
+      this.setData({
+        location: app.globalData.selectLocation,
+      });
+    }
+  },
+
+  /**
+   * 获取轮播图
+   */
+  _getBanners() {
+    homeModel.getBanners().then(
+      res => {
+        let banners = res.data;
+        if (banners) {
+          this.setData({
+            banners: banners
+          });
+        }
+      },
+      error => {
+        
+      }
+    );
+  },
+
+  /**
+   * 获取周边用户数量
+   */
+  _getAroundUser(lng, lat, distance) {
+    locationModel.getAroundUser(lng, lat, distance).then(
+      res => {
+        const data = res.data;
+        this.setData({
+          user_num: data,
+        });
+      },
+      error => {
+
+      }
+    );
+  },
+
+  /**
+   * 是否需要显示霸屏
+   */
+  _getCouponing() {
+    this.setData({
+      bullying: app.globalData.couponing,
+    });
+  },
+
 })

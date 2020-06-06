@@ -1,8 +1,5 @@
-import { LocationModel } from '../../models/location.js';
-var qqmaputil = require('../../utils/qqmaputil.js');
-const locationModel = new LocationModel();
+const locationModel = require('../../models/location.js');
 
-const RADIUS = 4;
 const app = getApp();
 
 Page({
@@ -13,7 +10,6 @@ Page({
     latitude: app.globalData.lat,
     longitude: app.globalData.lng,
     regionId: 0,
-    policy: 1,
     animation: false,
     isShowSubpois: true,
     dialogShow: false,
@@ -43,7 +39,6 @@ Page({
     hiddenMap: false,
     hiddenHis: true,
     hisSearchData: [],
-    showNull: false,
 
     //搜索关键词
     keyword: '',
@@ -56,57 +51,35 @@ Page({
     user_num: 0,
   },
 
+  /**
+   * 页面加载监听
+   */
   onLoad: function (options) {
+    console.log("+++++++++++");
+    console.log(options);
+    this._loadHistory();//载入搜索历史记录
 
-    var that = this
-    that.loadHis();//载入搜索历史记录
-
-    //需要直接开始搜索
+    //需要直接开始搜索(主页顶部/行业分类进入)
     let keyword = options.keyword;
     let searching = options.searching;
     if (searching) {
       this.hiddenMap();
       if (keyword)
         this._searchList(keyword);
-    } else {
-      that.setData({
-        latitude: options.lat,
-        longitude: options.lng,
-        regionCallbackTxt: options.lat + ',' + options.lng,
-        currentcity: options.currentcity,
-        'markers[0].latitude': options.lat,
-        'markers[0].longitude': options.lng,
-
-      })
-
-      //获取指定位置的poi
-      qqmaputil.reverseGeocoderPoi(app, that, { latitude: options.lat, longitude: options.lng }, res => {
-        this.data.regionId = res.ad_info.adcode;
-        this.data.location = res;
-        app.globalData.t_location = res;
-      });
-      //获取周边用户
-      this._getAroundUser(options.lng, options.lat, 10);
+    }
+    //从首页进入，直接显示地图
+    else {
+      this._initMap(options);
     }
   },
 
-  onShareAppMessage() {
-
-  },
-
-  onMarkerAnimationend() {
-    this.setData({
-      animation: false
-    });
-  },
-
-  // 监听视野变化
+  /**
+   * 监听视野变化
+   */
   onChangeRegion(event) {
-    var that = this
     if (event.type === 'end' && event.causedBy === 'drag') {
-      const mapCtx = wx.createMapContext('map', that);//根据控件ID
+      const mapCtx = wx.createMapContext('map', this);//根据控件ID
       mapCtx.getCenterLocation({
-
         //拿到移动的位置
         success: res => {
           const latitude = res.latitude;
@@ -117,187 +90,29 @@ Page({
             'markers[0].longitude': longitude,
           });
 
-          qqmaputil.reverseGeocoderPoi(app, that, { latitude: latitude, longitude: longitude }, res => {
-            this.data.regionId = res.ad_info.adcode;
-            this.data.location = res;
-            app.globalData.t_location = res;
+          this._reverseGeocoderPositon({
+            location: {
+              latitude: latitude, longitude: longitude
+            },
+            get_poi: 1,
           });
-          //获取周边用户
-          this._getAroundUser(longitude, latitude, 10);
-
-          // wx.serviceMarket.invokeService({
-          //   service: WEBSERVICE_APPID,
-          //   api: 'rgeoc',
-          //   data: data
-          // }).then(res => {
-          //   const result = (typeof res.data) === 'string' ? JSON.parse(res.data).result : res.data.result;
-          //   let adInfo = '';
-          //   let businessArea = '';
-          //   let landmark = '';
-          //   let crossroad = '';
-
-          //   if (result.address_reference && result.address_reference.business_area) {
-          //     businessArea = result.address_reference.business_area.title || '';
-          //     businessArea += '(' + result.address_reference.business_area._dir_desc + ')';
-          //   }
-
-          //   if (result.address_reference && result.address_reference.landmark_l1) {
-          //     landmark = result.address_reference.landmark_l1.title || '';
-          //     landmark += '(' + result.address_reference.landmark_l1._dir_desc + ')';
-          //   }
-
-          //   that.setData({
-          //     addressInfo: {
-          //       businessArea: businessArea, //商圈
-          //       recommend: result.formatted_addresses && result.formatted_addresses.recommend || ''
-          //     },
-          //     pois: result.pois,
-
-          //     'markers[0].latitude': latitude.toFixed(6),
-          //     'markers[0].longitude': longitude.toFixed(6),
-
-          //   });
-          // }).catch(err => {
-          //   console.error(err);
-          // });
-
         },
 
       });
     }
   },
 
-  onDialogClose() {
-    this.setData({
-      dialogShow: false
-    });
-  },
-
-  onWatchDoc() {
-    this.setData({
-      dialogShow: true
-    });
-  },
-
-  onShareAppMessage: function () {
-    return {
-      title: '腾讯位置服务'
-    };
-  },
-
-  showMap(event) {
-    console.log(event);
-    // if (event.detail.value == '') {//有搜索值的时候，失去焦点后不显示地图
-    //   this.setData({
-    //     hiddenMap: false,
-    //     hiddenHis: true,
-    //     showNull: false,
-    //     siteData: []//清空搜索结果
-    //   })
-    // }
-  },
-
-  loadHis() {
-    console.log(111);
-    var that = this;
-    let arr = wx.getStorageSync("searchHisArray");
-    if (Array.isArray(arr)) {
-      that.setData({
-        hisSearchData: arr
-      })
-    }
-  },
-
-  hiddenMap() {
-
-    var that = this;
-    this.setData({
-      hiddenMap: true,
-      showNull: false,
-      hiddenHis: false//显示搜索历史
-    });
-
-  },
-
+  /**
+   * 提交搜索
+   */
   onKeywordConfirm(event) {//搜索提交，从组件传值，默认封装成event.detail.变量名称
     const value = event.detail.value;
     this._searchList(value);
   },
 
-  getSearchResult(keyword) {
-    if (keyword === '') {
-      keyword = this.data.defaultKeyword.keyword;
-      wx.showToast({
-        title: '请输入搜索关键字',
-        icon: 'none',
-        duration: 1000
-      })
-    } else {//输入之后搜索
-
-      this.search(keyword);
-
-
-    }
-  },
-
-  search: function (keyword) {
-    var that = this;
-
-    wx.showLoading({
-      title: '加载中',
-    })
-    var shapLocation = that.data.regionCallbackTxt;//坐标中心 
-
-    qqmaputil.search(that, keyword, this.data.page, shapLocation, that.data.currentcity, this.data.siteData);
-
-    //http://lbs.qq.com/miniProgram/jsSdk/jsSdkGuide/methodSearch
-    // qqmapsdk.search({
-    //   keyword: keyword,//搜索关键词
-    //   location: shapLocation,//设置周边搜索中心点
-    //   address_format: 'short',
-    //   region: that.data.currentcity,
-    //   page_size:20,
-    //     success: function (res) {
-    //       if (res.data.length > 0) {
-    //         for (var i = 0; i < res.data.length; i++) {
-    //           siteData.push({
-    //             title: res.data[i].title,//名字
-    //             id: res.data[i].id,//id
-    //             da_info: res.data[i].da_info,//所属省市区
-    //             address: res.data[i].address,//具体地址
-    //             location: res.data[i].location,//坐标
-    //             category: res.data[i].category,//类型
-    //             tel: res.data[i].tel,//电话
-    //             checked: false,//是否在选中
-    //             scope: false,//是否在范围以内
-    //           })
-    //         };
-
-    //         that.setData({
-    //           siteData: siteData
-    //         })
-    //         wx.hideLoading();
-    //       } else {
-    //         //无数据
-    //         that.setData({
-    //           showNull :true
-    //         })
-
-    //         wx.hideLoading();
-
-    //       }
-    //       that.setData({//搜索后，隐藏历史
-    //         hiddenHis: true
-    //       })
-
-    //       //最多50条历史
-    //       that.addHisSearchData(keyword);
-
-
-    //     },
-    //   })
-  },
-
+  /**
+   * 清除搜索输入框内容
+   */
   clearKeyword: function () {
     this.setData({
       keyword: '',
@@ -314,12 +129,42 @@ Page({
     })
   },
 
-  onSelectCity: function () {
-    var that = this;
-    wx.navigateTo({
-      url: `../city/city?currentcity=` + that.data.currentcity,
-    })
+  /**
+   * 隐藏地图
+   */
+  hiddenMap() {
+    this.setData({
+      hiddenMap: true,
+      hiddenHis: false//显示搜索历史
+    });
+  },
 
+  /**
+   * 跳转到选择城市页面
+   */
+  onSelectCity: function () {
+    wx.navigateTo({
+      url: `../city/city?currentcity=` + this.data.currentcity,
+    })
+  },
+
+  /**
+   * 清空搜索历史
+   */
+  clearHisSearchData: function () {
+    this.setData({
+      hisSearchData: []
+    });
+
+    wx.clearStorage("searchHisArray");
+  },
+
+  /**
+   * 选中搜索历史监听回调
+   */
+  onSelectHistory(event) {
+    const value = event.detail.value;
+    this._searchList(value);
   },
 
   /**
@@ -327,13 +172,9 @@ Page({
    */
   bindSelect: function (e) {
     //隐藏搜索结果。显示地图
-
     e = e.detail.event;
-    var that = this;
     var index = e.currentTarget.dataset.index ? e.currentTarget.dataset.index : "0";
-    var location = e.currentTarget.dataset.location;
     var siteData = this.data.siteData;
-    var shapLocation = this.data.shapLocation;//起点地址坐标
 
     wx.showLoading({
       title: '加载中',
@@ -358,14 +199,12 @@ Page({
           longitude: longitude,
         });
 
-        qqmaputil.reverseGeocoderPoi(app, that, { latitude: latitude, longitude: longitude }, res => {
-          this.data.regionId = res.ad_info.adcode;
-          this.data.location = res;
-          app.globalData.t_location = res;
+        this._reverseGeocoderPositon({
+          location: {
+            latitude: latitude, longitude: longitude
+          },
+          get_poi: 1,
         });
-        //获取周边用户
-        this._getAroundUser(longitude, latitude, 10);
-
 
         //显示地图
         this.setData({
@@ -381,72 +220,9 @@ Page({
       }
     }
 
-    that.setData({
+    this.setData({
       listIndex: index
     })
-  },
-
-  // 添加历史搜索记录缓存
-  addHisSearchData: function (searchValue) {
-
-    var that = this;
-    let arr = wx.getStorageSync("searchHisArray");
-    if (!Array.isArray(arr)) {//判断本地缓存是否有数组，如果没有，则新建
-      that.setData({
-        hisSearchData: [searchValue]//更新历史显示列表
-      })
-      wx.setStorage({//更新存储的历史
-        key: 'searchHisArray',
-        data: that.data.hisSearchData
-      })
-
-      return;
-    }
-
-    //如果存在了，则读取本地缓存
-
-    if (arr !== null) {
-
-      let num = arr.indexOf(searchValue);
-      if (num != -1) {
-        // 删除已存在后重新插入至数组
-        arr.splice(num, 1);
-        arr.unshift(searchValue);
-      } else {
-        arr.unshift(searchValue);
-      }
-    }
-
-    if (arr.length >= 50) {
-      arr.splice(49, 1);
-    }
-
-    //存储搜索记录
-    wx.setStorage({
-      key: "searchHisArray",
-      data: arr
-    })
-
-    that.setData({
-      hisSearchData: arr
-    })
-
-  },
-
-  clearHisSearchData: function () {
-    this.setData({
-      hisSearchData: []
-    });
-
-    wx.clearStorage("searchHisArray");
-  },
-
-  /**
-   * 选中搜索历史监听回调
-   */
-  onSelectHistory(event) {
-    const value = event.detail.value;
-    this._searchList(value);
   },
 
   /**
@@ -458,26 +234,90 @@ Page({
   },
 
   /**
-   * 修改检索关键词，重新搜索
+   * 点击了周边位置Item
    */
-  _searchList(value) {
-    //重新搜索，页码和搜索结果需要重置
-    this.data.page = 1;
-    this.data.siteData = [];
-    //修改搜索框的显示内容
-    this.setData({
-      keyword: value
-    });
-    this.getSearchResult(value);
+  onSelectPosition(event) {
+    let location = event.detail.value;
+    app.globalData.selectLocation = location;
+    wx.switchTab({
+      url: `../throw/throw`,
+      success: res => {
+        var page = getCurrentPages().pop();
+        if (page == undefined || page == null) return;
+        page.onLoad();
+      }
+    })
   },
 
   /**
-   * 不修改检索关键词，加载更多结果
+   * 跳转到热力图页面
    */
-  _searchMoreList(value) {
-    //加载更多，页码递增
-    this.data.page++;
-    this.getSearchResult(value);
+  onJumpToHeatMap(event) {
+    wx.navigateTo({
+      url: `/pages/heatmap/heatmap?regionid=${this.data.regionId}&lat=${this.data.latitude}&lng=${this.data.longitude}&zoom=10`,
+    })
+  },
+  /**
+   * 初始化地图视图 
+   */
+  _initMap(options) {    
+    this.setData({
+      latitude: options.lat,
+      longitude: options.lng,
+      regionCallbackTxt: options.lat + ',' + options.lng,
+      currentcity: options.currentcity,
+      'markers[0].latitude': options.lat,
+      'markers[0].longitude': options.lng,
+
+    })
+
+    //获取当前位置信息
+    this._reverseGeocoderPositon({
+      location: {
+        latitude: options.lat,
+        longitude: options.lng
+      },
+      get_poi: 1
+    });
+  },
+
+  /**
+   * 加载搜索历史记录
+   */
+  _loadHistory() {
+    let arr = wx.getStorageSync("searchHisArray");
+    if (Array.isArray(arr)) {
+      this.setData({
+        hisSearchData: arr
+      })
+    }
+  },
+
+  /**
+   * 获取选中位置信息
+   */
+  _reverseGeocoderPositon({ location, get_poi }) {
+    locationModel.reverseGeocoder({
+      location: location,
+      get_poi: get_poi,
+    }).then(
+      res => {
+        console.log(res);
+        const result = res.result;
+        app.globalData.selectLocation = result;
+
+        this.setData({
+          regionId: result.ad_info.adcode,
+          location: result,
+          pois: result.pois,
+          currentcity: result.address_component.city,
+        });
+        //获取周边用户
+        this._getAroundUser(res.result.location.longitude, res.result.location.latitude, 10);
+      }, error => {
+        console.log(error);
+      }
+    );
   },
 
   /**
@@ -500,29 +340,78 @@ Page({
   },
 
   /**
-   * 点击了周边位置Item
+   * 修改检索关键词，重新搜索
    */
-  onSelectPosition(event) {
-    let location = event.detail.value;
-    app.globalData.t_location = location;
-    wx.switchTab({
-      url: `../throw/throw`,
-      success: res => {
-        var page = getCurrentPages().pop();
-        if (page == undefined || page == null) return;
-        page.onLoad();
-      }
-    })
+  _searchList(value) {
+    //重新搜索，页码和搜索结果需要重置
+    this.data.page = 1;
+    this.data.siteData = [];
+    //修改搜索框的显示内容
+    this.setData({
+      keyword: value
+    });
+    this._getSearchResult(value);
   },
 
   /**
-   * 跳转到热力图页面
+   * 不修改检索关键词，加载更多结果
    */
-  onJumpToHeatMap(event) {
-    wx.navigateTo({
-      url: `/pages/heatmap/heatmap?regionid=${this.data.regionId}&lat=${this.data.latitude}&lng=${this.data.longitude}&zoom=10`,
+  _searchMoreList(value) {
+    //加载更多，页码递增
+    this.data.page++;
+    this._getSearchResult(value);
+  },
+
+  /**
+   * 获取搜索结果
+   */
+  _getSearchResult(keyword) {
+    if (keyword === '') {
+      keyword = this.data.defaultKeyword.keyword;
+      wx.showToast({
+        title: '请输入搜索关键字',
+        icon: 'none',
+        duration: 1000
+      })
+    } else {//输入之后搜索
+      this._execSearch(keyword);
+    }
+  },
+
+  /**
+   * 执行具体搜索
+   */
+  _execSearch: function (keyword) {
+    wx.showLoading({
+      title: '加载中',
     })
-  }
+    var shapLocation = this.data.regionCallbackTxt;//坐标中心 
+
+    locationModel.search({
+      keyword,
+      page: this.data.page,
+      shapLocation:
+        shapLocation,
+      currentcity: this.data.currentcity
+    }).then(
+      res => {
+        if(res.data){
+          this.data.siteData = this.data.siteData.concat(res.data);
+        }
+        wx.hideLoading();
+        this.setData({//搜索后，隐藏历史
+          hiddenHis: true,
+          siteData: this.data.siteData,
+        })
+      }, error => {
+        wx.hideLoading();
+        this.setData({//搜索后，隐藏历史
+          hiddenHis: true,
+          siteData: this.data.siteData,
+        })
+      }
+    );
+  },
 })
 
 

@@ -1,11 +1,10 @@
-import { LocationModel } from '../../models/location.js';
+const locationModel = require('../../models/location.js');
 let ThrowModel = require('../../models/throw.js');
 var dateUtil = require('../../utils/date.js');
 let AccountModel = require('../../models/account.js')
 
 const defaultModel = 1;
 const app = getApp();
-const locationModel = new LocationModel();
 const accountModel = new AccountModel();
 const date = new Date();
 let now = dateUtil.tsFormatTime(date, 'yyyy-MM-dd');
@@ -106,7 +105,7 @@ Page({
    */
   onJumpToMap() {
     wx.navigateTo({
-      url: `../map/map?lat=${app.globalData.lat}&lng=${app.globalData.lng}`,
+      url: `../map/map?lat=${app.globalData.selectLocation.location.lat}&lng=${app.globalData.selectLocation.location.lng}`,
     })
     this.data.mapFlag = true;
   },
@@ -498,20 +497,24 @@ Page({
    * 获取投放地点 
    */
   _getLocation() {
-    console.log("==================");
     //当前已定位过，直接从全局中取
-    if (app.globalData.t_location) {
-      let location = app.globalData.t_location;
+    if (app.globalData.selectLocation) {
+      let location = app.globalData.selectLocation;
       this._setLocationView(location);
     }
     //当前未定位过，重新定位，防止进入程序后，index尚未定位完成，直接进入投放页面
     else {
-      throwModel.getLocation(app).then(res => {
-        let location = res;
-        this._setLocationView(location);
-      }), error => {
+      locationModel.getCurrentLocation().then(
+        res => {
+          if (res && res.result) {
+            app.globalData.selectLocation = res.result;
+            let location = res.result;
+            this._setLocationView(location);
+          }
+        }, error => {
 
-      };
+        }
+      );
     }
   },
 

@@ -1,5 +1,5 @@
 <view class="list {{hiddenMap==false?'map-hidden':'map-block'}}" wx:if="{{siteData.length>0}}">
-      <view class='list-li' wx:for="{{siteData}}" wx:key="{{index}}" data-location='{{item.location}}' data-index='{{index+1}}' bindtap='bindSelect'>
+      <view class='list-li' wx:for="{{siteData}}" wx:key="index" data-location='{{item.location}}' data-index='{{index+1}}' bindtap='bindSelect'>
         
         <view class='list-img'>
           <image src='../../img/dot.png' mode='widthFix'/>

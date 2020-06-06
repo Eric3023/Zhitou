@@ -133,6 +133,7 @@ function search(that, keyword, page, shapLocation, currentcity, siteData) {
     page_index: page,
     page_size: "20",
     success: function (res) {
+      console.log(res);
       if (res.data.length > 0) {
         for (var i = 0; i < res.data.length; i++) {
           siteData.push({
@@ -147,7 +148,6 @@ function search(that, keyword, page, shapLocation, currentcity, siteData) {
             scope: false,//是否在范围以内
           })
         };
-
         that.setData({
           siteData: siteData,
         })
@@ -165,11 +165,12 @@ function search(that, keyword, page, shapLocation, currentcity, siteData) {
         hiddenHis: true
       })
 
-      //最多50条历史
-      that.addHisSearchData(keyword);
-
-
+      // //最多50条历史
+      // that.addHisSearchData(keyword);
     },
+    fail:error=>{
+      wx.hideLoading()
+    }
   })
 }
 
@@ -188,7 +189,7 @@ function getCurrentLocation({ app } = null) {
           app.globalData.lat = result.location.lat;
           app.globalData.lng = result.location.lng;
 
-          app.globalData.t_location = result;
+          app.globalData.selectLocation = result;
         }
         resolve(result);
       },

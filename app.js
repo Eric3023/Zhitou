@@ -51,13 +51,15 @@ App({
     lng: 0,
     hasLogin: false,
 
-    //是否显示优惠券
-    couponing: false,
-    //投放地点参数，switchTab无法传递参数，使用全局变量
-    t_location: null,
+    //选中投放位置(投放页面无法传参，全局共享)
+    selectLocation: null,
     //当前选择地点（未授权）
     city: "",
 
+    //是否显示优惠券
+    couponing: false,
+    
+    //关于枝头
     version: '1.0.1',
     time: '2020.06.05'
   }
