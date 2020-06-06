@@ -83,6 +83,7 @@ Page({
       qqmaputil.reverseGeocoderPoi(app, that, { latitude: options.lat, longitude: options.lng }, res => {
         this.data.regionId = res.ad_info.adcode;
         this.data.location = res;
+        app.globalData.t_location = res;
       });
       //获取周边用户
       this._getAroundUser(options.lng, options.lat, 10);
@@ -119,6 +120,7 @@ Page({
           qqmaputil.reverseGeocoderPoi(app, that, { latitude: latitude, longitude: longitude }, res => {
             this.data.regionId = res.ad_info.adcode;
             this.data.location = res;
+            app.globalData.t_location = res;
           });
           //获取周边用户
           this._getAroundUser(longitude, latitude, 10);
@@ -359,6 +361,7 @@ Page({
         qqmaputil.reverseGeocoderPoi(app, that, { latitude: latitude, longitude: longitude }, res => {
           this.data.regionId = res.ad_info.adcode;
           this.data.location = res;
+          app.globalData.t_location = res;
         });
         //获取周边用户
         this._getAroundUser(longitude, latitude, 10);
@@ -490,8 +493,8 @@ Page({
           user_num: data,
           markers: this.data.markers,
         });
-      },error=>{
-        
+      }, error => {
+
       }
     );
   },

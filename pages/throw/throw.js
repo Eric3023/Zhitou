@@ -58,6 +58,8 @@ Page({
     balance: 0,
     remain: 0,
     unitPrice: 0,
+
+    mapFlag: false,//是否是从地图页面返回
   },
 
   /**
@@ -68,7 +70,20 @@ Page({
     this._getLocation();
     this._getAdPlaces();
     this._getCarTypes();
+  },
+
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function () {
+    if (this.data.mapFlag) {
+      this._resetData(0);
+      this._getLocation();
+      this._getAdPlaces();
+      this._getCarTypes();
+    }
     this._getBalance();
+    this.data.mapFlag = false;
   },
 
   /**
@@ -93,6 +108,7 @@ Page({
     wx.navigateTo({
       url: `../map/map?lat=${app.globalData.lat}&lng=${app.globalData.lng}`,
     })
+    this.data.mapFlag = true;
   },
 
   /**
@@ -482,6 +498,7 @@ Page({
    * 获取投放地点 
    */
   _getLocation() {
+    console.log("==================");
     //当前已定位过，直接从全局中取
     if (app.globalData.t_location) {
       let location = app.globalData.t_location;
