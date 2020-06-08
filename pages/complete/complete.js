@@ -21,9 +21,9 @@ Page({
    * 查看订单
    */
   onClikeDetail() {
-    wx.navigateTo({
-      url: '/pages/order_detail/order_detail',
-    })
+    // wx.navigateTo({
+    //   url: '/pages/order_detail/order_detail',
+    // })
   }
 })
 
