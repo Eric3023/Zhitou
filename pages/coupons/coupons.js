@@ -7,38 +7,38 @@ Page({
    */
   data: {
     list: [
-      {
-        money: 200,
-        condition: '2000',
-        title: '知了互联全国出行领域公共资源投放系统',
-        startTime: '2020.06.01',
-        endTime: '2020.06.25',
-        isOver: false,
-      },
-      {
-        money: 200,
-        condition: '2000',
-        title: '知了互联全国出行领域公共资源投放系统',
-        startTime: '2020.06.01',
-        endTime: '2020.06.25',
-        isOver: false,
-      },
-      {
-        money: 200,
-        condition: '2000',
-        title: '知了互联全国出行领域公共资源投放系统',
-        startTime: '2020.06.01',
-        endTime: '2020.06.25',
-        isOver: false,
-      },
-      {
-        money: 200,
-        condition: '2000',
-        title: '知了互联全国出行领域公共资源投放系统',
-        startTime: '2020.05.01',
-        endTime: '2020.05.25',
-        isOver: true,
-      }
+      // {
+      //   money: 200,
+      //   condition: '2000',
+      //   title: '知了互联全国出行领域公共资源投放系统',
+      //   startTime: '2020.06.01',
+      //   endTime: '2020.06.25',
+      //   isOver: false,
+      // },
+      // {
+      //   money: 200,
+      //   condition: '2000',
+      //   title: '知了互联全国出行领域公共资源投放系统',
+      //   startTime: '2020.06.01',
+      //   endTime: '2020.06.25',
+      //   isOver: false,
+      // },
+      // {
+      //   money: 200,
+      //   condition: '2000',
+      //   title: '知了互联全国出行领域公共资源投放系统',
+      //   startTime: '2020.06.01',
+      //   endTime: '2020.06.25',
+      //   isOver: false,
+      // },
+      // {
+      //   money: 200,
+      //   condition: '2000',
+      //   title: '知了互联全国出行领域公共资源投放系统',
+      //   startTime: '2020.05.01',
+      //   endTime: '2020.05.25',
+      //   isOver: true,
+      // }
     ]
   },
 
