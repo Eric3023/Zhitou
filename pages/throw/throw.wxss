@@ -290,10 +290,12 @@ page {
 }
 
 .time_picker {
+  width: 136rpx;
   font-size: 22rpx;
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: center;
   padding: 2rpx 8rpx 2rpx 8rpx;
   border-radius: 8rpx;
   border: 1rpx solid #cecece;
@@ -527,7 +529,7 @@ page {
 }
 
 .input_num {
-  width: 240rpx;
+  width: 264rpx;
   height: 28rpx;
   margin-right: 18rpx;
   background-color: #f1f1f1;
@@ -535,6 +537,7 @@ page {
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
+  text-align: right;
 }
 
 /*隐藏滚动条*/

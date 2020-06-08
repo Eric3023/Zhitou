@@ -25,13 +25,14 @@ Page({
     state: 0,//流程当前状态 0：选择广告位;1：选择模板/文件；2.选择素材完成，等待上传；3.素材上传完成 4：结算中/结算确认；5；结算完成
 
     //地点相关参数
-    codeIndex: -1,
     location_state: 0,//投放地点：0：特定地点投放;2：全省投放
     location: {},//投放地点
     audience: 0,//周边用户数
 
-    //广告位
+    //后台返回的广告位id
     position: 0,
+    //广告位索引
+    codeIndex: -1,
 
     //模板相关参数
     model: defaultModel,//0.使用模板；1.直接上传
@@ -57,6 +58,7 @@ Page({
     balance: 0,
     remain: 0,
     unitPrice: 0,
+    unit:'元/CPM',//单价单位
 
     mapFlag: false,//是否是从地图页面返回
   },
@@ -65,7 +67,10 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this._resetData(0);
+
+    this._setState(0);
+    this._resetData(true);
+
     this._getLocation();
     this._getAdPlaces();
     this._getCarTypes();
@@ -76,7 +81,8 @@ Page({
    */
   onShow: function () {
     if (this.data.mapFlag) {
-      this._resetData(0);
+      this._setState(0);
+      this._resetData(true);
       this._getLocation();
       this._getAdPlaces();
       this._getCarTypes();
@@ -116,7 +122,7 @@ Page({
   onClickUpdate(event) {
     let position = event.currentTarget.dataset.position;
     let codeIndex = event.currentTarget.dataset.index;
-    this._resetData(0);
+    this._resetData(false);//重新选择广告位，之前广告位信息清空
     this.setData({
       state: 1,
       position: position,
@@ -247,7 +253,9 @@ Page({
    * 取消了上传素材
    */
   onCancelMaterial() {
-    this._resetData(0);
+    //取消上传素材，只清空广告位相关信息
+    this._setState(0);
+    this._resetData(false);
   },
 
   /**
@@ -279,13 +287,13 @@ Page({
     }
 
     this.setData({
-      state: 2,
+      state: 2, //等待图片上传完成
     });
 
     //上传图片
     if (this.data.model == 0) {
       this.setData({
-        state: 3,
+        state: 3,//图片上传完成
       });
     } else {
       this._updateImgFie({
@@ -305,7 +313,7 @@ Page({
           let data = response.data;
           this.data.imgurl = data.url;
           this.setData({
-            state: 3,
+            state: 3,//图片上传完成
           });
           console.log(this.data.imgurl);
           this._onCalTotal();
@@ -313,7 +321,8 @@ Page({
         fail: error => {
           console.log('上传失败');
           console.log(error);
-          this._resetData();
+          this._setState(0);//重新选择广告位
+          this._resetData(false);
         },
       });
     }
@@ -323,10 +332,10 @@ Page({
    * 点击开始结算
    */
   onSettle() {
-    if (this.data.state != 3 && this.data.state != 4) return;
+    if (this.data.state != 3) return;//只有选择完广告位，且图片上传完成后，才可结算
     if (this.data.totalAmount <= 0) return;
     this.setData({
-      state: 4,
+      state: 4,//确认结算弹框？
     });
   },
 
@@ -334,7 +343,8 @@ Page({
    * 取消结算 
    */
   onCancleCheck() {
-    this._resetData(0);
+    //取消结算，保留参数信息，不做清空操作
+    this._setState(3);
   },
 
   /**
@@ -369,7 +379,7 @@ Page({
       startTime: startTime,
       endTime: endTime,
       totalAmount: this.data.totalAmount,
-      unitPrice: 0,
+      unitPrice: this.data.unitPrice,
       coupon: 0,
       couponId: 0,
       isMonitor: this.data.isMonitor,
@@ -389,12 +399,13 @@ Page({
     throwModel.doAdvertising(data).then(res => {
       console.log(res);
       this.setData({
-        state: 5,
+        state: 5,//结算完成
       });
-      this._resetData();
       this.setData({
-        state: 0,
+        state: 0,//重置页面
       });
+      this._resetData(true);
+
       wx.navigateTo({
         url: '../../pages/complete/complete',
       });
@@ -405,7 +416,7 @@ Page({
         icon: 'none',
       });
       this.setData({
-        state: 0,
+        state: 0,//投放失败
       });
     });
 
@@ -453,24 +464,28 @@ Page({
     if (code.charging == 0) {
       if (this.data.throwCount > 0) {
         this.setData({
-          unitPrice: '60元/CPM',
-          totalAmount: this.data.throwCount * 60
+          unitPrice: 60,
+          unit:'元/CPM',//单价单位
+          totalAmount: this.data.throwCount * this.data.unitPrice
         });
       } else {
         this.setData({
-          unitPrice: '60元/CPM',
+          unitPrice: 60,
+          unit:'元/CPM',//单价单位
           totalAmount: 0,
         });
       }
     } else if (code.charging == 1) {
       if (days > 0) {
         this.setData({
-          unitPrice: '20000元/天',
-          totalAmount: days * 20000
+          unitPrice: 20000,
+          unit:'元/天',//单价单位
+          totalAmount: days * this.data.unitPrice
         });
       } else {
         this.setData({
-          unitPrice: '20000元/天',
+          unitPrice: 20000,
+          unit:'元/天',//单价单位
           totalAmount: 0
         });
       }
@@ -555,11 +570,20 @@ Page({
   },
 
   /**
+   * 设置当前投放状态
+   */
+  _setState(state){
+    this.setData({
+      state : state
+    })
+  },
+
+  /**
    * 数据重置
    */
-  _resetData(state) {
+  _resetData(isAll) {
+    //仅将广告位相关重置
     this.setData({
-      state: state,
       codeIndex: -1,
       position: 0,
       model: defaultModel,
@@ -572,11 +596,24 @@ Page({
       div_param: {
         img: '',//上传的照片
       },
+      progress: '',//图片上传进度
       imgurl: '',
-      mottoIndex: 0,//选中车型索引
 
       totalAmount: 0,
     });
+    //全部内容重置：包括城市、周期、投放数量等
+    if(isAll){
+      this.setData({
+        location_state: 0,
+        isMonitor: 0, //是否使用记刻数据0:不使用；1:使用；
+        mottoIndex: 0,//选中车型索引
+        start: now,//投放开始日期
+        end: now,//投放结束日期
+        throwCount: 0,//投放数量，cpm
+        unitPrice: 0,//单价
+        unit:'元/CPM',//单价单位
+      });
+    }
   },
 
   /**

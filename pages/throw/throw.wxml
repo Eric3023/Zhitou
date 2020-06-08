@@ -137,12 +137,12 @@
 		</view> -->
 		<view class="audience">投放数量
 			<view class="audience_num">
-				<input class="input_num" placeholder="输入投放数量" placeholder-class="place_class" type="number" adjust-position="true" bindblur="onConfirmThrowCount"></input>
+				<input class="input_num" placeholder="输入投放数量" placeholder-class="place_class" type="number" adjust-position="true" bindblur="onConfirmThrowCount" value="{{throwCount==0? '':throwCount}}"></input>
 				CPM
 			</view>
 		</view>
 		<view class="audience">单　　价
-			<view class="audience_num">{{unitPrice}}</view>
+			<view class="audience_num">{{unitPrice}}{{unit}}</view>
 		</view>
 		<!-- <view class="coupon">已享受首单满减，优惠金额1000元</view> -->
 		<view class="settle">合计：{{totalAmount}}元
