@@ -4,7 +4,7 @@ page {
 
 .header {
   width: 690rpx;
-  height: 300rpx;
+  height: 240rpx;
   padding-left: 60rpx;
   background: white;
   border-bottom-left-radius: 25rpx;
@@ -19,7 +19,7 @@ page {
 }
 
 .ad {
-  margin: 290rpx 50rpx 390rpx 50rpx;
+  margin: 240rpx 50rpx 440rpx 50rpx;
   width: 650rpx;
   display: flex;
   flex-direction: column;
@@ -396,7 +396,7 @@ page {
 
 .settlement {
   width: 100%;
-  height: 360rpx;
+  height: 420rpx;
   background-color: white;
   border-radius: 20rpx;
   box-shadow: 0 0rpx 8rpx #bcbcbc;
@@ -422,6 +422,17 @@ page {
   font-size: 26rpx;
   margin-top: 28rpx;
   color: #000000;
+  position: relative;
+}
+.settlement checkbox-group {
+  width: 332rpx;
+  font-size: 20rpx;
+  color: #5a5a5a;
+  margin-top: 6rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 30rpx 50rpx 0 60rpx;
   position: relative;
 }
 
@@ -537,7 +548,16 @@ page {
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
-  text-align: right;
+}
+
+.input_link {
+  width: 332rpx;
+  height: 28rpx;
+  background-color: #f1f1f1;
+  box-shadow: 0rpx 0rpx 5rpx #dedede;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 /*隐藏滚动条*/

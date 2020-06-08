@@ -17,11 +17,7 @@
 			<text class="address">{{location_state==0? (location.title? location.title:location.formatted_addresses.recommend):location.ad_info.province}}</text>
 		</view>
 		<!-- <view class="audience">{{location_state==0?'当前位置':location.ad_info.province}}有{{audience}}个用户</view> -->
-		<view class="audience">{{location_state==0?'当前位置':location.ad_info.province}}用户转换指数等级：高</view>
-		<checkbox-group class="audience origin" bindchange="onMonitorChange">
-			<checkbox color="#f77a51" value="{{1}}"></checkbox>
-			是否选择由记刻数据提供第三方监测
-		</checkbox-group>
+		<view class="audience">{{location_state==0?'当前位置':location.ad_info.province}}用户转化指数等级：高</view>
 	</view>
 	<!-- 广告选择 -->
 	<scroll-view class="ad" scroll-x="false" scroll-y="true">
@@ -110,6 +106,15 @@
 	</view>
 	<!-- 结算 -->
 	<view class="settlement">
+		<view class="audience">监测链接
+			<view class="audience_num">
+				<input class="input_link" placeholder="选填" placeholder-class="place_class" adjust-position="true" bindblur="onConfirmMonitorUrl" value="{{monitorUrl}}"></input>
+			</view>
+		</view>
+				<checkbox-group class="origin" bindchange="onMonitorChange">
+			<checkbox color="#f77a51" value="{{1}}"></checkbox>
+			是否由记刻数据提供第三方监测
+		</checkbox-group>
 		<view class="motto" hidden="true">
 			优选车型
 			<picker bindchange="bindMottoPickerChange" value="0" range="{{mottos}}" range-key='desc'>

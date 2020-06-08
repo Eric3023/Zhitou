@@ -53,6 +53,7 @@ Page({
     progress: '',//图片上传进度
 
     isMonitor: 0, //是否使用记刻数据0:不使用；1:使用；
+    monitorUrl:'',
 
     throwCount: 0,//投放数量，cpm
     totalAmount: 0,
@@ -359,6 +360,7 @@ Page({
       couponId: 0,
       isMonitor: this.data.isMonitor,
       cpm: this.data.throwCount,
+      monitor: this.data.monitorUrl,
     };
     //使用模板
     if (this.data.model == 0) {
@@ -425,6 +427,18 @@ Page({
     let value = event.detail.value;
     this.data.throwCount = parseInt(value);
     this._onCalTotal();
+  },
+
+  /**
+   * 监测链接输入完成
+   */
+  onConfirmMonitorUrl(event) {
+    let value = event.detail.value;
+    if(value.startsWith("http://")||value.startsWith("https://")){
+      this.setData({
+        monitorUrl: value,
+      })
+    }
   },
 
   /**
@@ -591,6 +605,7 @@ Page({
       this.setData({
         location_state: 0,
         isMonitor: 0, //是否使用记刻数据0:不使用；1:使用；
+        monitorUrl:'',
         mottoIndex: 0,//选中车型索引
         start: now,//投放开始日期
         end: now,//投放结束日期

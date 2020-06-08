@@ -25,7 +25,7 @@
 		<image src="/img/11.png"></image>
 		<text class="title">当前位置：{{location.formatted_addresses.recommend}}</text>
 		<view class="user-font">
-			{{location.ad_info.province}}用户转换指数等级：高
+			{{location.ad_info.province}}用户转化指数等级：高
 			<!-- 10公里内有
 			<text class="usercount-color" v-model="userCount">{{user_num==0? 'x':user_num}}</text>
 			个用户 -->

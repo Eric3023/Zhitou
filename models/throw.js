@@ -31,7 +31,7 @@ class ThrowModel {
   /**
    * 投放
    */
-  doAdvertising({ lat, lng, regionId, address, province, audience, distance, throwType, position, isTemplate, templateId, phone, content, imgUrl, modelImagUrl, motto, city, coupon, couponId, startTime, endTime, totalAmount, unitPrice, isMonitor, cpm }) {
+  doAdvertising({ lat, lng, regionId, address, province, audience, distance, throwType, position, isTemplate, templateId, phone, content, imgUrl, modelImagUrl, motto, city, coupon, couponId, startTime, endTime, totalAmount, unitPrice, isMonitor, cpm, monitor }) {
     return check.checkResult(util.request(config.DoAdvertising,
       {
         regionId: regionId,
@@ -59,6 +59,7 @@ class ThrowModel {
         unitPrice: unitPrice,//单价
         isMonitor: isMonitor,//是否使用检测
         cpm: cpm,
+        monitor: monitor,
       },
       'POST'));
   }

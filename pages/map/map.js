@@ -21,7 +21,7 @@ Page({
     markers: [{
       callout: {
         // content: '10公里内有x个用户',
-        content: '用户转换指数等级：高',
+        content: '用户转化指数等级：高',
         padding: 11,
         borderRadius: 2,
         display: 'ALWAYS',
@@ -328,7 +328,7 @@ Page({
       res => {
         const data = res.data;
         // this.data.markers[0].content = `10公里内有${data == 0 ? 'x' : data}个用户`;
-        this.data.markers[0].callout.content = `${this.data.location.ad_info.province}用户转换指数等级：高`;
+        this.data.markers[0].callout.content = `${this.data.location.ad_info.province}用户转化指数等级：高`;
         this.setData({
           user_num: data,
           markers: this.data.markers,
