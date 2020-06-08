@@ -1,5 +1,6 @@
 let util = require('../utils/util.js');
 let config = require('../config/api.js');
+const check = require('../models/check.js');
 
 class AccountModel {
 
@@ -7,9 +8,9 @@ class AccountModel {
    * 获取账户余额
    */
   getBalance() {
-    return util.request(
+    return check.checkResult(util.request(
       config.Balance
-    );
+    ));
   }
 
 }

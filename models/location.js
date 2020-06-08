@@ -1,6 +1,7 @@
 const util = require('../utils/util.js');
 const config = require('../config/api.js');
 const qqmap = require('../utils/qqmap.js');
+const check = require('../models/check.js');
 
 /**
  * 获取当前位置
@@ -34,11 +35,11 @@ function getGeocoder(address) {
  * 获取周边用户数
  */
 function getAroundUser(lng, lat, distance) {
-  return util.request(config.AroundUsers, {
+  return check.checkResult(util.request(config.AroundUsers, {
     lng: lng,
     lat: lat,
     distance: distance,
-  }, 'POST');
+  }, 'POST'));
 }
 
 /**

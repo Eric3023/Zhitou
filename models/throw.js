@@ -1,5 +1,6 @@
 var util = require('../utils/util.js');
 var config = require('../config/api.js');
+const check = require('../models/check.js');
 
 class ThrowModel {
 
@@ -7,32 +8,31 @@ class ThrowModel {
    * 获取投放广告位
    */
   getAdPlaces() {
-    return util.request(config.AdPlaces);
+    return check.checkResult(util.request(config.AdPlaces));
   }
-
 
   /**
    * 获取车型列表 
    */
   getCarTypes() {
-    return util.request(config.CarTypes);
+    return check.checkResult(util.request(config.CarTypes));
   }
 
   /**
    * 获取投放模板
    */
   getTemplates(adPlace) {
-    return util.request(config.Templates,
+    return check.checkResult(util.request(config.Templates,
       {
         adPlace: adPlace,
-      });
+      }));
   }
 
   /**
    * 投放
    */
   doAdvertising({ lat, lng, regionId, address, province, audience, distance, throwType, position, isTemplate, templateId, phone, content, imgUrl, modelImagUrl, motto, city, coupon, couponId, startTime, endTime, totalAmount, unitPrice, isMonitor, cpm }) {
-    return util.request(config.DoAdvertising,
+    return check.checkResult(util.request(config.DoAdvertising,
       {
         regionId: regionId,
         adContact: phone,
@@ -60,24 +60,7 @@ class ThrowModel {
         isMonitor: isMonitor,//是否使用检测
         cpm: cpm,
       },
-      'POST');
-  }
-
-  /**
-   * 上传图片
-   */
-  updateImgFie({ path, sCallback, fCallback }) {
-    return wx.uploadFile({
-      url: config.Upload,
-      filePath: path,
-      name: 'file',
-      success: res => {
-        sCallback(res.data);
-      },
-      fail: error => {
-        fCallback(error);
-      }
-    });
+      'POST'));
   }
 }
 

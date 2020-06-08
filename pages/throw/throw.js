@@ -1,4 +1,5 @@
 const locationModel = require('../../models/location.js');
+const fileModel = require('../../models/file.js');
 let ThrowModel = require('../../models/throw.js');
 var dateUtil = require('../../utils/date.js');
 let AccountModel = require('../../models/account.js')
@@ -58,7 +59,7 @@ Page({
     balance: 0,
     remain: 0,
     unitPrice: 0,
-    unit:'元/CPM',//单价单位
+    unit: '元/CPM',//单价单位
 
     mapFlag: false,//是否是从地图页面返回
   },
@@ -298,32 +299,6 @@ Page({
     } else {
       this._updateImgFie({
         path: imgPath,
-        progress: res => {
-          console.log('上传进度', res.progress);
-          console.log('已经上传的数据长度', res.totalBytesSent);
-          console.log('预期需要上传的数据总长度', res.totalBytesExpectedToSend);
-          this.setData({
-            progress: res.progress,
-          });
-        },
-        success: res => {
-          console.log('上传成功');
-          console.log(res);
-          let response = JSON.parse(res);
-          let data = response.data;
-          this.data.imgurl = data.url;
-          this.setData({
-            state: 3,//图片上传完成
-          });
-          console.log(this.data.imgurl);
-          this._onCalTotal();
-        },
-        fail: error => {
-          console.log('上传失败');
-          console.log(error);
-          this._setState(0);//重新选择广告位
-          this._resetData(false);
-        },
       });
     }
   },
@@ -398,17 +373,27 @@ Page({
     }
     throwModel.doAdvertising(data).then(res => {
       console.log(res);
-      this.setData({
-        state: 5,//结算完成
-      });
-      this.setData({
-        state: 0,//重置页面
-      });
-      this._resetData(true);
+      if (res && res.errno == 0) {
+        this.setData({
+          state: 5,//结算完成
+        });
+        this.setData({
+          state: 0,//重置页面
+        });
+        this._resetData(true);
 
-      wx.navigateTo({
-        url: '../../pages/complete/complete',
-      });
+        wx.navigateTo({
+          url: '../../pages/complete/complete',
+        });
+      } else {
+        wx.showToast({
+          title: '投放失败，请尝试重新投放',
+          icon: 'none',
+        });
+        this.setData({
+          state: 0,//投放失败
+        });
+      }
     }, error => {
       console.log(error);
       wx.showToast({
@@ -465,13 +450,13 @@ Page({
       if (this.data.throwCount > 0) {
         this.setData({
           unitPrice: 60,
-          unit:'元/CPM',//单价单位
+          unit: '元/CPM',//单价单位
           totalAmount: this.data.throwCount * this.data.unitPrice
         });
       } else {
         this.setData({
           unitPrice: 60,
-          unit:'元/CPM',//单价单位
+          unit: '元/CPM',//单价单位
           totalAmount: 0,
         });
       }
@@ -479,13 +464,13 @@ Page({
       if (days > 0) {
         this.setData({
           unitPrice: 20000,
-          unit:'元/天',//单价单位
+          unit: '元/天',//单价单位
           totalAmount: days * this.data.unitPrice
         });
       } else {
         this.setData({
           unitPrice: 20000,
-          unit:'元/天',//单价单位
+          unit: '元/天',//单价单位
           totalAmount: 0
         });
       }
@@ -572,9 +557,9 @@ Page({
   /**
    * 设置当前投放状态
    */
-  _setState(state){
+  _setState(state) {
     this.setData({
-      state : state
+      state: state
     })
   },
 
@@ -602,7 +587,7 @@ Page({
       totalAmount: 0,
     });
     //全部内容重置：包括城市、周期、投放数量等
-    if(isAll){
+    if (isAll) {
       this.setData({
         location_state: 0,
         isMonitor: 0, //是否使用记刻数据0:不使用；1:使用；
@@ -611,7 +596,7 @@ Page({
         end: now,//投放结束日期
         throwCount: 0,//投放数量，cpm
         unitPrice: 0,//单价
-        unit:'元/CPM',//单价单位
+        unit: '元/CPM',//单价单位
       });
     }
   },
@@ -667,19 +652,52 @@ Page({
   /**
    * 上传图片
    */
-  _updateImgFie({ path, progress, success, fail }) {
-    let uploadTask = throwModel.updateImgFie({
+  _updateImgFie({ path }) {
+    fileModel.uploadImage({
       path: path,
-      sCallback: res => {
-        success(res);
+      progress: res => {
+        console.log('上传进度', res.progress);
+        console.log('已经上传的数据长度', res.totalBytesSent);
+        console.log('预期需要上传的数据总长度', res.totalBytesExpectedToSend);
+        this.setData({
+          progress: res.progress,
+        });
       },
-      fCallback: error => {
-        fail(error)
-      }
-    });
-    uploadTask.onProgressUpdate((res) => {
-      progress(res);
-    })
+    }).then(
+      res => {
+        console.log('上传成功');
+        console.log(res);
+        if (res && res.errno == 0) {
+          let data = res.data;
+          this.data.imgurl = data.url;
+          this.setData({
+            state: 3,//图片上传完成
+          });
+          console.log(this.data.imgurl);
+          this._onCalTotal();
+        } else {
+          console.log('上传失败');
+          console.log(response);
+          wx.showToast({
+            title: '图片上传失败',
+            icon: 'none',
+          });
+          this._setState(0);//重新选择广告位
+          this._resetData(false);
+        }
+      },
+      error => {
+        console.log("-------------------");
+        console.log('上传失败');
+        console.log(error);
+        wx.showToast({
+          title: '图片上传失败',
+          icon: 'none',
+        });
+        this._setState(0);//重新选择广告位
+        this._resetData(false);
+      },
+    )
   },
 
   /**
