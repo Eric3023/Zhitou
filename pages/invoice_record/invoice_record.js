@@ -14,6 +14,8 @@ Page({
     size: 20,
     lock: false,
     hasMore: true,
+
+    prices: 0,
   },
 
   /**
@@ -35,6 +37,11 @@ Page({
    */
   onCheckedChanged(event) {
     this.data.items = event.detail.value;
+
+    let price = this._calTotalMoney();
+    this.setData({
+      prices: price.toFixed(2),
+    })
   },
 
   /**
@@ -56,6 +63,11 @@ Page({
         items: [],
       });
     }
+
+    let price = this._calTotalMoney();
+    this.setData({
+      prices: price.toFixed(2),
+    })
   },
 
   /**
@@ -87,6 +99,20 @@ Page({
         icon: 'none'
       })
     }
+  },
+
+  /**
+   * 计算总金额
+   */
+  _calTotalMoney(){
+    let prices = 0;
+    for (var i = 0; i < this.data.items.length; i++) {
+      let index = this.data.items[i];
+      let price = this.data.records[index].actualPrice;
+      //获取价格
+      prices += parseFloat(price);
+    }
+    return prices;
   },
 
   /**
