@@ -5,29 +5,36 @@
 		<view class="param">
 			发票类型
 			<view class="data">
-				<radio-group class="radio_container">
+				<radio-group class="radio_container" bindchange="onTypeChanged">
 					<view class="radio_container">
-						<radio style="transform:scale(0.65);"></radio>
+						<radio style="transform:scale(0.65);" checked="true" value="0"></radio>
 						<text>企业单位</text>
 					</view>
 					<view class="radio_container radio_margin">
-						<radio style="transform:scale(0.65);"></radio>
+						<radio style="transform:scale(0.65);" value="1"></radio>
 						<text>个人</text>
 					</view>
 				</radio-group>
 			</view>
 		</view>
-		<view class="param">
+		<view class="param" hidden="{{type==1}}">
 			公司名称
-			<view class="data">北京广化寺</view>
+			<input placeholder="请输入公司名称" adjust-position="true" bindblur="onConfirmName"></input>
+			<!-- <view class="data">北京广化寺</view> -->
 		</view>
-		<view class="param">
+		<view class="param" hidden="{{type==1}}">
 			公司税号
-			<view class="data">AFD1012154621225JKIO</view>
+			<input placeholder="请输入公司税号" adjust-position="true" bindblur="onConfirmNumber"></input>
+			<!-- <view class="data">AFD1012154621225JKIO</view> -->
+		</view>
+		<view class="param" hidden="{{type==0}}">
+			发票抬头
+			<input placeholder="请输入姓名" adjust-position="true" bindblur="onConfirmName"></input>
+			<!-- <view class="data">AFD1012154621225JKIO</view> -->
 		</view>
 		<view class="param">
 			总金额
-			<view class="data">10000元</view>
+			<view class="data">{{price}}元</view>
 		</view>
 	</view>
 	<!-- 接收方式 -->
@@ -35,9 +42,10 @@
 		接收方式
 		<view class="param">
 			电子邮箱
-			<view class="data">20179282@qq.com</view>
+			<input placeholder="请输入接收邮箱" adjust-position="true" bindblur="onConfirmEmail"></input>
+			<!-- <view class="data">20179282@qq.com</view> -->
 		</view>
 	</view>
 	<!-- 确认按钮 -->
-	<view class="btn">提交</view>
+	<view class="btn" catchtap="onSubmit">提交</view>
 </view>

@@ -1,6 +1,4 @@
-var RecordModel = require('../../models/record.js');
-
-let recordModel = new RecordModel();
+var recordModel = require('../../models/record.js');
 
 Page({
 
@@ -28,6 +26,17 @@ Page({
    */
   onReachBottom: function () {
     this._getRecords();
+  },
+
+  /**
+   * 查看订单详情
+   */
+  onRechargeDatail(event){
+    let value = event.currentTarget.dataset.value;
+    let jValue = JSON.stringify(value);
+    wx.navigateTo({
+      url: `/pages/order_detail/order_detail?detail=${jValue}`,
+    })
   },
 
   /**

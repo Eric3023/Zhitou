@@ -1,0 +1,24 @@
+<checkbox-group class="list" bindchange="onCheckedChanged">
+	<block wx:for="{{records}}" wx:key="index">
+		<view class="item_container">
+			<checkbox class="check" checked="{{checkedAll}}" value="{{index}}"></checkbox>
+			<view class="content">
+				<text class="title">{{item.message}}</text>
+				<text class="time">{{item.payTime}}</text>
+			</view>
+			<text class="price">¥{{item.actualPrice}}</text>
+		</view>
+		<view class="line" wx:if="{{index!=records.length-1}}"></view>
+	</block>
+</checkbox-group>
+
+<checkbox-group bindchange="onCheckedAllCheanged">
+	<view class="invoice">
+		<view class="line"></view>
+		<view class="content">
+			<checkbox class="check"></checkbox>
+			<view class="title">全选</view>
+			<text class="btn" catchtap="onInvoice">开具发票</text>
+		</view>
+	</view>
+</checkbox-group>

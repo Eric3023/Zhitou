@@ -41,6 +41,11 @@ module.exports = {
   Author: WxApiRoot + 'ocr/auth',
   //优惠券列表
   Coupons: WxApiRoot + 'coupon/mylist',
+  //代开发票列表
+  NoUserInvoice: WxApiRoot + 'pay/noUseInvoice',
+  //开具发票
+  OpenInvoice: WxApiRoot + 'pay/openInvoice',
+
 
 
   //用户余额接口

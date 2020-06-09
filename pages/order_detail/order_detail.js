@@ -4,14 +4,17 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    data:{},
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    let value = options.detail;
+    this.setData({
+      data: JSON.parse(value),
+    });
   },
 
   /**
@@ -19,7 +22,7 @@ Page({
    */
   onInvoice() {
     wx.navigateTo({
-      url: '/pages/invoice/invoice',
+      url: '/pages/invoice_record/invoice_record',
     })
   }
 })

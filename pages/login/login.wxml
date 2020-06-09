@@ -11,8 +11,10 @@
   <view class="protocol">
     <label class="checked-lable" catchtap='checkedTap'>
     <!--color='#deab8a' -->
-      <radio checked="{{checked}}" style="transform:scale(0.7);" 
-      >已阅读与同意《法律声明及隐私政策》</radio>
+      <radio checked="{{checked}}" style="transform:scale(0.7);">
+        <text catchtap="onJumpToPolicy">已阅读与同意</text>
+        <text style="color:#92afc8;" catchtap="onJumpToPolicy">《法律声明及隐私政策》</text>
+      </radio>
     </label>
   </view>
 </view>

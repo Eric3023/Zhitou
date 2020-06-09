@@ -23,7 +23,9 @@
     "pages/heatmap/heatmap",
     "pages/setting/setting",
     "pages/coupons/coupons",
-    "pages/about/about"
+    "pages/about/about",
+    "pages/invoice_record/invoice_record",
+    "pages/policy/policy"
   ],
   "window": {
     "backgroundTextStyle": "light",

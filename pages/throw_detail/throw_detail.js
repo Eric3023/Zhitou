@@ -20,8 +20,8 @@ Page({
    * 查看详情
    */
   onClickDetail() {
-    wx.navigateTo({
-      url: '/pages/throw_detail2/throw_detail2',
-    })
+    // wx.navigateTo({
+    //   url: '/pages/throw_detail2/throw_detail2',
+    // })
   },
 })

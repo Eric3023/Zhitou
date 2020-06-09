@@ -76,9 +76,12 @@ page {
 }
 
 .license .photo text {
+  width: 100%;
   position: absolute;
   bottom: 16rpx;
+  left: 0rpx;
   font-size: 20rpx;
+  text-align: center;
 }
 
 .legal {

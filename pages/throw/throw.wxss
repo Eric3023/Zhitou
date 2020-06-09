@@ -227,7 +227,7 @@ page {
 }
 
 .place_class {
-  font-size: 24rpx;
+  font-size: 20rpx;
 }
 
 .motto {
@@ -283,10 +283,13 @@ page {
 
 .time_picker_contianer {
   position: absolute;
+  height: 100%;
+  top: 0;
   right: 0;
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: center;
 }
 
 .time_picker {
@@ -415,8 +418,9 @@ page {
 }
 
 .settlement .audience {
-  margin: 30rpx 50rpx 0 60rpx;
+  margin: 25rpx 50rpx 0 60rpx;
   width: 640rpx;
+  height: 36rpx;
   display: flex;
   flex-direction: row;
   font-size: 26rpx;
@@ -428,11 +432,11 @@ page {
   width: 332rpx;
   font-size: 20rpx;
   color: #5a5a5a;
-  margin-top: 6rpx;
+  /* margin-top: 6rpx; */
   display: flex;
   flex-direction: row;
   align-items: center;
-  margin: 30rpx 50rpx 0 60rpx;
+  /* margin: 30rpx 50rpx 0 60rpx; */
   position: relative;
 }
 
@@ -441,6 +445,8 @@ page {
   color: #6c6c6c;
   position: absolute;
   right: 0;
+  height: 100%;
+  top: 0rpx;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -461,7 +467,7 @@ page {
   flex-direction: row;
   align-items: center;
   position: absolute;
-  bottom: 32rpx;
+  bottom: 24rpx;
   right: 36rpx;
 }
 
@@ -557,6 +563,7 @@ page {
   box-shadow: 0rpx 0rpx 5rpx #dedede;
   text-overflow: ellipsis;
   white-space: nowrap;
+  font-size: 20rpx;
   overflow: hidden;
 }
 
@@ -569,16 +576,16 @@ page {
 
 /*checkbox 整体大小  */
 checkbox {
-  width: 30rpx;
-  height: 30rpx;
+  width: 24rpx;
+  height: 24rpx;
   position: relative;
   margin-right: 16rpx;
 }
 
 /*checkbox 选项框大小  */
 checkbox .wx-checkbox-input {
-  width: 30rpx;
-  height: 30rpx;
+  width: 24rpx;
+  height: 24rpx;
   margin-top: 0rpx;
   position: absolute;
   top: 0rpx;

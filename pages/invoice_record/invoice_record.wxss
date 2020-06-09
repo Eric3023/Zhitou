@@ -1,0 +1,132 @@
+.list{
+  margin-bottom: 112rpx;
+}
+
+.item_container{
+  height: 150rpx;
+  width: 84%;
+  margin-left: 8%;
+  margin-right: 8%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.item_container .check{
+  width: 10%;
+}
+
+.item_container .content{
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+}
+
+.item_container .content .title{
+  font-size: 32rpx;
+  color: black;
+}
+
+.item_container .content .time{
+  margin-top: 18rpx;
+  font-size: 24rpx;
+  color: #b6b6b6;
+}
+
+.item_container .price{
+  width: 20%;
+  text-align: right;
+  font-size: 28rpx;
+  font-weight: bold;
+  color: black;
+}
+
+.line{
+  background-color: #b8b8b8;
+  height: 2rpx;
+  width: 84%;
+  margin-left: 8%;
+  margin-right: 8%;
+}
+
+.invoice .line{
+  width: 100%;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.invoice{
+  height: 116rpx;
+  width: 100%;
+  position: fixed;
+  background-color: white;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.invoice .content{
+  height: 114rpx;
+  width: 84%;
+  margin-left: 8%;
+  margin-right: 8%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  position: relative;
+}
+
+.invoice .check{
+  width: 10%;
+}
+
+.invoice .title{
+  font-size: 32rpx;
+  color: black;
+}
+
+.invoice .btn{
+  width: 215rpx;
+  height: 54rpx;
+  font-size: 28rpx;
+  color: #65ae95;
+  position: absolute;
+  right: 0;
+  top: 31rpx;
+  border-radius: 8rpx;
+  border: 3rpx solid #65ae95;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+
+/*checkbox 整体大小  */
+checkbox {
+  width: 30rpx;
+  height: 30rpx;
+  position: relative;
+  margin-right: 16rpx;
+}
+
+/*checkbox 选项框大小  */
+checkbox .wx-checkbox-input {
+  width: 30rpx;
+  height: 30rpx;
+  margin-top: 0rpx;
+  position: absolute;
+  top: 0rpx;
+  left: 0rpx;
+}
+
+/*checkbox选中后图标样式  */
+checkbox .wx-checkbox-input.wx-checkbox-input-checked::before {
+  width: 30rpx;
+  height: 30rpx;
+  line-height: 28rpx;
+  text-align: center;
+  font-size: 30rpx;
+}

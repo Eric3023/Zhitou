@@ -32,10 +32,16 @@ page {
   color: #92afc8;
   font-size: 26rpx;
   position: absolute;
+  width: 100%;
+  text-align: center;
   top: 56%;
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.content text{
+  margin-top: 12rpx;
 }
 
 .time {

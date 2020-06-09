@@ -108,13 +108,17 @@
 	<view class="settlement">
 		<view class="audience">监测链接
 			<view class="audience_num">
-				<input class="input_link" placeholder="选填" placeholder-class="place_class" adjust-position="true" bindblur="onConfirmMonitorUrl" value="{{monitorUrl}}"></input>
+				<checkbox-group class="origin" bindchange="onMonitorChange">
+					<checkbox color="#f77a51" value="{{1}}"></checkbox>
+					是否由记刻数据提供第三方监测
+				</checkbox-group>
 			</view>
 		</view>
-				<checkbox-group class="origin" bindchange="onMonitorChange">
-			<checkbox color="#f77a51" value="{{1}}"></checkbox>
-			是否由记刻数据提供第三方监测
-		</checkbox-group>
+		<view class="audience">
+			<view class="audience_num">   
+				<input class="input_link" placeholder="输入第三方监测链接，选填" placeholder-class="place_class" adjust-position="true" bindblur="onConfirmMonitorUrl" value="{{monitorUrl}}"></input>
+			</view>
+		</view>
 		<view class="motto" hidden="true">
 			优选车型
 			<picker bindchange="bindMottoPickerChange" value="0" range="{{mottos}}" range-key='desc'>

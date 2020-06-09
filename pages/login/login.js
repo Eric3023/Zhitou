@@ -104,5 +104,11 @@ Page({
       disabled: !that.data.disabled
     })
   },
+
+  onJumpToPolicy(){
+    wx.navigateTo({
+      url: '/pages/policy/policy',
+    })
+  }
   
 })

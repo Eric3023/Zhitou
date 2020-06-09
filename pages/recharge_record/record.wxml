@@ -3,7 +3,7 @@
 		<view class="mouth_container" wx:if="{{item.first}}">
 			<text class="mouth">{{item.mouth}}</text>
 		</view>
-		<view class="record_container">
+		<view class="record_container" catchtap="onRechargeDatail" data-value="{{item}}">
 			<image class="icon" src="/img/order/icon_wallet.png"></image>
 			<view class="content">
 				<text class="person">{{item.message}}</text>

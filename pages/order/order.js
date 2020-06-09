@@ -62,9 +62,9 @@ Page({
    * 点击订单列表，进入订单详情
    */
   onClickItem(event) {
-    wx.navigateTo({
-      url: '/pages/throw_detail/throw_detail',
-    })
+    // wx.navigateTo({
+    //   url: '/pages/throw_detail/throw_detail',
+    // })
   },
 
   /**

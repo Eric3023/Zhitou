@@ -34,5 +34,14 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+
+  /**
+   * 跳转到法律政策和隐私协议
+   */
+  onJumpToPolicy(){
+    wx.navigateTo({
+      url: '/pages/policy/policy',
+    })
   }
 })
