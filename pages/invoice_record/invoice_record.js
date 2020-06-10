@@ -22,6 +22,10 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+  },
+
+  onShow: function () {
+    this._reset();
     this._getRecords();
   },
 
@@ -83,7 +87,7 @@ Page({
         let price = this.data.records[index].actualPrice;
         //获取id
         ids += id;
-        if (i != this.data.items.length-1) ids += ',';
+        if (i != this.data.items.length - 1) ids += ',';
         //获取价格
         prices += parseFloat(price);
       }
@@ -102,9 +106,27 @@ Page({
   },
 
   /**
+   * 重置数据
+   */
+  _reset(){
+    this.setData({
+      records: [],
+      checkedAll: false,
+      items: [],//需要开具发票的订单
+  
+      page: 1,
+      size: 20,
+      lock: false,
+      hasMore: true,
+  
+      prices: 0,
+    });
+  },
+
+  /**
    * 计算总金额
    */
-  _calTotalMoney(){
+  _calTotalMoney() {
     let prices = 0;
     for (var i = 0; i < this.data.items.length; i++) {
       let index = this.data.items[i];

@@ -88,7 +88,10 @@ Page({
       email: this.data.email,
       orderId: this.data.ids,
     }).then(res => {
-
+      this._showToast('开票成功，稍后请在邮箱查收')
+      wx.navigateBack({
+        delta: 1,
+      });
     }).catch(e => {
       this._showToast('开具发票失败，请重新尝试')
     });
