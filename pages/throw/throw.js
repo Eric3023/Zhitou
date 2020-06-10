@@ -56,6 +56,9 @@ Page({
     monitorUrl:'',
 
     throwCount: 0,//投放数量，cpm
+    charging: 0,//按天计费，按照CPM计费
+    days: 1,//天数
+
     totalAmount: 0,
     balance: 0,
     remain: 0,
@@ -124,6 +127,16 @@ Page({
   onClickUpdate(event) {
     let position = event.currentTarget.dataset.position;
     let codeIndex = event.currentTarget.dataset.index;
+
+    let code = this.data.codes[codeIndex];
+    if(!code || code.status != 0 ){
+      wx.showToast({
+        title: '该广告位暂时无法投放',
+        icon: 'none',
+      })
+      return;
+    }
+    
     this._resetData(false);//重新选择广告位，之前广告位信息清空
     this.setData({
       state: 1,
@@ -308,7 +321,13 @@ Page({
    * 点击开始结算
    */
   onSettle() {
-    if (this.data.state != 3) return;//只有选择完广告位，且图片上传完成后，才可结算
+    if (this.data.state != 3) {
+      wx.showToast({
+        title: '请选择需要投放的广告位',
+        icon:'none',
+      })
+      return;
+    }//只有选择完广告位，且图片上传完成后，才可结算
     if (this.data.totalAmount <= 0) return;
     this.setData({
       state: 4,//确认结算弹框？
@@ -462,13 +481,18 @@ Page({
     //按照cpm结算
     if (code.charging == 0) {
       if (this.data.throwCount > 0) {
+        this.data.unitPrice = 60;
         this.setData({
+          charging: 0,
+          
           unitPrice: 60,
           unit: '元/CPM',//单价单位
           totalAmount: this.data.throwCount * this.data.unitPrice
         });
       } else {
         this.setData({
+          charging: 0,
+
           unitPrice: 60,
           unit: '元/CPM',//单价单位
           totalAmount: 0,
@@ -476,13 +500,20 @@ Page({
       }
     } else if (code.charging == 1) {
       if (days > 0) {
+        this.data.unitPrice = 20000;
         this.setData({
+          charging: 1,
+          days: days,
+
           unitPrice: 20000,
           unit: '元/天',//单价单位
           totalAmount: days * this.data.unitPrice
         });
       } else {
         this.setData({
+          charging: 1,
+          days: 0,
+
           unitPrice: 20000,
           unit: '元/天',//单价单位
           totalAmount: 0
@@ -597,6 +628,9 @@ Page({
       },
       progress: '',//图片上传进度
       imgurl: '',
+
+      charging: 0,
+      days: 1,
 
       totalAmount: 0,
     });

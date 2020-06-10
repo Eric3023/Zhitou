@@ -19,8 +19,8 @@ page {
 }
 
 .ad {
-  margin: 240rpx 50rpx 440rpx 50rpx;
-  width: 650rpx;
+  margin: 240rpx 35rpx 440rpx 35rpx;
+  width: 680rpx;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -32,7 +32,7 @@ page {
   flex-direction: row;
   align-items: center;
   margin-top: 26rpx;
-  width: 650rpx;
+  width: 680rpx;
   height: 138rpx;
   background-color: white;
   position: relative;
