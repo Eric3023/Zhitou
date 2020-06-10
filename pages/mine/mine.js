@@ -78,7 +78,9 @@ Page({
   onLoad: function (option) {
     this._resetUserInfo();
     this._checkLogin();
-    this._getBalance();
+    if(this.data.hasLogin === true) {
+      this._getBalance();
+    }
   },
 
   /**

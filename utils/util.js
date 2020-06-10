@@ -33,29 +33,15 @@ function request(url, data = {}, method = "GET") {
         'token': wx.getStorageSync('token')
       },
       success: function (res) {
-
         if (res.statusCode == 200) {
 
           if (res.data.errno == 800 || res.data.errno == 401) {
-
-            reject(res.data.errmsg);
-          }
-
-          if (res.data.errno == 501) {
-            // 清除登录相关内容
-            try {
-              wx.removeStorageSync('phone');
-              wx.removeStorageSync('token');
-            } catch (e) {
-              // Do something when catch error
-            }
-            // 切换到登录页面
-            wx.navigateTo({
-              url: '/pages/auth/login/login'
-            });
+            reLogin();
+            //reject(res.data);
           } else {
             resolve(res.data);
           }
+
         } else {
           reject(res.errMsg);
         }
@@ -113,6 +99,33 @@ function jhxLoadHide() {
   } else {
     wx.hideToast();
   }
+}
+
+function reLogin() {
+  // 清除登录相关内容
+  try {
+    wx.removeStorageSync('phone');
+    wx.removeStorageSync('token');
+  } catch (e) {
+    // Do something when catch error
+  }
+  wx.showModal({
+    title: "提示",
+    content: "用户未登录或已过期，请重新登录",
+    cancelText: "取消",
+    confirmText: "去登录",
+    success(res) {
+      if (res.confirm) {
+        wx.redirectTo({
+          url: '/pages/login/login',
+        })
+      } else if (res.cancel) {
+        wx.reLaunch({
+          url: '/pages/index/index',
+        })
+      }
+    }
+  });
 }
 
 module.exports = {
