@@ -1,17 +1,17 @@
 <view class="container">
 	<!-- layout 1 -->
 	<view class="header">
-		<image src="/img/adcode/bully.jpg"></image>
+		<image src="{{detail.ad.adImgUrl}}" mode="aspectFit"></image>
 		<view class="content">
-			<text class="title">韩国烤肉餐饮店投放</text>
-			<text class="throw">投放5天</text>
+			<text class="title">{{detail.ad.title}}</text>
+			<text class="throw">投放{{days? days:0}}天</text>
 		</view>
 		<view class="line"></view>
-		<text class="state">审核未通过</text>
+		<text class="state">{{detail.ad.status==0?'审核中':'审核未通过'}}</text>
 	</view>
 	<!-- layout 2 -->
-	<view class="sub">
-		<text class="reason">未通过原因：素材审核不合格</text>
+	<view class="sub" wx:if="{{detail.ad.checkDesc}}">
+		<text class="reason">{{detail.ad.checkDesc}}</text>
 		<view class="notice">
 			<text>素材注意事项</text>
 			<image class="notice_icon" src="/img/throw/notice.png"></image>
@@ -21,16 +21,16 @@
 	<view class="body">
 		<view class="title_container">
 			<view class="point"></view>
-			<view class="title">华腾世纪总部公园</view>
+			<view class="title">{{detail.ad.positionDesc}}</view>
 		</view>
-		<image class="img" src="/img/adcode/bully.jpg"></image>
+		<image class="img" src="{{detail.ad.adImgUrl}}" mode="aspectFit"></image>
 		<view class="tail">
 			<text>投放周期: </text>
-			<text class="data">2020年04月20日-2020年08月21日</text>
+			<text class="data">{{startTime}}-{{endTime}}</text>
 		</view>
 		<view class="tail">
 			<text>影响人群: </text>
-			<text class="data">300人</text>
+			<text class="data">{{detail.ad.crowd}}人</text>
 		</view>
 	</view>
 </view>

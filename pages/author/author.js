@@ -16,7 +16,7 @@ Page({
 
     //参数信息
     index: 0,
-    regionId: 110105,
+    regionId: '北京市北京市朝阳区',
     license: '',//营业执照
     licenseUrl: '',
     licenseProgess: 0, //0：不显示；1:正在上传；2：上传成功；3：上传失败
@@ -49,11 +49,16 @@ Page({
    * 注册地改变
    */
   bindRegionChange(event) {
-    this.data.regionId = event.detail.code[2];
-    console.log(this.data.regionId);
+
+    let region = event.detail.value;
+    let regionId = '';
+    for (var i = 0; i < region.length; i++) {
+      regionId += region[i];
+    }
 
     this.setData({
-      region: event.detail.value
+      region: region,
+      regionId: regionId,
     });
   },
 
@@ -73,14 +78,14 @@ Page({
         }
       }
     ).then(res => {
-      let response = JSON.parse(res);
-      let data = response.data;
+      let data = res;
       this.setData({
-        licenseUrl: data,
+        licenseUrl: data.data.url,
         licenseProgess: 2,
       });
       console.log(this.data.licenseUrl);
     }, error => {
+      console.log(error);
       this.setData({
         licenseProgess: 3,
       });
@@ -103,10 +108,9 @@ Page({
         }
       }
     ).then(res => {
-      let response = JSON.parse(res);
-      let data = response.data;
+      let data = res;
       this.setData({
-        idcard_a_url: data,
+        idcard_a_url: data.data.url,
         idcard_a_progress: 2,
       });
       console.log(this.data.idcard_a_url);
@@ -133,10 +137,9 @@ Page({
         }
       }
     ).then(res => {
-      let response = JSON.parse(res);
-      let data = response.data;
+      let data = res;
       this.setData({
-        idcard_b_url: data,
+        idcard_b_url: data.data.url,
         idcard_b_progress: 2,
       });
       console.log(this.data.idcard_b_url);
@@ -151,7 +154,23 @@ Page({
    * 提交信息
    */
   onSubmit(event) {
-    authorModel.author(this.data.index, this.data.regionId, this.data.licenseUrl, this.data.idcard_a_url, this.data.idcard_b_url);
+    console.log(this.data.index);
+    console.log(this.data.regionId);
+    console.log(this.data.licenseUrl);
+    console.log(this.data.idcard_a_url);
+    console.log(this.data.idcard_b_url);
+
+    authorModel.author(this.data.index, this.data.regionId, this.data.licenseUrl, this.data.idcard_a_url, this.data.idcard_b_url).then(
+      res => {
+        wx.showToast({
+          title: '信息已提交，请等待认证',
+        });
+      }
+    ).catch(error => {
+      wx.showToast({
+        title: '提交失败，请尝试重新提交',
+      });
+    });
   },
 
 
@@ -162,7 +181,8 @@ Page({
     return new Promise((resolve, reject) => {
       wx.chooseImage({
         count: 1,
-        sourceType: 'album',
+        sizeType: ['compressed'],
+        sourceType: ['album', 'camera'],
         complete: (res) => {
           resolve(res);
         },
@@ -174,24 +194,12 @@ Page({
    * 上传照片
    */
   _updateImage(path) {
-    return new Promise((resolve, reject) => {
-      fileModel.uploadImage({
-        path: path,
-        progress: res => {
-          console.log('上传进度', res.progress);
-        },
-        success: res => {
-          console.log('上传成功');
-          console.log(res);
-          resolve(res);
-        },
-        fail: error => {
-          console.log('上传失败');
-          console.log(error);
-          reject(error);
-        },
-      });
-    })
+    return fileModel.uploadImage({
+      path: path,
+      progress: res => {
+        console.log('上传进度', res.progress);
+      }
+    });
   }
 
 })

@@ -53,7 +53,7 @@ Page({
     progress: '',//图片上传进度
 
     isMonitor: 0, //是否使用记刻数据0:不使用；1:使用；
-    monitorUrl:'',
+    monitorUrl: '',
 
     throwCount: 0,//投放数量，cpm
     charging: 0,//按天计费，按照CPM计费
@@ -129,14 +129,14 @@ Page({
     let codeIndex = event.currentTarget.dataset.index;
 
     let code = this.data.codes[codeIndex];
-    if(!code || code.status != 0 ){
+    if (!code || code.status != 0) {
       wx.showToast({
         title: '该广告位暂时无法投放',
         icon: 'none',
       })
       return;
     }
-    
+
     this._resetData(false);//重新选择广告位，之前广告位信息清空
     this.setData({
       state: 1,
@@ -234,7 +234,8 @@ Page({
   onSelectModelPhoto() {
     wx.chooseImage({
       count: 1,
-      sourceType: 'album',
+      sizeType: ['compressed'],
+      sourceType: ['album', 'camera'],
       complete: (res) => {
         if (res && res.tempFilePaths) {
           this.data.model_param.img = res.tempFilePaths[0];
@@ -252,7 +253,8 @@ Page({
   onSelectDivPhoto() {
     wx.chooseImage({
       count: 1,
-      sourceType: 'album',
+      sizeType: ['compressed'],
+      sourceType: ['album', 'camera'],
       complete: (res) => {
         if (res && res.tempFilePaths) {
           this.data.div_param.img = res.tempFilePaths[0];
@@ -324,7 +326,7 @@ Page({
     if (this.data.state != 3) {
       wx.showToast({
         title: '请选择需要投放的广告位',
-        icon:'none',
+        icon: 'none',
       })
       return;
     }//只有选择完广告位，且图片上传完成后，才可结算
@@ -453,7 +455,7 @@ Page({
    */
   onConfirmMonitorUrl(event) {
     let value = event.detail.value;
-    if(value.startsWith("http://")||value.startsWith("https://")){
+    if (value.startsWith("http://") || value.startsWith("https://")) {
       this.setData({
         monitorUrl: value,
       })
@@ -484,7 +486,7 @@ Page({
         this.data.unitPrice = 60;
         this.setData({
           charging: 0,
-          
+
           unitPrice: 60,
           unit: '元/CPM',//单价单位
           totalAmount: this.data.throwCount * this.data.unitPrice
@@ -639,7 +641,7 @@ Page({
       this.setData({
         location_state: 0,
         isMonitor: 0, //是否使用记刻数据0:不使用；1:使用；
-        monitorUrl:'',
+        monitorUrl: '',
         mottoIndex: 0,//选中车型索引
         start: now,//投放开始日期
         end: now,//投放结束日期

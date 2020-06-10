@@ -1,5 +1,4 @@
-let OrderModel = require('../../models/order.js');
-const orderModel = new OrderModel();
+let orderModel = require('../../models/order.js');
 
 Page({
 
@@ -8,7 +7,14 @@ Page({
    */
   data: {
     orders: [],
+    extras: {
+      "exposureNum": 3,
+      "launching": 0,
+      "MacNum": 1,
+    },
+
     status: 0,
+
     page: 1,
     size: 20,
     lock: false,
@@ -62,9 +68,21 @@ Page({
    * 点击订单列表，进入订单详情
    */
   onClickItem(event) {
-    // wx.navigateTo({
-    //   url: '/pages/throw_detail/throw_detail',
-    // })
+    let value = event.currentTarget.dataset.value;
+    let id = value.id;
+    let status = value.status;
+    console.log(event);
+    if (id) {
+      if (status == 1 || status == 1) {
+        wx.navigateTo({
+          url: `/pages/throw_detail2/throw_detail2?id=${id}`,
+        })
+      } else if (status == 0 || status == 3) {
+        wx.navigateTo({
+          url: `/pages/throw_detail/throw_detail?id=${id}`,
+        })
+      }
+    }
   },
 
   /**

@@ -1,60 +1,62 @@
-// pages/throw_detail2/throw_detail2.js
+const throwModel = require('../../models/order.js');
+const dateUtil = require('../../utils/date.js');
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    detail: {},
 
+    startTime: '',
+    endTime: '',
+    days: 0,
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    let id = options.id;
+    console.log(`id:${id}`);
+    this._getThrowDetail(id);
   },
 
   /**
-   * 生命周期函数--监听页面初次渲染完成
+   * 获取投放详情
    */
-  onReady: function () {
+  _getThrowDetail(id) {
+    throwModel.getThrowDetail(id)
+      .then(res => {
+        console.log(res);
+        this.setData({
+          detail: res.data,
+        });
 
+        let start = res.data.ad.startTime;
+        let end = res.data.ad.endTime;
+        this._calDays(start, end);
+      }).catch(error => {
+        console.log(error);
+      });
   },
 
   /**
-   * 生命周期函数--监听页面显示
+   * 计算投放天数
    */
-  onShow: function () {
+  _calDays(start, end){
+    let endDate = new Date(end);
+    let startDate = new Date(start);
+    let endTime = dateUtil.tsFormatTime(endDate, 'yyyy年MM月dd日');
+    let startTime = dateUtil.tsFormatTime(startDate, 'yyyy年MM月dd日')
+    let days = Math.ceil((endDate - startDate) / (1000 * 60 * 60 * 24));
 
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
+    this.setData({
+      startTime: startTime,
+      endTime: endTime,
+      days: days,
+    });
   },
 
   /**

@@ -27,9 +27,9 @@ function author(typeId, regionId, license, idcard_a, idcard_b) {
     {
       certType: typeId,
       domicile: regionId,
-      file_biz: license,
-      file_f: idcard_a,
-      file_b: idcard_b,
+      imgUrl_biz: license,
+      imgUrl_f: idcard_a,
+      imgUrl_b: idcard_b,
     },
     'POST'
   );

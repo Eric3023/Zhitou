@@ -78,7 +78,13 @@ Page({
   onLoad: function (option) {
     this._resetUserInfo();
     this._checkLogin();
-    if(this.data.hasLogin === true) {
+    // if (this.data.hasLogin === true) {
+    //   this._getBalance();
+    // }
+  },
+
+  onShow() {
+    if (this.data.hasLogin === true) {
       this._getBalance();
     }
   },
