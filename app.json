@@ -25,7 +25,8 @@
     "pages/coupons/coupons",
     "pages/about/about",
     "pages/invoice_record/invoice_record",
-    "pages/policy/policy"
+    "pages/policy/policy",
+    "pages/preview/preview"
   ],
   "window": {
     "backgroundTextStyle": "light",
