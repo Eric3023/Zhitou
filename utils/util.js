@@ -111,7 +111,7 @@ function reLogin() {
   }
   wx.showModal({
     title: "提示",
-    content: "您的登录已过期，请重新登录",
+    content: "用户未登录或已过期，请重新登录",
     cancelText: "取消",
     confirmText: "去登录",
     success(res) {
