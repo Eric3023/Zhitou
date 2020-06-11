@@ -4,7 +4,7 @@ let ThrowModel = require('../../models/throw.js');
 var dateUtil = require('../../utils/date.js');
 let userModel = require('../../models/user.js');
 
-const defaultModel = 1;
+const defaultModel = 0;
 const app = getApp();
 const date = new Date();
 let now = dateUtil.tsFormatTime(date, 'yyyy-MM-dd');
@@ -65,6 +65,7 @@ Page({
     unit: '元/CPM',//单价单位
 
     mapFlag: false,//是否是从地图页面返回
+    previewUrl: '',//预览的url
   },
 
   /**
@@ -154,6 +155,16 @@ Page({
     let position = event.currentTarget.dataset.position;
     if (position == this.data.position) {
       console.log(position);
+      if (!this.data.previewUrl) {
+        wx.showToast({
+          title: '请上传素材后预览',
+          icon: 'none',
+        })
+        return;
+      }
+      // wx.navigateTo({
+      //   url: `/pages/preview/preview?adcode=${this.data.position}&url=${this.data.previewUrl}`,
+      // })
     }
   },
 
@@ -313,6 +324,7 @@ Page({
       this.setData({
         state: 3,//图片上传完成
       });
+      this._getPreviewImage();
     } else {
       this._updateImgFie({
         path: imgPath,
@@ -692,6 +704,9 @@ Page({
     throwModel.getTemplates(adPlace).then(res => {
       console.log('获取模板列表成功');
       console.log(res.data);
+      if (res.data.length > 0) {
+        this.data.model_param.modelId = res.data[0].id;
+      }
       this.setData({
         models: res.data,
       });
@@ -722,6 +737,7 @@ Page({
         if (res && res.errno == 0) {
           let data = res.data;
           this.data.imgurl = data.url;
+          this.data.previewUrl = res.data;
           this.setData({
             state: 3,//图片上传完成
           });
@@ -753,6 +769,26 @@ Page({
   },
 
   /**
+   *  获取预览模板图片 
+   */
+  _getPreviewImage() {
+    throwModel.getPreviewImage({
+      templateId: this.data.model_param.modelId,//模板Id
+      desc: this.data.model_param.content,//显示内容
+      contact: this.data.model_param.phone,//联系方式
+    }).then(
+      res => {
+        this.setData({
+          progress: 100,
+          previewUrl: res.data,
+        });
+      }
+    ).catch(e => {
+
+    });
+  },
+
+  /**
    * 获取余额
    */
   _getBalance() {
@@ -763,14 +799,15 @@ Page({
           console.log(res);
           let balance = res.data.totalAmount;
           let isAuth = res.data.isAuth;
+          // isAuth = 2;
 
           //余额不足
-          if(balance <= 0){
+          if (balance <= 0) {
             this._showNoMoney();
             return;
           }
           //是否认证
-          if(isAuth!=2){
+          if (isAuth != 2) {
             this._showNoAuth(isAuth);
             return;
           }
@@ -787,7 +824,7 @@ Page({
   /**
    * 提示未认证
    */
-  _showNoAuth(isAuth){
+  _showNoAuth(isAuth) {
     wx.showModal({
       title: "提示",
       content: "账户未认证，请认证后进行投放",
@@ -807,10 +844,10 @@ Page({
     });
   },
 
-   /**
-   * 提示余额不足
-   */
-  _showNoMoney(){
+  /**
+  * 提示余额不足
+  */
+  _showNoMoney() {
     wx.showModal({
       title: "提示",
       content: "余额不足，请充值后进行投放",

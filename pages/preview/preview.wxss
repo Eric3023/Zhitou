@@ -1,6 +1,55 @@
-.background{
+.container {
+  position: relative;
+}
+
+.background {
   width: 100%;
   position: absolute;
   top: 0;
   bottom: 0;
+}
+
+.fixedimage {
+  position: absolute;
+  background-color: brown;
+}
+
+.start{
+  width: 462rpx;
+  height: 1000rpx;
+  border-radius: 48rpx;
+  top: 165rpx;
+  left: 136rpx;
+}
+
+.bully {
+  width: 390rpx;
+  height: 576rpx;
+  top: 380rpx;
+  border-radius: 8rpx;
+  left: 170rpx;
+}
+
+.activity{
+  width: 390rpx;
+  height: 576rpx;
+  top: 380rpx;
+  border-radius: 8rpx;
+  left: 170rpx;
+}
+
+.personal{
+  width: 390rpx;
+  height: 576rpx;
+  top: 380rpx;
+  border-radius: 8rpx;
+  left: 170rpx;
+}
+
+.receiveCode{
+  width: 390rpx;
+  height: 576rpx;
+  top: 380rpx;
+  border-radius: 8rpx;
+  left: 170rpx;
 }

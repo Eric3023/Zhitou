@@ -35,7 +35,7 @@
 							<text class="btn preview" style="background-color:{{position==item.optionCode && state==3? '#ffffff':'#bdbdbd'}}; color:{{position==item.optionCode && state==3? '#000000':'#ffffff'}};">预览</text>
 						</view>
 					</view>
-					<progress class="code_progress" wx:if="{{position==item.optionCode && state!=0 && state!=1 && model==1}}" activeColor="#42c2e2" backgroundColor="#e9e9e9" percent="{{position==item.optionCode? progress:0}}">
+					<progress class="code_progress" wx:if="{{position==item.optionCode && state!=0 && state!=1}}" activeColor="#42c2e2" backgroundColor="#e9e9e9" percent="{{position==item.optionCode? progress:0}}">
 					</progress>
 					<!-- <view class="mask" wx:if="{{position!=item.optionCode && state!=0 && state!=1 || item.status!=0}}"></view> -->
 				</view>
@@ -51,7 +51,7 @@
 				<!-- 模板选择 -->
 				<view class="model_selector">
 					<view class="model_header">
-						<radio style="transform:scale(0.6);" checked="true" value="{{0}}" disabled></radio>
+						<radio style="transform:scale(0.6);" checked="true" value="{{0}}" checked></radio>
 						<text  class="model_title" >  模板选择 :</text>
 					</view>
 					<view class="model_body">
@@ -61,7 +61,7 @@
 									<block wx:for="{{models}}" wx:key="index">
 										<view class="model_item">
 											<image class="model_img" src="{{item.styleImageUrl}}"></image>
-											<radio class="model_radio" style="transform:scale(0.6);" checked="{{index==0}}" value="{{index}}"></radio>
+											<radio class="model_radio" style="transform:scale(0.6);" checked="{{index==0}}" value="{{item.id}}"></radio>
 										</view>
 									</block>
 								</view>
@@ -86,7 +86,7 @@
 				<!-- 直接上传 -->
 				<view class="model_selector">
 					<view class="model_header">
-						<radio style="transform:scale(0.6);" value="{{1}}" checked></radio>
+						<radio style="transform:scale(0.6);" value="{{1}}"></radio>
 						<text  class="model_title" >直接上传 :</text>
 					</view>
 					<view class="model_body">

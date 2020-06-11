@@ -63,6 +63,20 @@ class ThrowModel {
       },
       'POST'));
   }
+
+  /**
+   * 获取模板预览图片
+   */
+  getPreviewImage({ templateId, desc, contact }) {
+    return check.checkResult(util.request(
+      config.PreviewImage,
+      {
+        templateId: templateId,
+        desc: desc,
+        contact: contact,
+      }
+    ))
+  }
 }
 
 

@@ -1,1 +1,16 @@
-<image class="background" src="{{path}}" mode="widthFix" />
+<view class="container">
+
+	<image class="background" src="{{path}}" mode="widthFix" />
+
+	<image class="fixedimage start" wx:if="{{optionCode == appCode}}" mode="scaleToFill" src="{{url}}"></image>
+
+	<image class="fixedimage bully" wx:if="{{optionCode == bullyCode}}" mode="scaleToFill" src="{{url}}"></image>
+
+	<image class="fixedimage activity" wx:if="{{optionCode == activityCode}}" mode="scaleToFill" src="{{url}}"></image>
+
+	<image class="fixedimage personal" wx:if="{{optionCode == personalCode}}" mode="scaleToFill" src="{{url}}"></image>
+
+	<image class="fixedimage receive" wx:if="{{optionCode == receiveCode}}" mode="scaleToFill" src="{{url}}"></image>
+
+
+</view>

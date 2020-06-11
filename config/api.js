@@ -47,6 +47,8 @@ module.exports = {
   OpenInvoice: WxApiRoot + 'pay/openInvoice',
   //投放详情
   ThrowDetail: WxApiRoot + 'advertising/getAdvertisingInfo',
+  //获取模板预览图片
+  PreviewImage: WxApiRoot + 'advertising/getTemplateImgUrl',
 
 
   //用户余额接口
