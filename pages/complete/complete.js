@@ -23,19 +23,19 @@ Page({
    * 查看订单
    */
   onClikeDetail() {
-    let id = this.data.id;
-    let status = this.data.status;
-    if (id) {
-      if (status == 0 || status == 1) {
-        wx.navigateTo({
-          url: `/pages/throw_detail2/throw_detail2?id=${id}`,
-        })
-      } else if (status == 2 || status == 3) {
-        wx.navigateTo({
-          url: `/pages/throw_detail/throw_detail?id=${id}`,
-        })
-      }
-    }
+    // let id = this.data.id;
+    // let status = this.data.status;
+    // if (id) {
+    //   if (status == 0 || status == 1) {
+    //     wx.navigateTo({
+    //       url: `/pages/throw_detail2/throw_detail2?id=${id}`,
+    //     })
+    //   } else if (status == 2 || status == 3) {
+    //     wx.navigateTo({
+    //       url: `/pages/throw_detail/throw_detail?id=${id}`,
+    //     })
+    //   }
+    // }
   }
 })
 

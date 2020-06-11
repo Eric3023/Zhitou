@@ -68,21 +68,21 @@ Page({
    * 点击订单列表，进入订单详情
    */
   onClickItem(event) {
-    // let value = event.currentTarget.dataset.value;
-    // let id = value.id;
-    // let status = value.status;
-    // console.log(event);
-    // if (id) {
-    //   if (status == 0 || status == 1) {
-    //     wx.navigateTo({
-    //       url: `/pages/throw_detail2/throw_detail2?id=${id}`,
-    //     })
-    //   } else if (status == 2 || status == 3) {
-    //     wx.navigateTo({
-    //       url: `/pages/throw_detail/throw_detail?id=${id}`,
-    //     })
-    //   }
-    // }
+    let value = event.currentTarget.dataset.value;
+    let id = value.id;
+    let status = value.status;
+    console.log(event);
+    if (id) {
+      if (status == 0 || status == 1) {
+        wx.navigateTo({
+          url: `/pages/throw_detail2/throw_detail2?id=${id}`,
+        })
+      } else if (status == 2 || status == 3) {
+        wx.navigateTo({
+          url: `/pages/throw_detail/throw_detail?id=${id}`,
+        })
+      }
+    }
   },
 
   /**
