@@ -10,7 +10,6 @@ Page({
     // Banner默认轮播图(防止网络数据获取失败，显示空白)
     banners: [
       { imageUrl: '/img/banner/banner1.jpg' },
-      { imageUrl: '/img/banner/banner2.jpg' },
     ],
     defaultBanner: '/img/banner/banner1.jpg',
 
