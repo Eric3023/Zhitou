@@ -11,7 +11,6 @@
 
 .fixedimage {
   position: absolute;
-  background-color: brown;
 }
 
 .start{
@@ -31,25 +30,25 @@
 }
 
 .activity{
-  width: 390rpx;
-  height: 576rpx;
-  top: 380rpx;
-  border-radius: 8rpx;
-  left: 170rpx;
+  width: 460rpx;
+  height: 54rpx;
+  top: 304rpx;
+  border-radius: 6rpx;
+  left: 138rpx;
 }
 
 .personal{
-  width: 390rpx;
-  height: 576rpx;
-  top: 380rpx;
-  border-radius: 8rpx;
-  left: 170rpx;
+  width: 458rpx;
+  height: 154rpx;
+  top: 880rpx;
+  border-radius: 0rpx;
+  left: 140rpx;
 }
 
-.receiveCode{
-  width: 390rpx;
-  height: 576rpx;
-  top: 380rpx;
-  border-radius: 8rpx;
+.receive{
+  width: 412rpx;
+  height: 86rpx;
+  top: 448rpx;
   left: 170rpx;
+  border-radius: 0rpx;
 }

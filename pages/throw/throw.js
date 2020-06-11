@@ -162,9 +162,9 @@ Page({
         })
         return;
       }
-      // wx.navigateTo({
-      //   url: `/pages/preview/preview?adcode=${this.data.position}&url=${this.data.previewUrl}`,
-      // })
+      wx.navigateTo({
+        url: `/pages/preview/preview?adcode=${this.data.position}&url=${this.data.previewUrl}`,
+      })
     }
   },
 
