@@ -10,7 +10,7 @@ Page({
     extras: {
       "exposureNum": 3,
       "launching": 0,
-      "MacNum": 1,
+      "macNum": 1,
     },
 
     status: 0,
@@ -44,6 +44,7 @@ Page({
         this.setData({
           hasMore: hasNext,
           orders: this.data.orders,
+          extras: res.data.extras,
         });
         this._removeLock();
         wx.hideLoading();
