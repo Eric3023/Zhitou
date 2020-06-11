@@ -11,7 +11,7 @@ Component({
       type: String
     },
     flag: Boolean,
-    authored: Boolean
+    authored: Number
   },
 
   /**

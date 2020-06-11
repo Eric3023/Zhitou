@@ -3,7 +3,7 @@
 	<!-- js中使用用户信息，在登录页面实现 -->
 	<!-- <open-data class="uicon" style="border: 6rpx solid {{authored? '#61b39d':'#ffffff'}};" type="userAvatarUrl" />
 	<open-data class="uid" type="userNickName" /> -->
-	<image_button class="uicon" open-type="getUserInfo" disabled="{{flag}}" bind:userinfo="getUserInfo" style="border: 6rpx solid {{authored? '#61b39d':'#ffffff'}};">
+	<image_button class="uicon" open-type="getUserInfo" disabled="{{flag}}" bind:userinfo="getUserInfo" style="border: 6rpx solid {{authored==2? '#61b39d':'#ffffff'}};">
 		<image src="{{uicon?uicon:'img/icon_header.png'}}" slot="img"></image>
 	</image_button>
 	<button open-type="getUserInfo" disabled="{{flag}}" bindgetuserinfo="getWxUserInfo" class="uid">{{uid?uid:'获取用户昵称'}}</button>

@@ -1,5 +1,7 @@
 page {
   background-color: white;
+  width: 100%;
+  height: 100%;
 }
 
 .info {
@@ -125,4 +127,17 @@ button{
   bottom: 0;
   background-color: #f88a3e;
   border-radius: 0;
+}
+
+.container_authing{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.container_authing .info{
+  font-size: 32rpx;
+  color: #363636;
 }

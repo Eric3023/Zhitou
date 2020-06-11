@@ -1,10 +1,10 @@
 // 本机开发API地址
 // var BaseApi = 'http://127.0.0.1:8070/';
 // 局域网开发API地址
-var BaseApi = 'http://192.168.1.105:8070/';
+// var BaseApi = 'http://192.168.1.105:8070/';
 // var BaseApi = 'http://192.168.1.19:8070/';
 // 线上云平台api地址
-// var BaseApi = "https://zt.ottauto.tv/"
+var BaseApi = "https://zt.ottauto.tv/"
 
 var WxApiRoot = BaseApi + 'wx/';
 
@@ -33,8 +33,8 @@ module.exports = {
   Upload: WxApiRoot + 'storage/upload',
   //充值记录接口
   PayRecord: WxApiRoot + 'pay/payRecord',
-  //账户余额接口
-  Balance: WxApiRoot + 'user/index',
+  //用户信息接口
+  UserInfo: WxApiRoot + 'user/index',
   //订单列表
   Order: WxApiRoot + 'advertising/getAdvertisings',
   //企业认证

@@ -7,7 +7,7 @@
 		<!-- 1.1 用户简介：头像和手机号 -->
 		<view class="user_info">
 			<v_user class="header_user_container" authored="{{authored}}" uicon="{{user_info.uicon}}" bind:getWxUserInfo="getWxUserInfo" uid="{{user_info.uid}}" flag="{{user_info.flag}}" />
-			<text class="authentication" style="background-color:{{authored? '#61b39d':'#ffffff'}}; color:{{authored? '#ffffff':'#000000'}}" catchtap="onAuthor">{{authored? '已认证':'未认证'}}</text>
+			<text class="authentication" style="background-color:{{authored==2? '#61b39d':'#ffffff'}}; color:{{authored==2? '#ffffff':'#000000'}}" catchtap="onAuthor">{{util.getAuthed(authored)}}</text>
 		</view>
 		<!-- 1.2 账户余额 -->
 		<v_balance class="header_user_balance" balance="{{balance}}" bindrecharge="recharge" />
@@ -21,3 +21,20 @@
 		<text>没有更多了</text>
 	</view>
 </view>
+
+<wxs module="util">
+	var getAuthed = function(isAuth){
+		switch(isAuth){
+			case 1:
+			 return "认证中";
+			case 2:
+			 return "已认证";
+			default:
+			 return "未认证";
+		}
+	}
+
+	module.exports = {
+		getAuthed: getAuthed
+	}
+</wxs>

@@ -1,4 +1,5 @@
-<view class="container">
+<!-- 未认证/已认证 -->
+<view class="container_auth" wx:if="{{isAuth!=1}}">
 	<!-- 基本信息 -->
 	<view class="info">
 		基本信息
@@ -51,4 +52,9 @@
 	</view>
 	<!-- 提交按钮 -->
 	<button catchtap="onSubmit">提交</button>
+</view>
+
+<!-- 认证中 -->
+<view class="container_authing" wx:if="{{isAuth==1}}">
+	<text class="info">认证信息审核中，请稍后</text>
 </view>

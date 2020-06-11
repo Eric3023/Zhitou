@@ -7,6 +7,8 @@ Page({
    * 页面的初始数据
    */
   data: {
+    isAuth: 0,//0：未认证；1:认证中；2：已认证
+
     types: [
       '营业执照',
     ],
@@ -32,7 +34,11 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    console.log(options);
+    
+    this.setData({
+      isAuth: options.isAuth,
+    })
   },
 
   /**

@@ -1,7 +1,6 @@
-let AccountModel = require('../../models/account.js');
+let userModel = require('../../models/user.js');
 let UserInfoHelper = require('../../utils/userInfo.js')
 const userInfoHelper = new UserInfoHelper();
-const accountModel = new AccountModel();
 const app = getApp()
 Page({
 
@@ -10,13 +9,13 @@ Page({
    */
   data: {
     phone: '',
-    authored: false,
+    authored: 0,//0:未认证；1：认证中；2：已认证
     hasLogin: false,
     balance: '0',
     user_info: {
       uicon: "",
       uid: "",
-      flag: false,
+      flag: false,//是否缓存用户信息
     },
     user_datas: [
       { icon: "/img/mine/icon_mine_collection.jpg", title: "我的订单" },
@@ -124,7 +123,7 @@ Page({
    */
   onAuthor(event) {
     wx.navigateTo({
-      url: '/pages/author/author',
+      url: `/pages/author/author?isAuth=${this.data.authored}`,
     })
   },
 
@@ -170,17 +169,18 @@ Page({
    * 获取账户余额
    */
   _getBalance() {
-    accountModel.getBalance().then(
+    userModel.getUserInfo().then(
       res => {
         let balance = res.data.totalAmount;
         balance = balance.toFixed(2);
         this.setData({
-          balance: balance,
+          balance: balance,//账号余额
+          authored: res.data.isAuth,//是否认证
         });
-      }, error => {
-
       }
-    );
+    ).catch(e => {
+      console.log(e);
+    });
   },
 
   /**
@@ -198,7 +198,7 @@ Page({
 
 
   /**
-   * 本地持久化中获取用户信息（暂时废弃）
+   * 本地持久化中获取用户信息
    */
   _getStorageUserInfo() {
     let uicon = wx.getStorageSync("uicon");

@@ -2,11 +2,10 @@ const locationModel = require('../../models/location.js');
 const fileModel = require('../../models/file.js');
 let ThrowModel = require('../../models/throw.js');
 var dateUtil = require('../../utils/date.js');
-let AccountModel = require('../../models/account.js')
+let userModel = require('../../models/user.js');
 
 const defaultModel = 1;
 const app = getApp();
-const accountModel = new AccountModel();
 const date = new Date();
 let now = dateUtil.tsFormatTime(date, 'yyyy-MM-dd');
 let throwModel = new ThrowModel();
@@ -85,6 +84,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    //如果从地图也返回（修改了地点），重新设置数据
     if (this.data.mapFlag) {
       this._setState(0);
       this._resetData(true);
@@ -92,6 +92,7 @@ Page({
       this._getAdPlaces();
       this._getCarTypes();
     }
+    //更新余额，判断是否认证
     this._getBalance();
     this.data.mapFlag = false;
   },
@@ -755,12 +756,25 @@ Page({
    * 获取余额
    */
   _getBalance() {
-    accountModel.getBalance()
+    userModel.getUserInfo()
       .then(
         res => {
           console.log('成功获取余额');
           console.log(res);
           let balance = res.data.totalAmount;
+          let isAuth = res.data.isAuth;
+
+          //余额不足
+          if(balance <= 0){
+            this._showNoMoney();
+            return;
+          }
+          //是否认证
+          if(isAuth!=2){
+            this._showNoAuth(isAuth);
+            return;
+          }
+
           this.setData({
             balance: balance.toFixed(2),
             remain: (this.data.balance - this.data.totalAmount).toFixed(2),
@@ -768,5 +782,51 @@ Page({
         }, error => {
 
         });
-  }
+  },
+
+  /**
+   * 提示未认证
+   */
+  _showNoAuth(isAuth){
+    wx.showModal({
+      title: "提示",
+      content: "账户未认证，请认证后进行投放",
+      cancelText: "取消",
+      confirmText: "去认证",
+      success(res) {
+        if (res.confirm) {
+          wx.navigateTo({
+            url: `/pages/author/author?isAuth=${isAuth}`,
+          })
+        } else if (res.cancel) {
+          wx.reLaunch({
+            url: '/pages/index/index',
+          })
+        }
+      }
+    });
+  },
+
+   /**
+   * 提示余额不足
+   */
+  _showNoMoney(){
+    wx.showModal({
+      title: "提示",
+      content: "余额不足，请充值后进行投放",
+      cancelText: "取消",
+      confirmText: "去充值",
+      success(res) {
+        if (res.confirm) {
+          wx.navigateTo({
+            url: '/pages/recharge/recharge',
+          })
+        } else if (res.cancel) {
+          wx.reLaunch({
+            url: '/pages/index/index',
+          })
+        }
+      }
+    });
+  },
 })
