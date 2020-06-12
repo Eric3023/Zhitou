@@ -29,8 +29,10 @@ Page({
    */
   onLoad: function (options) {
     let adcode = options.adcode;
-    let url = options.url;
     this._initBackground(adcode);
+    this.setData({
+      url:options.url,
+    });
   },
 
   /**

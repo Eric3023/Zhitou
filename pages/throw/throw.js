@@ -737,7 +737,7 @@ Page({
         if (res && res.errno == 0) {
           let data = res.data;
           this.data.imgurl = data.url;
-          this.data.previewUrl = res.data;
+          this.data.previewUrl = data.url;
           this.setData({
             state: 3,//图片上传完成
           });
