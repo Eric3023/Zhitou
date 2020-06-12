@@ -419,7 +419,7 @@ Page({
         this._resetData(true);
 
         wx.navigateTo({
-          url: '../../pages/complete/complete',
+          url: `../../pages/complete/complete?id=${res.data}`,
         });
       } else {
         wx.showToast({
