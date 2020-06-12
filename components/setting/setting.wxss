@@ -6,6 +6,7 @@
   height: 105rpx;
   font-size: 30rpx;
   color: #212121;
+  position: relative;
 }
 
 .setting_line {
@@ -26,5 +27,8 @@
   width: 32rpx;
   height: 32rpx;
   position: absolute;
+  align-items: center;
   left: 680rpx;
+  top: 36rpx;
+  
 }

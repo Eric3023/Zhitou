@@ -1,6 +1,6 @@
 <view class="setting_container" bindtap="onClickItem">
 	<image class="setting_icon" src="{{icon}}"></image>
-	<text>{{title}}</text>
+	<text style="textalign:left;">{{title}}</text>
 	<image class="setting_enter" src="{{enter}}"></image>
 </view>
 <view class="setting_line"></view>
