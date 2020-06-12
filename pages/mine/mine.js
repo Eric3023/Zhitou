@@ -11,7 +11,7 @@ Page({
     phone: '',
     authored: 0,//0:未认证；1：认证中；2：已认证
     hasLogin: false,
-    balance: '0',
+    balance: '0.00',
     user_info: {
       uicon: "",
       uid: "",
@@ -192,7 +192,8 @@ Page({
         uicon: "",
         uid: "",
         flag: false,
-      }
+      },
+      balance: '0.00',
     });
   },
 

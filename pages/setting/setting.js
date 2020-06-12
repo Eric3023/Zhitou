@@ -33,7 +33,7 @@ Page({
             success: res => {
               var page = getCurrentPages().pop();
               if (page == undefined || page == null) return;
-              page.onLoad();
+              page._resetUserInfo();
             }
           })
         }
