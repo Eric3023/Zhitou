@@ -22,7 +22,7 @@
     </view> -->
 
 	<view class="location" bindtap="onJumpToMap">
-		<image src="/img/11.png"></image>
+		<image src="/img/icon_point.png"></image>
 		<text class="title">当前位置：{{location.formatted_addresses.recommend}}</text>
 		<view class="user-font">
 			{{location.ad_info.province}}用户转化指数等级：高
