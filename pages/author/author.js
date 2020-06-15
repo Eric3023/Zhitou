@@ -84,12 +84,18 @@ Page({
         }
       }
     ).then(res => {
-      let data = res;
-      this.setData({
-        licenseUrl: data.data.url,
-        licenseProgess: 2,
-      });
-      console.log(this.data.licenseUrl);
+      if (res) {
+        let data = res;
+        this.setData({
+          licenseUrl: data.data.url,
+          licenseProgess: 2,
+        });
+        console.log(this.data.licenseUrl);
+      } else {
+        this.setData({
+          licenseProgess: 0,
+        });
+      }
     }, error => {
       console.log(error);
       this.setData({

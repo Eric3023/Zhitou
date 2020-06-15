@@ -26,12 +26,14 @@
 	<view class="license">
 		企业营业执照
 		<text class="notice">请上传最新营业执照正面照（仅支持中国大陆地区）</text>
-		<view class="photo" wx:if="{{!licenseUrl}}" catchtap="onSelectLicense">
-			+
-			<text>点击上传</text>
+		<view class="photo_contianer">
+			<view class="photo" wx:if="{{!licenseUrl}}" catchtap="onSelectLicense">
+				+
+				<text>点击上传</text>
+			</view>
+			<image class="photo" wx:if="{{licenseUrl}}" src="{{license}}" catchtap="onSelectLicense" />
+			<!-- <v_loading state="{{licenseProgess}}"></v_loading> -->
 		</view>
-		<image class="photo" wx:if="{{licenseUrl}}" src="{{license}}" catchtap="onSelectLicense" />
-		<icon></icon>
 	</view>
 	<!-- 法人信息 -->
 	<view class="legal">

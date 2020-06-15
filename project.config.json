@@ -59,7 +59,15 @@
 		},
 		"miniprogram": {
 			"current": -1,
-			"list": []
+			"list": [
+				{
+					"id": 0,
+					"name": "pages/author/author",
+					"pathName": "pages/author/author",
+					"query": "adcode=19",
+					"scene": null
+				}
+			]
 		}
 	}
 }

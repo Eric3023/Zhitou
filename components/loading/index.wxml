@@ -1,0 +1,3 @@
+<van-loading wx:if="{{state==1}}" color="{{color}}" size="{{size}}" vertical></van-loading>
+<icon wx:if="{{state==2}}" type="success" color="{{color}}" size="{{size}}"></icon>
+<icon wx:if="{{state==3}}" type="warn" color="{{color}}" size="{{size}}"></icon>

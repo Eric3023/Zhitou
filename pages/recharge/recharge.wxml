@@ -8,7 +8,7 @@
 				</view>
 				<view class="recharge">
 					<text>充值金额</text>
-					<input type="number" name="recharge" confirm-type="done" placeholder="输入充值金额"></input>
+					<input type="digit" name="recharge" confirm-type="done" placeholder="输入充值金额"></input>
 				</view>
 			</view>
 			<view class="payment-method">

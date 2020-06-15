@@ -1,4 +1,6 @@
 {
-  "usingComponents": {},
+  "usingComponents": {
+    "v_loading": "/components/loading/index"
+  },
   "navigationBarTitleText": "企业实名认证"
 }
