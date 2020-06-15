@@ -246,7 +246,8 @@ Page({
   onSelectModelPhoto() {
     wx.chooseImage({
       count: 1,
-      sizeType: ['compressed'],
+      // sizeType: ['compressed'],
+      sizeType: ['original'],
       sourceType: ['album', 'camera'],
       complete: (res) => {
         if (res && res.tempFilePaths) {
@@ -265,7 +266,8 @@ Page({
   onSelectDivPhoto() {
     wx.chooseImage({
       count: 1,
-      sizeType: ['compressed'],
+      // sizeType: ['compressed'],
+      sizeType: ['original'],
       sourceType: ['album', 'camera'],
       complete: (res) => {
         if (res && res.tempFilePaths) {

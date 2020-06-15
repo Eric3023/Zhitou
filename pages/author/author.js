@@ -170,12 +170,14 @@ Page({
     if (authorPromise) {
       authorPromise.then(
         res => {
+          console.log(res);
           wx.showToast({
             title: '信息已提交，请等待认证',
             icon: 'none',
           });
         }
       ).catch(error => {
+        console.log(error);
         wx.showToast({
           title: '提交失败，请尝试重新提交',
           icon: 'none',
@@ -192,7 +194,8 @@ Page({
     return new Promise((resolve, reject) => {
       wx.chooseImage({
         count: 1,
-        sizeType: ['compressed'],
+        // sizeType: ['compressed'],
+        sizeType: ['original'],
         sourceType: ['album', 'camera'],
         complete: (res) => {
           resolve(res);
