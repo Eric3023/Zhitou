@@ -1,4 +1,4 @@
-<view class="container">
+<view class="container"  wx:if="{{list&&list.length!=0}}">
 	<view class="header"></view>
 	<view class="item" wx:for="{{list}}" wx:key="index">
 		<view class="sawtooth" style="background: radial-gradient(transparent 8rpx, {{item.isOver?'#e5e5e5':'#ffeee7'}} 8rpx);background-size: 30rpx 30rpx;background-position: 16rpx 0rpx;"></view>
@@ -15,4 +15,8 @@
 			<image wx:if="{{item.isOver}}" src="/img/coupons/over.jpg"></image>
 		</view>
 	</view>
+</view>
+
+<view class="empty" wx:if="{{!(list&&list.length!=0)}}">
+	<text>暂时没有优惠券哦~~~</text>
 </view>

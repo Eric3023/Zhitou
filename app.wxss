@@ -1,65 +1,98 @@
 @import './common.wxss';
-page {background-color:#f3f3f3;}
+
+page {
+  background-color: #f3f3f3;
+}
+
+.empty {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 30rpx;
+  color: #666666;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
 .container {
   height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding:0rpx 0;
+  padding: 0rpx 0;
   box-sizing: border-box;
-  
-}
-.clear:before{
-    display: table;
-    content: "";
-    clear:both; 
-}
-.clear:after{
-    display: table;
-    content: "";
-    clear:both; 
+
 }
 
-.inline{
+.clear:before {
+  display: table;
+  content: "";
+  clear: both;
+}
+
+.clear:after {
+  display: table;
+  content: "";
+  clear: both;
+}
+
+.inline {
   display: inline
 }
-.fo-lan{
+
+.fo-lan {
   color: #0099FF
 }
-.fo-t{
+
+.fo-t {
   color: #46495f
 }
-.fo-p{
+
+.fo-p {
   color: #ff6633
 }
-.bg-t{
+
+.bg-t {
   background-color: #46495f
 }
+
 .bg-t:active {
   background-color: rgba(70, 73, 95, 0.8)
 }
-.bg-p{
+
+.bg-p {
   background-color: #ff6633
 }
-.bg-sp{
+
+.bg-sp {
   background-color: rgba(255, 101, 50, 0.06)
 }
-.fo-green{
+
+.fo-green {
   color: #33CC66
 }
-.bg-green{
+
+.bg-green {
   background-color: #33CC66
 }
-.bg-g2{
+
+.bg-g2 {
   background-color: #e1e1e1
 }
-.fo-g2{
+
+.fo-g2 {
   color: #e1e1e1
 }
-.w-600{
+
+.w-600 {
   width: 600rpx
 }
-.fix-user{
+
+.fix-user {
   width: 100rpx;
   height: 100rpx;
   border-radius: 100rpx 0 0 100rpx;
@@ -68,21 +101,24 @@ page {background-color:#f3f3f3;}
   right: 0rpx;
   background-color: #fff;
 }
-.point-green{
+
+.point-green {
   background-color: #33CC66;
   width: 15rpx;
   height: 15rpx;
   border-radius: 30rpx;
   border: 5rpx solid rgb(195, 252, 213)
 }
-.point-ori{
+
+.point-ori {
   background-color: #ff6633;
   width: 15rpx;
   height: 15rpx;
   border-radius: 30rpx;
   border: 5rpx solid #fcc4b2
 }
-.nom{
+
+.nom {
   display: inline-block;
   padding: 0 30rpx;
   line-height: 50rpx;
@@ -90,7 +126,8 @@ page {background-color:#f3f3f3;}
   border-radius: 0 50rpx 50rpx 0;
   margin-top: 30rpx
 }
-.choose-address-btn{
+
+.choose-address-btn {
   width: 80rpx;
   height: 50rpx;
   font-size: 24rpx;
@@ -100,32 +137,38 @@ page {background-color:#f3f3f3;}
   color: #ffffff;
   border-radius: 4rpx
 }
-.vertical-line{
+
+.vertical-line {
   width: 2rpx;
   height: 50rpx;
   background-color: #e1e1e1
 }
-.address-content{
+
+.address-content {
   width: 443rpx;
 }
-.tags{
+
+.tags {
   padding: 15rpx 30rpx;
   margin-right: 20rpx;
   border-radius: 100rpx;
   font-size: 24rpx;
   margin-bottom: 20rpx;
 }
-.fix-top{
+
+.fix-top {
   width: 750rpx;
   position: fixed;
   top: 0
 }
-.fix-bot{
+
+.fix-bot {
   width: 750rpx;
   position: fixed;
   bottom: 0;
 }
-.nm{
+
+.nm {
   width: 60rpx;
   height: 40rpx;
   display: inline-block;
