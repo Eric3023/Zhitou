@@ -22,7 +22,7 @@ function author(typeId, regionId, license, idcard_a, idcard_b) {
     return;
   }
 
-  util.request(
+  return util.request(
     config.Author,
     {
       certType: typeId,

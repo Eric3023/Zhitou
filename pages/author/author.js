@@ -35,7 +35,7 @@ Page({
    */
   onLoad: function (options) {
     console.log(options);
-    
+
     this.setData({
       isAuth: options.isAuth,
     })
@@ -166,17 +166,22 @@ Page({
     console.log(this.data.idcard_a_url);
     console.log(this.data.idcard_b_url);
 
-    authorModel.author(this.data.index, this.data.regionId, this.data.licenseUrl, this.data.idcard_a_url, this.data.idcard_b_url).then(
-      res => {
+    let authorPromise = authorModel.author(this.data.index, this.data.regionId, this.data.licenseUrl, this.data.idcard_a_url, this.data.idcard_b_url);
+    if (authorPromise) {
+      authorPromise.then(
+        res => {
+          wx.showToast({
+            title: '信息已提交，请等待认证',
+            icon: 'none',
+          });
+        }
+      ).catch(error => {
         wx.showToast({
-          title: '信息已提交，请等待认证',
+          title: '提交失败，请尝试重新提交',
+          icon: 'none',
         });
-      }
-    ).catch(error => {
-      wx.showToast({
-        title: '提交失败，请尝试重新提交',
-      });
-    });
+      })
+    }
   },
 
 
