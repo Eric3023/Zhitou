@@ -1,4 +1,4 @@
-<wxs src="order.wxs" module="util"/>
+<wxs src="order.wxs" module="util" />
 <view class="container">
 	<!-- 订单简介 -->
 	<v_statistic class="header" throwing="{{extras.launching}}" exposed="{{extras.exposureNum}}" audience="{{extras.macNum}}" />
@@ -8,4 +8,8 @@
 	<block class="list" wx:for="{{orders}}" wx:key="index">
 		<v_order img="{{item.adImgUrl}}" title="{{item.title}}" address="{{item.positionDesc}}" count="{{item.count}}" start="{{item.startTime}}" end="{{item.endTime}}" state="{{util.getState(status)}}" data-value='{{item}}' catchtap="onClickItem" />
 	</block>
+
+	<view class="empty" wx:if="{{!(orders&&orders.length!=0)}}">
+		<text>没有符合条件的订单列表~~~</text>
+	</view>
 </view>
