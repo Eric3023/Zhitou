@@ -234,10 +234,6 @@ Page({
    * 预览图片
    */
   onPreviewImage(event) {
-    console.log("================================");
-    console.log(event);
-    
-    
     let url = event.currentTarget.dataset.url;
     if (url) {
       wx.previewImage({
