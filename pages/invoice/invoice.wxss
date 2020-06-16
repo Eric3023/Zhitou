@@ -22,7 +22,7 @@ page {
 }
 
 .data {
-  left: 210rpx;
+  left: 180rpx;
   position: absolute;
   font-size: 28rpx;
 }
@@ -55,8 +55,8 @@ page {
 input{
   background-color: #efefef;
   border-radius: 5rpx;
-  width: 360rpx;
-  left: 210rpx;
+  width: 420rpx;
+  left: 180rpx;
   top: 0rpx;
   height: 100%;
   position: absolute;
