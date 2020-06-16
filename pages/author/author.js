@@ -191,6 +191,22 @@ Page({
   },
 
   /**
+   * 预览图片
+   */
+  onPreviewImage(event) {
+    console.log("================================");
+    console.log(event);
+    
+    
+    let url = event.currentTarget.dataset.url;
+    if (url) {
+      wx.previewImage({
+        urls: [url],
+      })
+    }
+  },
+
+  /**
    * 提交信息
    */
   onSubmit(event) {
@@ -248,6 +264,6 @@ Page({
         console.log('上传进度', res.progress);
       }
     });
-  }
+  },
 
 })
