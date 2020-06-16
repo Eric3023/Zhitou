@@ -28,13 +28,13 @@ Page({
       success(res) {
         if (res.confirm) {
           userModel.loginOut();
-          wx.switchTab({
+          wx.reLaunch({
             url: '/pages/mine/mine',
-            success: res => {
-              var page = getCurrentPages().pop();
-              if (page == undefined || page == null) return;
-              page._resetUserInfo();
-            }
+            // success: res => {
+            //   var page = getCurrentPages().pop();
+            //   if (page == undefined || page == null) return;
+            //   page._resetUserInfo();
+            // }
           })
         }
       }

@@ -36,6 +36,22 @@ Page({
   onLoad: function (options) {
     console.log(options);
 
+    wx.showModal({
+      title: "提示",
+      content: "您在此提供的所有信息，仅用于企业认证，我们不会透漏您的任何信息，也不会另作他用，请您放心填写",
+      cancelText: "取消",
+      confirmText: "继续",
+      success(res) {
+        if (res.confirm) {
+
+        } else if (res.cancel) {
+          wx.switchTab({
+            url: '/pages/index/mine',
+          })
+        }
+      }
+    })
+
     this.setData({
       isAuth: options.isAuth,
     })

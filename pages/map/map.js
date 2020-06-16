@@ -239,13 +239,8 @@ Page({
   onSelectPosition(event) {
     let location = event.detail.value;
     app.globalData.selectLocation = location;
-    wx.switchTab({
+    wx.reLaunch({
       url: `../throw/throw`,
-      success: res => {
-        var page = getCurrentPages().pop();
-        if (page == undefined || page == null) return;
-        page.onLoad();
-      }
     })
   },
 
