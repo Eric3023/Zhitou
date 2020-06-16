@@ -45,8 +45,8 @@ Page({
         if (res.confirm) {
 
         } else if (res.cancel) {
-          wx.switchTab({
-            url: '/pages/index/mine',
+          wx.reLaunch({
+            url: '/pages/mine/mine',
           })
         }
       }
