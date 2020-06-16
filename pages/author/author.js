@@ -24,10 +24,10 @@ Page({
     licenseProgess: 0, //0：不显示；1:正在上传；2：上传成功；3：上传失败
     idcard_a: '',//身份证正面
     idcard_a_url: '',
-    idcard_a_progress: 0,
+    idcard_a_progress: 0,//0：不显示；1:正在上传；2：上传成功；3：上传失败
     idcard_b: '',//身份证反面
     idcard_b_url: '',
-    idcard_b_progress: 0,
+    idcard_b_progress: 0,//0：不显示；1:正在上传；2：上传成功；3：上传失败
   },
 
   /**
@@ -94,7 +94,7 @@ Page({
           let path = res.tempFilePaths[0];
           this.setData({
             license: path,
-            licenseProgess: 1,
+            licenseProgess: 1,//正在上传
           });
           return this._updateImage(path);
         }
@@ -104,18 +104,18 @@ Page({
         let data = res;
         this.setData({
           licenseUrl: data.data.url,
-          licenseProgess: 2,
+          licenseProgess: 2,//上传成功
         });
         console.log(this.data.licenseUrl);
       } else {
         this.setData({
-          licenseProgess: 0,
+          licenseProgess: 3,//上传失败
         });
       }
     }, error => {
       console.log(error);
       this.setData({
-        licenseProgess: 3,
+        licenseProgess: 3,//上传失败
       });
     });
   },
@@ -130,21 +130,27 @@ Page({
           let path = res.tempFilePaths[0];
           this.setData({
             idcard_a: path,
-            idcard_a_progress: 1,
+            idcard_a_progress: 1,//开始上传
           });
           return this._updateImage(path);
         }
       }
     ).then(res => {
-      let data = res;
-      this.setData({
-        idcard_a_url: data.data.url,
-        idcard_a_progress: 2,
-      });
-      console.log(this.data.idcard_a_url);
+      if (res) {
+        let data = res;
+        this.setData({
+          idcard_a_url: data.data.url,
+          idcard_a_progress: 2,//上传成功
+        });
+        console.log(this.data.idcard_a_url);
+      } else {
+        this.setData({
+          idcard_a_progress: 3,//上传失败
+        });
+      }
     }, error => {
       this.setData({
-        idcard_a_progress: 3,
+        idcard_a_progress: 3,//上传失败
       });
     });
   },
@@ -159,21 +165,27 @@ Page({
           let path = res.tempFilePaths[0];
           this.setData({
             idcard_b: path,
-            idcard_b_progress: 1,
+            idcard_b_progress: 1,//开始上传
           });
           return this._updateImage(path);
         }
       }
     ).then(res => {
-      let data = res;
-      this.setData({
-        idcard_b_url: data.data.url,
-        idcard_b_progress: 2,
-      });
-      console.log(this.data.idcard_b_url);
+      if (res) {
+        let data = res;
+        this.setData({
+          idcard_b_url: data.data.url,
+          idcard_b_progress: 2,//上传成功
+        });
+        console.log(this.data.idcard_b_url);
+      } else {
+        this.setData({
+          idcard_b_progress: 3,//上传失败
+        });
+      }
     }, error => {
       this.setData({
-        idcard_b_progress: 3,
+        idcard_b_progress: 3,//上传失败
       });
     });
   },

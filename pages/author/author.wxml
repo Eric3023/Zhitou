@@ -27,12 +27,12 @@
 		企业营业执照
 		<text class="notice">请上传最新营业执照正面照（仅支持中国大陆地区）</text>
 		<view class="photo_contianer">
-			<view class="photo" wx:if="{{!licenseUrl}}" catchtap="onSelectLicense">
+			<view class="photo" wx:if="{{!licenseUrl && licenseProgess == 0}}" catchtap="onSelectLicense">
 				+
 				<text>点击上传</text>
 			</view>
 			<image class="photo" wx:if="{{licenseUrl}}" src="{{license}}" catchtap="onSelectLicense" />
-			<!-- <v_loading state="{{licenseProgess}}"></v_loading> -->
+			<v_loading state="{{licenseProgess}}" catchtap="onSelectLicense"></v_loading>
 		</view>
 	</view>
 	<!-- 法人信息 -->
@@ -40,16 +40,22 @@
 		法人信息
 		<text class="notice">请上传法人身份证正反面</text>
 		<view class="photo_contianer">
-			<view class="photo" wx:if="{{!idcard_a_url}}" catchtap="onSelectIDCardA">
-				+
-				<text>正面</text>
+			<view class="photo_container">
+				<view class="photo" wx:if="{{!idcard_a_url && idcard_a_progress==0}}" catchtap="onSelectIDCardA">
+					+
+					<text>正面</text>
+				</view>
+				<image class="photo" wx:if="{{idcard_a_url}}" src="{{idcard_a}}" catchtap="onSelectIDCardA" />
+				<v_loading state="{{idcard_a_progress}}" catchtap="onSelectIDCardA"></v_loading>
 			</view>
-			<image class="photo" wx:if="{{idcard_a_url}}" src="{{idcard_a}}" catchtap="onSelectIDCardA" />
-			<view class="photo" wx:if="{{!idcard_b_url}}" catchtap="onSelectIDCardB">
-				+
-				<text>反面</text>
+			<view class="photo_container">
+				<view class="photo" wx:if="{{!idcard_b_url&&idcard_b_progress==0}}" catchtap="onSelectIDCardB">
+					+
+					<text>反面</text>
+				</view>
+				<image class="photo" wx:if="{{idcard_b_url}}" src="{{idcard_b}}" catchtap="onSelectIDCardB" />
+				<v_loading state="{{idcard_b_progress}}" catchtap="onSelectIDCardB"></v_loading>
 			</view>
-			<image class="photo" wx:if="{{idcard_b_url}}" src="{{idcard_b}}" catchtap="onSelectIDCardB" />
 		</view>
 	</view>
 	<!-- 提交按钮 -->
