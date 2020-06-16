@@ -9,7 +9,7 @@
 		<v_order img="{{item.adImgUrl}}" title="{{item.title}}" address="{{item.positionDesc}}" count="{{item.count}}" start="{{item.startTime}}" end="{{item.endTime}}" state="{{util.getState(status)}}" data-value='{{item}}' catchtap="onClickItem" />
 	</block>
 
-	<view class="empty" wx:if="{{!(orders&&orders.length!=0)}}">
+	<view class="empty" wx:if="{{!(orders&&orders.length!=0)&&!lock}}">
 		<text>没有符合条件的订单列表~~~</text>
 	</view>
 </view>

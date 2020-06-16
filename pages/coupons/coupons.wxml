@@ -17,6 +17,6 @@
 	</view>
 </view>
 
-<view class="empty" wx:if="{{!(list&&list.length!=0)}}">
+<view class="empty" wx:if="{{!(list&&list.length!=0)&&!lock}}">
 	<text>暂时没有优惠券哦~~~</text>
 </view>

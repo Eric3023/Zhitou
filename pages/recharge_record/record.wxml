@@ -14,6 +14,6 @@
 	</block>
 </view>
 
-<view class="empty" wx:if="{{!(records&&records.length!=0)}}">
+<view class="empty" wx:if="{{!(records&&records.length!=0)&&!lock}}">
 	<text>暂时没有充值记录哦~~~</text>
 </view>
