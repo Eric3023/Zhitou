@@ -90,11 +90,13 @@ Page({
    * 重置数据
    */
   _reset(status) {
-    this.data.status = status;
-    this.data.orders = [];
-    this.data.page = 1;
-    this.data.lock = false;
-    this.data.hasMore = true;
+    this.setData({
+      status,
+      orders: [],
+      page: 1,
+      lock: false,
+      hasMore: true,
+    });
   },
 
   /**

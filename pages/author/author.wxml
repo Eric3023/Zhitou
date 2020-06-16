@@ -32,14 +32,14 @@
 					+
 					<text>点击上传</text>
 				</view>
-				<image class="photo" wx:if="{{licenseUrl}}" src="{{license}}" catchtap="onSelectLicense" />
+				<image class="photo" wx:if="{{licenseUrl}}" src="{{licenseUrl}}" catchtap="onSelectLicense" />
 				<v_loading state="{{licenseProgess}}" catchtap="onSelectLicense"></v_loading>
 			</view>
 			<text class="btn" data-url="{{licenseUrl}}" catchtap="onPreviewImage">点击查看</text>
 		</view>
 	</view>
 	<!-- 法人信息 -->
-	<view class="legal">
+	<!-- <view class="legal">
 		法人信息
 		<text class="notice">请上传法人身份证正反面</text>
 		<view class="photo_contianer">
@@ -59,6 +59,22 @@
 				<image class="photo" wx:if="{{idcard_b_url}}" src="{{idcard_b}}" catchtap="onSelectIDCardB" />
 				<v_loading state="{{idcard_b_progress}}" catchtap="onSelectIDCardB"></v_loading>
 			</view>
+		</view>
+	</view> -->
+	<!-- 行业资质 -->
+	<view class="license">
+		行业资质文件
+		<text class="notice">请上传所在行业资质信息</text>
+		<view class="picture_container">
+			<view class="photo_contianer">
+				<view class="photo" wx:if="{{!credentialsUrl && credentialsProgess == 0}}" catchtap="onSelectCredentials">
+					+
+					<text>点击上传</text>
+				</view>
+				<image class="photo" wx:if="{{credentialsUrl}}" src="{{credentialsUrl}}" catchtap="onSelectCredentials" />
+				<v_loading state="{{credentialsProgess}}" catchtap="onSelectCredentials"></v_loading>
+			</view>
+			<text class="btn" data-url="{{credentialsUrl}}" catchtap="onPreviewImage">点击查看</text>
 		</view>
 	</view>
 	<!-- 提交按钮 -->

@@ -28,6 +28,10 @@ Page({
     idcard_b: '',//身份证反面
     idcard_b_url: '',
     idcard_b_progress: 0,//0：不显示；1:正在上传；2：上传成功；3：上传失败
+
+    credentials: '',//资质证书
+    credentialsUrl: '',
+    credentialsProgess: 0, //0：不显示；1:正在上传；2：上传成功；3：上传失败
   },
 
   /**
@@ -116,6 +120,42 @@ Page({
       console.log(error);
       this.setData({
         licenseProgess: 3,//上传失败
+      });
+    });
+  },
+
+    /**
+   * 上传资质信息
+   */
+  onSelectCredentials() {
+    this._chooseImage().then(
+      res => {
+        if (res && res.tempFilePaths) {
+          let path = res.tempFilePaths[0];
+          this.setData({
+            credentials: path,
+            credentialsProgess: 1,//正在上传
+          });
+          return this._updateImage(path);
+        }
+      }
+    ).then(res => {
+      if (res) {
+        let data = res;
+        this.setData({
+          credentialsUrl: data.data.url,
+          credentialsProgess: 2,//上传成功
+        });
+        console.log(this.data.credentials);
+      } else {
+        this.setData({
+          credentialsProgess: 3,//上传失败
+        });
+      }
+    }, error => {
+      console.log(error);
+      this.setData({
+        credentialsProgess: 3,//上传失败
       });
     });
   },
@@ -215,8 +255,9 @@ Page({
     console.log(this.data.licenseUrl);
     console.log(this.data.idcard_a_url);
     console.log(this.data.idcard_b_url);
+    console.log(this.data.credentialsUrl);
 
-    let authorPromise = authorModel.author(this.data.index, this.data.regionId, this.data.licenseUrl, this.data.idcard_a_url, this.data.idcard_b_url);
+    let authorPromise = authorModel.author(this.data.index, this.data.regionId, this.data.licenseUrl, this.data.idcard_a_url, this.data.idcard_b_url, this.data.credentialsUrl);
     if (authorPromise) {
       authorPromise.then(
         res => {
