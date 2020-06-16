@@ -1,11 +1,11 @@
-<view class="container">
+<form class="container" bindsubmit="onSubmit">
 	<!-- 发票详情 -->
 	<view class="sub_contaner">
 		发票详情
 		<view class="param">
 			发票类型
 			<view class="data">
-				<radio-group class="radio_container" bindchange="onTypeChanged">
+				<radio-group class="radio_container" bindchange="onTypeChanged" name="type">
 					<view class="radio_container">
 						<radio style="transform:scale(0.65);" checked="true" value="0"></radio>
 						<text>企业单位</text>
@@ -17,19 +17,19 @@
 				</radio-group>
 			</view>
 		</view>
-		<view class="param" hidden="{{type==1}}">
+		<view class="param" wx:if="{{type==0}}">
 			公司名称
-			<input placeholder="请输入公司名称" adjust-position="true" bindblur="onConfirmName"></input>
+			<input placeholder="请输入公司名称" adjust-position="true" name="name"></input>
 			<!-- <view class="data">北京广化寺</view> -->
 		</view>
-		<view class="param" hidden="{{type==1}}">
+		<view class="param" wx:if="{{type==0}}">
 			公司税号
-			<input placeholder="请输入公司税号" adjust-position="true" bindblur="onConfirmNumber"></input>
+			<input placeholder="请输入公司税号" adjust-position="true" name="number"></input>
 			<!-- <view class="data">AFD1012154621225JKIO</view> -->
 		</view>
-		<view class="param" hidden="{{type==0}}">
+		<view class="param" wx:if="{{type==1}}">
 			发票抬头
-			<input placeholder="请输入姓名" adjust-position="true" bindblur="onConfirmName"></input>
+			<input placeholder="请输入姓名" adjust-position="true" name="name"></input>
 			<!-- <view class="data">AFD1012154621225JKIO</view> -->
 		</view>
 		<view class="param">
@@ -42,10 +42,10 @@
 		接收方式
 		<view class="param">
 			电子邮箱
-			<input placeholder="请输入接收邮箱" adjust-position="true" bindblur="onConfirmEmail"></input>
+			<input placeholder="请输入接收邮箱" name="email" adjust-position="true"></input>
 			<!-- <view class="data">20179282@qq.com</view> -->
 		</view>
 	</view>
 	<!-- 确认按钮 -->
-	<view class="btn" catchtap="onSubmit">提交</view>
-</view>
+	<button class="btn" form-type="submit">提交</button>
+</form>

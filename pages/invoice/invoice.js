@@ -7,9 +7,6 @@ Page({
    */
   data: {
     type: 0,//0:个人发票；1:个人发票
-    name: '',//名称
-    number: '',//税号
-    email: '',//邮箱
 
     price: 0, //总金额
     ids: '',//订单id
@@ -39,42 +36,23 @@ Page({
   },
 
   /**
-   * 发票名称改变
-   */
-  onConfirmName(event) {
-    this.data.name = event.detail.value;
-  },
-
-  /**
-   * 发票税号改变
-   */
-  onConfirmNumber(event) {
-    this.data.number = event.detail.value;
-  },
-
-  /**
-   * 接收邮箱改变
-   */
-  onConfirmEmail(event) {
-    this.data.email = event.detail.value;
-  },
-
-  /**
    * 提交信息
    */
   onSubmit(event) {
 
-    if (!this.data.name) {
+    let value = event.detail.value;
+
+    if (!value.name) {
       this._showToast('请输入名称');
       return;
     }
-    if (!this.data.email) {
+    if (!value.email) {
       this._showToast('请输入接收邮箱');
       return;
     }
 
     if (this.data.type == 0) {
-      if (!this.data.number) {
+      if (!value.number) {
         this._showToast('请输入公司税号');
         return;
       }
@@ -82,16 +60,18 @@ Page({
 
     recordModel.openInvoice({
       type: this.data.type,
-      name: this.data.name,
-      dutySign: this.data.number,
+      name: value.name,
+      dutySign: value.number,
       totalPrice: this.data.price,
-      email: this.data.email,
+      email: value.email,
       orderId: this.data.ids,
     }).then(res => {
-      this._showToast('开票成功，稍后请在邮箱查收')
-      wx.navigateBack({
-        delta: 1,
-      });
+      this._showToast('发票信息已提交，稍后请在邮箱查收')
+      setTimeout(res => {
+        wx.navigateBack({
+          delta: 1,
+        });
+      }, 1500);
     }).catch(e => {
       this._showToast('开具发票失败，请重新尝试')
     });

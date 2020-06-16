@@ -44,6 +44,7 @@ page {
   color: white;
   font-size: 32rpx;
   position: fixed;
+  border-radius: 0;
   bottom: 0;
   z-index: 9;
   display: flex;
