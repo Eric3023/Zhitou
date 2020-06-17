@@ -85,3 +85,5 @@
 <view class="container_authing" wx:if="{{isAuth==1}}">
 	<text class="info">认证信息审核中，请稍后</text>
 </view>
+<!-- 压缩画布 -->
+<canvas canvas-id="canvas" style="width:{{cWidth}}px;height:{{cHeight}}px;position: fixed;left:-10000px;top:-10000px; z-index:-1;"></canvas>

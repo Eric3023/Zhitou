@@ -32,6 +32,9 @@ Page({
     credentials: '',//资质证书
     credentialsUrl: '',
     credentialsProgess: 0, //0：不显示；1:正在上传；2：上传成功；3：上传失败
+
+    cWidth: 0,
+    cHeight: 0,
   },
 
   /**
@@ -92,47 +95,63 @@ Page({
    * 上传营业执照
    */
   onSelectLicense() {
-    this._chooseImage().then(
-      res => {
-        if (res && res.tempFilePaths) {
-          let path = res.tempFilePaths[0];
-          this.setData({
-            license: path,
-            licenseProgess: 1,//正在上传
-          });
-          return this._updateImage(path);
-        }
-      }
-    ).then(res => {
-      if (res) {
-        let data = res;
+    this._chooseImage()
+      .then(res => {
         this.setData({
-          licenseUrl: data.data.url,
-          licenseProgess: 2,//上传成功
+          licenseProgess: 1,//正在压缩
         });
-        console.log(this.data.licenseUrl);
-      } else {
+        //2.压缩图片
+        return this._compressImage(res);
+      })
+      .then(
+        res => {
+          if (res) {
+            let path = res;
+            this.setData({
+              license: path,
+              licenseProgess: 1,//正在上传
+            });
+            return this._updateImage(path);
+          }
+        }
+      ).then(res => {
+        if (res) {
+          let data = res;
+          this.setData({
+            licenseUrl: data.data.url,
+            licenseProgess: 2,//上传成功
+          });
+          console.log(this.data.licenseUrl);
+        } else {
+          this.setData({
+            licenseProgess: 3,//上传失败
+          });
+        }
+      })
+      .catch(e => {
+        console.log(e);
         this.setData({
           licenseProgess: 3,//上传失败
         });
-      }
-    })
-    .catch(e=>{
-      console.log(e);
-      this.setData({
-        licenseProgess: 3,//上传失败
       });
-    });
   },
 
   /**
- * 上传资质信息
- */
+   * 上传资质信息
+   */
   onSelectCredentials() {
-    this._chooseImage().then(
+    this._chooseImage()
+    .then(res => {
+      this.setData({
+        credentialsProgess: 1,//正在压缩
+      });
+      //2.压缩图片
+      return this._compressImage(res);
+    })
+    .then(
       res => {
-        if (res && res.tempFilePaths) {
-          let path = res.tempFilePaths[0];
+        if (res) {
+          let path = res;
           this.setData({
             credentials: path,
             credentialsProgess: 1,//正在上传
@@ -147,7 +166,7 @@ Page({
           credentialsUrl: data.data.url,
           credentialsProgess: 2,//上传成功
         });
-        console.log(this.data.credentials);
+        console.log(this.data.credentialsUrl);
       } else {
         this.setData({
           credentialsProgess: 3,//上传失败
@@ -165,10 +184,18 @@ Page({
    * 上传身份证正面
    */
   onSelectIDCardA() {
-    this._chooseImage().then(
+    this._chooseImage()
+    .then(res => {
+      this.setData({
+        idcard_a_progress: 1,//开始压缩
+      });
+      //2.压缩图片
+      return this._compressImage(res);
+    })
+    .then(
       res => {
-        if (res && res.tempFilePaths) {
-          let path = res.tempFilePaths[0];
+        if (res) {
+          let path = res;
           this.setData({
             idcard_a: path,
             idcard_a_progress: 1,//开始上传
@@ -200,10 +227,18 @@ Page({
    * 上传身份证反面
    */
   onSelectIDCardB() {
-    this._chooseImage().then(
+    this._chooseImage()
+    .then(res => {
+      this.setData({
+        idcard_b_progress: 1,//开始压缩
+      });
+      //2.压缩图片
+      return this._compressImage(res);
+    })
+    .then(
       res => {
-        if (res && res.tempFilePaths) {
-          let path = res.tempFilePaths[0];
+        if (res) {
+          let path = res;
           this.setData({
             idcard_b: path,
             idcard_b_progress: 1,//开始上传
@@ -297,31 +332,119 @@ Page({
         // sizeType: ['compressed'],
         sizeType: ['original'],
         sourceType: ['album', 'camera'],
-        complete: (res) => {
-          if (res && res.tempFilePaths) {
-            let path = res.tempFilePaths[0];
-            wx.getFileInfo({
-              filePath: path,
-              success: response => {        
-                if(response.size <= 2 *1024*1024){
-                  resolve(res);
-                }else{
-                  wx.showToast({
-                    title: '请上传小于2M的图片',
-                    icon:'none',
-                  })
-                  reject(res);
-                }
-              },
-              fail: error => {
-                reject(error);
-              }
-            });
-          }else{
-            reject(res);
-          }
+        success: (res) => {
+          let path = res.tempFiles[0].path;
+          resolve(path)
         },
+        fail: e => {
+          reject(e);
+        }
+      })
+    });
+  },
+
+  /**
+   * 压缩图片
+   */
+  _compressImage(path) {
+    return new Promise((resolve, reject) => {
+      //获取图片体积 
+      this._getFileInfo(path)
+        .then(res => {
+          let size = res.size;
+          if (size <= 1.6 * 1024 * 1024) {
+            resolve(path);
+          } else {
+            //获取图片尺寸
+            this._getImageInfo(path)
+              .then(res => {
+                return this._compressImageByCanvas(res);
+              })
+              .then(res => {
+                return this._compressImage(res);
+              })
+              .then(res => {
+                resolve(res);
+              })
+              .catch(e => {
+                reject(e);
+              });
+          }
+        })
+        .catch(e => {
+          reject(e);
+        });
+    });
+  },
+
+  /**
+   * 获取文件信息（图片体积大小）
+   */
+  _getFileInfo(path) {
+    return new Promise((resolve, reject) => {
+      wx.getFileInfo({
+        filePath: path,
+        success: res => {
+          resolve(res);
+        },
+        fail: e => {
+          reject(e);
+        }
       });
+    })
+  },
+
+  /**
+   * 获取图片信息（图片尺寸大小）
+   */
+  _getImageInfo(path) {
+    return new Promise((resolve, reject) => {
+      wx.getImageInfo({
+        src: path,
+        success: res => {
+          resolve(res);
+        },
+        fail: e => {
+          reject(e);
+        }
+      })
+    });
+  },
+
+  /**
+   * 使用Canvas压缩图片
+   */
+  _compressImageByCanvas(res) {
+    //---------利用canvas压缩图片--------------
+    var ratio = 0.5;
+    var canvasWidth = res.width;//图片原始长宽
+    var canvasHeight = res.height;
+    canvasWidth = Math.trunc(res.width * ratio)
+    canvasHeight = Math.trunc(res.height * ratio)
+    this.setData({
+      cWidth: canvasWidth,
+      cHeight: canvasHeight
+    })
+
+    //----------绘制图形并取出图片路径--------------
+    var ctx = wx.createCanvasContext('canvas')
+    ctx.drawImage(res.path, 0, 0, canvasWidth, canvasHeight)
+    return new Promise((resolve, reject) => {
+      ctx.draw(false, setTimeout(() => {
+        wx.canvasToTempFilePath({
+          canvasId: 'canvas',
+          fileType: 'jpg',
+          destWidth: canvasWidth,
+          destHeight: canvasHeight,
+          success: res => {
+            resolve(res.tempFilePath);
+          },
+          fail: e => {
+            console.log(e.errMsg)
+            reject(e);
+          }
+        })
+      }, 3000));
     });
   },
 
