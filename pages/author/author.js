@@ -124,9 +124,9 @@ Page({
     });
   },
 
-    /**
-   * 上传资质信息
-   */
+  /**
+ * 上传资质信息
+ */
   onSelectCredentials() {
     this._chooseImage().then(
       res => {
@@ -253,18 +253,31 @@ Page({
     console.log(this.data.idcard_b_url);
     console.log(this.data.credentialsUrl);
 
+    wx.showLoading({
+      title: '信息提交中',
+      mask: true,
+    });
     let authorPromise = authorModel.author(this.data.index, this.data.regionId, this.data.licenseUrl, this.data.idcard_a_url, this.data.idcard_b_url, this.data.credentialsUrl);
     if (authorPromise) {
       authorPromise.then(
         res => {
           console.log(res);
-          wx.showToast({
-            title: '信息已提交，请等待认证',
-            icon: 'none',
-          });
+          wx.hideLoading();
+          if (res.errno == 0) {
+            wx.showToast({
+              title: '信息已提交，请等待认证',
+              icon: 'none',
+            });
+          } else {
+            wx.showToast({
+              title: '提交失败，请尝试重新提交',
+              icon: 'none',
+            });
+          }
         }
       ).catch(error => {
         console.log(error);
+        wx.hideLoading();
         wx.showToast({
           title: '提交失败，请尝试重新提交',
           icon: 'none',
@@ -272,7 +285,6 @@ Page({
       })
     }
   },
-
 
   /**
    * 选择照片

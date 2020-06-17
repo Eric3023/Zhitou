@@ -11,7 +11,7 @@ Component({
     },
     size: {
       type: String,
-      value: '45rpx',
+      value: '50rpx',
     }
   },
 

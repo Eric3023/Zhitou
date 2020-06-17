@@ -1,3 +1,3 @@
-<van-loading wx:if="{{state==1}}" color="{{color}}" size="{{size}}" vertical></van-loading>
+<view wx:if="{{state==1}}" class="weui-loading" style="width:{{size}};height:{{size}};"></view>
 <icon wx:if="{{state==2}}" type="success" color="{{color}}" size="{{size}}"></icon>
 <icon wx:if="{{state==3}}" type="warn" color="{{color}}" size="{{size}}"></icon>
