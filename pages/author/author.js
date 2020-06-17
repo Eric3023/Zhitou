@@ -56,9 +56,9 @@ Page({
       }
     })
 
-    this.setData({
-      isAuth: options.isAuth,
-    })
+    // this.setData({
+    //   isAuth: options.isAuth,
+    // })
   },
 
   /**
@@ -116,8 +116,9 @@ Page({
           licenseProgess: 3,//上传失败
         });
       }
-    }, error => {
-      console.log(error);
+    })
+    .catch(e=>{
+      console.log(e);
       this.setData({
         licenseProgess: 3,//上传失败
       });
@@ -297,7 +298,28 @@ Page({
         sizeType: ['original'],
         sourceType: ['album', 'camera'],
         complete: (res) => {
-          resolve(res);
+          if (res && res.tempFilePaths) {
+            let path = res.tempFilePaths[0];
+            wx.getFileInfo({
+              filePath: path,
+              success: response => {        
+                if(response.size <= 2 *1024*1024){
+                  resolve(res);
+                }else{
+                  wx.showToast({
+                    title: '请上传小于2M的图片',
+                    icon:'none',
+                  })
+                  reject(res);
+                }
+              },
+              fail: error => {
+                reject(error);
+              }
+            });
+          }else{
+            reject(res);
+          }
         },
       });
     });

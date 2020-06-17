@@ -21,7 +21,8 @@
 			"ignore": [],
 			"disablePlugins": [],
 			"outputPath": ""
-		}
+		},
+		"nodeModules": true
 	},
 	"compileType": "miniprogram",
 	"libVersion": "2.10.4",
@@ -59,15 +60,7 @@
 		},
 		"miniprogram": {
 			"current": -1,
-			"list": [
-				{
-					"id": 0,
-					"name": "pages/author/author",
-					"pathName": "pages/author/author",
-					"query": "adcode=19",
-					"scene": null
-				}
-			]
+			"list": []
 		}
 	}
 }
