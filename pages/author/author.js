@@ -56,9 +56,9 @@ Page({
       }
     })
 
-    // this.setData({
-    //   isAuth: options.isAuth,
-    // })
+    this.setData({
+      isAuth: options.isAuth,
+    })
   },
 
   /**
