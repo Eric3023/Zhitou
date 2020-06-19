@@ -4,7 +4,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    data:{},
+    data: {},
   },
 
   /**
@@ -20,9 +20,9 @@ Page({
   /**
    * 开具发票
    */
-  onInvoice() {
-    wx.navigateTo({
-      url: '/pages/invoice_record/invoice_record',
+  onInvoice(event) {
+    wx.redirectTo({
+      url: `/pages/invoice/invoice?ids=${this.data.data.id}&price=${this.data.data.actualPrice.toFixed(2)}`,
     })
-  }
+  },
 })

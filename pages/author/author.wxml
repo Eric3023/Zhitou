@@ -78,7 +78,7 @@
 		</view>
 	</view>
 	<!-- 提交按钮 -->
-	<button catchtap="onSubmit">提交</button>
+	<button catchtap="onSubmit" hover-class="none">提交</button>
 </view>
 
 <!-- 认证中 -->

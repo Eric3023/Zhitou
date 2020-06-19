@@ -79,7 +79,7 @@
 }
 
 .invoice .price .num{
-  color: #65ae95;
+  color: #f88a3e;
 }
 
 .invoice .content{
@@ -106,12 +106,12 @@
   width: 215rpx;
   height: 54rpx;
   font-size: 25rpx;
-  color: #65ae95;
+  color: #f88a3e;
   position: absolute;
   right: 0;
   top: 28rpx;
   border-radius: 8rpx;
-  border: 3rpx solid #65ae95;
+  border: 3rpx solid #f88a3e;
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -145,4 +145,5 @@ checkbox .wx-checkbox-input.wx-checkbox-input-checked::before {
   line-height: 28rpx;
   text-align: center;
   font-size: 30rpx;
+  color: #f88a3e;
 }

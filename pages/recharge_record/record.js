@@ -9,7 +9,7 @@ Page({
     records: [],
 
     page: 1,
-    size: 20,
+    size: 100,
     lock: false,
     hasMore: true,
   },
@@ -17,7 +17,8 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onShow: function () {
+    this._resetData();
     this._getRecords();
   },
 
@@ -31,11 +32,20 @@ Page({
   /**
    * 查看订单详情
    */
-  onRechargeDatail(event){
+  onRechargeDatail(event) {
     let value = event.currentTarget.dataset.value;
     let jValue = JSON.stringify(value);
     wx.navigateTo({
       url: `/pages/order_detail/order_detail?detail=${jValue}`,
+    })
+  },
+
+  /**
+   * 开具发票
+   */
+  onInvoice() {
+    wx.navigateTo({
+      url: '/pages/invoice_record/invoice_record',
     })
   },
 
@@ -81,6 +91,19 @@ Page({
         wx.hideLoading();
       }
     );
+  },
+
+  /**
+   * 重置数据
+   */
+  _resetData() {
+    this.setData({
+      records: [],
+
+      page: 1,
+      lock: false,
+      hasMore: true,
+    });
   },
 
   /**

@@ -1,0 +1,11 @@
+var numberFormat = function (number, count) {
+  if (number)
+    return number.toFixed(count);
+  else
+    return "";
+}
+
+module.exports = {
+  numberFormat: numberFormat,
+}
+

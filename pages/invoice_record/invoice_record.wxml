@@ -20,9 +20,13 @@
 		</view>
 		<view class="line"></view>
 		<view class="content">
-			<checkbox class="check"></checkbox>
+			<checkbox class="check" checked="{{checkedAll}}"></checkbox>
 			<view class="title">全选</view>
 			<text class="btn" catchtap="onInvoice">开具发票</text>
 		</view>
 	</view>
 </checkbox-group>
+
+<view class="empty" wx:if="{{!(records&&records.length!=0)&&!lock}}">
+	<text>暂时没有可以开具发票的订单~~~</text>
+</view>

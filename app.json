@@ -26,7 +26,8 @@
     "pages/about/about",
     "pages/invoice_record/invoice_record",
     "pages/policy/policy",
-    "pages/preview/preview"
+    "pages/preview/preview",
+    "pages/recharge_record/record"
   ],
   "window": {
     "backgroundTextStyle": "light",

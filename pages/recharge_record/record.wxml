@@ -1,3 +1,7 @@
+<wxs src="../../utils/numberFormat.wxs" module="util" />
+<view class="invoice">
+		<text catchtap="onInvoice">开发票</text>
+	</view>
 <view class="container" wx:if="{{records&&records.length!=0}}">
 	<block wx:for="{{records}}" wx:key="index">
 		<view class="mouth_container" wx:if="{{item.first}}">
@@ -9,7 +13,8 @@
 				<text class="person">{{item.message}}</text>
 				<text class="time">{{item.payTime}}</text>
 			</view>
-			<text class="money">{{item.actualPrice}}</text>
+			<text class="money">￥{{util.numberFormat(item.actualPrice, 2)}}</text>
+			<text class="isInvoice" wx:if="{{item.isInvoice}}">已开票</text>
 		</view>
 	</block>
 </view>
