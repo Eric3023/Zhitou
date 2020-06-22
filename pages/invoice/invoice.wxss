@@ -53,7 +53,7 @@ page {
   align-items: center;
 }
 
-input{
+input {
   background-color: #efefef;
   border-radius: 5rpx;
   width: 420rpx;
@@ -65,4 +65,98 @@ input{
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
+}
+
+.mask {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 9;
+  top: 0;
+  left: 0;
+  background-color: #000000;
+  opacity: 0.4;
+}
+
+.dialog {
+  width: 628rpx;
+  height: 880rpx;
+  margin-top: -440rpx;
+  margin-left: -314rpx;
+  position: fixed;
+  z-index: 99;
+  top: 50%;
+  left: 50%;
+  background-color: white;
+  box-shadow: 0 0 8rpx #cbcbcb;
+  padding: 50rpx 60rpx 50rpx 60rpx;
+  box-sizing: border-box;
+}
+
+.warn {
+  color: #45a69c;
+  font-size: 28rpx;
+  margin-bottom: 48rpx;
+}
+
+.dialog .row {
+  display: flex;
+  flex-direction: row;
+  width: 508rpx;
+  margin-top: 32rpx;
+  font-size: 28rpx;
+}
+
+.dialog .row .key {
+  width: 200rpx;
+  color: #717171;
+}
+
+.dialog .row .value {
+  width: 308rpx;
+  color: #333333;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  word-wrap: break-word;
+	word-break: break-all;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.dialog .btn_container {
+  display: flex;
+  flex-direction: row;
+  width: 508rpx;
+  position: absolute;
+  left: 60rpx;
+  bottom: 56rpx;
+  background-color: white;
+  justify-content: space-evenly;
+  color: 28rpx;
+}
+
+.dialog .btn_container .cancel {
+  width: 170rpx;
+  height: 60rpx;
+  color: #717171;
+  border-radius: 5rpx;
+  border: 2rpx solid #f88a3e;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.dialog .btn_container .commit {
+  width: 170rpx;
+  height: 60rpx;
+  color: #717171;
+  background-color: #f88a3e;
+  color: white;
+  border-radius: 5rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 }

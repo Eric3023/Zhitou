@@ -8,13 +8,20 @@
 				<image class="picker_icon" src="/img/login/icon_pull.png"></image>
 			</view>
 			<view class="change_city">
-				<image class="point1" src="/img/throw/change_location.png" catchtap="onChangeToCity"></image>
-				<text class="change" catchtap="onChangeToCity">{{location_state==0?'切换至全省投放':'切换至区域投放'}} </text>
+				<!-- <image class="point1" src="/img/throw/change_location.png" catchtap="onChangeToCity"></image> -->
+				<!-- <text class="change" catchtap="onChangeToCity">{{location_state==0?'切换至全省投放':'切换至区域投放'}} </text> -->
+				<text class="change" catchtap="onChangeToCity" data-value="area" style="color:{{location_state==0?'#4cbea0':'#969696'}};">区域</text>
+				|
+				<text class="change"  catchtap="onChangeToCity" data-value="province" style="color:{{location_state==2?'#4cbea0':'#969696'}};">全省</text>
+				|
+				<text class="change"  catchtap="onChangeToCity"  data-value="country" style="color:{{location_state==3?'#4cbea0':'#969696'}};">全国</text>
 			</view>
 		</view>
 		<view class="city">
 			<image class="point2" src="/img/icon_location.jpg"></image>
-			<text class="address">{{location_state==0? (location.title? location.title:location.formatted_addresses.recommend):location.ad_info.province}}</text>
+			<text class="address" wx:if="{{location_state==0}}">{{(location.title? location.title:location.formatted_addresses.recommend)}}</text>
+			<text class="address" wx:if="{{location_state==2}}">{{location.ad_info.province}}</text>
+			<text class="address" wx:if="{{location_state==3}}">全国投放</text>
 		</view>
 		<!-- <view class="audience">{{location_state==0?'当前位置':location.ad_info.province}}有{{audience}}个用户</view> -->
 		<view class="audience">{{location_state==0?'当前位置':location.ad_info.province}}用户转化指数等级：高</view>
@@ -51,8 +58,10 @@
 				<!-- 模板选择 -->
 				<view class="model_selector">
 					<view class="model_header">
-						<radio style="transform:scale(0.6);" checked="true" value="{{0}}" checked></radio>
-						<text  class="model_title" >  模板选择 :</text>
+						<radio id="model" style="transform:scale(0.6);" checked="true" value="{{0}}" checked></radio>
+						<label class="model_title" for="model"> 模板选择 :</label>
+						<text class="notice" catchtap="onNotice">注意事项</text>
+						<image class="notice_icon" src="/img/throw/notice.png" catchtap="onNotice"></image>
 					</view>
 					<view class="model_body">
 						<scroll-view scroll-x="true" scroll-y="false">
@@ -75,8 +84,6 @@
 						<view class="input_container">
 							<view class="input_title">
 								<text>输入显示内容</text>
-								<text class="notice">注意事项</text>
-								<image class="notice_icon" src="/img/throw/notice.png"></image>
 							</view>
 							<input class="input" placeholder="文字" placeholder-class="place_class" adjust-position="true" bindblur="onConfirmModelContent"></input>
 							<input class="input" placeholder="电话" placeholder-class="place_class" adjust-position="true" bindblur="onConfirmModelPhone"></input>
@@ -86,14 +93,19 @@
 				<!-- 直接上传 -->
 				<view class="model_selector">
 					<view class="model_header">
-						<radio style="transform:scale(0.6);" value="{{1}}"></radio>
-						<text  class="model_title" >直接上传 :</text>
+						<radio id="div" style="transform:scale(0.6);" value="{{1}}"></radio>
+						<label class="model_title" for="div">直接上传 :</label>
 					</view>
 					<view class="model_body">
-						<view class="photo">
-							<text>选择照片</text>
-							<view class="photo_update" wx:if="{{!div_param.img}}" catchtap="onSelectDivPhoto">+</view>
-							<image class="photo_update" wx:if="{{div_param.img}}" src="{{div_param.img}}" catchtap="onSelectDivPhoto"></image>
+						<view class="photo" catchtap="onSelectDivPhoto">
+							<text>{{position==16?'选择照片(750*1334)':'选择照片'}}</text>
+							<view class="photo_update" wx:if="{{!div_param.img}}">+</view>
+							<image class="photo_update" wx:if="{{div_param.img}}" src="{{div_param.img}}"></image>
+						</view>
+						<view class="photo" wx:if="{{position==16}}" catchtap="onSelectDivPhoto2">
+							<text>选择照片(750*1624)</text>
+							<view class="photo_update" wx:if="{{!div_param.img2}}">+</view>
+							<image class="photo_update" wx:if="{{div_param.img2}}" src="{{div_param.img2}}"></image>
 						</view>
 					</view>
 				</view>
@@ -115,7 +127,7 @@
 			</view>
 		</view>
 		<view class="audience">
-			<view class="audience_num">   
+			<view class="audience_num">
 				<input class="input_link" placeholder="输入第三方监测链接，选填" placeholder-class="place_class" adjust-position="true" bindblur="onConfirmMonitorUrl" value="{{monitorUrl}}"></input>
 			</view>
 		</view>
@@ -146,7 +158,7 @@
 		</view> -->
 		<view class="audience">投放数量
 			<view class="audience_num">
-				<input class="input_num" hidden="{{charging==1}}" placeholder="输入投放数量" placeholder-class="place_class" type="number" adjust-position="true" bindblur="onConfirmThrowCount" value="{{throwCount==0? '':throwCount}}"/>
+				<input class="input_num" hidden="{{charging==1}}" placeholder="输入投放数量" placeholder-class="place_class" type="number" adjust-position="true" bindblur="onConfirmThrowCount" value="{{throwCount==0? '':throwCount}}" />
 				<view hidden="{{charging==0}}">{{days}}</view>
 				{{charging==0?'CPM':'天'}}
 			</view>
@@ -173,4 +185,6 @@
 			<view class="check_confirm" catchtap="onConfirmCheck">确定</view>
 		</view>
 	</view>
+	<!-- 注意事项 -->
+	<image class="noticing_container" hidden="{{!noticing}}" src="/img/throw/noticing.jpg" catchtap="onCacelNotice"></image>
 </view>

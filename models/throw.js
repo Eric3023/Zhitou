@@ -31,7 +31,10 @@ class ThrowModel {
   /**
    * 投放
    */
-  doAdvertising({ lat, lng, regionId, address, province, audience, distance, throwType, position, isTemplate, templateId, phone, content, imgUrl, modelImagUrl, motto, city, coupon, couponId, startTime, endTime, totalAmount, unitPrice, isMonitor, cpm, monitor }) {
+  doAdvertising({ lat, lng, regionId, address, province, audience, distance, throwType, position, isTemplate, templateId, phone, content, imgUrl, imgUrl2, modelImagUrl, motto, city, coupon, couponId, startTime, endTime, totalAmount, unitPrice, isMonitor, cpm, monitor }) {
+    if (imgUrl2) {
+      imgUrl = imgUrl + ',' + imgUrl2;
+    }
     return check.checkResult(util.request(config.DoAdvertising,
       {
         regionId: regionId,
@@ -39,7 +42,7 @@ class ThrowModel {
         adDesc: content,
         adImgUrl: imgUrl,
         adPlace: position,
-        adTmpUrl: modelImagUrl,
+        // adTmpUrl: modelImagUrl,
         carType: motto,
         city: city,
         couponAmount: coupon,

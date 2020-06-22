@@ -25,7 +25,7 @@ Page({
     state: 0,//流程当前状态 0：选择广告位;1：选择模板/文件；2.选择素材完成，等待上传；3.素材上传完成 4：结算中/结算确认；5；结算完成
 
     //地点相关参数
-    location_state: 0,//投放地点：0：特定地点投放;2：全省投放
+    location_state: 0,//投放地点：0：特定地点投放;2：全省投放；
     location: {},//投放地点
     audience: 0,//周边用户数
 
@@ -38,17 +38,19 @@ Page({
     model: defaultModel,//0.使用模板；1.直接上传
     model_param: {
       modelId: 0,//选中的模板Id
-      img: '',//上传的模板照片
+      img: [],//上传的模板照片
       content: '',//输入的显示内容
       phone: '',//输入的电话
     },
     div_param: {
-      img: '',//上传的照片
+      img: '',//750*1332
+      img2: '',//750*1624
     },
     mottoIndex: 0,//选中车型索引
     start: now,//投放开始日期
     end: now,//投放结束日期
-    imgurl: '',
+    imgurl: '',//标准图片
+    imgurl2: '',//其他规格图片
     progress: '',//图片上传进度
 
     isMonitor: 0, //是否使用记刻数据0:不使用；1:使用；
@@ -66,6 +68,8 @@ Page({
 
     mapFlag: false,//是否是从地图页面返回
     previewUrl: '',//预览的url
+
+    noticing: false,//显示注意事项
   },
 
   /**
@@ -101,16 +105,34 @@ Page({
   /**
    * 切换至全城投放
    */
-  onChangeToCity() {
-    if (this.data.location_state == 0) {
-      this.setData({
-        location_state: 2
-      });
-    } else {
-      this.setData({
-        location_state: 0
-      });
+  onChangeToCity(event) {
+    let value = event.currentTarget.dataset.value;
+    switch (value) {
+      case 'area':
+        this.setData({
+          location_state: 0
+        });
+        break;
+      case 'province':
+        this.setData({
+          location_state: 2
+        });
+        break;
+      case 'country':
+        this.setData({
+          location_state: 3
+        });
+        break;
     }
+    // if (this.data.location_state == 0) {
+    //   this.setData({
+    //     location_state: 2
+    //   });
+    // } else {
+    //   this.setData({
+    //     location_state: 0
+    //   });
+    // }
   },
 
   /**
@@ -241,7 +263,7 @@ Page({
   },
 
   /**
-   * 选择照片
+   * 选择照片（废弃）
    */
   onSelectModelPhoto() {
     wx.chooseImage({
@@ -261,7 +283,7 @@ Page({
   },
 
   /**
-   * 选择照片
+   * 选择照片(750*1334)
    */
   onSelectDivPhoto() {
     wx.chooseImage({
@@ -281,6 +303,27 @@ Page({
   },
 
   /**
+   * 选择照片(750*1624)
+   */
+  onSelectDivPhoto2() {
+    wx.chooseImage({
+      count: 1,
+      // sizeType: ['compressed'],
+      sizeType: ['original'],
+      sourceType: ['album', 'camera'],
+      complete: (res) => {
+        if (res && res.tempFilePaths) {
+          this.data.div_param.img2 = res.tempFilePaths[0];
+          this.setData({
+            div_param: this.data.div_param,
+          });
+        }
+      },
+    })
+  },
+
+
+  /**
    * 取消了上传素材
    */
   onCancelMaterial() {
@@ -293,7 +336,7 @@ Page({
    * 上传素材
    */
   onCommitMaterial() {
-    let imgPath = '';
+    let imgPath = [];
     //图片未选择
     if (this.data.model == 0) {
       console.log(this.data.model_param);
@@ -304,17 +347,29 @@ Page({
       //   });
       //   return;
       // }
-      imgPath = this.data.model_param.img;
+      // imgPath[0] = this.data.model_param.img;
     } else {
       console.log(this.data.div_param);
-      if (!this.data.div_param.img) {
-        wx.showToast({
-          title: '请上传图片',
-          icon: 'none',
-        });
-        return;
+      //开屏广告
+      if (this.data.position == 16) {
+        if (!this.data.div_param.img || !this.data.div_param.img2) {
+          wx.showToast({
+            title: '两种尺寸图片都需要上传',
+            icon: 'none',
+          });
+          return;
+        }
+      } else {
+        if (!this.data.div_param.img) {
+          wx.showToast({
+            title: '请上传图片',
+            icon: 'none',
+          });
+          return;
+        }
       }
-      imgPath = this.data.div_param.img;
+      imgPath[0] = this.data.div_param.img;
+      imgPath[1] = this.data.div_param.img2;
     }
 
     this.setData({
@@ -398,16 +453,17 @@ Page({
       cpm: this.data.throwCount,
       monitor: this.data.monitorUrl,
     };
-    //使用模板
+    //使用模板    
     if (this.data.model == 0) {
-      data.templateId = this.data.models[this.data.model_param.modelId].id;
+      data.templateId = this.data.model_param.modelId;
       data.phone = this.data.model_param.phone;
       data.content = this.data.model_param.content;
-      data.modelImagUrl = this.data.models[this.data.model_param.modelId].styleImageUrl;
+      data.imgUrl = this.data.model_param.img;
     }
     //直接上传
     else {
       data.imgUrl = this.data.imgurl;
+      data.imgUrl2 = this.data.imgurl2;
     }
     throwModel.doAdvertising(data).then(res => {
       console.log(res);
@@ -475,6 +531,23 @@ Page({
         monitorUrl: value,
       })
     }
+  },
+
+  /**
+   * 注意事项
+   */
+  onNotice(event) {
+    this.setData({
+      noticing: true,
+    });
+  },
+  /**
+   * 取消注意事项
+   */
+  onCacelNotice() {
+    this.setData({
+      noticing: false,
+    });
   },
 
   /**
@@ -636,15 +709,17 @@ Page({
       model: defaultModel,
       model_param: {
         modelId: 0,//选中的模板id
-        img: '',//上传的模板照片
+        img: [],//上传的模板照片
         content: '',//输入的显示内容
         phone: '',//输入的电话
       },
       div_param: {
-        img: '',//上传的照片
+        img: '',//750*1332
+        img2: '',//750*1624
       },
       progress: '',//图片上传进度
       imgurl: '',
+      imgurl2: '',
 
       charging: 0,
       days: 1,
@@ -722,52 +797,77 @@ Page({
    * 上传图片
    */
   _updateImgFie({ path }) {
-    fileModel.uploadImage({
-      path: path,
-      progress: res => {
-        console.log('上传进度', res.progress);
-        console.log('已经上传的数据长度', res.totalBytesSent);
-        console.log('预期需要上传的数据总长度', res.totalBytesExpectedToSend);
-        this.setData({
-          progress: res.progress,
-        });
-      },
-    }).then(
-      res => {
-        console.log('上传成功');
-        console.log(res);
-        if (res && res.errno == 0) {
-          let data = res.data;
-          this.data.imgurl = data.url;
-          this.data.previewUrl = data.url;
+    let imgPromise0 = null;
+    let imgPromise1 = null;
+    if (path[0]) {
+      imgPromise0 = fileModel.uploadImage({
+        path: path[0],
+        progress: res => {
+          console.log('上传进度', res.progress);
+          console.log('已经上传的数据长度', res.totalBytesSent);
+          console.log('预期需要上传的数据总长度', res.totalBytesExpectedToSend);
           this.setData({
-            state: 3,//图片上传完成
+            progress: res.progress,
           });
-          console.log(this.data.imgurl);
-          this._onCalTotal();
-        } else {
+        },
+      });
+    }
+    if (path[1]) {
+      imgPromise1 = fileModel.uploadImage({
+        path: path[1],
+      });
+    }
+
+    let promises = [];
+    if (imgPromise0) {
+      promises[0] = imgPromise0;
+      if (imgPromise1) {
+        promises[1] = imgPromise1;
+      }
+    }
+
+    Promise.all(promises)
+      .then(
+        res => {
+          console.log('上传成功');
+          console.log(res);
+          if (res[1] && res[1].errno == 0) {
+            let data = res[1].data;
+            this.data.imgurl2 = data.url;
+          }
+
+          if (res[0] && res[0].errno == 0) {
+            let data = res[0].data;
+            this.data.imgurl = data.url;
+            this.data.previewUrl = data.url;
+            this.setData({
+              state: 3,//图片上传完成
+            });
+            console.log(this.data.imgurl);
+            this._onCalTotal();
+          } else {
+            console.log('上传失败');
+            console.log(res[0]);
+            wx.showToast({
+              title: '图片上传失败',
+              icon: 'none',
+            });
+            this._setState(0);//重新选择广告位
+            this._resetData(false);
+          }
+        },
+        error => {
+          console.log("-------------------");
           console.log('上传失败');
-          console.log(response);
+          console.log(error);
           wx.showToast({
             title: '图片上传失败',
             icon: 'none',
           });
           this._setState(0);//重新选择广告位
           this._resetData(false);
-        }
-      },
-      error => {
-        console.log("-------------------");
-        console.log('上传失败');
-        console.log(error);
-        wx.showToast({
-          title: '图片上传失败',
-          icon: 'none',
-        });
-        this._setState(0);//重新选择广告位
-        this._resetData(false);
-      },
-    )
+        },
+      )
   },
 
   /**
@@ -780,13 +880,16 @@ Page({
       contact: this.data.model_param.phone,//联系方式
     }).then(
       res => {
+        this.data.model_param.img = res.data.join(',');
+        console.log(this.data.model_param.img);
         this.setData({
           progress: 100,
-          previewUrl: res.data,
+          previewUrl: res.data[0],//需要预览的图片
         });
+        this._onCalTotal();
       }
     ).catch(e => {
-
+      console.log(e);
     });
   },
 
@@ -808,11 +911,11 @@ Page({
             this._showNoMoney();
             return;
           }
-          //是否认证
-          if (isAuth != 2) {
-            this._showNoAuth(isAuth);
-            return;
-          }
+          // //是否认证
+          // if (isAuth != 2) {
+          //   this._showNoAuth(isAuth);
+          //   return;
+          // }
 
           this.setData({
             balance: balance.toFixed(2),

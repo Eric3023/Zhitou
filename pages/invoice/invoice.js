@@ -7,9 +7,14 @@ Page({
    */
   data: {
     type: 0,//0:个人发票；1:个人发票
+    name: '',
+    number: '',
+    email: '',
 
     price: 0, //总金额
     ids: '',//订单id
+
+    checking: false,
   },
 
   /**
@@ -58,12 +63,43 @@ Page({
       }
     }
 
+    this.setData({
+      name: value.name,
+      number: value.number,
+      email: value.email,
+      checking: true,
+    });
+  },
+
+  /**
+   * 修改信息
+   */
+  onCancel(event) {
+    this.setData({
+      checking: false,
+    });
+  },
+
+  /**
+   * 确认信息
+   */
+  onCommit(event) {
+    this.setData({
+      checking: false,
+    });
+    this._submitMessage();
+  },
+
+  /**
+   * 提交发票信息
+   */
+  _submitMessage() {
     recordModel.openInvoice({
       type: this.data.type,
-      name: value.name,
-      dutySign: value.number,
+      name: this.data.name,
+      dutySign: this.data.number,
       totalPrice: this.data.price,
-      email: value.email,
+      email: this.data.email,
       orderId: this.data.ids,
     }).then(res => {
       this._showToast('发票信息已提交，稍后请在邮箱查收')

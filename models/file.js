@@ -4,7 +4,7 @@ const check = require('../models/check.js');
 /**
  * 上传图片
  */
-function uploadImage({ path, progress}) {
+function uploadImage({ path, progress }) {
   console.log(`url:${config.Upload}`);
   console.log(`filePath:${path}`);
 
@@ -24,7 +24,7 @@ function uploadImage({ path, progress}) {
 
     if (uploadTask)
       uploadTask.onProgressUpdate((res) => {
-        progress(res);
+        if (progress) progress(res);
       });
   }));
 

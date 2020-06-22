@@ -18,7 +18,7 @@
 			</view>
 		</view>
 		<view class="param" wx:if="{{type==0}}">
-			公司名称
+			发票抬头
 			<input placeholder="请输入公司名称" adjust-position="true" name="name"></input>
 			<!-- <view class="data">北京广化寺</view> -->
 		</view>
@@ -49,3 +49,34 @@
 	<!-- 确认按钮 -->
 	<button class="btn" form-type="submit">提交</button>
 </form>
+
+<!-- 遮罩层 -->
+<v_mask class="mask" wx:if="{{checking}}" />
+<!-- 信息确认弹框 -->
+<view class="dialog" wx:if="{{checking}}">
+	<view class="warn">发票开具成功后不可撤销，请您仔细核对开票信息</view>
+	<view class="row">
+		<text class="key">抬头类型</text>
+		<text class="value">{{type==0?'企业单位':'个人'}}</text>
+	</view>
+	<view class="row">
+		<text class="key">发票抬头</text>
+		<text class="value">{{name}}</text>
+	</view>
+	<view class="row" wx:if="{{type==0}}">
+		<text class="key">纳税人识别号</text>
+		<text class="value">{{number}}</text>
+	</view>
+	<view class="row">
+		<text class="key">发票金额</text>
+		<text class="value">{{price}}</text>
+	</view>
+	<view class="row">
+		<text class="key">电子邮件</text>
+		<text class="value">{{email}}</text>
+	</view>
+	<view class="btn_container">
+		<view class="cancel" catchtap="onCancel">修改</view>
+		<view class="commit" catchtap="onCommit">确认</view>
+	</view>
+</view>

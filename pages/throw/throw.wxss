@@ -31,7 +31,7 @@ page {
   display: flex;
   flex-direction: row;
   align-items: center;
-  margin-top: 26rpx;
+  margin-top: 24rpx;
   width: 680rpx;
   height: 138rpx;
   background-color: white;
@@ -77,7 +77,7 @@ page {
 .code_content {
   width: 90%;
   font-size: 24rpx;
-  margin-top: 22rpx;
+  margin-top: 20rpx;
   margin-left: 38rpx;
   color: #484848;
   text-overflow: ellipsis;
@@ -132,19 +132,14 @@ page {
   opacity: 0.4;
 }
 
-.model>radio-group {
-  width: 100%;
-  height: 100%;
-}
-
 .model_header {
   display: flex;
   flex-direction: row;
-  align-items: center;
+  align-items: flex-end;
 }
 
 .model_selector {
-  padding-top: 50rpx;
+  padding-top: 30rpx;
   margin-left: 32rpx;
 }
 
@@ -185,8 +180,8 @@ page {
 .photo {
   display: flex;
   flex-direction: row;
-  font-size: 28rpx;
-  margin-top: 36rpx;
+  font-size: 24rpx;
+  margin-top: 24rpx;
   align-items: center;
 }
 
@@ -208,7 +203,7 @@ page {
 }
 
 .input_container {
-  font-size: 28rpx;
+  font-size: 24rpx;
   margin-top: 36rpx;
 }
 
@@ -330,6 +325,24 @@ page {
   overflow: hidden;
 }
 
+.noticing_container{
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 650rpx;
+  height: 940rpx;
+  margin-left: -325rpx;
+  margin-top: -470rpx;
+  background-color: white;
+  z-index: 9999;
+  border-radius: 1%;
+  box-shadow: 0 0 8rpx #cecece;
+  overflow: hidden;
+}
+
 .btn_container {
   width: 100%;
   height: 90rpx;
@@ -374,8 +387,9 @@ page {
 }
 
 .change {
-  color: #4cbea0;
-  margin-left: 12rpx;
+  /* color: #4cbea0; */
+  margin-left: 10rpx;
+  margin-right: 10rpx;
 }
 
 .point2 {
