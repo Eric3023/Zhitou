@@ -58,7 +58,7 @@
 				<!-- 模板选择 -->
 				<view class="model_selector">
 					<view class="model_header">
-						<radio id="model" style="transform:scale(0.6);" checked="true" value="{{0}}" checked></radio>
+						<radio id="model" checked="true" value="{{0}}" checked></radio>
 						<label class="model_title" for="model"> 模板选择 :</label>
 						<view class="notice_container" catchtap="onNotice">
 							<text class="notice" catchtap="onNotice">注意事项</text>
@@ -71,8 +71,8 @@
 								<view class="model_items">
 									<block wx:for="{{models}}" wx:key="index">
 										<view class="model_item">
-											<image class="model_img" src="{{item.styleImageUrl}}"></image>
-											<radio class="model_radio" style="transform:scale(0.6);" checked="{{index==0}}" value="{{item.id}}"></radio>
+											<image class="model_img" src="{{item.styleImageUrl}}" catchtap="onPreviewModel" data-value="{{item.styleImageUrl}}"></image>
+											<radio class="model_radio" checked="{{index==0}}" value="{{item.id}}"></radio>
 										</view>
 									</block>
 								</view>
@@ -95,7 +95,7 @@
 				<!-- 直接上传 -->
 				<view class="model_selector">
 					<view class="model_header">
-						<radio id="div" style="transform:scale(0.6);" value="{{1}}"></radio>
+						<radio id="div" value="{{1}}"></radio>
 						<label class="model_title" for="div">直接上传 :</label>
 					</view>
 					<view class="model_body">
@@ -121,16 +121,18 @@
 	<!-- 结算 -->
 	<view class="settlement">
 		<view class="audience">监测链接
-			<view class="audience_num">
-				<checkbox-group class="origin" bindchange="onMonitorChange">
-					<checkbox id="checkMonitor" color="#f77a51" value="{{1}}"></checkbox>
-					<label for="checkMonitor">是否由记刻数据提供第三方监测</label>
-				</checkbox-group>
+			<view class="audience_num form_param">
+				<view class="monitor">
+					<!-- <checkbox id="checkMonitor" color="#f77a51" value="{{1}}"></checkbox> -->
+					<switch id="checkMonitor" type="switch" value="{{1}}" bindchange="onMonitorChange"></switch>
+					<label for="checkMonitor">是否使用记刻监测</label>
+				</view>
 			</view>
 		</view>
 		<view class="audience">
-			<view class="audience_num">
+			<view class="audience_num form_param">
 				<input class="input_link" placeholder="输入第三方监测链接，选填" placeholder-class="place_class" adjust-position="true" bindblur="onConfirmMonitorUrl" value="{{monitorUrl}}"></input>
+				<button class="input_link_add">+</button>
 			</view>
 		</view>
 		<view class="motto" hidden="true">
@@ -143,12 +145,12 @@
 		</view>
 		<view class="audience">
 			投放周期
-			<view class="time_picker_contianer">
+			<view class="time_picker_contianer form_param">
 				<picker bindchange="onStartTimeChange" mode="date" value="0" start='{{now}}'>
 					<view class="time_picker time_picker_right_margin">{{start}}
 					</view>
 				</picker>
-				-
+				<text>-</text>
 				<picker bindchange="onEndTimeChange" value="0" mode="date" start='{{now}}'>
 					<view class="time_picker time_picker_left_margin">{{end}}
 					</view>
@@ -158,15 +160,29 @@
 		<!-- <view class="audience">影响人群
 			<view class="audience_num">9000+</view>
 		</view> -->
+		<view class="audience">投放类型
+			<radio-group class="audience_num form_param" bindchange="onValuationChanged">
+				<view class="cpm">
+					<radio id="cpm_radio" value="{{0}}" style="transform:scale(0.8);" checked></radio>
+					<label for="cpm_radio">CPM</label>
+				</view>
+				<view class="cpd">
+					<radio id="cpd_radio" value="{{1}}" style="transform:scale(0.8);"></radio>
+					<label for="cpd_radio">CPD</label>
+				</view>
+			</radio-group>
+		</view>
 		<view class="audience">投放数量
-			<view class="audience_num">
+			<view class="audience_num form_param">
 				<input class="input_num" hidden="{{charging==1}}" placeholder="输入投放数量" placeholder-class="place_class" type="number" adjust-position="true" bindblur="onConfirmThrowCount" value="{{throwCount==0? '':throwCount}}" />
-				<view hidden="{{charging==0}}">{{days}}</view>
-				{{charging==0?'CPM':'天'}}
+				<view class="unit">
+					<view hidden="{{charging==0}}">{{days}}</view>
+					<view>　{{charging==0?'CPM':'天'}}</view>
+				</view>
 			</view>
 		</view>
 		<view class="audience">单　　价
-			<view class="audience_num">{{unitPrice}}{{unit}}</view>
+			<view class="audience_num">{{unitPrice}}　{{charging==0?'元/CPM':'元/天'}}</view>
 		</view>
 		<!-- <view class="coupon">已享受首单满减，优惠金额1000元</view> -->
 		<view class="settle">合计：{{totalAmount}}元

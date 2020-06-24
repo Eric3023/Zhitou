@@ -49,6 +49,8 @@ module.exports = {
   ThrowDetail: WxApiRoot + 'advertising/getAdvertisingInfo',
   //获取模板预览图片
   PreviewImage: WxApiRoot + 'advertising/getTemplateImgUrl',
+  //投放价格表
+  AllPrices: WxApiRoot+'advertising/getAllPrices',
 
 
   //用户余额接口

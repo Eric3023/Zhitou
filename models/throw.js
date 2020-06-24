@@ -80,6 +80,15 @@ class ThrowModel {
       }
     ))
   }
+
+  /**
+   * 获取价格表
+   */
+  getAllPrices(){
+    return check.checkResult(util.request(
+      config.AllPrices,
+    ));
+  }
 }
 
 

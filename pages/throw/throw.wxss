@@ -148,6 +148,7 @@ page {
 .model_title {
   font-size: 30rpx;
   font-weight: 400;
+  padding-left: 12rpx;
 }
 
 .model_body {
@@ -158,7 +159,7 @@ page {
   margin-top: 24rpx;
   display: flex;
   flex-direction: row;
-  flex-wrap: nowrap;
+  flex-wrap: nowrap
 }
 
 .model_item {
@@ -175,6 +176,8 @@ page {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding: 10rpx;
+  box-sizing: border-box;
 }
 
 .model_img {
@@ -296,7 +299,7 @@ page {
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
 }
 
 .time_picker {
@@ -312,11 +315,11 @@ page {
 }
 
 .time_picker_left_margin {
-  margin-left: 8rpx;
+  margin-left: 0rpx;
 }
 
 .time_picker_right_margin {
-  margin-right: 8rpx;
+  margin-right: 0rpx;
 }
 
 .model_container {
@@ -425,7 +428,7 @@ page {
 
 .settlement {
   width: 100%;
-  height: 420rpx;
+  height: fit-content;
   background-color: white;
   border-radius: 20rpx;
   box-shadow: 0 0rpx 8rpx #bcbcbc;
@@ -487,15 +490,17 @@ page {
 }
 
 .settle {
-  /* margin-top: 24rpx; */
-  /* margin-right: 28rpx; */
+  margin-top: 24rpx;
+  margin-bottom: 24rpx;
+  margin-right: 36rpx;
+  /* background-color: turquoise; */
   font-size: 26rpx;
   display: flex;
   flex-direction: row;
   align-items: center;
-  position: absolute;
-  bottom: 24rpx;
-  right: 36rpx;
+  /* position: absolute; */
+  /* bottom: 24rpx;
+  right: 36rpx; */
 }
 
 .settle_btn {
@@ -505,6 +510,16 @@ page {
   color: white;
   padding: 12rpx 36rpx 12rpx 36rpx;
   box-shadow: 0 0 8rpx #f77a51;
+}
+
+.form_param {
+  width: 340rpx;
+  height: 50rpx;
+  /* justify-content: center; */
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
 }
 
 /* 结算确认 */
@@ -573,7 +588,7 @@ page {
 }
 
 .input_num {
-  width: 264rpx;
+  width: 80%;
   height: 28rpx;
   margin-right: 18rpx;
   background-color: #f1f1f1;
@@ -583,8 +598,18 @@ page {
   overflow: hidden;
 }
 
+.unit{
+  text-align: end;
+  position: absolute;
+  right: 0rpx;
+  height: 100%;
+  flex-direction: row;
+  display: flex;
+  align-items: center;
+}
+
 .input_link {
-  width: 332rpx;
+  width: 80%;
   height: 28rpx;
   background-color: #f1f1f1;
   box-shadow: 0rpx 0rpx 5rpx #dedede;
@@ -592,6 +617,34 @@ page {
   white-space: nowrap;
   font-size: 20rpx;
   overflow: hidden;
+}
+
+.input_link_add{
+  width: 15%;
+  height: 50rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-left: 5%;
+}
+
+.monitor{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+#throwCont{
+  justify-content: end;
+}
+
+switch{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-left: 10rpx;
 }
 
 /*隐藏滚动条*/
@@ -627,3 +680,53 @@ checkbox .wx-checkbox-input.wx-checkbox-input-checked::before {
   text-align: center;
   font-size: 30rpx;
 }
+
+radio .wx-radio-input {
+  height: 30rpx;
+  width: 30rpx;
+  border-radius: 50%;
+  border: 2rpx solid #999;
+  background: transparent;
+}
+
+/* 选中后的 背景样式 （红色背景 无边框 可根据UI需求自己修改） */
+radio .wx-radio-input.wx-radio-input-checked {
+  border: 2rpx solid transparent;
+  /* background: red; */
+}
+
+/* 选中后的 对勾样式 （白色对勾 可根据UI需求自己修改） */
+radio .wx-radio-input.wx-radio-input-checked::before {
+  border-radius: 50%;
+  width: 30rpx;
+  height: 30rpx;
+  line-height: 30rpx;
+  text-align: center;
+  font-size: 24rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  align-items: center;
+  /* color: #fff;
+  background: #f00; */
+  transform: translate(-50%, -50%) scale(1);
+  -webkit-transform: translate(-50%, -50%) scale(1);
+}
+
+.wx-switch-input{
+  width:82rpx !important;
+  height:28rpx !important;
+  /* background: #50D2C2 !important; */
+}
+/*白色样式（false的样式）*/
+.wx-switch-input::before{
+  width:82rpx !important;
+  height: 28rpx !important;
+}
+/*绿色样式（true的样式）*/
+.wx-switch-input::after{
+  width: 40rpx !important;
+  height: 28rpx !important;
+}
+

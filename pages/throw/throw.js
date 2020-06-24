@@ -70,6 +70,8 @@ Page({
     previewUrl: '',//预览的url
 
     noticing: false,//显示注意事项
+    priceJson: [],//价格表
+    jk_price: 0,
   },
 
   /**
@@ -80,6 +82,7 @@ Page({
     this._setState(0);
     this._resetData(true);
 
+    this._getPriceJson();
     this._getLocation();
     this._getAdPlaces();
     this._getCarTypes();
@@ -348,7 +351,7 @@ Page({
       //   return;
       // }
       // imgPath[0] = this.data.model_param.img;
-      if(!this.data.model_param.content){
+      if (!this.data.model_param.content) {
         wx.showToast({
           title: '请输入显示内容',
           icon: 'none',
@@ -575,44 +578,111 @@ Page({
       return;
     }
 
+    // //按照cpm结算
+    // if (code.charging == 0) {
+    //   if (this.data.throwCount > 0) {
+    //     this.data.unitPrice = 60;
+    //     this.setData({
+    //       charging: 0,
+
+    //       unitPrice: 60,
+    //       unit: '元/CPM',//单价单位
+    //       totalAmount: this.data.throwCount * this.data.unitPrice
+    //     });
+    //   } else {
+    //     this.setData({
+    //       charging: 0,
+
+    //       unitPrice: 60,
+    //       unit: '元/CPM',//单价单位
+    //       totalAmount: 0,
+    //     });
+    //   }
+    // } else if (code.charging == 1) {
+    //   if (days > 0) {
+    //     this.data.unitPrice = 20000;
+    //     this.setData({
+    //       charging: 1,
+    //       days: days,
+
+    //       unitPrice: 20000,
+    //       unit: '元/天',//单价单位
+    //       totalAmount: days * this.data.unitPrice
+    //     });
+    //   } else {
+    //     this.setData({
+    //       charging: 1,
+    //       days: 0,
+
+    //       unitPrice: 20000,
+    //       unit: '元/天',//单价单位
+    //       totalAmount: 0
+    //     });
+    //   }
+    // }
+
     //按照cpm结算
-    if (code.charging == 0) {
+    console.log("============================");
+    console.log("==========计算单价===========");
+    //1.筛选广告位
+    let optionPrice = {};
+    for (var i = 0; i < this.data.priceJson.length; i++) {
+      if (this.data.priceJson[i].code == code.optionCode) {
+        optionPrice = this.data.priceJson[i];
+        break;
+      }
+    }
+    //2.筛选地域
+    let regionId = Math.floor(this.data.location.ad_info.adcode/10000)*10000;
+    let regionPrice = {};
+    for (var i = 0; i < optionPrice.regions.length; i++) {
+      if (optionPrice.regions[i].code == regionId) {
+        regionPrice = optionPrice.regions[i];
+        break;
+      }
+    }
+    console.log(regionPrice);
+    
+    
+    //3.筛选类型
+
+    if (this.data.charging == 0) {
+      console.log(regionPrice.chargings[0]);
+      console.log(regionPrice.chargings[0].price);
+      
       if (this.data.throwCount > 0) {
-        this.data.unitPrice = 60;
+        this.data.unitPrice = regionPrice.chargings[0].price;
         this.setData({
           charging: 0,
-
-          unitPrice: 60,
-          unit: '元/CPM',//单价单位
+          unitPrice: this.data.unitPrice,
           totalAmount: this.data.throwCount * this.data.unitPrice
         });
       } else {
+        this.data.unitPrice = regionPrice.chargings[0].price;
         this.setData({
           charging: 0,
-
-          unitPrice: 60,
-          unit: '元/CPM',//单价单位
+          unitPrice: this.data.unitPrice,
           totalAmount: 0,
         });
       }
-    } else if (code.charging == 1) {
+    } else if (this.data.charging == 1) {
+      console.log(regionPrice.chargings[1]);
+      console.log(regionPrice.chargings[1].price);
       if (days > 0) {
-        this.data.unitPrice = 20000;
+        this.data.unitPrice = regionPrice.chargings[1].price;
         this.setData({
           charging: 1,
           days: days,
 
-          unitPrice: 20000,
-          unit: '元/天',//单价单位
+          unitPrice: this.data.unitPrice,
           totalAmount: days * this.data.unitPrice
         });
       } else {
+        this.data.unitPrice = regionPrice.chargings[1].price;
         this.setData({
           charging: 1,
           days: 0,
-
-          unitPrice: 20000,
-          unit: '元/天',//单价单位
+          unitPrice: this.data.unitPrice,
           totalAmount: 0
         });
       }
@@ -628,11 +698,53 @@ Page({
    */
   onMonitorChange(event) {
     let value = event.detail.value;
-    if (!value || value.length == 0) {
+    if (!value) {
       this.data.isMonitor = 0;
     } else {
       this.data.isMonitor = 1;
     }
+  },
+
+  /**
+   * 计价方式改变
+   */
+  onValuationChanged: function (event) {
+    console.log(event);
+    let value = event.detail.value;
+    if (value == "1") {
+      this.setData({
+        charging: 1,
+      });
+    } else {
+      this.setData({
+        charging: 0,
+      });
+    }
+    this._onCalTotal();
+  },
+
+  /**
+   * 预览模板
+   */
+  onPreviewModel: function (event) {
+    wx.previewImage({
+      urls: [event.currentTarget.dataset.value],
+    })
+  },
+
+  /**
+   * 获取价格表格 
+   */
+  _getPriceJson() {
+    throwModel.getAllPrices()
+      .then(res => {
+        console.log(res);
+        this.data.jk_price = res.data.jk_price;
+        this.data.priceJson = res.data.list;
+      })
+      .catch(e => {
+        console.log(e);
+      });
   },
 
   /**
@@ -728,7 +840,6 @@ Page({
       imgurl: '',
       imgurl2: '',
 
-      charging: 0,
       days: 1,
 
       totalAmount: 0,
@@ -736,7 +847,7 @@ Page({
       throwCount: 0,//投放数量，cpm
       unitPrice: 0,//单价
       unit: '元/CPM',//单价单位
-      preview:'',
+      preview: '',
     });
     //全部内容重置：包括城市、周期、投放数量等
     if (isAll) {
@@ -747,6 +858,7 @@ Page({
         mottoIndex: 0,//选中车型索引
         start: now,//投放开始日期
         end: now,//投放结束日期
+        charging: 0,
       });
     }
   },
