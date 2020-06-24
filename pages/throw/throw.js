@@ -348,6 +348,13 @@ Page({
       //   return;
       // }
       // imgPath[0] = this.data.model_param.img;
+      if(!this.data.model_param.content){
+        wx.showToast({
+          title: '请输入显示内容',
+          icon: 'none',
+        });
+        return;
+      }
     } else {
       console.log(this.data.div_param);
       //开屏广告
@@ -725,6 +732,11 @@ Page({
       days: 1,
 
       totalAmount: 0,
+
+      throwCount: 0,//投放数量，cpm
+      unitPrice: 0,//单价
+      unit: '元/CPM',//单价单位
+      preview:'',
     });
     //全部内容重置：包括城市、周期、投放数量等
     if (isAll) {
@@ -735,9 +747,6 @@ Page({
         mottoIndex: 0,//选中车型索引
         start: now,//投放开始日期
         end: now,//投放结束日期
-        throwCount: 0,//投放数量，cpm
-        unitPrice: 0,//单价
-        unit: '元/CPM',//单价单位
       });
     }
   },
@@ -911,11 +920,11 @@ Page({
             this._showNoMoney();
             return;
           }
-          // //是否认证
-          // if (isAuth != 2) {
-          //   this._showNoAuth(isAuth);
-          //   return;
-          // }
+          //是否认证
+          if (isAuth != 2) {
+            this._showNoAuth(isAuth);
+            return;
+          }
 
           this.setData({
             balance: balance.toFixed(2),

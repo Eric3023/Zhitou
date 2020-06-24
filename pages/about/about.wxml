@@ -1,7 +1,7 @@
 <view class="container">
 	<image class="icon" src='/img/app/logo.jpg'></image>
 	<text class="title">枝头</text>
-	<text class="version">版本：{{version}}</text>
+	<text class="version" hidden="true">版本：{{version}}</text>
 	<view class="content">
 		<text catchtap="onJumpToPolicy">《法律声明及隐私政策》</text>
 		<text>北京知了互联全国出行领域广告资源投放系统</text>

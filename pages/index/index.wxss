@@ -28,7 +28,8 @@
     background-size: 100% 100%;
     background-color: #f7fbfe;
     align-items: center;
-    line-height: 58rpx;
+    /* line-height: 58rpx; */
+    display: flex;
 }
 
 .search>image {

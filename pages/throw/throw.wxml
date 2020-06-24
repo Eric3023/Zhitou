@@ -60,8 +60,10 @@
 					<view class="model_header">
 						<radio id="model" style="transform:scale(0.6);" checked="true" value="{{0}}" checked></radio>
 						<label class="model_title" for="model"> 模板选择 :</label>
-						<text class="notice" catchtap="onNotice">注意事项</text>
-						<image class="notice_icon" src="/img/throw/notice.png" catchtap="onNotice"></image>
+						<view class="notice_container" catchtap="onNotice">
+							<text class="notice" catchtap="onNotice">注意事项</text>
+							<image class="notice_icon" src="/img/throw/notice.png" catchtap="onNotice"></image>
+						</view>
 					</view>
 					<view class="model_body">
 						<scroll-view scroll-x="true" scroll-y="false">
@@ -121,8 +123,8 @@
 		<view class="audience">监测链接
 			<view class="audience_num">
 				<checkbox-group class="origin" bindchange="onMonitorChange">
-					<checkbox color="#f77a51" value="{{1}}"></checkbox>
-					是否由记刻数据提供第三方监测
+					<checkbox id="checkMonitor" color="#f77a51" value="{{1}}"></checkbox>
+					<label for="checkMonitor">是否由记刻数据提供第三方监测</label>
 				</checkbox-group>
 			</view>
 		</view>

@@ -36,6 +36,7 @@ page {
   height: 138rpx;
   background-color: white;
   position: relative;
+  border-radius: 5rpx;
 }
 
 .code_backgroud {
@@ -46,11 +47,12 @@ page {
 }
 
 .code_progress {
-  width: 100%;
+  width: 96%;
   height: 16rpx;
   position: absolute;
   z-index: 99;
-  bottom: 0;
+  left: 2%;
+  bottom: 2%;
 }
 
 .code_messeage {
@@ -167,14 +169,17 @@ page {
 }
 
 .model_radio {
+  width: 100%;
   position: relative;
-  margin-top: -12rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .model_img {
   width: 142rpx;
   height: 220rpx;
-  margin-bottom: 16rpx;
 }
 
 .photo {
@@ -208,9 +213,16 @@ page {
 }
 
 .notice {
-  margin-left: 20rpx;
-  font-size: 22rpx;
+  font-size: 24rpx;
   color: #cbcbcb;
+}
+
+.notice_container {
+  height: 100%;
+  display: flex;
+  align-items: flex-end;
+  padding-left: 20rpx;
+  padding-right: 20rpx;
 }
 
 .notice_icon {
@@ -325,7 +337,7 @@ page {
   overflow: hidden;
 }
 
-.noticing_container{
+.noticing_container {
   display: flex;
   flex-direction: column;
   position: relative;
@@ -442,6 +454,7 @@ page {
   color: #000000;
   position: relative;
 }
+
 .settlement checkbox-group {
   width: 332rpx;
   font-size: 20rpx;
