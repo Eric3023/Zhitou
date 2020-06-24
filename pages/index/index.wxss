@@ -34,9 +34,9 @@
 
 .search>image {
 
-    float: left;
+    /* float: left;
+    margin-top: 8rpx; */
     margin-left: 10rpx;
-    margin-top: 8rpx;
     width: 35rpx;
     height: 35rpx;
 }
