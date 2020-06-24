@@ -129,10 +129,10 @@
 				</view>
 			</view>
 		</view>
-		<view class="audience">
+		<view class="audience" wx:if="{{!isMonitor}}" wx:for="{{monitorUrl}}" wx:key="index">
 			<view class="audience_num form_param">
-				<input class="input_link" placeholder="输入第三方监测链接，选填" placeholder-class="place_class" adjust-position="true" bindblur="onConfirmMonitorUrl" value="{{monitorUrl}}"></input>
-				<button class="input_link_add">+</button>
+				<input class="input_link" placeholder="输入第三方监测链接，选填" placeholder-class="place_class" adjust-position="true" bindblur="onConfirmMonitorUrl" data-index="{{index}}" model:value="{{monitorUrl[index]}}"></input>
+				<button class="input_link_add" catchtap="onAddLink" wx:if="{{index==0}}">+</button>
 			</view>
 		</view>
 		<view class="motto" hidden="true">

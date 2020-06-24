@@ -31,7 +31,7 @@ class ThrowModel {
   /**
    * 投放
    */
-  doAdvertising({ lat, lng, regionId, address, province, audience, distance, throwType, position, isTemplate, templateId, phone, content, imgUrl, imgUrl2, modelImagUrl, motto, city, coupon, couponId, startTime, endTime, totalAmount, unitPrice, isMonitor, cpm, monitor }) {
+  doAdvertising({ lat, lng, regionId, address, province, audience, distance, throwType, position, isTemplate, templateId, phone, content, imgUrl, imgUrl2, modelImagUrl, motto, city, coupon, couponId, startTime, endTime, totalAmount, unitPrice, isMonitor, cpm, monitor, charging }) {
     if (imgUrl2) {
       imgUrl = imgUrl + ',' + imgUrl2;
     }
@@ -63,6 +63,7 @@ class ThrowModel {
         isMonitor: isMonitor,//是否使用检测
         cpm: cpm,
         monitor: monitor,
+        charging: charging,
       },
       'POST'));
   }
@@ -84,7 +85,7 @@ class ThrowModel {
   /**
    * 获取价格表
    */
-  getAllPrices(){
+  getAllPrices() {
     return check.checkResult(util.request(
       config.AllPrices,
     ));

@@ -54,7 +54,7 @@ Page({
     progress: '',//图片上传进度
 
     isMonitor: 0, //是否使用记刻数据0:不使用；1:使用；
-    monitorUrl: '',
+    monitorUrl: [''],
 
     throwCount: 0,//投放数量，cpm
     charging: 0,//按天计费，按照CPM计费
@@ -440,6 +440,19 @@ Page({
     let end = this.data.end;
     let startTime = dateUtil.tsFormatTime(dateUtil.formatTimeStamp(start), 'yyyy-MM-dd 00:00:00');
     let endTime = dateUtil.tsFormatTime(dateUtil.formatTimeStamp(end), 'yyyy-MM-dd 23:59:59');
+    //拼接第三方监测链接
+    let monitor = '';
+    //不使用记刻监测时，使用第三方监测链接
+    if (!this.data.isMonitor) {
+      let monitors = [];
+      for (let i = 0; i < this.data.monitorUrl.length; i++) {
+        if (this.data.monitorUrl[i]) {
+          monitors.push(this.data.monitorUrl[i]);
+        }
+      }
+      if (monitors.length > 0)
+        monitor = monitors.join('|');
+    }
     let data = {
       lat: this.data.location.location.lat,
       lng: this.data.location.location.lng,
@@ -452,7 +465,7 @@ Page({
       throwType: this.data.location_state,
       position: this.data.position,
       isTemplate: this.data.model,
-      motto: this.data.mottos[this.data.mottoIndex].code,
+      // motto: this.data.mottos[this.data.mottoIndex].code,
       startTime: startTime,
       endTime: endTime,
       totalAmount: this.data.totalAmount,
@@ -461,7 +474,8 @@ Page({
       couponId: 0,
       isMonitor: this.data.isMonitor,
       cpm: this.data.throwCount,
-      monitor: this.data.monitorUrl,
+      monitor: monitor,
+      charging: this.data.charging,
     };
     //使用模板    
     if (this.data.model == 0) {
@@ -495,7 +509,7 @@ Page({
           icon: 'none',
         });
         this.setData({
-          state: 0,//投放失败
+          state: 3,//投放失败
         });
       }
     }, error => {
@@ -505,7 +519,7 @@ Page({
         icon: 'none',
       });
       this.setData({
-        state: 0,//投放失败
+        state: 3,//投放失败
       });
     });
 
@@ -535,12 +549,16 @@ Page({
    * 监测链接输入完成
    */
   onConfirmMonitorUrl(event) {
+    let index = parseInt(event.currentTarget.dataset.index);
+    if (isNaN(index)) return;
     let value = event.detail.value;
     if (value.startsWith("http://") || value.startsWith("https://")) {
+      this.data.monitorUrl[index] = value;
       this.setData({
-        monitorUrl: value,
+        monitorUrl: this.data.monitorUrl,
       })
     }
+    let monitor = this.data.monitorUrl.join('|');
   },
 
   /**
@@ -695,11 +713,28 @@ Page({
   onMonitorChange(event) {
     let value = event.detail.value;
     if (!value) {
-      this.data.isMonitor = 0;
+      this.setData({
+        isMonitor: 0,
+      })
     } else {
-      this.data.isMonitor = 1;
+      this.setData({
+        isMonitor: 1,
+      })
     }
     this._onCalTotal();
+  },
+
+  /**
+   * 添加监测链接输入框
+   */
+  onAddLink() {
+    let length = this.data.monitorUrl.length;
+    if (length < 3) {
+      this.data.monitorUrl.push('');
+      this.setData({
+        monitorUrl: this.data.monitorUrl,
+      });
+    }
   },
 
   /**
@@ -851,7 +886,7 @@ Page({
       this.setData({
         location_state: 0,
         isMonitor: 0, //是否使用记刻数据0:不使用；1:使用；
-        monitorUrl: '',
+        monitorUrl: [''],
         mottoIndex: 0,//选中车型索引
         start: now,//投放开始日期
         end: now,//投放结束日期

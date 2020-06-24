@@ -714,6 +714,11 @@ radio .wx-radio-input.wx-radio-input-checked::before {
   -webkit-transform: translate(-50%, -50%) scale(1);
 }
 
+switch{
+  margin-left: 0rpx;
+  margin-right: 10rpx;
+}
+
 .wx-switch-input{
   width:82rpx !important;
   height:28rpx !important;
@@ -723,6 +728,7 @@ radio .wx-radio-input.wx-radio-input-checked::before {
 .wx-switch-input::before{
   width:82rpx !important;
   height: 28rpx !important;
+  background-color: #cbcbcb !important;
 }
 /*绿色样式（true的样式）*/
 .wx-switch-input::after{
