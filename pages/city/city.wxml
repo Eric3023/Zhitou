@@ -3,7 +3,7 @@
 <view class="pa-l30 pa-r30">
   <view class="pa-t30 pa-b30 fo-28 fo-g">当前城市</view>
   <view class="city-item panel-center item-center">
-    <image src="/img/icon_location.jpg" class="icon-25"></image>
+    <image src="/img/icon_location.png" class="icon-25"></image>
     <view class="fo-26 ma-l10 w-s ell">{{currentcity}}</view>
   </view>
   <view class="pa-t30 pa-b30 fo-28 fo-g">热门城市</view>

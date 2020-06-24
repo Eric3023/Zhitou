@@ -18,7 +18,7 @@
 			</view>
 		</view>
 		<view class="city">
-			<image class="point2" src="/img/icon_location.jpg"></image>
+			<image class="point2" src="/img/icon_location.png"></image>
 			<text class="address" wx:if="{{location_state==0}}">{{(location.title? location.title:location.formatted_addresses.recommend)}}</text>
 			<text class="address" wx:if="{{location_state==2}}">{{location.ad_info.province}}</text>
 			<text class="address" wx:if="{{location_state==3}}">全国投放</text>
