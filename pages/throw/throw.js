@@ -621,9 +621,6 @@ Page({
     //   }
     // }
 
-    //按照cpm结算
-    console.log("============================");
-    console.log("==========计算单价===========");
     //1.筛选广告位
     let optionPrice = {};
     for (var i = 0; i < this.data.priceJson.length; i++) {
@@ -633,7 +630,7 @@ Page({
       }
     }
     //2.筛选地域
-    let regionId = Math.floor(this.data.location.ad_info.adcode/10000)*10000;
+    let regionId = Math.floor(this.data.location.ad_info.adcode / 10000) * 10000;
     let regionPrice = {};
     for (var i = 0; i < optionPrice.regions.length; i++) {
       if (optionPrice.regions[i].code == regionId) {
@@ -641,21 +638,17 @@ Page({
         break;
       }
     }
-    console.log(regionPrice);
-    
-    
-    //3.筛选类型
 
+    //3.筛选类型
+    //cpm
     if (this.data.charging == 0) {
-      console.log(regionPrice.chargings[0]);
-      console.log(regionPrice.chargings[0].price);
-      
       if (this.data.throwCount > 0) {
         this.data.unitPrice = regionPrice.chargings[0].price;
+        let jk = this.data.isMonitor ? this.data.jk_price : 0;
         this.setData({
           charging: 0,
           unitPrice: this.data.unitPrice,
-          totalAmount: this.data.throwCount * this.data.unitPrice
+          totalAmount: this.data.throwCount * this.data.unitPrice + jk,
         });
       } else {
         this.data.unitPrice = regionPrice.chargings[0].price;
@@ -665,17 +658,20 @@ Page({
           totalAmount: 0,
         });
       }
-    } else if (this.data.charging == 1) {
+    }
+    //cpd
+    else if (this.data.charging == 1) {
       console.log(regionPrice.chargings[1]);
       console.log(regionPrice.chargings[1].price);
       if (days > 0) {
         this.data.unitPrice = regionPrice.chargings[1].price;
+        let jk = this.data.isMonitor ? this.data.jk_price : 0;
         this.setData({
           charging: 1,
           days: days,
 
           unitPrice: this.data.unitPrice,
-          totalAmount: days * this.data.unitPrice
+          totalAmount: days * this.data.unitPrice + jk,
         });
       } else {
         this.data.unitPrice = regionPrice.chargings[1].price;
@@ -703,6 +699,7 @@ Page({
     } else {
       this.data.isMonitor = 1;
     }
+    this._onCalTotal();
   },
 
   /**
