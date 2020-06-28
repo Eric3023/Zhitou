@@ -1,5 +1,16 @@
 page {
   background-color: #ebebeb;
+  height: 100%;
+  width: 100%;
+}
+
+.container {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  z-index: 0;
+  height: 100%;
+  width: 100%;
 }
 
 .header {
@@ -9,8 +20,8 @@ page {
   background: white;
   border-bottom-left-radius: 25rpx;
   border-bottom-right-radius: 25rpx;
-  position: fixed;
-  z-index: 9;
+  /* position: fixed;
+  z-index: 9; */
   box-shadow: 0rpx 0rpx 8rpx #bcbcbc;
 }
 
@@ -19,9 +30,12 @@ page {
 }
 
 .ad {
-  margin: 240rpx 35rpx 600rpx 35rpx;
-  width: 680rpx;
+  margin: 0rpx 25rpx 0rpx 25rpx;
+  width: 700rpx;
+  height: 100%;
+  box-sizing: border-box;
   display: flex;
+  flex: 1;
   flex-direction: column;
   align-items: center;
   z-index: 0;
@@ -31,8 +45,8 @@ page {
   display: flex;
   flex-direction: row;
   align-items: center;
-  margin-top: 24rpx;
-  width: 680rpx;
+  margin: 24rpx 0 24rpx 0;
+  width: 700rpx;
   height: 138rpx;
   background-color: white;
   position: relative;
@@ -432,8 +446,8 @@ page {
   background-color: white;
   border-radius: 20rpx;
   box-shadow: 0 0rpx 8rpx #bcbcbc;
-  position: fixed;
-  z-index: 9;
+  /* position: fixed;
+  z-index: 9; */
   bottom: 0;
   display: flex;
   flex-direction: column;
@@ -598,7 +612,7 @@ page {
   overflow: hidden;
 }
 
-.unit{
+.unit {
   text-align: end;
   position: absolute;
   right: 0rpx;
@@ -619,7 +633,7 @@ page {
   overflow: hidden;
 }
 
-.input_link_add{
+.input_link_add {
   width: 15%;
   height: 50rpx;
   display: flex;
@@ -629,17 +643,17 @@ page {
   margin-left: 5%;
 }
 
-.monitor{
+.monitor {
   display: flex;
   flex-direction: row;
   align-items: center;
 }
 
-#throwCont{
+#throwCont {
   justify-content: end;
 }
 
-switch{
+switch {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -714,25 +728,26 @@ radio .wx-radio-input.wx-radio-input-checked::before {
   -webkit-transform: translate(-50%, -50%) scale(1);
 }
 
-switch{
+switch {
   margin-left: 0rpx;
   margin-right: 10rpx;
 }
 
-.wx-switch-input{
-  width:82rpx !important;
-  height:28rpx !important;
+.wx-switch-input {
+  width: 82rpx !important;
+  height: 28rpx !important;
   background: #4cbea0 !important;
 }
+
 /*白色样式（false的样式）*/
-.wx-switch-input::before{
-  width:82rpx !important;
+.wx-switch-input::before {
+  width: 82rpx !important;
   height: 24rpx !important;
   background-color: #cbcbcb !important;
 }
+
 /*绿色样式（true的样式）*/
-.wx-switch-input::after{
+.wx-switch-input::after {
   width: 40rpx !important;
   height: 24rpx !important;
 }
-
