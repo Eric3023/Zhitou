@@ -1,7 +1,6 @@
 let orderModel = require('../../models/order.js');
 
 Page({
-
   /**
    * 页面的初始数据
    */
@@ -19,6 +18,9 @@ Page({
     size: 20,
     lock: false,
     hasMore: true,
+
+    touchStartTime: 0,
+    touchEndTime: 0,
   },
 
   /**
@@ -62,6 +64,20 @@ Page({
     );
   },
 
+  /**
+   * 按钮触摸开始触发的事件
+   */
+  onTouchStart: function (e) {
+    this.data.touchStartTime = e.timeStamp;
+  },
+
+  /**
+   * 按钮触摸结束触发的事件
+   */
+  onTouchEnd: function (e) {
+    this.data.touchEndTime = e.timeStamp;
+  },
+
 
   /**
    * 修改列表中的订单状态
@@ -76,6 +92,7 @@ Page({
    * 点击订单列表，进入订单详情
    */
   onClickItem(event) {
+    if (this.data.touchEndTime - this.data.touchStartTime > 350) return;
     let value = event.currentTarget.dataset.value;
     let id = value.id;
     let status = value.status;
@@ -153,8 +170,8 @@ Page({
   },
 
   /**
- * 是否加锁（正在请求数据）
- */
+   * 是否加锁（正在请求数据）
+   */
   _isLock() {
     return this.data.lock;
   },

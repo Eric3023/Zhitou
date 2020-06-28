@@ -6,7 +6,7 @@
 	<v_state class="category" bindchangetype="onChangeType" />
 	<!-- 订单列表 -->
 	<block class="list" wx:for="{{orders}}" wx:key="index">
-		<v_order img="{{item.adImgUrl}}" title="{{item.title}}" address="{{item.positionDesc}}" count="{{item.count}}" start="{{item.startTime}}" end="{{item.endTime}}" state="{{util.getState(status)}}" data-value='{{item}}' catchtap="onClickItem" catchlongtap="onDeleteItem"/>
+		<v_order img="{{item.adImgUrl}}" title="{{item.title}}" address="{{item.positionDesc}}" count="{{item.count}}" start="{{item.startTime}}" end="{{item.endTime}}" state="{{util.getState(status)}}" data-value='{{item}}' catchtap="onClickItem" catchlongtap="onDeleteItem" bindtouchstart="onTouchStart" bindtouchend="onTouchEnd"/>
 	</block>
 
 	<view class="empty" wx:if="{{!(orders&&orders.length!=0)&&!lock}}">
