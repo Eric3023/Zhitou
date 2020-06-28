@@ -23,8 +23,8 @@
 .title {
   font-size: 24rpx;
   color: black;
-  margin-top: 5rpx;
-  margin-bottom: 3rpx;
+  margin-top: 8rpx;
+  margin-bottom: 8rpx;
   width: 100%;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -34,8 +34,8 @@
 .address {
   font-size: 22rpx;
   color: #484848;
-  margin-top: 5rpx;
-  margin-bottom: 3rpx;
+  margin-top: 8rpx;
+  margin-bottom: 8rpx;
   width: 100%;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -47,8 +47,8 @@
   font-size: 22rpx;
   background-color: #f6f2e9;
   color: #d7ac96;
-  margin-top: 5rpx;
-  margin-bottom: 5rpx;
+  margin-top: 8rpx;
+  margin-bottom: 8rpx;
   max-width: 100%;
   text-overflow: ellipsis;
   white-space: nowrap;

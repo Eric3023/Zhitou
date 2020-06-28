@@ -16,41 +16,45 @@ Page({
    * 页面的初始数据
    */
   data: {
-    //广告位
+    //广告位列表
     codes: [],
+    //选中的广告位信息
+    adcode: {
+      code: null,//广告位信息,
+      model: defaultModel,//0.使用模板；1.直接上传
+      //模板参数
+      model_param: {
+        modelId: 0,//选中的模板Id
+        content: '',//输入的显示内容
+        phone: '',//输入的电话
+      },
+      //自定义参数
+      div_param: {
+        img: '',//750*1332，本地path地址
+        img2: '',//750*1624,本地path地址
+      },
+
+    },
+    imgurl: '',//标准图片，网络地址
+    imgurl2: '',//其他规格图片，网络地址
+    //临时参数
+    tmpCode: null,
+    tmpImgPath1: "",
+    tmpImgPath2: "",
+
     models: [],
-    mottos: [],
     now: now,//当前日期
 
     state: 0,//流程当前状态 0：选择广告位;1：选择模板/文件；2.选择素材完成，等待上传；3.素材上传完成 4：结算中/结算确认；5；结算完成
 
     //地点相关参数
-    location_state: 0,//投放地点：0：特定地点投放;2：全省投放；
+    location_state: 0,//投放地点：0：特定地点投放;2：全省投放；3.全国投放
     location: {},//投放地点
     audience: 0,//周边用户数
 
-    //后台返回的广告位id
-    position: 0,
-    //广告位索引
-    codeIndex: -1,
 
-    //模板相关参数
-    model: defaultModel,//0.使用模板；1.直接上传
-    model_param: {
-      modelId: 0,//选中的模板Id
-      img: [],//上传的模板照片
-      content: '',//输入的显示内容
-      phone: '',//输入的电话
-    },
-    div_param: {
-      img: '',//750*1332
-      img2: '',//750*1624
-    },
-    mottoIndex: 0,//选中车型索引
     start: now,//投放开始日期
     end: now,//投放结束日期
-    imgurl: '',//标准图片
-    imgurl2: '',//其他规格图片
     progress: '',//图片上传进度
 
     isMonitor: 0, //是否使用记刻数据0:不使用；1:使用；
@@ -152,9 +156,23 @@ Page({
    * 点击了上传素材
    */
   onClickUpdate(event) {
-    let position = event.currentTarget.dataset.position;
-    let codeIndex = event.currentTarget.dataset.index;
+    if (this.data.adcode.code) {
+      wx.showModal({
+        title: "提示",
+        content: "每个订单仅能选择一个广告位，确认提交后，会覆盖之前填写的信息",
+        cancelText: "取消",
+        confirmText: "确定",
+        success: res => {
+          if (res.cancel) {
+            this.setData({
+              state: 0,
+            });
+          }
+        }
+      });
+    }
 
+    let codeIndex = event.currentTarget.dataset.index;
     let code = this.data.codes[codeIndex];
     if (!code || code.status != 0) {
       wx.showToast({
@@ -164,22 +182,19 @@ Page({
       return;
     }
 
-    this._resetData(false);//重新选择广告位，之前广告位信息清空
     this.setData({
       state: 1,
-      position: position,
-      codeIndex: codeIndex,
+      tmpCode: code,
     });
-    this._getTemplates(position);
+    this._getTemplates(code.optionCode);
   },
 
   /**
    * 预览
    */
   onPreview(event) {
-    let position = event.currentTarget.dataset.position;
-    if (position == this.data.position) {
-      console.log(position);
+    let code = event.currentTarget.dataset.item;
+    if (code.optionCode == this.data.adcode.code.optionCode) {
       if (!this.data.previewUrl) {
         wx.showToast({
           title: '请上传素材后预览',
@@ -188,57 +203,9 @@ Page({
         return;
       }
       wx.navigateTo({
-        url: `/pages/preview/preview?adcode=${this.data.position}&url=${this.data.previewUrl}`,
+        url: `/pages/preview/preview?adcode=${this.data.adcode.code.optionCode}&url=${this.data.previewUrl}`,
       })
     }
-  },
-
-  /**
-   * 模板/直接上传
-   */
-  onModelChange(event) {
-    let model = event.detail.value;
-    this.setData({
-      model: model
-    });
-    console.log(model);
-  },
-
-  /**
-   * 选中模板 
-   */
-  onModelDetailChange(event) {
-    let modelId = event.detail.value;
-    this.data.model_param.modelId = modelId;
-    console.log(this.data.model_param.modelId);
-  },
-
-  /**
-   * 模板内容输入完成 
-   */
-  onConfirmModelContent(event) {
-    let content = event.detail.value;
-    this.data.model_param.content = content;
-    console.log(this.data.model_param.content);
-  },
-
-  /**
-   * 模板电话输入完成 
-   */
-  onConfirmModelPhone(event) {
-    let phone = event.detail.value;
-    this.data.model_param.phone = phone;
-    console.log(this.data.model_param.phone);
-  },
-
-  /**
-   * 选中车型
-   */
-  bindMottoPickerChange(event) {
-    this.setData({
-      mottoIndex: event.detail.value,
-    });
-    console.log(this.data.mottos[this.data.mottoIndex]);
   },
 
   /**
@@ -266,26 +233,6 @@ Page({
   },
 
   /**
-   * 选择照片（废弃）
-   */
-  onSelectModelPhoto() {
-    wx.chooseImage({
-      count: 1,
-      // sizeType: ['compressed'],
-      sizeType: ['original'],
-      sourceType: ['album', 'camera'],
-      complete: (res) => {
-        if (res && res.tempFilePaths) {
-          this.data.model_param.img = res.tempFilePaths[0];
-          this.setData({
-            model_param: this.data.model_param,
-          });
-        }
-      },
-    })
-  },
-
-  /**
    * 选择照片(750*1334)
    */
   onSelectDivPhoto() {
@@ -296,9 +243,8 @@ Page({
       sourceType: ['album', 'camera'],
       complete: (res) => {
         if (res && res.tempFilePaths) {
-          this.data.div_param.img = res.tempFilePaths[0];
           this.setData({
-            div_param: this.data.div_param,
+            tmpImgPath1: res.tempFilePaths[0],
           });
         }
       },
@@ -316,9 +262,8 @@ Page({
       sourceType: ['album', 'camera'],
       complete: (res) => {
         if (res && res.tempFilePaths) {
-          this.data.div_param.img2 = res.tempFilePaths[0];
           this.setData({
-            div_param: this.data.div_param,
+            tmpImgPath2: res.tempFilePaths[0],
           });
         }
       },
@@ -330,28 +275,26 @@ Page({
    * 取消了上传素材
    */
   onCancelMaterial() {
-    //取消上传素材，只清空广告位相关信息
     this._setState(0);
-    this._resetData(false);
   },
 
   /**
    * 上传素材
    */
-  onCommitMaterial() {
+  onCommitMaterial(event) {
+    let value = event.detail.value;
+    let model = parseInt(value.model);//模板or直接上传
+    let modelId = value.modelId;//选中模板的Id
+    let content = value.content;//模板显示内容
+    let phone = value.phone;//模板联系方式
+    let code = this.data.tmpCode;//广告位信息
+    let divimg1 = this.data.tmpImgPath1;//直接上传图片本地地址
+    let divimg2 = this.data.tmpImgPath2;//直接上传图片本地地址
+
     let imgPath = [];
     //图片未选择
-    if (this.data.model == 0) {
-      console.log(this.data.model_param);
-      // if (!this.data.model_param.img) {
-      //   wx.showToast({
-      //     title: '您已选择模板类型，请上传图片',
-      //     icon: 'none',
-      //   });
-      //   return;
-      // }
-      // imgPath[0] = this.data.model_param.img;
-      if (!this.data.model_param.content) {
+    if (model == 0) {
+      if (!content) {
         wx.showToast({
           title: '请输入显示内容',
           icon: 'none',
@@ -359,10 +302,9 @@ Page({
         return;
       }
     } else {
-      console.log(this.data.div_param);
       //开屏广告
-      if (this.data.position == 16) {
-        if (!this.data.div_param.img || !this.data.div_param.img2) {
+      if (code.optionCode == 16) {
+        if (!divimg1 || !divimg2) {
           wx.showToast({
             title: '两种尺寸图片都需要上传',
             icon: 'none',
@@ -370,7 +312,7 @@ Page({
           return;
         }
       } else {
-        if (!this.data.div_param.img) {
+        if (!divimg1) {
           wx.showToast({
             title: '请上传图片',
             icon: 'none',
@@ -378,16 +320,38 @@ Page({
           return;
         }
       }
-      imgPath[0] = this.data.div_param.img;
-      imgPath[1] = this.data.div_param.img2;
+      imgPath[0] = divimg1;
+      imgPath[1] = divimg2;
     }
+
+    //更新Data中广告位参数
+    this.setData({
+      adcode: {
+        code: code,//广告位信息,
+        model: model,//0.使用模板；1.直接上传
+        model_param: {
+          modelId: modelId,//选中的模板Id
+          content: content,//输入的显示内容
+          phone: phone,//输入的电话
+        },
+        //自定义参数
+        div_param: {
+          img: divimg1,//750*1332，本地path地址
+          img2: divimg2,//750*1624,本地path地址
+        },
+      },
+
+      tmpCode: null,
+      tmpImgPath1: '',
+      tmpImgPath2: '',
+    });
 
     this.setData({
       state: 2, //等待图片上传完成
     });
 
     //上传图片
-    if (this.data.model == 0) {
+    if (this.data.adcode.model == 0) {
       this.setData({
         state: 3,//图片上传完成
       });
@@ -403,7 +367,7 @@ Page({
    * 点击开始结算
    */
   onSettle() {
-    if (this.data.state != 3) {
+    if (!this.data.adcode.code) {
       wx.showToast({
         title: '请选择需要投放的广告位',
         icon: 'none',
@@ -429,9 +393,8 @@ Page({
    */
   onConfirmCheck() {
     if (this.data.remain < 0) {
-      wx.showToast({
-        title: '余额不足',
-        icon: 'none',
+      wx.navigateTo({
+        url: '../../pages/recharge/recharge',
       })
       return;
     }
@@ -463,26 +426,25 @@ Page({
       audience: this.data.audience,
       distance: 10,
       throwType: this.data.location_state,
-      position: this.data.position,
-      isTemplate: this.data.model,
+      position: this.data.adcode.code.optionCode,//广告位id
+      isTemplate: this.data.adcode.model,//是否使用模板
       // motto: this.data.mottos[this.data.mottoIndex].code,
       startTime: startTime,
       endTime: endTime,
-      totalAmount: this.data.totalAmount,
-      unitPrice: this.data.unitPrice,
+      totalAmount: this.data.totalAmount,//总价
+      unitPrice: this.data.unitPrice,//单价
       coupon: 0,
       couponId: 0,
-      isMonitor: this.data.isMonitor,
-      cpm: this.data.throwCount,
-      monitor: monitor,
-      charging: this.data.charging,
+      isMonitor: this.data.isMonitor,//是否使用即可监测
+      cpm: this.data.throwCount,//投放数量cpm
+      monitor: monitor,//第三方监测简介
+      charging: this.data.charging,//计价方式
     };
     //使用模板    
-    if (this.data.model == 0) {
-      data.templateId = this.data.model_param.modelId;
-      data.phone = this.data.model_param.phone;
-      data.content = this.data.model_param.content;
-      data.imgUrl = this.data.model_param.img;
+    if (this.data.adcode.model == 0) {
+      data.templateId = this.data.adcode.model_param.modelId;
+      data.phone = this.data.adcode.model_param.phone;
+      data.content = this.data.adcode.model_param.content;
     }
     //直接上传
     else {
@@ -582,8 +544,8 @@ Page({
    * 计算总价
    */
   _onCalTotal() {
-    if (this.data.codeIndex < 0) return;
-    let code = this.data.codes[this.data.codeIndex];
+    if (!this.data.adcode.code) return;
+    let code = this.data.adcode.code;
     let start = this.data.start;
     let end = this.data.end;
     let days = (new Date(end) - new Date(start)) / (1000 * 60 * 60 * 24) + 1;
@@ -596,49 +558,6 @@ Page({
       return;
     }
 
-    // //按照cpm结算
-    // if (code.charging == 0) {
-    //   if (this.data.throwCount > 0) {
-    //     this.data.unitPrice = 60;
-    //     this.setData({
-    //       charging: 0,
-
-    //       unitPrice: 60,
-    //       unit: '元/CPM',//单价单位
-    //       totalAmount: this.data.throwCount * this.data.unitPrice
-    //     });
-    //   } else {
-    //     this.setData({
-    //       charging: 0,
-
-    //       unitPrice: 60,
-    //       unit: '元/CPM',//单价单位
-    //       totalAmount: 0,
-    //     });
-    //   }
-    // } else if (code.charging == 1) {
-    //   if (days > 0) {
-    //     this.data.unitPrice = 20000;
-    //     this.setData({
-    //       charging: 1,
-    //       days: days,
-
-    //       unitPrice: 20000,
-    //       unit: '元/天',//单价单位
-    //       totalAmount: days * this.data.unitPrice
-    //     });
-    //   } else {
-    //     this.setData({
-    //       charging: 1,
-    //       days: 0,
-
-    //       unitPrice: 20000,
-    //       unit: '元/天',//单价单位
-    //       totalAmount: 0
-    //     });
-    //   }
-    // }
-
     //1.筛选广告位
     let optionPrice = {};
     for (var i = 0; i < this.data.priceJson.length; i++) {
@@ -647,8 +566,17 @@ Page({
         break;
       }
     }
+
     //2.筛选地域
-    let regionId = Math.floor(this.data.location.ad_info.adcode / 10000) * 10000;
+    //全国
+    let regionId = null;
+    if (this.data.location_state == 3) {
+      regionId = 999999;
+    }
+    //全省/区域
+    else {
+      regionId = Math.floor(this.data.location.ad_info.adcode / 10000) * 10000;
+    }
     let regionPrice = {};
     for (var i = 0; i < optionPrice.regions.length; i++) {
       if (optionPrice.regions[i].code == regionId) {
@@ -855,19 +783,26 @@ Page({
   _resetData(isAll) {
     //仅将广告位相关重置
     this.setData({
-      codeIndex: -1,
-      position: 0,
-      model: defaultModel,
-      model_param: {
-        modelId: 0,//选中的模板id
-        img: [],//上传的模板照片
-        content: '',//输入的显示内容
-        phone: '',//输入的电话
+      adcode: {
+        code: null,//广告位信息,
+        model: defaultModel,//0.使用模板；1.直接上传
+        //模板参数
+        model_param: {
+          modelId: 0,//选中的模板Id
+          content: '',//输入的显示内容
+          phone: '',//输入的电话
+        },
+        //自定义参数
+        div_param: {
+          img: '',//750*1332，本地path地址
+          img2: '',//750*1624,本地path地址
+        },
       },
-      div_param: {
-        img: '',//750*1332
-        img2: '',//750*1624
-      },
+      //临时参数
+      tmpCode: null,
+      tmpImgPath1: "",
+      tmpImgPath2: "",
+
       progress: '',//图片上传进度
       imgurl: '',
       imgurl2: '',
@@ -1006,7 +941,11 @@ Page({
               icon: 'none',
             });
             this._setState(0);//重新选择广告位
-            this._resetData(false);
+            this.setData({
+              progress: 0,
+              imgUrl: '',
+              imgUrl2: '',
+            });
           }
         },
         error => {
@@ -1018,7 +957,11 @@ Page({
             icon: 'none',
           });
           this._setState(0);//重新选择广告位
-          this._resetData(false);
+          this.setData({
+            progress: 0,
+            imgUrl: '',
+            imgUrl2: '',
+          });
         },
       )
   },

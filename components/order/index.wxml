@@ -6,7 +6,7 @@
 	<view class="content">
 		<text class="title">{{title}}</text>
 		<text class="address">地址：{{address}}</text>
-		<view class="address">
+		<view class="address" hidden="true">
 			<text>已曝光{{count}}次</text>
 		</view>
 		<text class="time">{{util.getTime(start)}}-{{util.getTime(end)}}</text>

@@ -30,7 +30,7 @@
 	<scroll-view class="ad" scroll-x="false" scroll-y="true">
 		<view>
 			<block wx:for="{{codes}}" wx:key="index">
-				<view class="code_container" data-position="{{item.optionCode}}" data-index="{{index}}" catchtap="onClickUpdate">
+				<view class="code_container" data-item="{{item}}" data-index="{{index}}" catchtap="onClickUpdate">
 					<image class="code_backgroud" src="{{item.imageUrl? item.imageUrl:'/img/throw/activity_center.png'}}" binderror="onBackgroundError" data-index="{{index}}"></image>
 					<view class="code_messeage">
 						<text class="code_title">{{item.optionName}}</text>
@@ -38,11 +38,11 @@
 					</view>
 					<view class="code_btn_container">
 						<text class="btn">上传素材</text>
-						<view class="preview_container" data-position="{{item.optionCode}}" catchtap="{{item.status!=0?'none':'onPreview'}}">
-							<text class="btn preview" style="background-color:{{position==item.optionCode && state==3? '#ffffff':'#bdbdbd'}}; color:{{position==item.optionCode && state==3? '#000000':'#ffffff'}};">预览</text>
+						<view class="preview_container" data-item="{{item}}" catchtap="{{item.status!=0?'none':'onPreview'}}">
+							<text class="btn preview" style="background-color:{{adcode.code.optionCode==item.optionCode? '#ffffff':'#bdbdbd'}}; color:{{adcode.code.optionCode==item.optionCode? '#000000':'#ffffff'}};">预览</text>
 						</view>
 					</view>
-					<progress class="code_progress" wx:if="{{position==item.optionCode && state!=0 && state!=1}}" activeColor="#42c2e2" backgroundColor="#e9e9e9" percent="{{position==item.optionCode? progress:0}}">
+					<progress class="code_progress" wx:if="{{adcode.code.optionCode==item.optionCode && progress!=0}}" activeColor="#42c2e2" backgroundColor="#e9e9e9" percent="{{adcode.code.optionCode==item.optionCode? progress:0}}">
 					</progress>
 					<!-- <view class="mask" wx:if="{{position!=item.optionCode && state!=0 && state!=1 || item.status!=0}}"></view> -->
 				</view>
@@ -52,9 +52,9 @@
 	<!-- 遮罩层 -->
 	<v_mask class="mask" wx:if="{{state==1||state==4}}" catchtap="onCancelMaterial" />
 	<!-- 模板选择 -->
-	<view class="model_container" wx:if="{{state==1}}">
+	<form class="model_container" wx:if="{{state==1}}" bindsubmit="onCommitMaterial" bindreset="onCancelMaterial">
 		<scroll-view class="model" scroll-x="false" scroll-y="true">
-			<radio-group bindchange="onModelChange">
+			<radio-group name="model" bindchange="onModelChange">
 				<!-- 模板选择 -->
 				<view class="model_selector">
 					<view class="model_header">
@@ -67,7 +67,7 @@
 					</view>
 					<view class="model_body">
 						<scroll-view scroll-x="true" scroll-y="false">
-							<radio-group bindchange="onModelDetailChange">
+							<radio-group name="modelId" bindchange="onModelDetailChange">
 								<view class="model_items">
 									<block wx:for="{{models}}" wx:key="index">
 										<view class="model_item">
@@ -87,8 +87,8 @@
 							<view class="input_title">
 								<text>输入显示内容</text>
 							</view>
-							<input class="input" placeholder="文字" placeholder-class="place_class" adjust-position="true" bindblur="onConfirmModelContent"></input>
-							<input class="input" placeholder="电话" placeholder-class="place_class" adjust-position="true" bindblur="onConfirmModelPhone"></input>
+							<input class="input" name="content" placeholder="文字" placeholder-class="place_class" adjust-position="true" bindblur="onConfirmModelContent"></input>
+							<input class="input" name="phone" placeholder="电话" placeholder-class="place_class" adjust-position="true" bindblur="onConfirmModelPhone"></input>
 						</view>
 					</view>
 				</view>
@@ -99,32 +99,32 @@
 						<label class="model_title" for="div">直接上传 :</label>
 					</view>
 					<view class="model_body">
-						<view class="photo" catchtap="onSelectDivPhoto">
-							<text>{{position==16?'选择照片(750*1334)':'选择照片'}}</text>
-							<view class="photo_update" wx:if="{{!div_param.img}}">+</view>
-							<image class="photo_update" wx:if="{{div_param.img}}" src="{{div_param.img}}"></image>
+						<view class="photo" name="divPhoto1" catchtap="onSelectDivPhoto">
+							<text>{{tmpCode.optionCode==16?'选择照片(750*1334)':'选择照片'}}</text>
+							<view class="photo_update" wx:if="{{!tmpImgPath1}}">+</view>
+							<image class="photo_update" wx:if="{{tmpImgPath1}}" src="{{tmpImgPath1}}"></image>
 						</view>
-						<view class="photo" wx:if="{{position==16}}" catchtap="onSelectDivPhoto2">
+						<view class="photo" name="divPhoto2" wx:if="{{tmpCode.optionCode==16}}" catchtap="onSelectDivPhoto2">
 							<text>选择照片(750*1624)</text>
-							<view class="photo_update" wx:if="{{!div_param.img2}}">+</view>
-							<image class="photo_update" wx:if="{{div_param.img2}}" src="{{div_param.img2}}"></image>
+							<view class="photo_update" wx:if="{{!tmpImgPath2}}">+</view>
+							<image class="photo_update" wx:if="{{tmpImgPath2}}" src="{{tmpImgPath2}}"></image>
 						</view>
 					</view>
 				</view>
 			</radio-group>
 		</scroll-view>
 		<view class="btn_container">
-			<button class="button" catchtap="onCancelMaterial">放弃</button>
-			<button class="button" catchtap="onCommitMaterial">确定</button>
+			<button class="button" form-type="reset">放弃</button>
+			<button class="button" form-type="submit">确定</button>
 		</view>
-	</view>
+	</form>
 	<!-- 结算 -->
 	<view class="settlement">
 		<view class="audience">监测链接
 			<view class="audience_num form_param">
 				<view class="monitor">
 					<!-- <checkbox id="checkMonitor" color="#f77a51" value="{{1}}"></checkbox> -->
-					<switch id="checkMonitor" type="switch" value="{{1}}" bindchange="onMonitorChange"></switch>
+					<switch id="checkMonitor" type="switch" value="{{1}}" bindchange="onMonitorChange" checked="{{isMonitor!=0}}"></switch>
 					<label for="checkMonitor">是否使用记刻监测</label>
 				</view>
 			</view>
@@ -163,18 +163,18 @@
 		<view class="audience">投放类型
 			<radio-group class="audience_num form_param" bindchange="onValuationChanged">
 				<view class="cpm">
-					<radio id="cpm_radio" value="{{0}}" style="transform:scale(0.8);" checked></radio>
+					<radio id="cpm_radio" value="{{0}}" style="transform:scale(0.8);" checked="{{charging==0}}"></radio>
 					<label for="cpm_radio">CPM</label>
 				</view>
 				<view class="cpd">
-					<radio id="cpd_radio" value="{{1}}" style="transform:scale(0.8);"></radio>
+					<radio id="cpd_radio" value="{{1}}" style="transform:scale(0.8);" checked="{{charging!=0}}"></radio>
 					<label for="cpd_radio">CPD</label>
 				</view>
 			</radio-group>
 		</view>
 		<view class="audience">投放数量
 			<view class="audience_num form_param">
-				<input class="input_num" hidden="{{charging==1}}" placeholder="输入投放数量" placeholder-class="place_class" type="number" adjust-position="true" bindblur="onConfirmThrowCount" value="{{throwCount==0? '':throwCount}}" />
+				<input class="input_num" hidden="{{charging==1}}" placeholder="输入投放数量" placeholder-class="place_class" type="number" adjust-position="true" bindblur="onConfirmThrowCount" value="{{throwCount==0? '':throwCount}}" maxlength="8"/>
 				<view class="unit">
 					<view hidden="{{charging==0}}">{{days}}</view>
 					<view>　{{charging==0?'CPM':'天'}}</view>
@@ -200,7 +200,7 @@
 		</view>
 		<view class="check_btn_container">
 			<view class="check_cancel" catchtap="onCancleCheck">放弃</view>
-			<view class="check_confirm" catchtap="onConfirmCheck">确定</view>
+			<view class="check_confirm" catchtap="onConfirmCheck">{{remain<0? '充值':'确定'}}</view>
 		</view>
 	</view>
 	<!-- 注意事项 -->

@@ -19,7 +19,7 @@ page {
 }
 
 .ad {
-  margin: 240rpx 35rpx 440rpx 35rpx;
+  margin: 240rpx 35rpx 600rpx 35rpx;
   width: 680rpx;
   display: flex;
   flex-direction: column;

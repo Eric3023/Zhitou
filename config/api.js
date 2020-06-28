@@ -51,6 +51,8 @@ module.exports = {
   PreviewImage: WxApiRoot + 'advertising/getTemplateImgUrl',
   //投放价格表
   AllPrices: WxApiRoot+'advertising/getAllPrices',
+  //删除订单
+  delOrder: WxApiRoot + '/advertising/delAdvertising',
 
 
   //用户余额接口

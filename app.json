@@ -27,6 +27,7 @@
     "pages/invoice_record/invoice_record",
     "pages/policy/policy",
     "pages/preview/preview",
+    "pages/recharge/recharge",
     "pages/recharge_record/record"
   ],
   "window": {

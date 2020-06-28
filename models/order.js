@@ -17,6 +17,19 @@ function getOrders(status, page, size) {
 }
 
 /**
+ * 删除订单
+ */
+function deleteOrder(id) {
+  return check.checkResult(util.request(
+    config.delOrder,
+    {
+      id: id
+    },
+    "POST"
+  ));
+}
+
+/**
  * 获取订单列表(投放)详情
  */
 function getThrowDetail(id) {
@@ -30,5 +43,6 @@ function getThrowDetail(id) {
 
 module.exports = {
   getOrders: getOrders,
+  deleteOrder: deleteOrder,
   getThrowDetail: getThrowDetail,
 };
