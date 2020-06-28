@@ -905,6 +905,8 @@ Page({
       imgPromise1 = fileModel.uploadImage({
         path: path[1],
       });
+    }else{
+      this.data.imgurl2 = '';
     }
 
     let promises = [];
