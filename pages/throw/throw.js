@@ -156,6 +156,17 @@ Page({
    * 点击了上传素材
    */
   onClickUpdate(event) {
+
+    let codeIndex = event.currentTarget.dataset.index;
+    let code = this.data.codes[codeIndex];
+    if (!code || code.status != 0) {
+      wx.showToast({
+        title: '该广告位暂时无法投放',
+        icon: 'none',
+      })
+      return;
+    }
+    
     if (this.data.adcode.code) {
       wx.showModal({
         title: "提示",
@@ -170,16 +181,6 @@ Page({
           }
         }
       });
-    }
-
-    let codeIndex = event.currentTarget.dataset.index;
-    let code = this.data.codes[codeIndex];
-    if (!code || code.status != 0) {
-      wx.showToast({
-        title: '该广告位暂时无法投放',
-        icon: 'none',
-      })
-      return;
     }
 
     this.setData({

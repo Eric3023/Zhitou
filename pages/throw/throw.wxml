@@ -163,11 +163,11 @@
 		<view class="audience">投放类型
 			<radio-group class="audience_num form_param" bindchange="onValuationChanged">
 				<view class="cpm">
-					<radio id="cpm_radio" value="{{0}}" style="transform:scale(0.8);" checked="{{charging==0}}"></radio>
+					<radio id="cpm_radio" value="{{0}}" style="transform:scale(0.8);" checked="{{charging==0}}" color="#4cbea0"></radio>
 					<label for="cpm_radio">CPM</label>
 				</view>
 				<view class="cpd">
-					<radio id="cpd_radio" value="{{1}}" style="transform:scale(0.8);" checked="{{charging!=0}}"></radio>
+					<radio id="cpd_radio" value="{{1}}" style="transform:scale(0.8);" checked="{{charging!=0}}" color="#4cbea0"></radio>
 					<label for="cpd_radio">CPD</label>
 				</view>
 			</radio-group>

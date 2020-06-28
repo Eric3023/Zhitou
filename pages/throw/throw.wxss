@@ -722,17 +722,17 @@ switch{
 .wx-switch-input{
   width:82rpx !important;
   height:28rpx !important;
-  /* background: #50D2C2 !important; */
+  background: #4cbea0 !important;
 }
 /*白色样式（false的样式）*/
 .wx-switch-input::before{
   width:82rpx !important;
-  height: 28rpx !important;
+  height: 24rpx !important;
   background-color: #cbcbcb !important;
 }
 /*绿色样式（true的样式）*/
 .wx-switch-input::after{
   width: 40rpx !important;
-  height: 28rpx !important;
+  height: 24rpx !important;
 }
 
