@@ -22,8 +22,8 @@ page {
   background: white;
   border-bottom-left-radius: 25rpx;
   border-bottom-right-radius: 25rpx;
-  /* position: fixed;
-  z-index: 9; */
+  position: relative;
+  z-index: 9;
   box-shadow: 0rpx 0rpx 8rpx #bcbcbc;
 }
 
@@ -448,8 +448,8 @@ page {
   background-color: white;
   border-radius: 20rpx;
   box-shadow: 0 0rpx 8rpx #bcbcbc;
-  /* position: fixed;
-  z-index: 9; */
+  position: relative;
+  z-index: 9;
   bottom: 0;
   display: flex;
   flex-direction: column;
