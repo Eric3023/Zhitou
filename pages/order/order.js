@@ -190,7 +190,7 @@ Page({
   _getIndexOfItem(id) {
     let index = -1;
     for (let i = 0; i < this.data.orders.length; i++) {
-      if (this.data.orders[i].id = id) {
+      if (this.data.orders[i].id == id) {
         index = i;
         break;
       }
