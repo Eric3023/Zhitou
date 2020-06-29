@@ -1,7 +1,7 @@
 <wxs src="order.wxs" module="util" />
 <view class="container">
 	<!-- 订单简介 -->
-	<v_statistic class="header" throwing="{{extras.launching}}" exposed="{{extras.exposureNum}}" audience="{{extras.macNum}}" />
+	<v_statistic class="header" throwing="{{extras.checkingNum}}" exposed="{{extras.launching}}" audience="{{extras.finishedNum}}" />
 	<!-- 订单状态 -->
 	<v_state class="category" bindchangetype="onChangeType" />
 	<!-- 订单列表 -->

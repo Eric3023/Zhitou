@@ -166,7 +166,7 @@ Page({
       })
       return;
     }
-    
+
     if (this.data.adcode.code) {
       wx.showModal({
         title: "提示",
@@ -417,11 +417,23 @@ Page({
       if (monitors.length > 0)
         monitor = monitors.join('|');
     }
+
+    let address = '';
+    if (this.data.location_state == 0) {
+      address = this.data.location.title ? this.data.location.title : this.data.location.formatted_addresses.recommend;
+    } else if (this.data.location_state == 2) {
+      address = this.data.location.ad_info.province;
+    } else if (this.data.location_state == 3) {
+      address = '全国投放';
+    } else {
+      address = this.data.location.ad_info.province;
+    }
+
     let data = {
       lat: this.data.location.location.lat,
       lng: this.data.location.location.lng,
       regionId: this.data.location.ad_info.adcode,
-      address: this.data.location.title ? this.data.location.title : this.data.location.formatted_addresses.recommend,
+      address: address,
       province: this.data.location.ad_info.provice,
       city: this.data.location.ad_info.city,
       audience: this.data.audience,
@@ -905,7 +917,7 @@ Page({
       imgPromise1 = fileModel.uploadImage({
         path: path[1],
       });
-    }else{
+    } else {
       this.data.imgurl2 = '';
     }
 

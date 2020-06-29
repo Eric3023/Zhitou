@@ -2,10 +2,10 @@
 	<!-- Layout 1 -->
 	<view class="header">
 		<!-- 剩余天数 -->
-		<view class="remain">
+		<!-- <view class="remain">
 			<text class="remain_num">{{detail.exposureNum}}次</text>
 			<text class="remain_title">曝光数量</text>
-		</view>
+		</view> -->
 		<!-- 剩余天数 -->
 		<view class="remain">
 			<text class="remain_num">{{remainDays}}天</text>
@@ -13,7 +13,7 @@
 		</view>
 		<!-- 已投放天数 -->
 		<view class="exposed">
-			<text class="exposed_num">{{days}}</text>
+			<text class="exposed_num">{{days}}天</text>
 			<text class="exposed_title">已投放</text>
 		</view>
 	</view>
@@ -29,7 +29,58 @@
 		<text class="num">{{detail.interest_num}}次</text>
 	</view> -->
 	<!-- layout 3 -->
-	<view class="detail_container">
-		<v_detail img="{{detail.ad.adImgUrl}}" title="{{detail.ad.title}}" address="" count="{{detail.count}}" start="{{startTime}}" end="{{endTime}}" state="{{detail.ad.state==2?'投放中':'完成'}}" catchtap="onClickDetail" />
+	<!-- <view class="detail_container">
+		<v_detail img="{{detail.ad.adImgUrl}}" title="{{detail.ad.title}}" address="{{detail.ad.throwType == 0? '区域投放':(detail.ad.throwType == 2?'全省投放':'全国投放')}}" count="" start="{{startTime}}" end="{{endTime}}" state="{{detail.ad.state==2?'投放中':'完成'}}" catchtap="onClickDetail" />
+	</view> -->
+
+	<!-- layout 3 -->
+	<view class="body">
+		<view class="title_container">
+			<view class="point"></view>
+			<view class="title">{{detail.ad.positionDesc}}</view>
+		</view>
+		<image class="img" src="{{detail.ad.adImgUrl}}" mode="aspectFit"></image>
+		<view class="tail">
+			<text>投放周期: </text>
+			<text class="data">{{startTime}}-{{endTime}}</text>
+		</view>
+		<view class="tail">
+			<text>投放地域: </text>
+			<text class="data">{{detail.ad.throwType == 0? '区域投放':(detail.ad.throwType == 2?'全省投放':'全国投放')}}</text>
+		</view>
+		<view class="tail">
+			<text>计价方式: </text>
+			<text class="data">{{detail.ad.charging == 0? 'CPM':'CPD'}}</text>
+		</view>
+		<view class="tail" wx:if="{{detail.ad.charging==0}}">
+			<text>投放数量: </text>
+			<text class="data">{{detail.ad.cpm}}CPM</text>
+		</view>
+		<view class="tail" wx:if="{{detail.ad.charging==1}}">
+			<text>投放数量: </text>
+			<text class="data">{{totalDays}}天</text>
+		</view>
+		<view class="tail">
+			<text>记刻监测: </text>
+			<text class="data">{{detail.ad.isMonitor?'是':'否'}}</text>
+		</view>
+		<view class="tail" wx:if="{{monitors}}">
+			<text>监测链接: </text>
+			<view class="data">
+				<text class="monitor" wx:for="{{monitors}}">{{item}}</text>
+			</view>
+		</view>
+		<view class="tail">
+			<text>单　　价: </text>
+			<text class="data">{{detail.ad.unitPrice}}</text>
+		</view>
+		<view class="tail" wx:if="{{detail.ad.couponAmount}}">
+			<text>优惠金额: </text>
+			<text class="data">{{detail.ad.couponAmount}}</text>
+		</view>
+		<view class="tail">
+			<text>总　　价: </text>
+			<text class="data">{{detail.ad.totalAmount}}</text>
+		</view>
 	</view>
 </view>

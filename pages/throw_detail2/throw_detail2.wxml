@@ -29,8 +29,42 @@
 			<text class="data">{{startTime}}-{{endTime}}</text>
 		</view>
 		<view class="tail">
-			<text>影响人群: </text>
-			<text class="data">{{detail.ad.crowd}}人</text>
+			<text>投放地域: </text>
+			<text class="data">{{detail.ad.throwType == 0? '区域投放':(detail.ad.throwType == 2?'全省投放':'全国投放')}}</text>
+		</view>
+		<view class="tail">
+			<text>计价方式: </text>
+			<text class="data">{{detail.ad.charging == 0? 'CPM':'CPD'}}</text>
+		</view>
+		<view class="tail" wx:if="{{detail.ad.charging==0}}">
+			<text>投放数量: </text>
+			<text class="data">{{detail.ad.cpm}}CPM</text>
+		</view>
+		<view class="tail" wx:if="{{detail.ad.charging==1}}">
+			<text>投放数量: </text>
+			<text class="data">{{days}}天</text>
+		</view>
+		<view class="tail">
+			<text>记刻监测: </text>
+			<text class="data">{{detail.ad.isMonitor?'是':'否'}}</text>
+		</view>
+		<view class="tail" wx:if="{{monitors}}">
+			<text>监测链接: </text>
+			<view class="data">
+				<text class="monitor" wx:for="{{monitors}}">{{item}}</text>
+			</view>
+		</view>
+		<view class="tail">
+			<text>单　　价: </text>
+			<text class="data">{{detail.ad.unitPrice}}</text>
+		</view>
+		<view class="tail" wx:if="{{detail.ad.couponAmount}}">
+			<text>优惠金额: </text>
+			<text class="data">{{detail.ad.couponAmount}}</text>
+		</view>
+		<view class="tail">
+			<text>总　　价: </text>
+			<text class="data">{{detail.ad.totalAmount}}</text>
 		</view>
 	</view>
 </view>

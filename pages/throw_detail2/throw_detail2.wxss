@@ -113,16 +113,26 @@ page {
 }
 
 .body .tail {
+  height: fit-content;
   margin-top: 34rpx;
   margin-right: 20rpx;
   font-size: 24rpx;
   display: flex;
   flex-direction: row;
-  align-items: center;
+  align-items: flex-start;
   position: relative;
+  justify-content: space-between;
 }
 
 .body .tail .data {
-  position: absolute;
-  right: 0rpx;
+  max-width: 380rpx;
+  display: flex;
+  flex-direction: column;
+}
+
+.monitor{
+  max-width: 100%;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }

@@ -33,6 +33,8 @@ Page({
     throwModel.getThrowDetail(id)
       .then(res => {
         console.log(res);
+        res.data.ad.totalAmount = res.data.ad.totalAmount.toFixed(2) + '元';
+        res.data.ad.unitPrice = res.data.ad.unitPrice.toFixed(2) + '元' + (res.data.charing == 1 ? '/CPD' : '/CPM');
         this.setData({
           detail: res.data,
         });
@@ -40,6 +42,7 @@ Page({
         let start = res.data.ad.startTime;
         let end = res.data.ad.endTime;
         this._calDays(start, end);
+        this._getMonitors(res.data.ad.monitor);
       }).catch(error => {
         console.log(error);
       });
@@ -68,9 +71,19 @@ Page({
       endTime: endTime,
       days: days,
       remainDays: totalDays - days,
+      totalDays: totalDays,
     });
   },
 
+  /**
+   * 获取监测链接
+   */
+  _getMonitors: function (monitor) {
+    let monitors = monitor.split('|');
+    this.setData({
+      monitors: monitors,
+    });
+  },
 
   /**
    * 查看详情

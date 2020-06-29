@@ -4,7 +4,7 @@
 	<!-- 详情 -->
 	<view class="content">
 		<text class="title">{{title}}</text>
-		<text class="address">已投放{{address}}天</text>
+		<text class="address">{{address}}</text>
 		<text class="time">周期：{{start}}-{{end}}</text>
 	</view>
 	<view class="line"></view>
