@@ -100,7 +100,11 @@
 					</view>
 					<view class="model_body">
 						<view class="photo" name="divPhoto1" catchtap="onSelectDivPhoto">
-							<text>{{tmpCode.optionCode==16?'选择照片(750*1334)':'选择照片'}}</text>
+							<text hidden="{{tmpCode.optionCode!=16}}">选择照片(750*1334)</text>
+							<text hidden="{{tmpCode.optionCode!=15}}">选择照片(610*906)</text>
+							<text hidden="{{tmpCode.optionCode!=19}}">选择照片(600*132)</text>
+							<text hidden="{{tmpCode.optionCode!=18}}">选择照片(690*157)</text>
+							<text hidden="{{tmpCode.optionCode!=17}}">选择照片(710*175)</text>
 							<view class="photo_update" wx:if="{{!tmpImgPath1}}">+</view>
 							<image class="photo_update" wx:if="{{tmpImgPath1}}" src="{{tmpImgPath1}}"></image>
 						</view>
