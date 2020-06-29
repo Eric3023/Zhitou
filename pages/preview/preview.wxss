@@ -14,7 +14,7 @@
 }
 
 .start{
-  width: 462rpx;
+  width: 465rpx;
   height: 1000rpx;
   border-radius: 48rpx;
   top: 165rpx;
@@ -22,15 +22,15 @@
 }
 
 .bully {
-  width: 390rpx;
-  height: 576rpx;
+  width: 394rpx;
+  height: 578rpx;
   top: 380rpx;
   border-radius: 8rpx;
   left: 170rpx;
 }
 
 .activity{
-  width: 460rpx;
+  width: 462rpx;
   height: 54rpx;
   top: 304rpx;
   border-radius: 6rpx;
@@ -38,16 +38,16 @@
 }
 
 .personal{
-  width: 458rpx;
-  height: 154rpx;
+  width: 460rpx;
+  height: 156rpx;
   top: 880rpx;
   border-radius: 0rpx;
   left: 140rpx;
 }
 
 .receive{
-  width: 412rpx;
-  height: 86rpx;
+  width: 414rpx;
+  height: 88rpx;
   top: 448rpx;
   left: 170rpx;
   border-radius: 0rpx;

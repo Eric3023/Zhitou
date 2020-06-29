@@ -199,7 +199,7 @@ page {
 .model_img {
   width: 142rpx;
   height: 220rpx;
-  background-color: #efefef;
+  background-color: #f4f4f4;
 }
 
 .photo {
