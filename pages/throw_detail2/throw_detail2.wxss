@@ -106,10 +106,10 @@ page {
 
 .body .img {
   margin-left: 80rpx;
-  margin-top: 20rpx;
+  margin-top: 40rpx;
   margin-bottom: 18rpx;
   width: 490rpx;
-  height: 588rpx;
+  height: 132rpx;
 }
 
 .body .tail {

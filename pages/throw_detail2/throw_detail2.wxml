@@ -23,7 +23,7 @@
 			<view class="point"></view>
 			<view class="title">{{detail.ad.positionDesc}}</view>
 		</view>
-		<image class="img" src="{{detail.ad.adImgUrl}}" mode="aspectFit"></image>
+		<image class="img" src="{{detail.ad.adImgUrl}}" mode="widthFix"></image>
 		<view class="tail">
 			<text>投放周期: </text>
 			<text class="data">{{startTime}}-{{endTime}}</text>

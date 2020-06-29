@@ -71,7 +71,7 @@
 								<view class="model_items">
 									<block wx:for="{{models}}" wx:key="index">
 										<view class="model_item">
-											<image class="model_img" src="{{item.styleImageUrl}}" catchtap="onPreviewModel" data-value="{{item.styleImageUrl}}"></image>
+											<image class="model_img" src="{{item.styleImageUrl}}" mode="aspectFit" catchtap="onPreviewModel" data-value="{{item.styleImageUrl}}"></image>
 											<radio class="model_radio" checked="{{index==0}}" value="{{item.id}}"></radio>
 										</view>
 									</block>

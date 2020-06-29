@@ -456,8 +456,10 @@ Page({
     //使用模板    
     if (this.data.adcode.model == 0) {
       data.templateId = this.data.adcode.model_param.modelId;
+
       data.phone = this.data.adcode.model_param.phone;
       data.content = this.data.adcode.model_param.content;
+      data.imgUrl = this.data.previewUrl;
     }
     //直接上传
     else {
@@ -819,6 +821,7 @@ Page({
       progress: '',//图片上传进度
       imgurl: '',
       imgurl2: '',
+      previewUrl: '',
 
       days: 1,
 
@@ -883,7 +886,7 @@ Page({
       console.log('获取模板列表成功');
       console.log(res.data);
       if (res.data.length > 0) {
-        this.data.model_param.modelId = res.data[0].id;
+        this.data.adcode.model_param.modelId = res.data[0].id;
       }
       this.setData({
         models: res.data,
@@ -986,13 +989,13 @@ Page({
    */
   _getPreviewImage() {
     throwModel.getPreviewImage({
-      templateId: this.data.model_param.modelId,//模板Id
-      desc: this.data.model_param.content,//显示内容
-      contact: this.data.model_param.phone,//联系方式
+      templateId: this.data.adcode.model_param.modelId,//模板Id
+      desc: this.data.adcode.model_param.content,//显示内容
+      contact: this.data.adcode.model_param.phone,//联系方式
     }).then(
       res => {
-        this.data.model_param.img = res.data.join(',');
-        console.log(this.data.model_param.img);
+        this.data.adcode.model_param.img = res.data.join(',');
+        console.log(this.data.adcode.model_param.img);
         this.setData({
           progress: 100,
           previewUrl: res.data[0],//需要预览的图片
