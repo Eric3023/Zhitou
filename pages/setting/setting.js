@@ -7,7 +7,7 @@ Page({
    */
   data: {
     list: [
-      // '联系客服',
+      '联系客服',
       '关于枝头'
     ]
   },
@@ -48,6 +48,11 @@ Page({
     let value = event.currentTarget.dataset.item;
     console.log(value);
     switch (value) {
+      case '联系客服':
+        wx.makePhoneCall({
+          phoneNumber: '15801408659',
+        })
+        break;
       case '关于枝头':
         wx.navigateTo({
           url: '/pages/about/about',

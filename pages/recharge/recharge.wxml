@@ -21,14 +21,14 @@
 
 						<radio class="radio" value="1" checked="true" />
 					</view>
-					<view class="payment">
+					<!-- <view class="payment">
 						<view style="display:flex">
 							<image src="../../img/recharge/bankcard.png"></image>
 							<text>银行转账</text>
 						</view>
 
 						<radio class="radio" value="2" />
-					</view>
+					</view> -->
 
 				</radio-group>
 
