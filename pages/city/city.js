@@ -110,7 +110,7 @@ Page({
         app.globalData.lng = res.location.lng;
         app.globalData.city = res.address_components.city
   
-        wx.navigateTo({
+        wx.redirectTo({
           url: `../map/map?lat=${app.globalData.lat}&lng=${app.globalData.lng}&currentcity=${app.globalData.city}`,
         })
       }, error => {

@@ -25,7 +25,7 @@ Page({
    * 加载页面
    */
   onLoad: function () {
-    this._getCurrentLocation();//获取当前定位
+    // this._getCurrentLocation();//获取当前定位
     this._getBanners();//请求轮播图
     this._getCouponing();//显示优惠券
   },
@@ -160,9 +160,9 @@ Page({
           app.globalData.selectLocation = res.result;
         }
       }, error => {
-        wx.navigateTo({
-          url: '/pages/city/city',
-        }) 
+        // wx.navigateTo({
+        //   url: '/pages/city/city',
+        // }) 
       });
   },
 
