@@ -7,8 +7,8 @@
 	<text class="title">{{data.message}}</text>
 	<text class="price">￥{{util.numberFormat(data.actualPrice, 2)}}</text>
 	<view class="line"></view>
-	<view class="content">{{data.orderStatus == 201? '支付成功':'支付失败'}}
-		<text class="param">支付成功</text>
+	<view class="content">支付状态
+		<text class="param">{{data.orderStatus == 201? '支付成功':(data.orderStatus == 203? '已退款':'支付失败')}}</text>
 	</view>
 	<view class="content">转账时间
 		<text class="param">{{data.payTime}}</text>
