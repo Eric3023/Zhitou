@@ -11,7 +11,8 @@ Page({
     hiddenAccount:true,
     wechatChecked:true,
     bankChecked:false,
-    balance:0
+    balance:0,
+    maxlength: -1,
   },
 
   /**
@@ -123,5 +124,15 @@ Page({
       wechatChecked: false
     });
   },
-
+  bindinput: function(e){
+    let money = e.detail.value
+    let maxlength = -1
+    let index = money.lastIndexOf('.')
+    if (index != -1) {
+      maxlength = index + 2 + 1;
+    }
+    this.setData({
+      maxlength,
+    })
+  }
 })
