@@ -65,6 +65,7 @@ Page({
           let item = list[i];
           let time = item.payTime;
           if (time) {
+            time = time.split('-').join('/');
             let date = new Date(time);
             item.mouth = date.getFullYear() + "年" + (date.getMonth() + 1) + "月";
             if (tmp == item.mouth) {

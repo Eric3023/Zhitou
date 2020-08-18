@@ -51,6 +51,8 @@ Page({
    * 计算投放天数
    */
   _calDays(start, end) {
+    start = start.split('-').join('/');
+    end = end.split('-').join('/');
     let endDate = new Date(end);
     let startDate = new Date(start);
     let endTime = dateUtil.tsFormatTime(endDate, 'yyyy年MM月dd日');

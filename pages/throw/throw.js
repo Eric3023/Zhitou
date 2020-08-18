@@ -561,8 +561,8 @@ Page({
   _onCalTotal() {
     if (!this.data.adcode.code) return;
     let code = this.data.adcode.code;
-    let start = this.data.start;
-    let end = this.data.end;
+    let start = this.data.start.split('-').join('/');
+    let end = this.data.end.split('-').join('/');
     let days = (new Date(end) - new Date(start)) / (1000 * 60 * 60 * 24) + 1;
     console.log(days);
     if (days <= 0) {
